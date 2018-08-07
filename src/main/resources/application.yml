@@ -4,9 +4,31 @@ spring:
       url: jdbc:mysql://120.78.74.194:3306/hyskjf?characterEncoding=utf8&useSSL=false
       username: root
       password: Root1234_
-
+      driverClassName: com.mysql.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+      # 下面为连接池的补充设置，应用到上面所有数据源中
+      # 初始化大小，最小，最大
+      initialSize: 1
+      minIdle: 3
+      maxActive: 20
+      # 配置获取连接等待超时的时间
+      maxWait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 30000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      filters: stat,wall,log4j
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      # 合并多个DruidDataSource的监控数据
+      useGlobalDataSourceStat: true
 mybatis:
-#Mybatis扫描
+    #Mybatis扫描
     mapper-locations: classpath*:mapper/*.xml
-#起别名。可省略写mybatis的xml中的resultType的全路径
+    #起别名。可省略写mybatis的xml中的resultType的全路径
     type-aliases-package: com.scau.hyskjf.pojo
