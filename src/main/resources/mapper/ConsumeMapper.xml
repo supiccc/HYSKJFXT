@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.ConsumeMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Consume" >
+    <id column="cumID" property="cumid" jdbcType="INTEGER" />
+    <result column="memID" property="memid" jdbcType="DECIMAL" />
+    <result column="mcID" property="mcid" jdbcType="DECIMAL" />
+    <result column="cumMoney" property="cummoney" jdbcType="REAL" />
+    <result column="cumWay" property="cumway" jdbcType="VARCHAR" />
+    <result column="cumCredit" property="cumcredit" jdbcType="REAL" />
+    <result column="cumMerchant" property="cummerchant" jdbcType="DECIMAL" />
+    <result column="macID" property="macid" jdbcType="INTEGER" />
+    <result column="cumTime" property="cumtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cumID, memID, mcID, cumMoney, cumWay, cumCredit, cumMerchant, macID, cumTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from Consume
+    where cumID = #{cumid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Consume
+    where cumID = #{cumid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Consume" >
+    insert into Consume (cumID, memID, mcID, 
+      cumMoney, cumWay, cumCredit, 
+      cumMerchant, macID, cumTime
+      )
+    values (#{cumid,jdbcType=INTEGER}, #{memid,jdbcType=DECIMAL}, #{mcid,jdbcType=DECIMAL}, 
+      #{cummoney,jdbcType=REAL}, #{cumway,jdbcType=VARCHAR}, #{cumcredit,jdbcType=REAL}, 
+      #{cummerchant,jdbcType=DECIMAL}, #{macid,jdbcType=INTEGER}, #{cumtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Consume" >
+    insert into Consume
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cumid != null" >
+        cumID,
+      </if>
+      <if test="memid != null" >
+        memID,
+      </if>
+      <if test="mcid != null" >
+        mcID,
+      </if>
+      <if test="cummoney != null" >
+        cumMoney,
+      </if>
+      <if test="cumway != null" >
+        cumWay,
+      </if>
+      <if test="cumcredit != null" >
+        cumCredit,
+      </if>
+      <if test="cummerchant != null" >
+        cumMerchant,
+      </if>
+      <if test="macid != null" >
+        macID,
+      </if>
+      <if test="cumtime != null" >
+        cumTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cumid != null" >
+        #{cumid,jdbcType=INTEGER},
+      </if>
+      <if test="memid != null" >
+        #{memid,jdbcType=DECIMAL},
+      </if>
+      <if test="mcid != null" >
+        #{mcid,jdbcType=DECIMAL},
+      </if>
+      <if test="cummoney != null" >
+        #{cummoney,jdbcType=REAL},
+      </if>
+      <if test="cumway != null" >
+        #{cumway,jdbcType=VARCHAR},
+      </if>
+      <if test="cumcredit != null" >
+        #{cumcredit,jdbcType=REAL},
+      </if>
+      <if test="cummerchant != null" >
+        #{cummerchant,jdbcType=DECIMAL},
+      </if>
+      <if test="macid != null" >
+        #{macid,jdbcType=INTEGER},
+      </if>
+      <if test="cumtime != null" >
+        #{cumtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Consume" >
+    update Consume
+    <set >
+      <if test="memid != null" >
+        memID = #{memid,jdbcType=DECIMAL},
+      </if>
+      <if test="mcid != null" >
+        mcID = #{mcid,jdbcType=DECIMAL},
+      </if>
+      <if test="cummoney != null" >
+        cumMoney = #{cummoney,jdbcType=REAL},
+      </if>
+      <if test="cumway != null" >
+        cumWay = #{cumway,jdbcType=VARCHAR},
+      </if>
+      <if test="cumcredit != null" >
+        cumCredit = #{cumcredit,jdbcType=REAL},
+      </if>
+      <if test="cummerchant != null" >
+        cumMerchant = #{cummerchant,jdbcType=DECIMAL},
+      </if>
+      <if test="macid != null" >
+        macID = #{macid,jdbcType=INTEGER},
+      </if>
+      <if test="cumtime != null" >
+        cumTime = #{cumtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where cumID = #{cumid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Consume" >
+    update Consume
+    set memID = #{memid,jdbcType=DECIMAL},
+      mcID = #{mcid,jdbcType=DECIMAL},
+      cumMoney = #{cummoney,jdbcType=REAL},
+      cumWay = #{cumway,jdbcType=VARCHAR},
+      cumCredit = #{cumcredit,jdbcType=REAL},
+      cumMerchant = #{cummerchant,jdbcType=DECIMAL},
+      macID = #{macid,jdbcType=INTEGER},
+      cumTime = #{cumtime,jdbcType=TIMESTAMP}
+    where cumID = #{cumid,jdbcType=INTEGER}
+  </update>
+</mapper>

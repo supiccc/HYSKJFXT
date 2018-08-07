@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.AdvertiseMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Advertise" >
+    <id column="adverID" property="adverid" jdbcType="INTEGER" />
+    <result column="merID" property="merid" jdbcType="DECIMAL" />
+    <result column="adverImage" property="adverimage" jdbcType="VARCHAR" />
+    <result column="adverURL" property="adverurl" jdbcType="VARCHAR" />
+    <result column="adverType" property="advertype" jdbcType="VARCHAR" />
+    <result column="adverCost" property="advercost" jdbcType="REAL" />
+    <result column="adverStart" property="adverstart" jdbcType="DATE" />
+    <result column="adverEnd" property="adverend" jdbcType="DATE" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.Advertise" extends="BaseResultMap" >
+    <result column="adverDescript" property="adverdescript" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    adverID, merID, adverImage, adverURL, adverType, adverCost, adverStart, adverEnd
+  </sql>
+  <sql id="Blob_Column_List" >
+    adverDescript
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from Advertise
+    where adverID = #{adverid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Advertise
+    where adverID = #{adverid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Advertise" >
+    insert into Advertise (adverID, merID, adverImage, 
+      adverURL, adverType, adverCost, 
+      adverStart, adverEnd, adverDescript
+      )
+    values (#{adverid,jdbcType=INTEGER}, #{merid,jdbcType=DECIMAL}, #{adverimage,jdbcType=VARCHAR}, 
+      #{adverurl,jdbcType=VARCHAR}, #{advertype,jdbcType=VARCHAR}, #{advercost,jdbcType=REAL}, 
+      #{adverstart,jdbcType=DATE}, #{adverend,jdbcType=DATE}, #{adverdescript,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Advertise" >
+    insert into Advertise
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="adverid != null" >
+        adverID,
+      </if>
+      <if test="merid != null" >
+        merID,
+      </if>
+      <if test="adverimage != null" >
+        adverImage,
+      </if>
+      <if test="adverurl != null" >
+        adverURL,
+      </if>
+      <if test="advertype != null" >
+        adverType,
+      </if>
+      <if test="advercost != null" >
+        adverCost,
+      </if>
+      <if test="adverstart != null" >
+        adverStart,
+      </if>
+      <if test="adverend != null" >
+        adverEnd,
+      </if>
+      <if test="adverdescript != null" >
+        adverDescript,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="adverid != null" >
+        #{adverid,jdbcType=INTEGER},
+      </if>
+      <if test="merid != null" >
+        #{merid,jdbcType=DECIMAL},
+      </if>
+      <if test="adverimage != null" >
+        #{adverimage,jdbcType=VARCHAR},
+      </if>
+      <if test="adverurl != null" >
+        #{adverurl,jdbcType=VARCHAR},
+      </if>
+      <if test="advertype != null" >
+        #{advertype,jdbcType=VARCHAR},
+      </if>
+      <if test="advercost != null" >
+        #{advercost,jdbcType=REAL},
+      </if>
+      <if test="adverstart != null" >
+        #{adverstart,jdbcType=DATE},
+      </if>
+      <if test="adverend != null" >
+        #{adverend,jdbcType=DATE},
+      </if>
+      <if test="adverdescript != null" >
+        #{adverdescript,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Advertise" >
+    update Advertise
+    <set >
+      <if test="merid != null" >
+        merID = #{merid,jdbcType=DECIMAL},
+      </if>
+      <if test="adverimage != null" >
+        adverImage = #{adverimage,jdbcType=VARCHAR},
+      </if>
+      <if test="adverurl != null" >
+        adverURL = #{adverurl,jdbcType=VARCHAR},
+      </if>
+      <if test="advertype != null" >
+        adverType = #{advertype,jdbcType=VARCHAR},
+      </if>
+      <if test="advercost != null" >
+        adverCost = #{advercost,jdbcType=REAL},
+      </if>
+      <if test="adverstart != null" >
+        adverStart = #{adverstart,jdbcType=DATE},
+      </if>
+      <if test="adverend != null" >
+        adverEnd = #{adverend,jdbcType=DATE},
+      </if>
+      <if test="adverdescript != null" >
+        adverDescript = #{adverdescript,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where adverID = #{adverid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scau.hyskjf.pojo.Advertise" >
+    update Advertise
+    set merID = #{merid,jdbcType=DECIMAL},
+      adverImage = #{adverimage,jdbcType=VARCHAR},
+      adverURL = #{adverurl,jdbcType=VARCHAR},
+      adverType = #{advertype,jdbcType=VARCHAR},
+      adverCost = #{advercost,jdbcType=REAL},
+      adverStart = #{adverstart,jdbcType=DATE},
+      adverEnd = #{adverend,jdbcType=DATE},
+      adverDescript = #{adverdescript,jdbcType=LONGVARCHAR}
+    where adverID = #{adverid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Advertise" >
+    update Advertise
+    set merID = #{merid,jdbcType=DECIMAL},
+      adverImage = #{adverimage,jdbcType=VARCHAR},
+      adverURL = #{adverurl,jdbcType=VARCHAR},
+      adverType = #{advertype,jdbcType=VARCHAR},
+      adverCost = #{advercost,jdbcType=REAL},
+      adverStart = #{adverstart,jdbcType=DATE},
+      adverEnd = #{adverend,jdbcType=DATE}
+    where adverID = #{adverid,jdbcType=INTEGER}
+  </update>
+</mapper>

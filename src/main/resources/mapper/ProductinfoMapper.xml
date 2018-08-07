@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.ProductinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Productinfo" >
+    <id column="pduID" property="pduid" jdbcType="INTEGER" />
+    <result column="merID" property="merid" jdbcType="DECIMAL" />
+    <result column="pduName" property="pduname" jdbcType="VARCHAR" />
+    <result column="pduPrice" property="pduprice" jdbcType="REAL" />
+    <result column="pduMemPrice" property="pdumemprice" jdbcType="REAL" />
+    <result column="pduIntro" property="pduintro" jdbcType="VARCHAR" />
+    <result column="pduImage" property="pduimage" jdbcType="VARCHAR" />
+    <result column="pduRemain" property="pduremain" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    pduID, merID, pduName, pduPrice, pduMemPrice, pduIntro, pduImage, pduRemain
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ProductInfo
+    where pduID = #{pduid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ProductInfo
+    where pduID = #{pduid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Productinfo" >
+    insert into ProductInfo (pduID, merID, pduName, 
+      pduPrice, pduMemPrice, pduIntro, 
+      pduImage, pduRemain)
+    values (#{pduid,jdbcType=INTEGER}, #{merid,jdbcType=DECIMAL}, #{pduname,jdbcType=VARCHAR}, 
+      #{pduprice,jdbcType=REAL}, #{pdumemprice,jdbcType=REAL}, #{pduintro,jdbcType=VARCHAR}, 
+      #{pduimage,jdbcType=VARCHAR}, #{pduremain,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Productinfo" >
+    insert into ProductInfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pduid != null" >
+        pduID,
+      </if>
+      <if test="merid != null" >
+        merID,
+      </if>
+      <if test="pduname != null" >
+        pduName,
+      </if>
+      <if test="pduprice != null" >
+        pduPrice,
+      </if>
+      <if test="pdumemprice != null" >
+        pduMemPrice,
+      </if>
+      <if test="pduintro != null" >
+        pduIntro,
+      </if>
+      <if test="pduimage != null" >
+        pduImage,
+      </if>
+      <if test="pduremain != null" >
+        pduRemain,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pduid != null" >
+        #{pduid,jdbcType=INTEGER},
+      </if>
+      <if test="merid != null" >
+        #{merid,jdbcType=DECIMAL},
+      </if>
+      <if test="pduname != null" >
+        #{pduname,jdbcType=VARCHAR},
+      </if>
+      <if test="pduprice != null" >
+        #{pduprice,jdbcType=REAL},
+      </if>
+      <if test="pdumemprice != null" >
+        #{pdumemprice,jdbcType=REAL},
+      </if>
+      <if test="pduintro != null" >
+        #{pduintro,jdbcType=VARCHAR},
+      </if>
+      <if test="pduimage != null" >
+        #{pduimage,jdbcType=VARCHAR},
+      </if>
+      <if test="pduremain != null" >
+        #{pduremain,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Productinfo" >
+    update ProductInfo
+    <set >
+      <if test="merid != null" >
+        merID = #{merid,jdbcType=DECIMAL},
+      </if>
+      <if test="pduname != null" >
+        pduName = #{pduname,jdbcType=VARCHAR},
+      </if>
+      <if test="pduprice != null" >
+        pduPrice = #{pduprice,jdbcType=REAL},
+      </if>
+      <if test="pdumemprice != null" >
+        pduMemPrice = #{pdumemprice,jdbcType=REAL},
+      </if>
+      <if test="pduintro != null" >
+        pduIntro = #{pduintro,jdbcType=VARCHAR},
+      </if>
+      <if test="pduimage != null" >
+        pduImage = #{pduimage,jdbcType=VARCHAR},
+      </if>
+      <if test="pduremain != null" >
+        pduRemain = #{pduremain,jdbcType=INTEGER},
+      </if>
+    </set>
+    where pduID = #{pduid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Productinfo" >
+    update ProductInfo
+    set merID = #{merid,jdbcType=DECIMAL},
+      pduName = #{pduname,jdbcType=VARCHAR},
+      pduPrice = #{pduprice,jdbcType=REAL},
+      pduMemPrice = #{pdumemprice,jdbcType=REAL},
+      pduIntro = #{pduintro,jdbcType=VARCHAR},
+      pduImage = #{pduimage,jdbcType=VARCHAR},
+      pduRemain = #{pduremain,jdbcType=INTEGER}
+    where pduID = #{pduid,jdbcType=INTEGER}
+  </update>
+</mapper>
