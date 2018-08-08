@@ -7,12 +7,13 @@
     <result column="mesSource" property="messource" jdbcType="DECIMAL" />
     <result column="mesDestination" property="mesdestination" jdbcType="DECIMAL" />
     <result column="mesRead" property="mesread" jdbcType="BIT" />
+    <result column="mesType" property="mestype" jdbcType="BIT" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.Message" extends="BaseResultMap" >
     <result column="mesContent" property="mescontent" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    mesID, mesTitle, mesSource, mesDestination, mesRead
+    mesID, mesTitle, mesSource, mesDestination, mesRead, mesType
   </sql>
   <sql id="Blob_Column_List" >
     mesContent
@@ -31,11 +32,11 @@
   </delete>
   <insert id="insert" parameterType="com.scau.hyskjf.pojo.Message" >
     insert into Message (mesID, mesTitle, mesSource, 
-      mesDestination, mesRead, mesContent
-      )
+      mesDestination, mesRead, mesType, 
+      mesContent)
     values (#{mesid,jdbcType=INTEGER}, #{mestitle,jdbcType=VARCHAR}, #{messource,jdbcType=DECIMAL}, 
-      #{mesdestination,jdbcType=DECIMAL}, #{mesread,jdbcType=BIT}, #{mescontent,jdbcType=LONGVARCHAR}
-      )
+      #{mesdestination,jdbcType=DECIMAL}, #{mesread,jdbcType=BIT}, #{mestype,jdbcType=BIT}, 
+      #{mescontent,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Message" >
     insert into Message
@@ -54,6 +55,9 @@
       </if>
       <if test="mesread != null" >
         mesRead,
+      </if>
+      <if test="mestype != null" >
+        mesType,
       </if>
       <if test="mescontent != null" >
         mesContent,
@@ -75,6 +79,9 @@
       <if test="mesread != null" >
         #{mesread,jdbcType=BIT},
       </if>
+      <if test="mestype != null" >
+        #{mestype,jdbcType=BIT},
+      </if>
       <if test="mescontent != null" >
         #{mescontent,jdbcType=LONGVARCHAR},
       </if>
@@ -95,6 +102,9 @@
       <if test="mesread != null" >
         mesRead = #{mesread,jdbcType=BIT},
       </if>
+      <if test="mestype != null" >
+        mesType = #{mestype,jdbcType=BIT},
+      </if>
       <if test="mescontent != null" >
         mesContent = #{mescontent,jdbcType=LONGVARCHAR},
       </if>
@@ -107,6 +117,7 @@
       mesSource = #{messource,jdbcType=DECIMAL},
       mesDestination = #{mesdestination,jdbcType=DECIMAL},
       mesRead = #{mesread,jdbcType=BIT},
+      mesType = #{mestype,jdbcType=BIT},
       mesContent = #{mescontent,jdbcType=LONGVARCHAR}
     where mesID = #{mesid,jdbcType=INTEGER}
   </update>
@@ -115,7 +126,8 @@
     set mesTitle = #{mestitle,jdbcType=VARCHAR},
       mesSource = #{messource,jdbcType=DECIMAL},
       mesDestination = #{mesdestination,jdbcType=DECIMAL},
-      mesRead = #{mesread,jdbcType=BIT}
+      mesRead = #{mesread,jdbcType=BIT},
+      mesType = #{mestype,jdbcType=BIT}
     where mesID = #{mesid,jdbcType=INTEGER}
   </update>
 </mapper>
