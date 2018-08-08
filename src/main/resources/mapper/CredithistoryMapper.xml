@@ -7,14 +7,21 @@
     <result column="mcID" property="mcid" jdbcType="DECIMAL" />
     <result column="chCredit" property="chcredit" jdbcType="REAL" />
     <result column="chRemain" property="chremain" jdbcType="REAL" />
-    <result column="chType" property="chtype" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.Credithistory" extends="BaseResultMap" >
+    <result column="chType" property="chtype" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    chID, memID, mcID, chCredit, chRemain, chType
+    chID, memID, mcID, chCredit, chRemain
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <sql id="Blob_Column_List" >
+    chType
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from CreditHistory
     where chID = #{chid,jdbcType=INTEGER}
   </select>
@@ -27,7 +34,7 @@
       chCredit, chRemain, chType
       )
     values (#{chid,jdbcType=INTEGER}, #{memid,jdbcType=DECIMAL}, #{mcid,jdbcType=DECIMAL}, 
-      #{chcredit,jdbcType=REAL}, #{chremain,jdbcType=REAL}, #{chtype,jdbcType=VARCHAR}
+      #{chcredit,jdbcType=REAL}, #{chremain,jdbcType=REAL}, #{chtype,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Credithistory" >
@@ -69,7 +76,7 @@
         #{chremain,jdbcType=REAL},
       </if>
       <if test="chtype != null" >
-        #{chtype,jdbcType=VARCHAR},
+        #{chtype,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -89,9 +96,18 @@
         chRemain = #{chremain,jdbcType=REAL},
       </if>
       <if test="chtype != null" >
-        chType = #{chtype,jdbcType=VARCHAR},
+        chType = #{chtype,jdbcType=LONGVARCHAR},
       </if>
     </set>
+    where chID = #{chid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scau.hyskjf.pojo.Credithistory" >
+    update CreditHistory
+    set memID = #{memid,jdbcType=DECIMAL},
+      mcID = #{mcid,jdbcType=DECIMAL},
+      chCredit = #{chcredit,jdbcType=REAL},
+      chRemain = #{chremain,jdbcType=REAL},
+      chType = #{chtype,jdbcType=LONGVARCHAR}
     where chID = #{chid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Credithistory" >
@@ -99,8 +115,7 @@
     set memID = #{memid,jdbcType=DECIMAL},
       mcID = #{mcid,jdbcType=DECIMAL},
       chCredit = #{chcredit,jdbcType=REAL},
-      chRemain = #{chremain,jdbcType=REAL},
-      chType = #{chtype,jdbcType=VARCHAR}
+      chRemain = #{chremain,jdbcType=REAL}
     where chID = #{chid,jdbcType=INTEGER}
   </update>
 </mapper>

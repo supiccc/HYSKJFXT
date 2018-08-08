@@ -13,13 +13,9 @@ public class Creditexchange {
 
     private String ceways;
 
-    private String ceitem;
-
     private Integer ceamount;
 
     private Float cecost;
-
-    private String ceadress;
 
     private Date cetime;
 
@@ -63,14 +59,6 @@ public class Creditexchange {
         this.ceways = ceways;
     }
 
-    public String getCeitem() {
-        return ceitem;
-    }
-
-    public void setCeitem(String ceitem) {
-        this.ceitem = ceitem;
-    }
-
     public Integer getCeamount() {
         return ceamount;
     }
@@ -85,14 +73,6 @@ public class Creditexchange {
 
     public void setCecost(Float cecost) {
         this.cecost = cecost;
-    }
-
-    public String getCeadress() {
-        return ceadress;
-    }
-
-    public void setCeadress(String ceadress) {
-        this.ceadress = ceadress;
     }
 
     public Date getCetime() {

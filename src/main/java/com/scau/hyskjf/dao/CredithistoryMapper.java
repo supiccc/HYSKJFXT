@@ -13,5 +13,7 @@ public interface CredithistoryMapper {
 
     int updateByPrimaryKeySelective(Credithistory record);
 
+    int updateByPrimaryKeyWithBLOBs(Credithistory record);
+
     int updateByPrimaryKey(Credithistory record);
 }

@@ -14,20 +14,26 @@
     <result column="hrBreadfast" property="hrbreadfast" jdbcType="VARCHAR" />
     <result column="hrBed" property="hrbed" jdbcType="VARCHAR" />
     <result column="hrNetwork" property="hrnetwork" jdbcType="VARCHAR" />
-    <result column="hrRoomStat" property="hrroomstat" jdbcType="VARCHAR" />
     <result column="hrSpecialPrice" property="hrspecialprice" jdbcType="REAL" />
     <result column="hrWeekendPrice" property="hrweekendprice" jdbcType="REAL" />
     <result column="hrAvailable" property="hravailable" jdbcType="BIT" />
-    <result column="hrComment" property="hrcomment" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.HotelroomsWithBLOBs" extends="BaseResultMap" >
+    <result column="hrRoomStat" property="hrroomstat" jdbcType="LONGVARCHAR" />
+    <result column="hrComment" property="hrcomment" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     pduID, merID, pduName, pduPrice, pduMemPrice, pduIntro, pduImage, pduRemain, hrRoomtype, 
-    hrBreadfast, hrBed, hrNetwork, hrRoomStat, hrSpecialPrice, hrWeekendPrice, hrAvailable, 
-    hrComment
+    hrBreadfast, hrBed, hrNetwork, hrSpecialPrice, hrWeekendPrice, hrAvailable
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <sql id="Blob_Column_List" >
+    hrRoomStat, hrComment
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from HotelRooms
     where pduID = #{pduid,jdbcType=INTEGER}
   </select>
@@ -35,21 +41,21 @@
     delete from HotelRooms
     where pduID = #{pduid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Hotelrooms" >
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.HotelroomsWithBLOBs" >
     insert into HotelRooms (pduID, merID, pduName, 
       pduPrice, pduMemPrice, pduIntro, 
       pduImage, pduRemain, hrRoomtype, 
       hrBreadfast, hrBed, hrNetwork, 
-      hrRoomStat, hrSpecialPrice, hrWeekendPrice, 
-      hrAvailable, hrComment)
+      hrSpecialPrice, hrWeekendPrice, hrAvailable, 
+      hrRoomStat, hrComment)
     values (#{pduid,jdbcType=INTEGER}, #{merid,jdbcType=DECIMAL}, #{pduname,jdbcType=VARCHAR}, 
       #{pduprice,jdbcType=REAL}, #{pdumemprice,jdbcType=REAL}, #{pduintro,jdbcType=VARCHAR}, 
       #{pduimage,jdbcType=VARCHAR}, #{pduremain,jdbcType=INTEGER}, #{hrroomtype,jdbcType=VARCHAR}, 
       #{hrbreadfast,jdbcType=VARCHAR}, #{hrbed,jdbcType=VARCHAR}, #{hrnetwork,jdbcType=VARCHAR}, 
-      #{hrroomstat,jdbcType=VARCHAR}, #{hrspecialprice,jdbcType=REAL}, #{hrweekendprice,jdbcType=REAL}, 
-      #{hravailable,jdbcType=BIT}, #{hrcomment,jdbcType=VARCHAR})
+      #{hrspecialprice,jdbcType=REAL}, #{hrweekendprice,jdbcType=REAL}, #{hravailable,jdbcType=BIT}, 
+      #{hrroomstat,jdbcType=LONGVARCHAR}, #{hrcomment,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Hotelrooms" >
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.HotelroomsWithBLOBs" >
     insert into HotelRooms
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="pduid != null" >
@@ -88,9 +94,6 @@
       <if test="hrnetwork != null" >
         hrNetwork,
       </if>
-      <if test="hrroomstat != null" >
-        hrRoomStat,
-      </if>
       <if test="hrspecialprice != null" >
         hrSpecialPrice,
       </if>
@@ -99,6 +102,9 @@
       </if>
       <if test="hravailable != null" >
         hrAvailable,
+      </if>
+      <if test="hrroomstat != null" >
+        hrRoomStat,
       </if>
       <if test="hrcomment != null" >
         hrComment,
@@ -141,9 +147,6 @@
       <if test="hrnetwork != null" >
         #{hrnetwork,jdbcType=VARCHAR},
       </if>
-      <if test="hrroomstat != null" >
-        #{hrroomstat,jdbcType=VARCHAR},
-      </if>
       <if test="hrspecialprice != null" >
         #{hrspecialprice,jdbcType=REAL},
       </if>
@@ -153,12 +156,15 @@
       <if test="hravailable != null" >
         #{hravailable,jdbcType=BIT},
       </if>
+      <if test="hrroomstat != null" >
+        #{hrroomstat,jdbcType=LONGVARCHAR},
+      </if>
       <if test="hrcomment != null" >
-        #{hrcomment,jdbcType=VARCHAR},
+        #{hrcomment,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Hotelrooms" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.HotelroomsWithBLOBs" >
     update HotelRooms
     <set >
       <if test="merid != null" >
@@ -194,9 +200,6 @@
       <if test="hrnetwork != null" >
         hrNetwork = #{hrnetwork,jdbcType=VARCHAR},
       </if>
-      <if test="hrroomstat != null" >
-        hrRoomStat = #{hrroomstat,jdbcType=VARCHAR},
-      </if>
       <if test="hrspecialprice != null" >
         hrSpecialPrice = #{hrspecialprice,jdbcType=REAL},
       </if>
@@ -206,10 +209,33 @@
       <if test="hravailable != null" >
         hrAvailable = #{hravailable,jdbcType=BIT},
       </if>
+      <if test="hrroomstat != null" >
+        hrRoomStat = #{hrroomstat,jdbcType=LONGVARCHAR},
+      </if>
       <if test="hrcomment != null" >
-        hrComment = #{hrcomment,jdbcType=VARCHAR},
+        hrComment = #{hrcomment,jdbcType=LONGVARCHAR},
       </if>
     </set>
+    where pduID = #{pduid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scau.hyskjf.pojo.HotelroomsWithBLOBs" >
+    update HotelRooms
+    set merID = #{merid,jdbcType=DECIMAL},
+      pduName = #{pduname,jdbcType=VARCHAR},
+      pduPrice = #{pduprice,jdbcType=REAL},
+      pduMemPrice = #{pdumemprice,jdbcType=REAL},
+      pduIntro = #{pduintro,jdbcType=VARCHAR},
+      pduImage = #{pduimage,jdbcType=VARCHAR},
+      pduRemain = #{pduremain,jdbcType=INTEGER},
+      hrRoomtype = #{hrroomtype,jdbcType=VARCHAR},
+      hrBreadfast = #{hrbreadfast,jdbcType=VARCHAR},
+      hrBed = #{hrbed,jdbcType=VARCHAR},
+      hrNetwork = #{hrnetwork,jdbcType=VARCHAR},
+      hrSpecialPrice = #{hrspecialprice,jdbcType=REAL},
+      hrWeekendPrice = #{hrweekendprice,jdbcType=REAL},
+      hrAvailable = #{hravailable,jdbcType=BIT},
+      hrRoomStat = #{hrroomstat,jdbcType=LONGVARCHAR},
+      hrComment = #{hrcomment,jdbcType=LONGVARCHAR}
     where pduID = #{pduid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Hotelrooms" >
@@ -225,11 +251,9 @@
       hrBreadfast = #{hrbreadfast,jdbcType=VARCHAR},
       hrBed = #{hrbed,jdbcType=VARCHAR},
       hrNetwork = #{hrnetwork,jdbcType=VARCHAR},
-      hrRoomStat = #{hrroomstat,jdbcType=VARCHAR},
       hrSpecialPrice = #{hrspecialprice,jdbcType=REAL},
       hrWeekendPrice = #{hrweekendprice,jdbcType=REAL},
-      hrAvailable = #{hravailable,jdbcType=BIT},
-      hrComment = #{hrcomment,jdbcType=VARCHAR}
+      hrAvailable = #{hravailable,jdbcType=BIT}
     where pduID = #{pduid,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -3,8 +3,6 @@
 <mapper namespace="com.scau.hyskjf.dao.ApplicationMapper" >
   <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Application" >
     <id column="acaID" property="acaid" jdbcType="INTEGER" />
-    <result column="merID" property="merid" jdbcType="DECIMAL" />
-    <result column="AdminID" property="adminid" jdbcType="DECIMAL" />
     <result column="acaMerchant" property="acamerchant" jdbcType="DECIMAL" />
     <result column="acaStat" property="acastat" jdbcType="VARCHAR" />
     <result column="acaReallo" property="acareallo" jdbcType="DECIMAL" />
@@ -12,7 +10,7 @@
     <result column="acaaMerchant" property="acaamerchant" jdbcType="DECIMAL" />
   </resultMap>
   <sql id="Base_Column_List" >
-    acaID, merID, AdminID, acaMerchant, acaStat, acaReallo, acaReaTime, acaaMerchant
+    acaID, acaMerchant, acaStat, acaReallo, acaReaTime, acaaMerchant
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -25,24 +23,18 @@
     where acaID = #{acaid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.scau.hyskjf.pojo.Application" >
-    insert into Application (acaID, merID, AdminID, 
-      acaMerchant, acaStat, acaReallo, 
-      acaReaTime, acaaMerchant)
-    values (#{acaid,jdbcType=INTEGER}, #{merid,jdbcType=DECIMAL}, #{adminid,jdbcType=DECIMAL}, 
-      #{acamerchant,jdbcType=DECIMAL}, #{acastat,jdbcType=VARCHAR}, #{acareallo,jdbcType=DECIMAL}, 
-      #{acareatime,jdbcType=DATE}, #{acaamerchant,jdbcType=DECIMAL})
+    insert into Application (acaID, acaMerchant, acaStat, 
+      acaReallo, acaReaTime, acaaMerchant
+      )
+    values (#{acaid,jdbcType=INTEGER}, #{acamerchant,jdbcType=DECIMAL}, #{acastat,jdbcType=VARCHAR}, 
+      #{acareallo,jdbcType=DECIMAL}, #{acareatime,jdbcType=DATE}, #{acaamerchant,jdbcType=DECIMAL}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Application" >
     insert into Application
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="acaid != null" >
         acaID,
-      </if>
-      <if test="merid != null" >
-        merID,
-      </if>
-      <if test="adminid != null" >
-        AdminID,
       </if>
       <if test="acamerchant != null" >
         acaMerchant,
@@ -64,12 +56,6 @@
       <if test="acaid != null" >
         #{acaid,jdbcType=INTEGER},
       </if>
-      <if test="merid != null" >
-        #{merid,jdbcType=DECIMAL},
-      </if>
-      <if test="adminid != null" >
-        #{adminid,jdbcType=DECIMAL},
-      </if>
       <if test="acamerchant != null" >
         #{acamerchant,jdbcType=DECIMAL},
       </if>
@@ -90,12 +76,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Application" >
     update Application
     <set >
-      <if test="merid != null" >
-        merID = #{merid,jdbcType=DECIMAL},
-      </if>
-      <if test="adminid != null" >
-        AdminID = #{adminid,jdbcType=DECIMAL},
-      </if>
       <if test="acamerchant != null" >
         acaMerchant = #{acamerchant,jdbcType=DECIMAL},
       </if>
@@ -116,9 +96,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Application" >
     update Application
-    set merID = #{merid,jdbcType=DECIMAL},
-      AdminID = #{adminid,jdbcType=DECIMAL},
-      acaMerchant = #{acamerchant,jdbcType=DECIMAL},
+    set acaMerchant = #{acamerchant,jdbcType=DECIMAL},
       acaStat = #{acastat,jdbcType=VARCHAR},
       acaReallo = #{acareallo,jdbcType=DECIMAL},
       acaReaTime = #{acareatime,jdbcType=DATE},

@@ -7,15 +7,11 @@ public class Requirement {
 
     private Long memid;
 
-    private String reqinfo;
-
     private Date reqtime;
 
     private Long reqby;
 
     private Boolean reqreply;
-
-    private String reqrepcontent;
 
     private Integer reqrepby;
 
@@ -35,14 +31,6 @@ public class Requirement {
 
     public void setMemid(Long memid) {
         this.memid = memid;
-    }
-
-    public String getReqinfo() {
-        return reqinfo;
-    }
-
-    public void setReqinfo(String reqinfo) {
-        this.reqinfo = reqinfo;
     }
 
     public Date getReqtime() {
@@ -67,14 +55,6 @@ public class Requirement {
 
     public void setReqreply(Boolean reqreply) {
         this.reqreply = reqreply;
-    }
-
-    public String getReqrepcontent() {
-        return reqrepcontent;
-    }
-
-    public void setReqrepcontent(String reqrepcontent) {
-        this.reqrepcontent = reqrepcontent;
     }
 
     public Integer getReqrepby() {

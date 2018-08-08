@@ -7,18 +7,25 @@
     <result column="memID" property="memid" jdbcType="DECIMAL" />
     <result column="mcID" property="mcid" jdbcType="DECIMAL" />
     <result column="ceWays" property="ceways" jdbcType="VARCHAR" />
-    <result column="ceItem" property="ceitem" jdbcType="VARCHAR" />
     <result column="ceAmount" property="ceamount" jdbcType="INTEGER" />
     <result column="ceCost" property="cecost" jdbcType="REAL" />
-    <result column="ceAdress" property="ceadress" jdbcType="VARCHAR" />
     <result column="ceTime" property="cetime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.CreditexchangeWithBLOBs" extends="BaseResultMap" >
+    <result column="ceItem" property="ceitem" jdbcType="LONGVARCHAR" />
+    <result column="ceAdress" property="ceadress" jdbcType="LONGVARCHAR" />
+  </resultMap>
   <sql id="Base_Column_List" >
-    ceID, ceStat, memID, mcID, ceWays, ceItem, ceAmount, ceCost, ceAdress, ceTime
+    ceID, ceStat, memID, mcID, ceWays, ceAmount, ceCost, ceTime
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <sql id="Blob_Column_List" >
+    ceItem, ceAdress
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from CreditExchange
     where ceID = #{ceid,jdbcType=INTEGER}
   </select>
@@ -26,17 +33,17 @@
     delete from CreditExchange
     where ceID = #{ceid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Creditexchange" >
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.CreditexchangeWithBLOBs" >
     insert into CreditExchange (ceID, ceStat, memID, 
-      mcID, ceWays, ceItem, 
-      ceAmount, ceCost, ceAdress, 
-      ceTime)
+      mcID, ceWays, ceAmount, 
+      ceCost, ceTime, ceItem, 
+      ceAdress)
     values (#{ceid,jdbcType=INTEGER}, #{cestat,jdbcType=VARCHAR}, #{memid,jdbcType=DECIMAL}, 
-      #{mcid,jdbcType=DECIMAL}, #{ceways,jdbcType=VARCHAR}, #{ceitem,jdbcType=VARCHAR}, 
-      #{ceamount,jdbcType=INTEGER}, #{cecost,jdbcType=REAL}, #{ceadress,jdbcType=VARCHAR}, 
-      #{cetime,jdbcType=TIMESTAMP})
+      #{mcid,jdbcType=DECIMAL}, #{ceways,jdbcType=VARCHAR}, #{ceamount,jdbcType=INTEGER}, 
+      #{cecost,jdbcType=REAL}, #{cetime,jdbcType=TIMESTAMP}, #{ceitem,jdbcType=LONGVARCHAR}, 
+      #{ceadress,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Creditexchange" >
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.CreditexchangeWithBLOBs" >
     insert into CreditExchange
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="ceid != null" >
@@ -54,20 +61,20 @@
       <if test="ceways != null" >
         ceWays,
       </if>
-      <if test="ceitem != null" >
-        ceItem,
-      </if>
       <if test="ceamount != null" >
         ceAmount,
       </if>
       <if test="cecost != null" >
         ceCost,
       </if>
-      <if test="ceadress != null" >
-        ceAdress,
-      </if>
       <if test="cetime != null" >
         ceTime,
+      </if>
+      <if test="ceitem != null" >
+        ceItem,
+      </if>
+      <if test="ceadress != null" >
+        ceAdress,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -86,24 +93,24 @@
       <if test="ceways != null" >
         #{ceways,jdbcType=VARCHAR},
       </if>
-      <if test="ceitem != null" >
-        #{ceitem,jdbcType=VARCHAR},
-      </if>
       <if test="ceamount != null" >
         #{ceamount,jdbcType=INTEGER},
       </if>
       <if test="cecost != null" >
         #{cecost,jdbcType=REAL},
       </if>
-      <if test="ceadress != null" >
-        #{ceadress,jdbcType=VARCHAR},
-      </if>
       <if test="cetime != null" >
         #{cetime,jdbcType=TIMESTAMP},
       </if>
+      <if test="ceitem != null" >
+        #{ceitem,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ceadress != null" >
+        #{ceadress,jdbcType=LONGVARCHAR},
+      </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Creditexchange" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.CreditexchangeWithBLOBs" >
     update CreditExchange
     <set >
       <if test="cestat != null" >
@@ -118,22 +125,35 @@
       <if test="ceways != null" >
         ceWays = #{ceways,jdbcType=VARCHAR},
       </if>
-      <if test="ceitem != null" >
-        ceItem = #{ceitem,jdbcType=VARCHAR},
-      </if>
       <if test="ceamount != null" >
         ceAmount = #{ceamount,jdbcType=INTEGER},
       </if>
       <if test="cecost != null" >
         ceCost = #{cecost,jdbcType=REAL},
       </if>
-      <if test="ceadress != null" >
-        ceAdress = #{ceadress,jdbcType=VARCHAR},
-      </if>
       <if test="cetime != null" >
         ceTime = #{cetime,jdbcType=TIMESTAMP},
       </if>
+      <if test="ceitem != null" >
+        ceItem = #{ceitem,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ceadress != null" >
+        ceAdress = #{ceadress,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    where ceID = #{ceid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scau.hyskjf.pojo.CreditexchangeWithBLOBs" >
+    update CreditExchange
+    set ceStat = #{cestat,jdbcType=VARCHAR},
+      memID = #{memid,jdbcType=DECIMAL},
+      mcID = #{mcid,jdbcType=DECIMAL},
+      ceWays = #{ceways,jdbcType=VARCHAR},
+      ceAmount = #{ceamount,jdbcType=INTEGER},
+      ceCost = #{cecost,jdbcType=REAL},
+      ceTime = #{cetime,jdbcType=TIMESTAMP},
+      ceItem = #{ceitem,jdbcType=LONGVARCHAR},
+      ceAdress = #{ceadress,jdbcType=LONGVARCHAR}
     where ceID = #{ceid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Creditexchange" >
@@ -142,10 +162,8 @@
       memID = #{memid,jdbcType=DECIMAL},
       mcID = #{mcid,jdbcType=DECIMAL},
       ceWays = #{ceways,jdbcType=VARCHAR},
-      ceItem = #{ceitem,jdbcType=VARCHAR},
       ceAmount = #{ceamount,jdbcType=INTEGER},
       ceCost = #{cecost,jdbcType=REAL},
-      ceAdress = #{ceadress,jdbcType=VARCHAR},
       ceTime = #{cetime,jdbcType=TIMESTAMP}
     where ceID = #{ceid,jdbcType=INTEGER}
   </update>

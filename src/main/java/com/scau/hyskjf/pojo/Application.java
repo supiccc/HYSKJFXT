@@ -5,10 +5,6 @@ import java.util.Date;
 public class Application {
     private Integer acaid;
 
-    private Integer merid;
-
-    private Integer adminid;
-
     private Integer acamerchant;
 
     private String acastat;
@@ -25,22 +21,6 @@ public class Application {
 
     public void setAcaid(Integer acaid) {
         this.acaid = acaid;
-    }
-
-    public Integer getMerid() {
-        return merid;
-    }
-
-    public void setMerid(Integer merid) {
-        this.merid = merid;
-    }
-
-    public Integer getAdminid() {
-        return adminid;
-    }
-
-    public void setAdminid(Integer adminid) {
-        this.adminid = adminid;
     }
 
     public Integer getAcamerchant() {

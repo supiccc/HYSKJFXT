@@ -1,8 +1,6 @@
 package com.scau.hyskjf.pojo;
 
 public class Merchantinfomodified extends MerchantinfomodifiedKey {
-    private String merintroduce;
-
     private String merimage;
 
     private Boolean mermainimage;
@@ -33,23 +31,7 @@ public class Merchantinfomodified extends MerchantinfomodifiedKey {
 
     private String merarea;
 
-    private String merlandmark;
-
-    private String merdiscount;
-
-    private String merdiscountevent;
-
     private String attribute250;
-
-    private String meradress;
-
-    public String getMerintroduce() {
-        return merintroduce;
-    }
-
-    public void setMerintroduce(String merintroduce) {
-        this.merintroduce = merintroduce;
-    }
 
     public String getMerimage() {
         return merimage;
@@ -171,43 +153,11 @@ public class Merchantinfomodified extends MerchantinfomodifiedKey {
         this.merarea = merarea;
     }
 
-    public String getMerlandmark() {
-        return merlandmark;
-    }
-
-    public void setMerlandmark(String merlandmark) {
-        this.merlandmark = merlandmark;
-    }
-
-    public String getMerdiscount() {
-        return merdiscount;
-    }
-
-    public void setMerdiscount(String merdiscount) {
-        this.merdiscount = merdiscount;
-    }
-
-    public String getMerdiscountevent() {
-        return merdiscountevent;
-    }
-
-    public void setMerdiscountevent(String merdiscountevent) {
-        this.merdiscountevent = merdiscountevent;
-    }
-
     public String getAttribute250() {
         return attribute250;
     }
 
     public void setAttribute250(String attribute250) {
         this.attribute250 = attribute250;
-    }
-
-    public String getMeradress() {
-        return meradress;
-    }
-
-    public void setMeradress(String meradress) {
-        this.meradress = meradress;
     }
 }

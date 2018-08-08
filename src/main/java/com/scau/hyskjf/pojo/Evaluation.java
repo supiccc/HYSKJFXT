@@ -11,8 +11,6 @@ public class Evaluation {
 
     private Long memid;
 
-    private String evainfo;
-
     private String evaip;
 
     private Long evaby;
@@ -24,8 +22,6 @@ public class Evaluation {
     private Boolean evareply;
 
     private Integer evareplyby;
-
-    private String evarepinfo;
 
     private Date evareptime;
 
@@ -59,14 +55,6 @@ public class Evaluation {
 
     public void setMemid(Long memid) {
         this.memid = memid;
-    }
-
-    public String getEvainfo() {
-        return evainfo;
-    }
-
-    public void setEvainfo(String evainfo) {
-        this.evainfo = evainfo;
     }
 
     public String getEvaip() {
@@ -115,14 +103,6 @@ public class Evaluation {
 
     public void setEvareplyby(Integer evareplyby) {
         this.evareplyby = evareplyby;
-    }
-
-    public String getEvarepinfo() {
-        return evarepinfo;
-    }
-
-    public void setEvarepinfo(String evarepinfo) {
-        this.evarepinfo = evarepinfo;
     }
 
     public Date getEvareptime() {
