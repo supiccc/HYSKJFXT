@@ -2,8 +2,8 @@ package com.scau.hyskjf.controller;
 
 import com.scau.hyskjf.dao.AdminMapper;
 import com.scau.hyskjf.pojo.Admin;
-import com.scau.hyskjf.util.ResponseCode;
-import com.scau.hyskjf.util.ResponseJSON;
+import com.scau.hyskjf.util.json.ResponseCode;
+import com.scau.hyskjf.util.json.ResponseJSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;

@@ -1,4 +1,4 @@
-package com.scau.hyskjf.util;
+package com.scau.hyskjf.util.json;
 
 /**
  * Created by supiccc on 2018-08-07 19:37
