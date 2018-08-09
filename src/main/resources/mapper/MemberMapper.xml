@@ -8,7 +8,7 @@
     <result column="memName" property="memname" jdbcType="VARCHAR" />
     <result column="memSex" property="memsex" jdbcType="VARCHAR" />
     <result column="memBirth" property="membirth" jdbcType="DATE" />
-    <result column="memPhone" property="memphone" jdbcType="INTEGER" />
+    <result column="memPhone" property="memphone" jdbcType="VARCHAR" />
     <result column="memEmail" property="mememail" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.Member" extends="BaseResultMap" >
@@ -39,7 +39,7 @@
       )
     values (#{memid,jdbcType=INTEGER}, #{memcer,jdbcType=VARCHAR}, #{memcerid,jdbcType=VARCHAR}, 
       #{memname,jdbcType=VARCHAR}, #{memsex,jdbcType=VARCHAR}, #{membirth,jdbcType=DATE}, 
-      #{memphone,jdbcType=INTEGER}, #{mememail,jdbcType=VARCHAR}, #{memadress,jdbcType=LONGVARCHAR}
+      #{memphone,jdbcType=VARCHAR}, #{mememail,jdbcType=VARCHAR}, #{memadress,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Member" >
@@ -93,7 +93,7 @@
         #{membirth,jdbcType=DATE},
       </if>
       <if test="memphone != null" >
-        #{memphone,jdbcType=INTEGER},
+        #{memphone,jdbcType=VARCHAR},
       </if>
       <if test="mememail != null" >
         #{mememail,jdbcType=VARCHAR},
@@ -122,7 +122,7 @@
         memBirth = #{membirth,jdbcType=DATE},
       </if>
       <if test="memphone != null" >
-        memPhone = #{memphone,jdbcType=INTEGER},
+        memPhone = #{memphone,jdbcType=VARCHAR},
       </if>
       <if test="mememail != null" >
         memEmail = #{mememail,jdbcType=VARCHAR},
@@ -140,7 +140,7 @@
       memName = #{memname,jdbcType=VARCHAR},
       memSex = #{memsex,jdbcType=VARCHAR},
       memBirth = #{membirth,jdbcType=DATE},
-      memPhone = #{memphone,jdbcType=INTEGER},
+      memPhone = #{memphone,jdbcType=VARCHAR},
       memEmail = #{mememail,jdbcType=VARCHAR},
       memAdress = #{memadress,jdbcType=LONGVARCHAR}
     where memID = #{memid,jdbcType=INTEGER}
@@ -152,7 +152,7 @@
       memName = #{memname,jdbcType=VARCHAR},
       memSex = #{memsex,jdbcType=VARCHAR},
       memBirth = #{membirth,jdbcType=DATE},
-      memPhone = #{memphone,jdbcType=INTEGER},
+      memPhone = #{memphone,jdbcType=VARCHAR},
       memEmail = #{mememail,jdbcType=VARCHAR}
     where memID = #{memid,jdbcType=INTEGER}
   </update>

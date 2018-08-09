@@ -22,7 +22,7 @@
     select
     <include refid="Base_Column_List" />
     from MemberAccount
-    where maID = #{memid}
+    where maID = #{maid}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from MemberAccount
