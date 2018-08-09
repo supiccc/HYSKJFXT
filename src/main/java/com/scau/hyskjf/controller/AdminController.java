@@ -25,6 +25,6 @@ public class AdminController {
 //        调用dao层
         Admin user = adminMapper.selectByPrimaryKey(1000);
         return new ResponseJSON(ResponseCode.SUCCESS, user);
-    }
 
+    }
 }
