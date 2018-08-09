@@ -1,7 +1,9 @@
 package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Memberaccount;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface MemberaccountMapper {
     int deleteByPrimaryKey(Integer memid);
 
@@ -15,5 +17,5 @@ public interface MemberaccountMapper {
 
     int updateByPrimaryKey(Memberaccount record);
 
-    Memberaccount selectBymaid(int id);
+    Memberaccount selectBymaid(int maid);
 }

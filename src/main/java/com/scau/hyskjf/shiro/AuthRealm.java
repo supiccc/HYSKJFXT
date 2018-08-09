@@ -28,6 +28,7 @@ public class AuthRealm extends AuthorizingRealm {
         int maid = Integer.parseInt(utoken.getUsername());
         String password = utoken.getPassword().toString();
         Memberaccount member = memberCenterService.findBymaiid(maid);
+        if (member == null) return null;
         return new SimpleAuthenticationInfo(member, member.getMapwd(), this.getClass().getName());
     }
 }

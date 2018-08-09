@@ -27,7 +27,7 @@
 
 
         <!-- 要生成的表tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
-        <table tableName="%" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="Member" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
     </context>
 
 </generatorConfiguration>

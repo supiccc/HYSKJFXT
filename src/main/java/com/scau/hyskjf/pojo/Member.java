@@ -15,7 +15,7 @@ public class Member {
 
     private Date membirth;
 
-    private Integer memphone;
+    private String memphone;
 
     private String mememail;
 
@@ -69,11 +69,11 @@ public class Member {
         this.membirth = membirth;
     }
 
-    public Integer getMemphone() {
+    public String getMemphone() {
         return memphone;
     }
 
-    public void setMemphone(Integer memphone) {
+    public void setMemphone(String memphone) {
         this.memphone = memphone;
     }
 
