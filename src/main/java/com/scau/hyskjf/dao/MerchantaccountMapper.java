@@ -1,16 +1,15 @@
 package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Merchantaccount;
-import com.scau.hyskjf.pojo.MerchantaccountKey;
 
 public interface MerchantaccountMapper {
-    int deleteByPrimaryKey(MerchantaccountKey key);
+    int deleteByPrimaryKey(Integer macid);
 
     int insert(Merchantaccount record);
 
     int insertSelective(Merchantaccount record);
 
-    Merchantaccount selectByPrimaryKey(MerchantaccountKey key);
+    Merchantaccount selectByPrimaryKey(Integer macid);
 
     int updateByPrimaryKeySelective(Merchantaccount record);
 

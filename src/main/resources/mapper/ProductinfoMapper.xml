@@ -3,7 +3,7 @@
 <mapper namespace="com.scau.hyskjf.dao.ProductinfoMapper" >
   <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Productinfo" >
     <id column="pduID" property="pduid" jdbcType="INTEGER" />
-    <result column="merID" property="merid" jdbcType="DECIMAL" />
+    <result column="merID" property="merid" jdbcType="INTEGER" />
     <result column="pduName" property="pduname" jdbcType="VARCHAR" />
     <result column="pduPrice" property="pduprice" jdbcType="REAL" />
     <result column="pduMemPrice" property="pdumemprice" jdbcType="REAL" />
@@ -28,7 +28,7 @@
     insert into ProductInfo (pduID, merID, pduName, 
       pduPrice, pduMemPrice, pduIntro, 
       pduImage, pduRemain)
-    values (#{pduid,jdbcType=INTEGER}, #{merid,jdbcType=DECIMAL}, #{pduname,jdbcType=VARCHAR}, 
+    values (#{pduid,jdbcType=INTEGER}, #{merid,jdbcType=INTEGER}, #{pduname,jdbcType=VARCHAR}, 
       #{pduprice,jdbcType=REAL}, #{pdumemprice,jdbcType=REAL}, #{pduintro,jdbcType=VARCHAR}, 
       #{pduimage,jdbcType=VARCHAR}, #{pduremain,jdbcType=INTEGER})
   </insert>
@@ -65,7 +65,7 @@
         #{pduid,jdbcType=INTEGER},
       </if>
       <if test="merid != null" >
-        #{merid,jdbcType=DECIMAL},
+        #{merid,jdbcType=INTEGER},
       </if>
       <if test="pduname != null" >
         #{pduname,jdbcType=VARCHAR},
@@ -91,7 +91,7 @@
     update ProductInfo
     <set >
       <if test="merid != null" >
-        merID = #{merid,jdbcType=DECIMAL},
+        merID = #{merid,jdbcType=INTEGER},
       </if>
       <if test="pduname != null" >
         pduName = #{pduname,jdbcType=VARCHAR},
@@ -116,7 +116,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Productinfo" >
     update ProductInfo
-    set merID = #{merid,jdbcType=DECIMAL},
+    set merID = #{merid,jdbcType=INTEGER},
       pduName = #{pduname,jdbcType=VARCHAR},
       pduPrice = #{pduprice,jdbcType=REAL},
       pduMemPrice = #{pdumemprice,jdbcType=REAL},

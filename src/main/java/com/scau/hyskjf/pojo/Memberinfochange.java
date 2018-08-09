@@ -5,11 +5,11 @@ import java.util.Date;
 public class Memberinfochange {
     private Integer micid;
 
-    private Long memid;
+    private Integer memid;
 
     private String miccer;
 
-    private Integer miccerid;
+    private String miccerid;
 
     private String micname;
 
@@ -35,11 +35,11 @@ public class Memberinfochange {
         this.micid = micid;
     }
 
-    public Long getMemid() {
+    public Integer getMemid() {
         return memid;
     }
 
-    public void setMemid(Long memid) {
+    public void setMemid(Integer memid) {
         this.memid = memid;
     }
 
@@ -51,11 +51,11 @@ public class Memberinfochange {
         this.miccer = miccer;
     }
 
-    public Integer getMiccerid() {
+    public String getMiccerid() {
         return miccerid;
     }
 
-    public void setMiccerid(Integer miccerid) {
+    public void setMiccerid(String miccerid) {
         this.miccerid = miccerid;
     }
 

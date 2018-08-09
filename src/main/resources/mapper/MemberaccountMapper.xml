@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.scau.hyskjf.dao.MemberaccountMapper" >
   <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Memberaccount" >
-    <id column="memID" property="memid" jdbcType="DECIMAL" />
+    <id column="memID" property="memid" jdbcType="INTEGER" />
     <result column="maID" property="maid" jdbcType="INTEGER" />
     <result column="maName" property="maname" jdbcType="VARCHAR" />
     <result column="maPwd" property="mapwd" jdbcType="VARCHAR" />
@@ -12,21 +12,27 @@
   <sql id="Base_Column_List" >
     memID, maID, maName, maPwd, maCumPwd, maEnable
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from MemberAccount
-    where memID = #{memid,jdbcType=DECIMAL}
+    where memID = #{memid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <select id="selectBymaid" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from MemberAccount
+    where maID = #{memid}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from MemberAccount
-    where memID = #{memid,jdbcType=DECIMAL}
+    where memID = #{memid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.scau.hyskjf.pojo.Memberaccount" >
     insert into MemberAccount (memID, maID, maName, 
       maPwd, maCumPwd, maEnable
       )
-    values (#{memid,jdbcType=DECIMAL}, #{maid,jdbcType=INTEGER}, #{maname,jdbcType=VARCHAR}, 
+    values (#{memid,jdbcType=INTEGER}, #{maid,jdbcType=INTEGER}, #{maname,jdbcType=VARCHAR}, 
       #{mapwd,jdbcType=VARCHAR}, #{macumpwd,jdbcType=VARCHAR}, #{maenable,jdbcType=BIT}
       )
   </insert>
@@ -54,7 +60,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="memid != null" >
-        #{memid,jdbcType=DECIMAL},
+        #{memid,jdbcType=INTEGER},
       </if>
       <if test="maid != null" >
         #{maid,jdbcType=INTEGER},
@@ -92,7 +98,7 @@
         maEnable = #{maenable,jdbcType=BIT},
       </if>
     </set>
-    where memID = #{memid,jdbcType=DECIMAL}
+    where memID = #{memid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Memberaccount" >
     update MemberAccount
@@ -101,6 +107,6 @@
       maPwd = #{mapwd,jdbcType=VARCHAR},
       maCumPwd = #{macumpwd,jdbcType=VARCHAR},
       maEnable = #{maenable,jdbcType=BIT}
-    where memID = #{memid,jdbcType=DECIMAL}
+    where memID = #{memid,jdbcType=INTEGER}
   </update>
 </mapper>

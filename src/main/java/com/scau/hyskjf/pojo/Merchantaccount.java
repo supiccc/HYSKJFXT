@@ -2,7 +2,11 @@ package com.scau.hyskjf.pojo;
 
 import java.util.Date;
 
-public class Merchantaccount extends MerchantaccountKey {
+public class Merchantaccount {
+    private Integer macid;
+
+    private Integer merid;
+
     private String macacc;
 
     private Integer maccumacc;
@@ -14,6 +18,22 @@ public class Merchantaccount extends MerchantaccountKey {
     private Date maclastlogin;
 
     private Boolean macenable;
+
+    public Integer getMacid() {
+        return macid;
+    }
+
+    public void setMacid(Integer macid) {
+        this.macid = macid;
+    }
+
+    public Integer getMerid() {
+        return merid;
+    }
+
+    public void setMerid(Integer merid) {
+        this.merid = merid;
+    }
 
     public String getMacacc() {
         return macacc;

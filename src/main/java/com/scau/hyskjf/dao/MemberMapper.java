@@ -3,13 +3,13 @@ package com.scau.hyskjf.dao;
 import com.scau.hyskjf.pojo.Member;
 
 public interface MemberMapper {
-    int deleteByPrimaryKey(Long memid);
+    int deleteByPrimaryKey(Integer memid);
 
     int insert(Member record);
 
     int insertSelective(Member record);
 
-    Member selectByPrimaryKey(Long memid);
+    Member selectByPrimaryKey(Integer memid);
 
     int updateByPrimaryKeySelective(Member record);
 

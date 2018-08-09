@@ -3,7 +3,7 @@
 <mapper namespace="com.scau.hyskjf.dao.SuggestionMapper" >
   <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Suggestion" >
     <id column="sugID" property="sugid" jdbcType="INTEGER" />
-    <result column="merID" property="merid" jdbcType="DECIMAL" />
+    <result column="merID" property="merid" jdbcType="INTEGER" />
     <result column="sugTitle" property="sugtitle" jdbcType="VARCHAR" />
     <result column="sugDate" property="sugdate" jdbcType="DATE" />
   </resultMap>
@@ -31,7 +31,7 @@
   <insert id="insert" parameterType="com.scau.hyskjf.pojo.Suggestion" >
     insert into Suggestion (sugID, merID, sugTitle, 
       sugDate, sugContent)
-    values (#{sugid,jdbcType=INTEGER}, #{merid,jdbcType=DECIMAL}, #{sugtitle,jdbcType=VARCHAR}, 
+    values (#{sugid,jdbcType=INTEGER}, #{merid,jdbcType=INTEGER}, #{sugtitle,jdbcType=VARCHAR}, 
       #{sugdate,jdbcType=DATE}, #{sugcontent,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Suggestion" >
@@ -58,7 +58,7 @@
         #{sugid,jdbcType=INTEGER},
       </if>
       <if test="merid != null" >
-        #{merid,jdbcType=DECIMAL},
+        #{merid,jdbcType=INTEGER},
       </if>
       <if test="sugtitle != null" >
         #{sugtitle,jdbcType=VARCHAR},
@@ -75,7 +75,7 @@
     update Suggestion
     <set >
       <if test="merid != null" >
-        merID = #{merid,jdbcType=DECIMAL},
+        merID = #{merid,jdbcType=INTEGER},
       </if>
       <if test="sugtitle != null" >
         sugTitle = #{sugtitle,jdbcType=VARCHAR},
@@ -91,7 +91,7 @@
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scau.hyskjf.pojo.Suggestion" >
     update Suggestion
-    set merID = #{merid,jdbcType=DECIMAL},
+    set merID = #{merid,jdbcType=INTEGER},
       sugTitle = #{sugtitle,jdbcType=VARCHAR},
       sugDate = #{sugdate,jdbcType=DATE},
       sugContent = #{sugcontent,jdbcType=LONGVARCHAR}
@@ -99,7 +99,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Suggestion" >
     update Suggestion
-    set merID = #{merid,jdbcType=DECIMAL},
+    set merID = #{merid,jdbcType=INTEGER},
       sugTitle = #{sugtitle,jdbcType=VARCHAR},
       sugDate = #{sugdate,jdbcType=DATE}
     where sugID = #{sugid,jdbcType=INTEGER}

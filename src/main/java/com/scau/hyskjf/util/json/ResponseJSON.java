@@ -1,6 +1,4 @@
-package com.scau.hyskjf.util;
-
-import org.springframework.stereotype.Repository;
+package com.scau.hyskjf.util.json;
 
 /**
  * Created by supiccc on 2018-08-07 19:30

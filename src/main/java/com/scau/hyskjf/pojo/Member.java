@@ -1,14 +1,13 @@
 package com.scau.hyskjf.pojo;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class Member {
-    private Long memid;
+    private Integer memid;
 
     private String memcer;
 
-    private BigDecimal memcerid;
+    private String memcerid;
 
     private String memname;
 
@@ -22,11 +21,11 @@ public class Member {
 
     private String memadress;
 
-    public Long getMemid() {
+    public Integer getMemid() {
         return memid;
     }
 
-    public void setMemid(Long memid) {
+    public void setMemid(Integer memid) {
         this.memid = memid;
     }
 
@@ -38,11 +37,11 @@ public class Member {
         this.memcer = memcer;
     }
 
-    public BigDecimal getMemcerid() {
+    public String getMemcerid() {
         return memcerid;
     }
 
-    public void setMemcerid(BigDecimal memcerid) {
+    public void setMemcerid(String memcerid) {
         this.memcerid = memcerid;
     }
 

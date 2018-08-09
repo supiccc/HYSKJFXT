@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.scau.hyskjf.dao.MerchantaccountMapper" >
   <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Merchantaccount" >
-    <id column="merID" property="merid" jdbcType="DECIMAL" />
     <id column="macID" property="macid" jdbcType="INTEGER" />
+    <result column="merID" property="merid" jdbcType="INTEGER" />
     <result column="macAcc" property="macacc" jdbcType="VARCHAR" />
     <result column="macCumAcc" property="maccumacc" jdbcType="INTEGER" />
     <result column="macPasswd" property="macpasswd" jdbcType="VARCHAR" />
@@ -12,36 +12,34 @@
     <result column="macEnable" property="macenable" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    merID, macID, macAcc, macCumAcc, macPasswd, macAccType, macLastLogin, macEnable
+    macID, merID, macAcc, macCumAcc, macPasswd, macAccType, macLastLogin, macEnable
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.scau.hyskjf.pojo.MerchantaccountKey" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from MerchantAccount
-    where merID = #{merid,jdbcType=DECIMAL}
-      and macID = #{macid,jdbcType=INTEGER}
+    where macID = #{macid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.scau.hyskjf.pojo.MerchantaccountKey" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from MerchantAccount
-    where merID = #{merid,jdbcType=DECIMAL}
-      and macID = #{macid,jdbcType=INTEGER}
+    where macID = #{macid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.scau.hyskjf.pojo.Merchantaccount" >
-    insert into MerchantAccount (merID, macID, macAcc, 
+    insert into MerchantAccount (macID, merID, macAcc, 
       macCumAcc, macPasswd, macAccType, 
       macLastLogin, macEnable)
-    values (#{merid,jdbcType=DECIMAL}, #{macid,jdbcType=INTEGER}, #{macacc,jdbcType=VARCHAR}, 
+    values (#{macid,jdbcType=INTEGER}, #{merid,jdbcType=INTEGER}, #{macacc,jdbcType=VARCHAR}, 
       #{maccumacc,jdbcType=INTEGER}, #{macpasswd,jdbcType=VARCHAR}, #{macacctype,jdbcType=INTEGER}, 
       #{maclastlogin,jdbcType=TIMESTAMP}, #{macenable,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Merchantaccount" >
     insert into MerchantAccount
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="merid != null" >
-        merID,
-      </if>
       <if test="macid != null" >
         macID,
+      </if>
+      <if test="merid != null" >
+        merID,
       </if>
       <if test="macacc != null" >
         macAcc,
@@ -63,11 +61,11 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="merid != null" >
-        #{merid,jdbcType=DECIMAL},
-      </if>
       <if test="macid != null" >
         #{macid,jdbcType=INTEGER},
+      </if>
+      <if test="merid != null" >
+        #{merid,jdbcType=INTEGER},
       </if>
       <if test="macacc != null" >
         #{macacc,jdbcType=VARCHAR},
@@ -92,6 +90,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Merchantaccount" >
     update MerchantAccount
     <set >
+      <if test="merid != null" >
+        merID = #{merid,jdbcType=INTEGER},
+      </if>
       <if test="macacc != null" >
         macAcc = #{macacc,jdbcType=VARCHAR},
       </if>
@@ -111,18 +112,17 @@
         macEnable = #{macenable,jdbcType=BIT},
       </if>
     </set>
-    where merID = #{merid,jdbcType=DECIMAL}
-      and macID = #{macid,jdbcType=INTEGER}
+    where macID = #{macid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Merchantaccount" >
     update MerchantAccount
-    set macAcc = #{macacc,jdbcType=VARCHAR},
+    set merID = #{merid,jdbcType=INTEGER},
+      macAcc = #{macacc,jdbcType=VARCHAR},
       macCumAcc = #{maccumacc,jdbcType=INTEGER},
       macPasswd = #{macpasswd,jdbcType=VARCHAR},
       macAccType = #{macacctype,jdbcType=INTEGER},
       macLastLogin = #{maclastlogin,jdbcType=TIMESTAMP},
       macEnable = #{macenable,jdbcType=BIT}
-    where merID = #{merid,jdbcType=DECIMAL}
-      and macID = #{macid,jdbcType=INTEGER}
+    where macID = #{macid,jdbcType=INTEGER}
   </update>
 </mapper>

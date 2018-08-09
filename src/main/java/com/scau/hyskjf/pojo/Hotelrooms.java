@@ -25,15 +25,11 @@ public class Hotelrooms {
 
     private String hrnetwork;
 
-    private String hrroomstat;
-
     private Float hrspecialprice;
 
     private Float hrweekendprice;
 
     private Boolean hravailable;
-
-    private String hrcomment;
 
     public Integer getPduid() {
         return pduid;
@@ -131,14 +127,6 @@ public class Hotelrooms {
         this.hrnetwork = hrnetwork;
     }
 
-    public String getHrroomstat() {
-        return hrroomstat;
-    }
-
-    public void setHrroomstat(String hrroomstat) {
-        this.hrroomstat = hrroomstat;
-    }
-
     public Float getHrspecialprice() {
         return hrspecialprice;
     }
@@ -161,13 +149,5 @@ public class Hotelrooms {
 
     public void setHravailable(Boolean hravailable) {
         this.hravailable = hravailable;
-    }
-
-    public String getHrcomment() {
-        return hrcomment;
-    }
-
-    public void setHrcomment(String hrcomment) {
-        this.hrcomment = hrcomment;
     }
 }

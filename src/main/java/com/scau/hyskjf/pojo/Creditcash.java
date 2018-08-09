@@ -5,13 +5,11 @@ import java.util.Date;
 public class Creditcash {
     private Integer ccid;
 
-    private Long memid;
-
-    private Long mcid;
+    private Integer mcpkid;
 
     private String ccways;
 
-    private Integer ccbankaccount;
+    private String ccbankaccount;
 
     private Float cccredit;
 
@@ -27,20 +25,12 @@ public class Creditcash {
         this.ccid = ccid;
     }
 
-    public Long getMemid() {
-        return memid;
+    public Integer getMcpkid() {
+        return mcpkid;
     }
 
-    public void setMemid(Long memid) {
-        this.memid = memid;
-    }
-
-    public Long getMcid() {
-        return mcid;
-    }
-
-    public void setMcid(Long mcid) {
-        this.mcid = mcid;
+    public void setMcpkid(Integer mcpkid) {
+        this.mcpkid = mcpkid;
     }
 
     public String getCcways() {
@@ -51,11 +41,11 @@ public class Creditcash {
         this.ccways = ccways;
     }
 
-    public Integer getCcbankaccount() {
+    public String getCcbankaccount() {
         return ccbankaccount;
     }
 
-    public void setCcbankaccount(Integer ccbankaccount) {
+    public void setCcbankaccount(String ccbankaccount) {
         this.ccbankaccount = ccbankaccount;
     }
 

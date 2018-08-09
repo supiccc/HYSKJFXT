@@ -3,7 +3,7 @@
 <mapper namespace="com.scau.hyskjf.dao.AdvertiseMapper" >
   <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Advertise" >
     <id column="adverID" property="adverid" jdbcType="INTEGER" />
-    <result column="merID" property="merid" jdbcType="DECIMAL" />
+    <result column="merID" property="merid" jdbcType="INTEGER" />
     <result column="adverImage" property="adverimage" jdbcType="VARCHAR" />
     <result column="adverURL" property="adverurl" jdbcType="VARCHAR" />
     <result column="adverType" property="advertype" jdbcType="VARCHAR" />
@@ -37,7 +37,7 @@
       adverURL, adverType, adverCost, 
       adverStart, adverEnd, adverDescript
       )
-    values (#{adverid,jdbcType=INTEGER}, #{merid,jdbcType=DECIMAL}, #{adverimage,jdbcType=VARCHAR}, 
+    values (#{adverid,jdbcType=INTEGER}, #{merid,jdbcType=INTEGER}, #{adverimage,jdbcType=VARCHAR}, 
       #{adverurl,jdbcType=VARCHAR}, #{advertype,jdbcType=VARCHAR}, #{advercost,jdbcType=REAL}, 
       #{adverstart,jdbcType=DATE}, #{adverend,jdbcType=DATE}, #{adverdescript,jdbcType=LONGVARCHAR}
       )
@@ -78,7 +78,7 @@
         #{adverid,jdbcType=INTEGER},
       </if>
       <if test="merid != null" >
-        #{merid,jdbcType=DECIMAL},
+        #{merid,jdbcType=INTEGER},
       </if>
       <if test="adverimage != null" >
         #{adverimage,jdbcType=VARCHAR},
@@ -107,7 +107,7 @@
     update Advertise
     <set >
       <if test="merid != null" >
-        merID = #{merid,jdbcType=DECIMAL},
+        merID = #{merid,jdbcType=INTEGER},
       </if>
       <if test="adverimage != null" >
         adverImage = #{adverimage,jdbcType=VARCHAR},
@@ -135,7 +135,7 @@
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scau.hyskjf.pojo.Advertise" >
     update Advertise
-    set merID = #{merid,jdbcType=DECIMAL},
+    set merID = #{merid,jdbcType=INTEGER},
       adverImage = #{adverimage,jdbcType=VARCHAR},
       adverURL = #{adverurl,jdbcType=VARCHAR},
       adverType = #{advertype,jdbcType=VARCHAR},
@@ -147,7 +147,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Advertise" >
     update Advertise
-    set merID = #{merid,jdbcType=DECIMAL},
+    set merID = #{merid,jdbcType=INTEGER},
       adverImage = #{adverimage,jdbcType=VARCHAR},
       adverURL = #{adverurl,jdbcType=VARCHAR},
       adverType = #{advertype,jdbcType=VARCHAR},

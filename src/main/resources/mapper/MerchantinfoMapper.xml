@@ -2,8 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.scau.hyskjf.dao.MerchantinfoMapper" >
   <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Merchantinfo" >
-    <id column="merID" property="merid" jdbcType="DECIMAL" />
-    <result column="merIntroduce" property="merintroduce" jdbcType="VARCHAR" />
+    <id column="merID" property="merid" jdbcType="INTEGER" />
     <result column="merImage" property="merimage" jdbcType="VARCHAR" />
     <result column="merMainImage" property="mermainimage" jdbcType="BIT" />
     <result column="merTelphone" property="mertelphone" jdbcType="VARCHAR" />
@@ -19,20 +18,20 @@
     <result column="merProvince" property="merprovince" jdbcType="VARCHAR" />
     <result column="merCity" property="mercity" jdbcType="VARCHAR" />
     <result column="merArea" property="merarea" jdbcType="VARCHAR" />
-    <result column="merLandmark" property="merlandmark" jdbcType="VARCHAR" />
-    <result column="merDiscount" property="merdiscount" jdbcType="VARCHAR" />
-    <result column="merDiscountEvent" property="merdiscountevent" jdbcType="VARCHAR" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.Merchantinfo" extends="BaseResultMap" >
+  <resultMap id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.MerchantinfoWithBLOBs" extends="BaseResultMap" >
+    <result column="merIntroduce" property="merintroduce" jdbcType="LONGVARCHAR" />
     <result column="merAdress" property="meradress" jdbcType="LONGVARCHAR" />
+    <result column="merLandmark" property="merlandmark" jdbcType="LONGVARCHAR" />
+    <result column="merDiscount" property="merdiscount" jdbcType="LONGVARCHAR" />
+    <result column="merDiscountEvent" property="merdiscountevent" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    merID, merIntroduce, merImage, merMainImage, merTelphone, merFax, merURL, merEmail, 
-    merPrincipal, merAppellation, merDuty, merPhone, merLevel, merPostNum, merProvince, 
-    merCity, merArea, merLandmark, merDiscount, merDiscountEvent
+    merID, merImage, merMainImage, merTelphone, merFax, merURL, merEmail, merPrincipal, 
+    merAppellation, merDuty, merPhone, merLevel, merPostNum, merProvince, merCity, merArea
   </sql>
   <sql id="Blob_Column_List" >
-    merAdress
+    merIntroduce, merAdress, merLandmark, merDiscount, merDiscountEvent
   </sql>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
@@ -40,38 +39,35 @@
     ,
     <include refid="Blob_Column_List" />
     from MerchantInfo
-    where merID = #{merid,jdbcType=DECIMAL}
+    where merID = #{merid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from MerchantInfo
-    where merID = #{merid,jdbcType=DECIMAL}
+    where merID = #{merid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Merchantinfo" >
-    insert into MerchantInfo (merID, merIntroduce, merImage, 
-      merMainImage, merTelphone, merFax, 
-      merURL, merEmail, merPrincipal, 
-      merAppellation, merDuty, merPhone, 
-      merLevel, merPostNum, merProvince, 
-      merCity, merArea, merLandmark, 
-      merDiscount, merDiscountEvent, merAdress
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.MerchantinfoWithBLOBs" >
+    insert into MerchantInfo (merID, merImage, merMainImage, 
+      merTelphone, merFax, merURL, 
+      merEmail, merPrincipal, merAppellation, 
+      merDuty, merPhone, merLevel, 
+      merPostNum, merProvince, merCity, 
+      merArea, merIntroduce, merAdress, 
+      merLandmark, merDiscount, merDiscountEvent
       )
-    values (#{merid,jdbcType=DECIMAL}, #{merintroduce,jdbcType=VARCHAR}, #{merimage,jdbcType=VARCHAR}, 
-      #{mermainimage,jdbcType=BIT}, #{mertelphone,jdbcType=VARCHAR}, #{merfax,jdbcType=VARCHAR}, 
-      #{merurl,jdbcType=VARCHAR}, #{meremail,jdbcType=VARCHAR}, #{merprincipal,jdbcType=VARCHAR}, 
-      #{merappellation,jdbcType=VARCHAR}, #{merduty,jdbcType=VARCHAR}, #{merphone,jdbcType=VARCHAR}, 
-      #{merlevel,jdbcType=INTEGER}, #{merpostnum,jdbcType=VARCHAR}, #{merprovince,jdbcType=VARCHAR}, 
-      #{mercity,jdbcType=VARCHAR}, #{merarea,jdbcType=VARCHAR}, #{merlandmark,jdbcType=VARCHAR}, 
-      #{merdiscount,jdbcType=VARCHAR}, #{merdiscountevent,jdbcType=VARCHAR}, #{meradress,jdbcType=LONGVARCHAR}
+    values (#{merid,jdbcType=INTEGER}, #{merimage,jdbcType=VARCHAR}, #{mermainimage,jdbcType=BIT}, 
+      #{mertelphone,jdbcType=VARCHAR}, #{merfax,jdbcType=VARCHAR}, #{merurl,jdbcType=VARCHAR}, 
+      #{meremail,jdbcType=VARCHAR}, #{merprincipal,jdbcType=VARCHAR}, #{merappellation,jdbcType=VARCHAR}, 
+      #{merduty,jdbcType=VARCHAR}, #{merphone,jdbcType=VARCHAR}, #{merlevel,jdbcType=INTEGER}, 
+      #{merpostnum,jdbcType=VARCHAR}, #{merprovince,jdbcType=VARCHAR}, #{mercity,jdbcType=VARCHAR}, 
+      #{merarea,jdbcType=VARCHAR}, #{merintroduce,jdbcType=LONGVARCHAR}, #{meradress,jdbcType=LONGVARCHAR}, 
+      #{merlandmark,jdbcType=LONGVARCHAR}, #{merdiscount,jdbcType=LONGVARCHAR}, #{merdiscountevent,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Merchantinfo" >
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.MerchantinfoWithBLOBs" >
     insert into MerchantInfo
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="merid != null" >
         merID,
-      </if>
-      <if test="merintroduce != null" >
-        merIntroduce,
       </if>
       <if test="merimage != null" >
         merImage,
@@ -118,6 +114,12 @@
       <if test="merarea != null" >
         merArea,
       </if>
+      <if test="merintroduce != null" >
+        merIntroduce,
+      </if>
+      <if test="meradress != null" >
+        merAdress,
+      </if>
       <if test="merlandmark != null" >
         merLandmark,
       </if>
@@ -127,16 +129,10 @@
       <if test="merdiscountevent != null" >
         merDiscountEvent,
       </if>
-      <if test="meradress != null" >
-        merAdress,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="merid != null" >
-        #{merid,jdbcType=DECIMAL},
-      </if>
-      <if test="merintroduce != null" >
-        #{merintroduce,jdbcType=VARCHAR},
+        #{merid,jdbcType=INTEGER},
       </if>
       <if test="merimage != null" >
         #{merimage,jdbcType=VARCHAR},
@@ -183,26 +179,26 @@
       <if test="merarea != null" >
         #{merarea,jdbcType=VARCHAR},
       </if>
-      <if test="merlandmark != null" >
-        #{merlandmark,jdbcType=VARCHAR},
-      </if>
-      <if test="merdiscount != null" >
-        #{merdiscount,jdbcType=VARCHAR},
-      </if>
-      <if test="merdiscountevent != null" >
-        #{merdiscountevent,jdbcType=VARCHAR},
+      <if test="merintroduce != null" >
+        #{merintroduce,jdbcType=LONGVARCHAR},
       </if>
       <if test="meradress != null" >
         #{meradress,jdbcType=LONGVARCHAR},
       </if>
+      <if test="merlandmark != null" >
+        #{merlandmark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="merdiscount != null" >
+        #{merdiscount,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="merdiscountevent != null" >
+        #{merdiscountevent,jdbcType=LONGVARCHAR},
+      </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Merchantinfo" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.MerchantinfoWithBLOBs" >
     update MerchantInfo
     <set >
-      <if test="merintroduce != null" >
-        merIntroduce = #{merintroduce,jdbcType=VARCHAR},
-      </if>
       <if test="merimage != null" >
         merImage = #{merimage,jdbcType=VARCHAR},
       </if>
@@ -248,25 +244,27 @@
       <if test="merarea != null" >
         merArea = #{merarea,jdbcType=VARCHAR},
       </if>
-      <if test="merlandmark != null" >
-        merLandmark = #{merlandmark,jdbcType=VARCHAR},
-      </if>
-      <if test="merdiscount != null" >
-        merDiscount = #{merdiscount,jdbcType=VARCHAR},
-      </if>
-      <if test="merdiscountevent != null" >
-        merDiscountEvent = #{merdiscountevent,jdbcType=VARCHAR},
+      <if test="merintroduce != null" >
+        merIntroduce = #{merintroduce,jdbcType=LONGVARCHAR},
       </if>
       <if test="meradress != null" >
         merAdress = #{meradress,jdbcType=LONGVARCHAR},
       </if>
+      <if test="merlandmark != null" >
+        merLandmark = #{merlandmark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="merdiscount != null" >
+        merDiscount = #{merdiscount,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="merdiscountevent != null" >
+        merDiscountEvent = #{merdiscountevent,jdbcType=LONGVARCHAR},
+      </if>
     </set>
-    where merID = #{merid,jdbcType=DECIMAL}
+    where merID = #{merid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scau.hyskjf.pojo.Merchantinfo" >
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scau.hyskjf.pojo.MerchantinfoWithBLOBs" >
     update MerchantInfo
-    set merIntroduce = #{merintroduce,jdbcType=VARCHAR},
-      merImage = #{merimage,jdbcType=VARCHAR},
+    set merImage = #{merimage,jdbcType=VARCHAR},
       merMainImage = #{mermainimage,jdbcType=BIT},
       merTelphone = #{mertelphone,jdbcType=VARCHAR},
       merFax = #{merfax,jdbcType=VARCHAR},
@@ -281,16 +279,16 @@
       merProvince = #{merprovince,jdbcType=VARCHAR},
       merCity = #{mercity,jdbcType=VARCHAR},
       merArea = #{merarea,jdbcType=VARCHAR},
-      merLandmark = #{merlandmark,jdbcType=VARCHAR},
-      merDiscount = #{merdiscount,jdbcType=VARCHAR},
-      merDiscountEvent = #{merdiscountevent,jdbcType=VARCHAR},
-      merAdress = #{meradress,jdbcType=LONGVARCHAR}
-    where merID = #{merid,jdbcType=DECIMAL}
+      merIntroduce = #{merintroduce,jdbcType=LONGVARCHAR},
+      merAdress = #{meradress,jdbcType=LONGVARCHAR},
+      merLandmark = #{merlandmark,jdbcType=LONGVARCHAR},
+      merDiscount = #{merdiscount,jdbcType=LONGVARCHAR},
+      merDiscountEvent = #{merdiscountevent,jdbcType=LONGVARCHAR}
+    where merID = #{merid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Merchantinfo" >
     update MerchantInfo
-    set merIntroduce = #{merintroduce,jdbcType=VARCHAR},
-      merImage = #{merimage,jdbcType=VARCHAR},
+    set merImage = #{merimage,jdbcType=VARCHAR},
       merMainImage = #{mermainimage,jdbcType=BIT},
       merTelphone = #{mertelphone,jdbcType=VARCHAR},
       merFax = #{merfax,jdbcType=VARCHAR},
@@ -304,10 +302,7 @@
       merPostNum = #{merpostnum,jdbcType=VARCHAR},
       merProvince = #{merprovince,jdbcType=VARCHAR},
       merCity = #{mercity,jdbcType=VARCHAR},
-      merArea = #{merarea,jdbcType=VARCHAR},
-      merLandmark = #{merlandmark,jdbcType=VARCHAR},
-      merDiscount = #{merdiscount,jdbcType=VARCHAR},
-      merDiscountEvent = #{merdiscountevent,jdbcType=VARCHAR}
-    where merID = #{merid,jdbcType=DECIMAL}
+      merArea = #{merarea,jdbcType=VARCHAR}
+    where merID = #{merid,jdbcType=INTEGER}
   </update>
 </mapper>

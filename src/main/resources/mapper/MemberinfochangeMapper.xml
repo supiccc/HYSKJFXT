@@ -3,9 +3,9 @@
 <mapper namespace="com.scau.hyskjf.dao.MemberinfochangeMapper" >
   <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Memberinfochange" >
     <id column="micID" property="micid" jdbcType="INTEGER" />
-    <result column="memID" property="memid" jdbcType="DECIMAL" />
+    <result column="memID" property="memid" jdbcType="INTEGER" />
     <result column="micCer" property="miccer" jdbcType="VARCHAR" />
-    <result column="micCerID" property="miccerid" jdbcType="INTEGER" />
+    <result column="micCerID" property="miccerid" jdbcType="VARCHAR" />
     <result column="micName" property="micname" jdbcType="VARCHAR" />
     <result column="micSex" property="micsex" jdbcType="VARCHAR" />
     <result column="micPhone" property="micphone" jdbcType="INTEGER" />
@@ -35,8 +35,8 @@
       micPhone, micBirth, micAdredd, 
       micEmail, micReason, micTime
       )
-    values (#{micid,jdbcType=INTEGER}, #{memid,jdbcType=DECIMAL}, #{miccer,jdbcType=VARCHAR}, 
-      #{miccerid,jdbcType=INTEGER}, #{micname,jdbcType=VARCHAR}, #{micsex,jdbcType=VARCHAR}, 
+    values (#{micid,jdbcType=INTEGER}, #{memid,jdbcType=INTEGER}, #{miccer,jdbcType=VARCHAR}, 
+      #{miccerid,jdbcType=VARCHAR}, #{micname,jdbcType=VARCHAR}, #{micsex,jdbcType=VARCHAR}, 
       #{micphone,jdbcType=INTEGER}, #{micbirth,jdbcType=DATE}, #{micadredd,jdbcType=VARCHAR}, 
       #{micemail,jdbcType=VARCHAR}, #{micreason,jdbcType=VARCHAR}, #{mictime,jdbcType=TIMESTAMP}
       )
@@ -86,13 +86,13 @@
         #{micid,jdbcType=INTEGER},
       </if>
       <if test="memid != null" >
-        #{memid,jdbcType=DECIMAL},
+        #{memid,jdbcType=INTEGER},
       </if>
       <if test="miccer != null" >
         #{miccer,jdbcType=VARCHAR},
       </if>
       <if test="miccerid != null" >
-        #{miccerid,jdbcType=INTEGER},
+        #{miccerid,jdbcType=VARCHAR},
       </if>
       <if test="micname != null" >
         #{micname,jdbcType=VARCHAR},
@@ -124,13 +124,13 @@
     update MemberInfoChange
     <set >
       <if test="memid != null" >
-        memID = #{memid,jdbcType=DECIMAL},
+        memID = #{memid,jdbcType=INTEGER},
       </if>
       <if test="miccer != null" >
         micCer = #{miccer,jdbcType=VARCHAR},
       </if>
       <if test="miccerid != null" >
-        micCerID = #{miccerid,jdbcType=INTEGER},
+        micCerID = #{miccerid,jdbcType=VARCHAR},
       </if>
       <if test="micname != null" >
         micName = #{micname,jdbcType=VARCHAR},
@@ -161,9 +161,9 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Memberinfochange" >
     update MemberInfoChange
-    set memID = #{memid,jdbcType=DECIMAL},
+    set memID = #{memid,jdbcType=INTEGER},
       micCer = #{miccer,jdbcType=VARCHAR},
-      micCerID = #{miccerid,jdbcType=INTEGER},
+      micCerID = #{miccerid,jdbcType=VARCHAR},
       micName = #{micname,jdbcType=VARCHAR},
       micSex = #{micsex,jdbcType=VARCHAR},
       micPhone = #{micphone,jdbcType=INTEGER},

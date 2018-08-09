@@ -3,13 +3,13 @@ package com.scau.hyskjf.dao;
 import com.scau.hyskjf.pojo.Premembercard;
 
 public interface PremembercardMapper {
-    int deleteByPrimaryKey(Long pmcid);
+    int deleteByPrimaryKey(Integer pmcid);
 
     int insert(Premembercard record);
 
     int insertSelective(Premembercard record);
 
-    Premembercard selectByPrimaryKey(Long pmcid);
+    Premembercard selectByPrimaryKey(Integer pmcid);
 
     int updateByPrimaryKeySelective(Premembercard record);
 

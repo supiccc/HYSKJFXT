@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.LabelhaveproductMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Labelhaveproduct" >
+    <result column="pduID" property="pduid" jdbcType="INTEGER" />
+    <result column="LabelID" property="labelid" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Labelhaveproduct" >
+    insert into LabelHaveProduct (pduID, LabelID)
+    values (#{pduid,jdbcType=INTEGER}, #{labelid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Labelhaveproduct" >
+    insert into LabelHaveProduct
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pduid != null" >
+        pduID,
+      </if>
+      <if test="labelid != null" >
+        LabelID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pduid != null" >
+        #{pduid,jdbcType=INTEGER},
+      </if>
+      <if test="labelid != null" >
+        #{labelid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

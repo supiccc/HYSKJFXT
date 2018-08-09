@@ -3,14 +3,13 @@
 <mapper namespace="com.scau.hyskjf.dao.LoginlogMapper" >
   <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Loginlog" >
     <id column="llogID" property="llogid" jdbcType="INTEGER" />
-    <result column="merID" property="merid" jdbcType="DECIMAL" />
     <result column="macID" property="macid" jdbcType="INTEGER" />
     <result column="llogAccount" property="llogaccount" jdbcType="INTEGER" />
     <result column="llogDate" property="llogdate" jdbcType="TIMESTAMP" />
     <result column="llogType" property="llogtype" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    llogID, merID, macID, llogAccount, llogDate, llogType
+    llogID, macID, llogAccount, llogDate, llogType
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -23,21 +22,16 @@
     where llogID = #{llogid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.scau.hyskjf.pojo.Loginlog" >
-    insert into LoginLog (llogID, merID, macID, 
-      llogAccount, llogDate, llogType
-      )
-    values (#{llogid,jdbcType=INTEGER}, #{merid,jdbcType=DECIMAL}, #{macid,jdbcType=INTEGER}, 
-      #{llogaccount,jdbcType=INTEGER}, #{llogdate,jdbcType=TIMESTAMP}, #{llogtype,jdbcType=VARCHAR}
-      )
+    insert into LoginLog (llogID, macID, llogAccount, 
+      llogDate, llogType)
+    values (#{llogid,jdbcType=INTEGER}, #{macid,jdbcType=INTEGER}, #{llogaccount,jdbcType=INTEGER}, 
+      #{llogdate,jdbcType=TIMESTAMP}, #{llogtype,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Loginlog" >
     insert into LoginLog
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="llogid != null" >
         llogID,
-      </if>
-      <if test="merid != null" >
-        merID,
       </if>
       <if test="macid != null" >
         macID,
@@ -56,9 +50,6 @@
       <if test="llogid != null" >
         #{llogid,jdbcType=INTEGER},
       </if>
-      <if test="merid != null" >
-        #{merid,jdbcType=DECIMAL},
-      </if>
       <if test="macid != null" >
         #{macid,jdbcType=INTEGER},
       </if>
@@ -76,9 +67,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Loginlog" >
     update LoginLog
     <set >
-      <if test="merid != null" >
-        merID = #{merid,jdbcType=DECIMAL},
-      </if>
       <if test="macid != null" >
         macID = #{macid,jdbcType=INTEGER},
       </if>
@@ -96,8 +84,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Loginlog" >
     update LoginLog
-    set merID = #{merid,jdbcType=DECIMAL},
-      macID = #{macid,jdbcType=INTEGER},
+    set macID = #{macid,jdbcType=INTEGER},
       llogAccount = #{llogaccount,jdbcType=INTEGER},
       llogDate = #{llogdate,jdbcType=TIMESTAMP},
       llogType = #{llogtype,jdbcType=VARCHAR}

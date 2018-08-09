@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.scau.hyskjf.dao.MerchantconfigureMapper" >
   <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Merchantconfigure" >
-    <id column="merID" property="merid" jdbcType="DECIMAL" />
+    <id column="merID" property="merid" jdbcType="INTEGER" />
     <result column="confIP" property="confip" jdbcType="VARCHAR" />
     <result column="confCNenable" property="confcnenable" jdbcType="BIT" />
     <result column="confMPenable" property="confmpenable" jdbcType="BIT" />
@@ -20,18 +20,18 @@
     select 
     <include refid="Base_Column_List" />
     from MerchantConfigure
-    where merID = #{merid,jdbcType=DECIMAL}
+    where merID = #{merid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from MerchantConfigure
-    where merID = #{merid,jdbcType=DECIMAL}
+    where merID = #{merid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.scau.hyskjf.pojo.Merchantconfigure" >
     insert into MerchantConfigure (merID, confIP, confCNenable, 
       confMPenable, confMerKind, confEnableLevel, 
       confEnableImage, confEnableHotel, confMaxPurchase
       )
-    values (#{merid,jdbcType=DECIMAL}, #{confip,jdbcType=VARCHAR}, #{confcnenable,jdbcType=BIT}, 
+    values (#{merid,jdbcType=INTEGER}, #{confip,jdbcType=VARCHAR}, #{confcnenable,jdbcType=BIT}, 
       #{confmpenable,jdbcType=BIT}, #{confmerkind,jdbcType=VARCHAR}, #{confenablelevel,jdbcType=BIT}, 
       #{confenableimage,jdbcType=BIT}, #{confenablehotel,jdbcType=BIT}, #{confmaxpurchase,jdbcType=REAL}
       )
@@ -69,7 +69,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="merid != null" >
-        #{merid,jdbcType=DECIMAL},
+        #{merid,jdbcType=INTEGER},
       </if>
       <if test="confip != null" >
         #{confip,jdbcType=VARCHAR},
@@ -125,7 +125,7 @@
         confMaxPurchase = #{confmaxpurchase,jdbcType=REAL},
       </if>
     </set>
-    where merID = #{merid,jdbcType=DECIMAL}
+    where merID = #{merid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Merchantconfigure" >
     update MerchantConfigure
@@ -137,6 +137,6 @@
       confEnableImage = #{confenableimage,jdbcType=BIT},
       confEnableHotel = #{confenablehotel,jdbcType=BIT},
       confMaxPurchase = #{confmaxpurchase,jdbcType=REAL}
-    where merID = #{merid,jdbcType=DECIMAL}
+    where merID = #{merid,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.scau.hyskjf.dao.AdminMapper" >
   <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Admin" >
-    <id column="AdminID" property="adminid" jdbcType="DECIMAL" />
+    <id column="AdminID" property="adminid" jdbcType="INTEGER" />
     <result column="AdminName" property="adminname" jdbcType="VARCHAR" />
     <result column="AdminAcc" property="adminacc" jdbcType="VARCHAR" />
     <result column="AdminPwd" property="adminpwd" jdbcType="VARCHAR" />
@@ -14,16 +14,16 @@
     select 
     <include refid="Base_Column_List" />
     from Admin
-    where AdminID = #{adminid,jdbcType=DECIMAL}
+    where AdminID = #{adminid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from Admin
-    where AdminID = #{adminid,jdbcType=DECIMAL}
+    where AdminID = #{adminid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.scau.hyskjf.pojo.Admin" >
     insert into Admin (AdminID, AdminName, AdminAcc, 
       AdminPwd)
-    values (#{adminid,jdbcType=DECIMAL}, #{adminname,jdbcType=VARCHAR}, #{adminacc,jdbcType=VARCHAR}, 
+    values (#{adminid,jdbcType=INTEGER}, #{adminname,jdbcType=VARCHAR}, #{adminacc,jdbcType=VARCHAR}, 
       #{adminpwd,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Admin" >
@@ -44,7 +44,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="adminid != null" >
-        #{adminid,jdbcType=DECIMAL},
+        #{adminid,jdbcType=INTEGER},
       </if>
       <if test="adminname != null" >
         #{adminname,jdbcType=VARCHAR},
@@ -70,13 +70,13 @@
         AdminPwd = #{adminpwd,jdbcType=VARCHAR},
       </if>
     </set>
-    where AdminID = #{adminid,jdbcType=DECIMAL}
+    where AdminID = #{adminid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Admin" >
     update Admin
     set AdminName = #{adminname,jdbcType=VARCHAR},
       AdminAcc = #{adminacc,jdbcType=VARCHAR},
       AdminPwd = #{adminpwd,jdbcType=VARCHAR}
-    where AdminID = #{adminid,jdbcType=DECIMAL}
+    where AdminID = #{adminid,jdbcType=INTEGER}
   </update>
 </mapper>

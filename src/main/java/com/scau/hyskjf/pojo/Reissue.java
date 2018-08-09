@@ -5,13 +5,13 @@ import java.util.Date;
 public class Reissue {
     private Integer reiid;
 
-    private Long memid;
+    private Integer memid;
 
     private Date reitime;
 
-    private Long reioldnum;
+    private Integer memMcpkid;
 
-    private Long reinewnum;
+    private Integer mcpkid;
 
     private String reireason;
 
@@ -23,11 +23,11 @@ public class Reissue {
         this.reiid = reiid;
     }
 
-    public Long getMemid() {
+    public Integer getMemid() {
         return memid;
     }
 
-    public void setMemid(Long memid) {
+    public void setMemid(Integer memid) {
         this.memid = memid;
     }
 
@@ -39,20 +39,20 @@ public class Reissue {
         this.reitime = reitime;
     }
 
-    public Long getReioldnum() {
-        return reioldnum;
+    public Integer getMemMcpkid() {
+        return memMcpkid;
     }
 
-    public void setReioldnum(Long reioldnum) {
-        this.reioldnum = reioldnum;
+    public void setMemMcpkid(Integer memMcpkid) {
+        this.memMcpkid = memMcpkid;
     }
 
-    public Long getReinewnum() {
-        return reinewnum;
+    public Integer getMcpkid() {
+        return mcpkid;
     }
 
-    public void setReinewnum(Long reinewnum) {
-        this.reinewnum = reinewnum;
+    public void setMcpkid(Integer mcpkid) {
+        this.mcpkid = mcpkid;
     }
 
     public String getReireason() {

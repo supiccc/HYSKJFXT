@@ -5,9 +5,7 @@ import java.util.Date;
 public class Balancehistory {
     private Integer vhid;
 
-    private Long memid;
-
-    private Long mcid;
+    private Integer mcpkid;
 
     private Float vhmoney;
 
@@ -21,20 +19,12 @@ public class Balancehistory {
         this.vhid = vhid;
     }
 
-    public Long getMemid() {
-        return memid;
+    public Integer getMcpkid() {
+        return mcpkid;
     }
 
-    public void setMemid(Long memid) {
-        this.memid = memid;
-    }
-
-    public Long getMcid() {
-        return mcid;
-    }
-
-    public void setMcid(Long mcid) {
-        this.mcid = mcid;
+    public void setMcpkid(Integer mcpkid) {
+        this.mcpkid = mcpkid;
     }
 
     public Float getVhmoney() {

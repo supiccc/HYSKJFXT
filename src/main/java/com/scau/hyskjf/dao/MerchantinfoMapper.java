@@ -1,19 +1,20 @@
 package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Merchantinfo;
+import com.scau.hyskjf.pojo.MerchantinfoWithBLOBs;
 
 public interface MerchantinfoMapper {
     int deleteByPrimaryKey(Integer merid);
 
-    int insert(Merchantinfo record);
+    int insert(MerchantinfoWithBLOBs record);
 
-    int insertSelective(Merchantinfo record);
+    int insertSelective(MerchantinfoWithBLOBs record);
 
-    Merchantinfo selectByPrimaryKey(Integer merid);
+    MerchantinfoWithBLOBs selectByPrimaryKey(Integer merid);
 
-    int updateByPrimaryKeySelective(Merchantinfo record);
+    int updateByPrimaryKeySelective(MerchantinfoWithBLOBs record);
 
-    int updateByPrimaryKeyWithBLOBs(Merchantinfo record);
+    int updateByPrimaryKeyWithBLOBs(MerchantinfoWithBLOBs record);
 
     int updateByPrimaryKey(Merchantinfo record);
 }

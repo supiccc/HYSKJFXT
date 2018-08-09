@@ -4,15 +4,16 @@
   <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Message" >
     <id column="mesID" property="mesid" jdbcType="INTEGER" />
     <result column="mesTitle" property="mestitle" jdbcType="VARCHAR" />
-    <result column="mesSource" property="messource" jdbcType="DECIMAL" />
-    <result column="mesDestination" property="mesdestination" jdbcType="DECIMAL" />
+    <result column="mesSource" property="messource" jdbcType="INTEGER" />
+    <result column="mesDestination" property="mesdestination" jdbcType="INTEGER" />
     <result column="mesRead" property="mesread" jdbcType="BIT" />
+    <result column="mesType" property="mestype" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.Message" extends="BaseResultMap" >
     <result column="mesContent" property="mescontent" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    mesID, mesTitle, mesSource, mesDestination, mesRead
+    mesID, mesTitle, mesSource, mesDestination, mesRead, mesType
   </sql>
   <sql id="Blob_Column_List" >
     mesContent
@@ -31,11 +32,11 @@
   </delete>
   <insert id="insert" parameterType="com.scau.hyskjf.pojo.Message" >
     insert into Message (mesID, mesTitle, mesSource, 
-      mesDestination, mesRead, mesContent
-      )
-    values (#{mesid,jdbcType=INTEGER}, #{mestitle,jdbcType=VARCHAR}, #{messource,jdbcType=DECIMAL}, 
-      #{mesdestination,jdbcType=DECIMAL}, #{mesread,jdbcType=BIT}, #{mescontent,jdbcType=LONGVARCHAR}
-      )
+      mesDestination, mesRead, mesType, 
+      mesContent)
+    values (#{mesid,jdbcType=INTEGER}, #{mestitle,jdbcType=VARCHAR}, #{messource,jdbcType=INTEGER}, 
+      #{mesdestination,jdbcType=INTEGER}, #{mesread,jdbcType=BIT}, #{mestype,jdbcType=INTEGER}, 
+      #{mescontent,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Message" >
     insert into Message
@@ -55,6 +56,9 @@
       <if test="mesread != null" >
         mesRead,
       </if>
+      <if test="mestype != null" >
+        mesType,
+      </if>
       <if test="mescontent != null" >
         mesContent,
       </if>
@@ -67,13 +71,16 @@
         #{mestitle,jdbcType=VARCHAR},
       </if>
       <if test="messource != null" >
-        #{messource,jdbcType=DECIMAL},
+        #{messource,jdbcType=INTEGER},
       </if>
       <if test="mesdestination != null" >
-        #{mesdestination,jdbcType=DECIMAL},
+        #{mesdestination,jdbcType=INTEGER},
       </if>
       <if test="mesread != null" >
         #{mesread,jdbcType=BIT},
+      </if>
+      <if test="mestype != null" >
+        #{mestype,jdbcType=INTEGER},
       </if>
       <if test="mescontent != null" >
         #{mescontent,jdbcType=LONGVARCHAR},
@@ -87,13 +94,16 @@
         mesTitle = #{mestitle,jdbcType=VARCHAR},
       </if>
       <if test="messource != null" >
-        mesSource = #{messource,jdbcType=DECIMAL},
+        mesSource = #{messource,jdbcType=INTEGER},
       </if>
       <if test="mesdestination != null" >
-        mesDestination = #{mesdestination,jdbcType=DECIMAL},
+        mesDestination = #{mesdestination,jdbcType=INTEGER},
       </if>
       <if test="mesread != null" >
         mesRead = #{mesread,jdbcType=BIT},
+      </if>
+      <if test="mestype != null" >
+        mesType = #{mestype,jdbcType=INTEGER},
       </if>
       <if test="mescontent != null" >
         mesContent = #{mescontent,jdbcType=LONGVARCHAR},
@@ -104,18 +114,20 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scau.hyskjf.pojo.Message" >
     update Message
     set mesTitle = #{mestitle,jdbcType=VARCHAR},
-      mesSource = #{messource,jdbcType=DECIMAL},
-      mesDestination = #{mesdestination,jdbcType=DECIMAL},
+      mesSource = #{messource,jdbcType=INTEGER},
+      mesDestination = #{mesdestination,jdbcType=INTEGER},
       mesRead = #{mesread,jdbcType=BIT},
+      mesType = #{mestype,jdbcType=INTEGER},
       mesContent = #{mescontent,jdbcType=LONGVARCHAR}
     where mesID = #{mesid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Message" >
     update Message
     set mesTitle = #{mestitle,jdbcType=VARCHAR},
-      mesSource = #{messource,jdbcType=DECIMAL},
-      mesDestination = #{mesdestination,jdbcType=DECIMAL},
-      mesRead = #{mesread,jdbcType=BIT}
+      mesSource = #{messource,jdbcType=INTEGER},
+      mesDestination = #{mesdestination,jdbcType=INTEGER},
+      mesRead = #{mesread,jdbcType=BIT},
+      mesType = #{mestype,jdbcType=INTEGER}
     where mesID = #{mesid,jdbcType=INTEGER}
   </update>
 </mapper>

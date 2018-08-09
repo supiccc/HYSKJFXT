@@ -9,13 +9,11 @@ public class Evaluation {
 
     private Integer merid;
 
-    private Long memid;
-
-    private String evainfo;
+    private Integer memid;
 
     private String evaip;
 
-    private Long evaby;
+    private Integer evaby;
 
     private Date evatime;
 
@@ -24,8 +22,6 @@ public class Evaluation {
     private Boolean evareply;
 
     private Integer evareplyby;
-
-    private String evarepinfo;
 
     private Date evareptime;
 
@@ -53,20 +49,12 @@ public class Evaluation {
         this.merid = merid;
     }
 
-    public Long getMemid() {
+    public Integer getMemid() {
         return memid;
     }
 
-    public void setMemid(Long memid) {
+    public void setMemid(Integer memid) {
         this.memid = memid;
-    }
-
-    public String getEvainfo() {
-        return evainfo;
-    }
-
-    public void setEvainfo(String evainfo) {
-        this.evainfo = evainfo;
     }
 
     public String getEvaip() {
@@ -77,11 +65,11 @@ public class Evaluation {
         this.evaip = evaip;
     }
 
-    public Long getEvaby() {
+    public Integer getEvaby() {
         return evaby;
     }
 
-    public void setEvaby(Long evaby) {
+    public void setEvaby(Integer evaby) {
         this.evaby = evaby;
     }
 
@@ -115,14 +103,6 @@ public class Evaluation {
 
     public void setEvareplyby(Integer evareplyby) {
         this.evareplyby = evareplyby;
-    }
-
-    public String getEvarepinfo() {
-        return evarepinfo;
-    }
-
-    public void setEvarepinfo(String evarepinfo) {
-        this.evarepinfo = evarepinfo;
     }
 
     public Date getEvareptime() {

@@ -3,17 +3,15 @@
 <mapper namespace="com.scau.hyskjf.dao.ConsumeMapper" >
   <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Consume" >
     <id column="cumID" property="cumid" jdbcType="INTEGER" />
-    <result column="memID" property="memid" jdbcType="DECIMAL" />
-    <result column="mcID" property="mcid" jdbcType="DECIMAL" />
+    <result column="mcPKID" property="mcpkid" jdbcType="INTEGER" />
     <result column="cumMoney" property="cummoney" jdbcType="REAL" />
     <result column="cumWay" property="cumway" jdbcType="VARCHAR" />
     <result column="cumCredit" property="cumcredit" jdbcType="REAL" />
-    <result column="cumMerchant" property="cummerchant" jdbcType="DECIMAL" />
     <result column="macID" property="macid" jdbcType="INTEGER" />
     <result column="cumTime" property="cumtime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    cumID, memID, mcID, cumMoney, cumWay, cumCredit, cumMerchant, macID, cumTime
+    cumID, mcPKID, cumMoney, cumWay, cumCredit, macID, cumTime
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -26,14 +24,12 @@
     where cumID = #{cumid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.scau.hyskjf.pojo.Consume" >
-    insert into Consume (cumID, memID, mcID, 
-      cumMoney, cumWay, cumCredit, 
-      cumMerchant, macID, cumTime
-      )
-    values (#{cumid,jdbcType=INTEGER}, #{memid,jdbcType=DECIMAL}, #{mcid,jdbcType=DECIMAL}, 
-      #{cummoney,jdbcType=REAL}, #{cumway,jdbcType=VARCHAR}, #{cumcredit,jdbcType=REAL}, 
-      #{cummerchant,jdbcType=DECIMAL}, #{macid,jdbcType=INTEGER}, #{cumtime,jdbcType=TIMESTAMP}
-      )
+    insert into Consume (cumID, mcPKID, cumMoney, 
+      cumWay, cumCredit, macID, 
+      cumTime)
+    values (#{cumid,jdbcType=INTEGER}, #{mcpkid,jdbcType=INTEGER}, #{cummoney,jdbcType=REAL}, 
+      #{cumway,jdbcType=VARCHAR}, #{cumcredit,jdbcType=REAL}, #{macid,jdbcType=INTEGER}, 
+      #{cumtime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Consume" >
     insert into Consume
@@ -41,11 +37,8 @@
       <if test="cumid != null" >
         cumID,
       </if>
-      <if test="memid != null" >
-        memID,
-      </if>
-      <if test="mcid != null" >
-        mcID,
+      <if test="mcpkid != null" >
+        mcPKID,
       </if>
       <if test="cummoney != null" >
         cumMoney,
@@ -55,9 +48,6 @@
       </if>
       <if test="cumcredit != null" >
         cumCredit,
-      </if>
-      <if test="cummerchant != null" >
-        cumMerchant,
       </if>
       <if test="macid != null" >
         macID,
@@ -70,11 +60,8 @@
       <if test="cumid != null" >
         #{cumid,jdbcType=INTEGER},
       </if>
-      <if test="memid != null" >
-        #{memid,jdbcType=DECIMAL},
-      </if>
-      <if test="mcid != null" >
-        #{mcid,jdbcType=DECIMAL},
+      <if test="mcpkid != null" >
+        #{mcpkid,jdbcType=INTEGER},
       </if>
       <if test="cummoney != null" >
         #{cummoney,jdbcType=REAL},
@@ -84,9 +71,6 @@
       </if>
       <if test="cumcredit != null" >
         #{cumcredit,jdbcType=REAL},
-      </if>
-      <if test="cummerchant != null" >
-        #{cummerchant,jdbcType=DECIMAL},
       </if>
       <if test="macid != null" >
         #{macid,jdbcType=INTEGER},
@@ -99,11 +83,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Consume" >
     update Consume
     <set >
-      <if test="memid != null" >
-        memID = #{memid,jdbcType=DECIMAL},
-      </if>
-      <if test="mcid != null" >
-        mcID = #{mcid,jdbcType=DECIMAL},
+      <if test="mcpkid != null" >
+        mcPKID = #{mcpkid,jdbcType=INTEGER},
       </if>
       <if test="cummoney != null" >
         cumMoney = #{cummoney,jdbcType=REAL},
@@ -113,9 +94,6 @@
       </if>
       <if test="cumcredit != null" >
         cumCredit = #{cumcredit,jdbcType=REAL},
-      </if>
-      <if test="cummerchant != null" >
-        cumMerchant = #{cummerchant,jdbcType=DECIMAL},
       </if>
       <if test="macid != null" >
         macID = #{macid,jdbcType=INTEGER},
@@ -128,12 +106,10 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Consume" >
     update Consume
-    set memID = #{memid,jdbcType=DECIMAL},
-      mcID = #{mcid,jdbcType=DECIMAL},
+    set mcPKID = #{mcpkid,jdbcType=INTEGER},
       cumMoney = #{cummoney,jdbcType=REAL},
       cumWay = #{cumway,jdbcType=VARCHAR},
       cumCredit = #{cumcredit,jdbcType=REAL},
-      cumMerchant = #{cummerchant,jdbcType=DECIMAL},
       macID = #{macid,jdbcType=INTEGER},
       cumTime = #{cumtime,jdbcType=TIMESTAMP}
     where cumID = #{cumid,jdbcType=INTEGER}

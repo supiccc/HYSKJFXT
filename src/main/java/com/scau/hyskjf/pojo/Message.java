@@ -11,6 +11,8 @@ public class Message {
 
     private Boolean mesread;
 
+    private Integer mestype;
+
     private String mescontent;
 
     public Integer getMesid() {
@@ -51,6 +53,14 @@ public class Message {
 
     public void setMesread(Boolean mesread) {
         this.mesread = mesread;
+    }
+
+    public Integer getMestype() {
+        return mestype;
+    }
+
+    public void setMestype(Integer mestype) {
+        this.mestype = mestype;
     }
 
     public String getMescontent() {

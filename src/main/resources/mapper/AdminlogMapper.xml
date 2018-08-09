@@ -3,7 +3,7 @@
 <mapper namespace="com.scau.hyskjf.dao.AdminlogMapper" >
   <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Adminlog" >
     <id column="adlogID" property="adlogid" jdbcType="INTEGER" />
-    <result column="AdminID" property="adminid" jdbcType="DECIMAL" />
+    <result column="AdminID" property="adminid" jdbcType="INTEGER" />
     <result column="adlogFunction" property="adlogfunction" jdbcType="VARCHAR" />
     <result column="adlogTime" property="adlogtime" jdbcType="DATE" />
   </resultMap>
@@ -31,7 +31,7 @@
   <insert id="insert" parameterType="com.scau.hyskjf.pojo.Adminlog" >
     insert into AdminLog (adlogID, AdminID, adlogFunction, 
       adlogTime, adlogInfo)
-    values (#{adlogid,jdbcType=INTEGER}, #{adminid,jdbcType=DECIMAL}, #{adlogfunction,jdbcType=VARCHAR}, 
+    values (#{adlogid,jdbcType=INTEGER}, #{adminid,jdbcType=INTEGER}, #{adlogfunction,jdbcType=VARCHAR}, 
       #{adlogtime,jdbcType=DATE}, #{adloginfo,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Adminlog" >
@@ -58,7 +58,7 @@
         #{adlogid,jdbcType=INTEGER},
       </if>
       <if test="adminid != null" >
-        #{adminid,jdbcType=DECIMAL},
+        #{adminid,jdbcType=INTEGER},
       </if>
       <if test="adlogfunction != null" >
         #{adlogfunction,jdbcType=VARCHAR},
@@ -75,7 +75,7 @@
     update AdminLog
     <set >
       <if test="adminid != null" >
-        AdminID = #{adminid,jdbcType=DECIMAL},
+        AdminID = #{adminid,jdbcType=INTEGER},
       </if>
       <if test="adlogfunction != null" >
         adlogFunction = #{adlogfunction,jdbcType=VARCHAR},
@@ -91,7 +91,7 @@
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scau.hyskjf.pojo.Adminlog" >
     update AdminLog
-    set AdminID = #{adminid,jdbcType=DECIMAL},
+    set AdminID = #{adminid,jdbcType=INTEGER},
       adlogFunction = #{adlogfunction,jdbcType=VARCHAR},
       adlogTime = #{adlogtime,jdbcType=DATE},
       adlogInfo = #{adloginfo,jdbcType=LONGVARCHAR}
@@ -99,7 +99,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Adminlog" >
     update AdminLog
-    set AdminID = #{adminid,jdbcType=DECIMAL},
+    set AdminID = #{adminid,jdbcType=INTEGER},
       adlogFunction = #{adlogfunction,jdbcType=VARCHAR},
       adlogTime = #{adlogtime,jdbcType=DATE}
     where adlogID = #{adlogid,jdbcType=INTEGER}

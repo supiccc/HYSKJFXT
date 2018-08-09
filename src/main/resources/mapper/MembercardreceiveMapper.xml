@@ -3,8 +3,8 @@
 <mapper namespace="com.scau.hyskjf.dao.MembercardreceiveMapper" >
   <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Membercardreceive" >
     <id column="mcrID" property="mcrid" jdbcType="INTEGER" />
-    <result column="AdminID" property="adminid" jdbcType="DECIMAL" />
-    <result column="merID" property="merid" jdbcType="DECIMAL" />
+    <result column="AdminID" property="adminid" jdbcType="INTEGER" />
+    <result column="merID" property="merid" jdbcType="INTEGER" />
     <result column="mcrReceivedCount" property="mcrreceivedcount" jdbcType="INTEGER" />
     <result column="mcrZone" property="mcrzone" jdbcType="VARCHAR" />
     <result column="mcrTime" property="mcrtime" jdbcType="DATE" />
@@ -26,7 +26,7 @@
     insert into MemberCardReceive (mcrID, AdminID, merID, 
       mcrReceivedCount, mcrZone, mcrTime
       )
-    values (#{mcrid,jdbcType=INTEGER}, #{adminid,jdbcType=DECIMAL}, #{merid,jdbcType=DECIMAL}, 
+    values (#{mcrid,jdbcType=INTEGER}, #{adminid,jdbcType=INTEGER}, #{merid,jdbcType=INTEGER}, 
       #{mcrreceivedcount,jdbcType=INTEGER}, #{mcrzone,jdbcType=VARCHAR}, #{mcrtime,jdbcType=DATE}
       )
   </insert>
@@ -57,10 +57,10 @@
         #{mcrid,jdbcType=INTEGER},
       </if>
       <if test="adminid != null" >
-        #{adminid,jdbcType=DECIMAL},
+        #{adminid,jdbcType=INTEGER},
       </if>
       <if test="merid != null" >
-        #{merid,jdbcType=DECIMAL},
+        #{merid,jdbcType=INTEGER},
       </if>
       <if test="mcrreceivedcount != null" >
         #{mcrreceivedcount,jdbcType=INTEGER},
@@ -77,10 +77,10 @@
     update MemberCardReceive
     <set >
       <if test="adminid != null" >
-        AdminID = #{adminid,jdbcType=DECIMAL},
+        AdminID = #{adminid,jdbcType=INTEGER},
       </if>
       <if test="merid != null" >
-        merID = #{merid,jdbcType=DECIMAL},
+        merID = #{merid,jdbcType=INTEGER},
       </if>
       <if test="mcrreceivedcount != null" >
         mcrReceivedCount = #{mcrreceivedcount,jdbcType=INTEGER},
@@ -96,8 +96,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Membercardreceive" >
     update MemberCardReceive
-    set AdminID = #{adminid,jdbcType=DECIMAL},
-      merID = #{merid,jdbcType=DECIMAL},
+    set AdminID = #{adminid,jdbcType=INTEGER},
+      merID = #{merid,jdbcType=INTEGER},
       mcrReceivedCount = #{mcrreceivedcount,jdbcType=INTEGER},
       mcrZone = #{mcrzone,jdbcType=VARCHAR},
       mcrTime = #{mcrtime,jdbcType=DATE}

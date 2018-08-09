@@ -3,14 +3,13 @@
 <mapper namespace="com.scau.hyskjf.dao.MembermanagerMapper" >
   <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Membermanager" >
     <id column="mmaID" property="mmaid" jdbcType="INTEGER" />
-    <result column="memID" property="memid" jdbcType="DECIMAL" />
-    <result column="merID" property="merid" jdbcType="DECIMAL" />
+    <result column="memID" property="memid" jdbcType="INTEGER" />
     <result column="macID" property="macid" jdbcType="INTEGER" />
     <result column="mmaTime" property="mmatime" jdbcType="DATE" />
     <result column="mmanagerID" property="mmanagerid" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    mmaID, memID, merID, macID, mmaTime, mmanagerID
+    mmaID, memID, macID, mmaTime, mmanagerID
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -23,12 +22,10 @@
     where mmaID = #{mmaid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.scau.hyskjf.pojo.Membermanager" >
-    insert into MemberManager (mmaID, memID, merID, 
-      macID, mmaTime, mmanagerID
-      )
-    values (#{mmaid,jdbcType=INTEGER}, #{memid,jdbcType=DECIMAL}, #{merid,jdbcType=DECIMAL}, 
-      #{macid,jdbcType=INTEGER}, #{mmatime,jdbcType=DATE}, #{mmanagerid,jdbcType=INTEGER}
-      )
+    insert into MemberManager (mmaID, memID, macID, 
+      mmaTime, mmanagerID)
+    values (#{mmaid,jdbcType=INTEGER}, #{memid,jdbcType=INTEGER}, #{macid,jdbcType=INTEGER}, 
+      #{mmatime,jdbcType=DATE}, #{mmanagerid,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Membermanager" >
     insert into MemberManager
@@ -38,9 +35,6 @@
       </if>
       <if test="memid != null" >
         memID,
-      </if>
-      <if test="merid != null" >
-        merID,
       </if>
       <if test="macid != null" >
         macID,
@@ -57,10 +51,7 @@
         #{mmaid,jdbcType=INTEGER},
       </if>
       <if test="memid != null" >
-        #{memid,jdbcType=DECIMAL},
-      </if>
-      <if test="merid != null" >
-        #{merid,jdbcType=DECIMAL},
+        #{memid,jdbcType=INTEGER},
       </if>
       <if test="macid != null" >
         #{macid,jdbcType=INTEGER},
@@ -77,10 +68,7 @@
     update MemberManager
     <set >
       <if test="memid != null" >
-        memID = #{memid,jdbcType=DECIMAL},
-      </if>
-      <if test="merid != null" >
-        merID = #{merid,jdbcType=DECIMAL},
+        memID = #{memid,jdbcType=INTEGER},
       </if>
       <if test="macid != null" >
         macID = #{macid,jdbcType=INTEGER},
@@ -96,8 +84,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Membermanager" >
     update MemberManager
-    set memID = #{memid,jdbcType=DECIMAL},
-      merID = #{merid,jdbcType=DECIMAL},
+    set memID = #{memid,jdbcType=INTEGER},
       macID = #{macid,jdbcType=INTEGER},
       mmaTime = #{mmatime,jdbcType=DATE},
       mmanagerID = #{mmanagerid,jdbcType=INTEGER}

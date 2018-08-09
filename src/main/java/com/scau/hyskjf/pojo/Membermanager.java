@@ -5,9 +5,7 @@ import java.util.Date;
 public class Membermanager {
     private Integer mmaid;
 
-    private Long memid;
-
-    private Integer merid;
+    private Integer memid;
 
     private Integer macid;
 
@@ -23,20 +21,12 @@ public class Membermanager {
         this.mmaid = mmaid;
     }
 
-    public Long getMemid() {
+    public Integer getMemid() {
         return memid;
     }
 
-    public void setMemid(Long memid) {
+    public void setMemid(Integer memid) {
         this.memid = memid;
-    }
-
-    public Integer getMerid() {
-        return merid;
-    }
-
-    public void setMerid(Integer merid) {
-        this.merid = merid;
     }
 
     public Integer getMacid() {

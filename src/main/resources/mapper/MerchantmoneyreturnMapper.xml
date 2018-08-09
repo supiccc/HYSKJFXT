@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.scau.hyskjf.dao.MerchantmoneyreturnMapper" >
   <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Merchantmoneyreturn" >
-    <result column="merID" property="merid" jdbcType="DECIMAL" />
+    <result column="merID" property="merid" jdbcType="INTEGER" />
     <result column="mmrID" property="mmrid" jdbcType="INTEGER" />
     <result column="mmrMoney" property="mmrmoney" jdbcType="REAL" />
     <result column="mmrConsumoMoney" property="mmrconsumomoney" jdbcType="REAL" />
@@ -11,7 +11,7 @@
   <insert id="insert" parameterType="com.scau.hyskjf.pojo.Merchantmoneyreturn" >
     insert into MerchantMoneyReturn (merID, mmrID, mmrMoney, 
       mmrConsumoMoney, mmrStat)
-    values (#{merid,jdbcType=DECIMAL}, #{mmrid,jdbcType=INTEGER}, #{mmrmoney,jdbcType=REAL}, 
+    values (#{merid,jdbcType=INTEGER}, #{mmrid,jdbcType=INTEGER}, #{mmrmoney,jdbcType=REAL}, 
       #{mmrconsumomoney,jdbcType=REAL}, #{mmrstat,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Merchantmoneyreturn" >
@@ -35,7 +35,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="merid != null" >
-        #{merid,jdbcType=DECIMAL},
+        #{merid,jdbcType=INTEGER},
       </if>
       <if test="mmrid != null" >
         #{mmrid,jdbcType=INTEGER},

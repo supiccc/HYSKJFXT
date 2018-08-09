@@ -3,7 +3,7 @@
 <mapper namespace="com.scau.hyskjf.dao.CreditsubmitMapper" >
   <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Creditsubmit" >
     <id column="csID" property="csid" jdbcType="INTEGER" />
-    <result column="merID" property="merid" jdbcType="DECIMAL" />
+    <result column="merID" property="merid" jdbcType="INTEGER" />
     <result column="csStat" property="csstat" jdbcType="BIT" />
     <result column="csMoney" property="csmoney" jdbcType="REAL" />
     <result column="csCredit" property="cscredit" jdbcType="REAL" />
@@ -24,7 +24,7 @@
   <insert id="insert" parameterType="com.scau.hyskjf.pojo.Creditsubmit" >
     insert into CreditSubmit (csID, merID, csStat, 
       csMoney, csCredit)
-    values (#{csid,jdbcType=INTEGER}, #{merid,jdbcType=DECIMAL}, #{csstat,jdbcType=BIT}, 
+    values (#{csid,jdbcType=INTEGER}, #{merid,jdbcType=INTEGER}, #{csstat,jdbcType=BIT}, 
       #{csmoney,jdbcType=REAL}, #{cscredit,jdbcType=REAL})
   </insert>
   <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Creditsubmit" >
@@ -51,7 +51,7 @@
         #{csid,jdbcType=INTEGER},
       </if>
       <if test="merid != null" >
-        #{merid,jdbcType=DECIMAL},
+        #{merid,jdbcType=INTEGER},
       </if>
       <if test="csstat != null" >
         #{csstat,jdbcType=BIT},
@@ -68,7 +68,7 @@
     update CreditSubmit
     <set >
       <if test="merid != null" >
-        merID = #{merid,jdbcType=DECIMAL},
+        merID = #{merid,jdbcType=INTEGER},
       </if>
       <if test="csstat != null" >
         csStat = #{csstat,jdbcType=BIT},
@@ -84,7 +84,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Creditsubmit" >
     update CreditSubmit
-    set merID = #{merid,jdbcType=DECIMAL},
+    set merID = #{merid,jdbcType=INTEGER},
       csStat = #{csstat,jdbcType=BIT},
       csMoney = #{csmoney,jdbcType=REAL},
       csCredit = #{cscredit,jdbcType=REAL}

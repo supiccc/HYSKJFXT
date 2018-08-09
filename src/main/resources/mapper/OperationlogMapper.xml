@@ -3,7 +3,6 @@
 <mapper namespace="com.scau.hyskjf.dao.OperationlogMapper" >
   <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Operationlog" >
     <id column="ologID" property="ologid" jdbcType="INTEGER" />
-    <result column="merID" property="merid" jdbcType="DECIMAL" />
     <result column="macID" property="macid" jdbcType="INTEGER" />
     <result column="ologAccount" property="ologaccount" jdbcType="INTEGER" />
     <result column="ologTime" property="ologtime" jdbcType="TIMESTAMP" />
@@ -15,7 +14,7 @@
     <result column="ologInfo" property="ologinfo" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ologID, merID, macID, ologAccount, ologTime, ologURL, ologFuntion
+    ologID, macID, ologAccount, ologTime, ologURL, ologFuntion
   </sql>
   <sql id="Blob_Column_List" >
     ologOperation, ologInfo
@@ -33,23 +32,18 @@
     where ologID = #{ologid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.scau.hyskjf.pojo.OperationlogWithBLOBs" >
-    insert into OperationLog (ologID, merID, macID, 
-      ologAccount, ologTime, ologURL, 
-      ologFuntion, ologOperation, ologInfo
-      )
-    values (#{ologid,jdbcType=INTEGER}, #{merid,jdbcType=DECIMAL}, #{macid,jdbcType=INTEGER}, 
-      #{ologaccount,jdbcType=INTEGER}, #{ologtime,jdbcType=TIMESTAMP}, #{ologurl,jdbcType=VARCHAR}, 
-      #{ologfuntion,jdbcType=VARCHAR}, #{ologoperation,jdbcType=LONGVARCHAR}, #{ologinfo,jdbcType=LONGVARCHAR}
-      )
+    insert into OperationLog (ologID, macID, ologAccount, 
+      ologTime, ologURL, ologFuntion, 
+      ologOperation, ologInfo)
+    values (#{ologid,jdbcType=INTEGER}, #{macid,jdbcType=INTEGER}, #{ologaccount,jdbcType=INTEGER}, 
+      #{ologtime,jdbcType=TIMESTAMP}, #{ologurl,jdbcType=VARCHAR}, #{ologfuntion,jdbcType=VARCHAR}, 
+      #{ologoperation,jdbcType=LONGVARCHAR}, #{ologinfo,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.OperationlogWithBLOBs" >
     insert into OperationLog
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="ologid != null" >
         ologID,
-      </if>
-      <if test="merid != null" >
-        merID,
       </if>
       <if test="macid != null" >
         macID,
@@ -77,9 +71,6 @@
       <if test="ologid != null" >
         #{ologid,jdbcType=INTEGER},
       </if>
-      <if test="merid != null" >
-        #{merid,jdbcType=DECIMAL},
-      </if>
       <if test="macid != null" >
         #{macid,jdbcType=INTEGER},
       </if>
@@ -106,9 +97,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.OperationlogWithBLOBs" >
     update OperationLog
     <set >
-      <if test="merid != null" >
-        merID = #{merid,jdbcType=DECIMAL},
-      </if>
       <if test="macid != null" >
         macID = #{macid,jdbcType=INTEGER},
       </if>
@@ -135,8 +123,7 @@
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scau.hyskjf.pojo.OperationlogWithBLOBs" >
     update OperationLog
-    set merID = #{merid,jdbcType=DECIMAL},
-      macID = #{macid,jdbcType=INTEGER},
+    set macID = #{macid,jdbcType=INTEGER},
       ologAccount = #{ologaccount,jdbcType=INTEGER},
       ologTime = #{ologtime,jdbcType=TIMESTAMP},
       ologURL = #{ologurl,jdbcType=VARCHAR},
@@ -147,8 +134,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Operationlog" >
     update OperationLog
-    set merID = #{merid,jdbcType=DECIMAL},
-      macID = #{macid,jdbcType=INTEGER},
+    set macID = #{macid,jdbcType=INTEGER},
       ologAccount = #{ologaccount,jdbcType=INTEGER},
       ologTime = #{ologtime,jdbcType=TIMESTAMP},
       ologURL = #{ologurl,jdbcType=VARCHAR},

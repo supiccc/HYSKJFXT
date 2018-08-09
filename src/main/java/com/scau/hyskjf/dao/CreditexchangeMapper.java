@@ -1,17 +1,20 @@
 package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Creditexchange;
+import com.scau.hyskjf.pojo.CreditexchangeWithBLOBs;
 
 public interface CreditexchangeMapper {
     int deleteByPrimaryKey(Integer ceid);
 
-    int insert(Creditexchange record);
+    int insert(CreditexchangeWithBLOBs record);
 
-    int insertSelective(Creditexchange record);
+    int insertSelective(CreditexchangeWithBLOBs record);
 
-    Creditexchange selectByPrimaryKey(Integer ceid);
+    CreditexchangeWithBLOBs selectByPrimaryKey(Integer ceid);
 
-    int updateByPrimaryKeySelective(Creditexchange record);
+    int updateByPrimaryKeySelective(CreditexchangeWithBLOBs record);
+
+    int updateByPrimaryKeyWithBLOBs(CreditexchangeWithBLOBs record);
 
     int updateByPrimaryKey(Creditexchange record);
 }

@@ -2,40 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.scau.hyskjf.dao.MembercardMapper" >
   <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Membercard" >
-    <id column="memID" property="memid" jdbcType="DECIMAL" />
-    <id column="mcID" property="mcid" jdbcType="DECIMAL" />
-    <result column="merID" property="merid" jdbcType="DECIMAL" />
+    <id column="mcPKID" property="mcpkid" jdbcType="INTEGER" />
+    <result column="memID" property="memid" jdbcType="INTEGER" />
+    <result column="mcID" property="mcid" jdbcType="VARCHAR" />
+    <result column="merID" property="merid" jdbcType="INTEGER" />
     <result column="mcType" property="mctype" jdbcType="VARCHAR" />
     <result column="mcCredit" property="mccredit" jdbcType="REAL" />
     <result column="mcBalance" property="mcbalance" jdbcType="REAL" />
     <result column="mcEnable" property="mcenable" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    memID, mcID, merID, mcType, mcCredit, mcBalance, mcEnable
+    mcPKID, memID, mcID, merID, mcType, mcCredit, mcBalance, mcEnable
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.scau.hyskjf.pojo.MembercardKey" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from MemberCard
-    where memID = #{memid,jdbcType=DECIMAL}
-      and mcID = #{mcid,jdbcType=DECIMAL}
+    where mcPKID = #{mcpkid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.scau.hyskjf.pojo.MembercardKey" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from MemberCard
-    where memID = #{memid,jdbcType=DECIMAL}
-      and mcID = #{mcid,jdbcType=DECIMAL}
+    where mcPKID = #{mcpkid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.scau.hyskjf.pojo.Membercard" >
-    insert into MemberCard (memID, mcID, merID, 
-      mcType, mcCredit, mcBalance, 
-      mcEnable)
-    values (#{memid,jdbcType=DECIMAL}, #{mcid,jdbcType=DECIMAL}, #{merid,jdbcType=DECIMAL}, 
-      #{mctype,jdbcType=VARCHAR}, #{mccredit,jdbcType=REAL}, #{mcbalance,jdbcType=REAL}, 
-      #{mcenable,jdbcType=BIT})
+    insert into MemberCard (mcPKID, memID, mcID, 
+      merID, mcType, mcCredit, 
+      mcBalance, mcEnable)
+    values (#{mcpkid,jdbcType=INTEGER}, #{memid,jdbcType=INTEGER}, #{mcid,jdbcType=VARCHAR}, 
+      #{merid,jdbcType=INTEGER}, #{mctype,jdbcType=VARCHAR}, #{mccredit,jdbcType=REAL}, 
+      #{mcbalance,jdbcType=REAL}, #{mcenable,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Membercard" >
     insert into MemberCard
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mcpkid != null" >
+        mcPKID,
+      </if>
       <if test="memid != null" >
         memID,
       </if>
@@ -59,14 +61,17 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mcpkid != null" >
+        #{mcpkid,jdbcType=INTEGER},
+      </if>
       <if test="memid != null" >
-        #{memid,jdbcType=DECIMAL},
+        #{memid,jdbcType=INTEGER},
       </if>
       <if test="mcid != null" >
-        #{mcid,jdbcType=DECIMAL},
+        #{mcid,jdbcType=VARCHAR},
       </if>
       <if test="merid != null" >
-        #{merid,jdbcType=DECIMAL},
+        #{merid,jdbcType=INTEGER},
       </if>
       <if test="mctype != null" >
         #{mctype,jdbcType=VARCHAR},
@@ -85,8 +90,14 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Membercard" >
     update MemberCard
     <set >
+      <if test="memid != null" >
+        memID = #{memid,jdbcType=INTEGER},
+      </if>
+      <if test="mcid != null" >
+        mcID = #{mcid,jdbcType=VARCHAR},
+      </if>
       <if test="merid != null" >
-        merID = #{merid,jdbcType=DECIMAL},
+        merID = #{merid,jdbcType=INTEGER},
       </if>
       <if test="mctype != null" >
         mcType = #{mctype,jdbcType=VARCHAR},
@@ -101,17 +112,17 @@
         mcEnable = #{mcenable,jdbcType=BIT},
       </if>
     </set>
-    where memID = #{memid,jdbcType=DECIMAL}
-      and mcID = #{mcid,jdbcType=DECIMAL}
+    where mcPKID = #{mcpkid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Membercard" >
     update MemberCard
-    set merID = #{merid,jdbcType=DECIMAL},
+    set memID = #{memid,jdbcType=INTEGER},
+      mcID = #{mcid,jdbcType=VARCHAR},
+      merID = #{merid,jdbcType=INTEGER},
       mcType = #{mctype,jdbcType=VARCHAR},
       mcCredit = #{mccredit,jdbcType=REAL},
       mcBalance = #{mcbalance,jdbcType=REAL},
       mcEnable = #{mcenable,jdbcType=BIT}
-    where memID = #{memid,jdbcType=DECIMAL}
-      and mcID = #{mcid,jdbcType=DECIMAL}
+    where mcPKID = #{mcpkid,jdbcType=INTEGER}
   </update>
 </mapper>

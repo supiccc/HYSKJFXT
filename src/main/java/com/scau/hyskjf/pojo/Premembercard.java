@@ -3,13 +3,11 @@ package com.scau.hyskjf.pojo;
 import java.util.Date;
 
 public class Premembercard {
-    private Long pmcid;
+    private Integer pmcid;
 
     private Integer merid;
 
     private Boolean pmcstat;
-
-    private Integer pmcmerchant;
 
     private Integer pmcmermaker;
 
@@ -19,11 +17,11 @@ public class Premembercard {
 
     private Date pmcprovidetime;
 
-    public Long getPmcid() {
+    public Integer getPmcid() {
         return pmcid;
     }
 
-    public void setPmcid(Long pmcid) {
+    public void setPmcid(Integer pmcid) {
         this.pmcid = pmcid;
     }
 
@@ -41,14 +39,6 @@ public class Premembercard {
 
     public void setPmcstat(Boolean pmcstat) {
         this.pmcstat = pmcstat;
-    }
-
-    public Integer getPmcmerchant() {
-        return pmcmerchant;
-    }
-
-    public void setPmcmerchant(Integer pmcmerchant) {
-        this.pmcmerchant = pmcmerchant;
     }
 
     public Integer getPmcmermaker() {

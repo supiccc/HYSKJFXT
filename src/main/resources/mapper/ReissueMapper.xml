@@ -3,16 +3,16 @@
 <mapper namespace="com.scau.hyskjf.dao.ReissueMapper" >
   <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Reissue" >
     <id column="reiID" property="reiid" jdbcType="INTEGER" />
-    <result column="memID" property="memid" jdbcType="DECIMAL" />
+    <result column="memID" property="memid" jdbcType="INTEGER" />
     <result column="reiTime" property="reitime" jdbcType="DATE" />
-    <result column="reiOldNum" property="reioldnum" jdbcType="DECIMAL" />
-    <result column="reiNewNum" property="reinewnum" jdbcType="DECIMAL" />
+    <result column="Mem_mcPKID" property="memMcpkid" jdbcType="INTEGER" />
+    <result column="mcPKID" property="mcpkid" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.Reissue" extends="BaseResultMap" >
     <result column="reiReason" property="reireason" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    reiID, memID, reiTime, reiOldNum, reiNewNum
+    reiID, memID, reiTime, Mem_mcPKID, mcPKID
   </sql>
   <sql id="Blob_Column_List" >
     reiReason
@@ -31,10 +31,10 @@
   </delete>
   <insert id="insert" parameterType="com.scau.hyskjf.pojo.Reissue" >
     insert into Reissue (reiID, memID, reiTime, 
-      reiOldNum, reiNewNum, reiReason
+      Mem_mcPKID, mcPKID, reiReason
       )
-    values (#{reiid,jdbcType=INTEGER}, #{memid,jdbcType=DECIMAL}, #{reitime,jdbcType=DATE}, 
-      #{reioldnum,jdbcType=DECIMAL}, #{reinewnum,jdbcType=DECIMAL}, #{reireason,jdbcType=LONGVARCHAR}
+    values (#{reiid,jdbcType=INTEGER}, #{memid,jdbcType=INTEGER}, #{reitime,jdbcType=DATE}, 
+      #{memMcpkid,jdbcType=INTEGER}, #{mcpkid,jdbcType=INTEGER}, #{reireason,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Reissue" >
@@ -49,11 +49,11 @@
       <if test="reitime != null" >
         reiTime,
       </if>
-      <if test="reioldnum != null" >
-        reiOldNum,
+      <if test="memMcpkid != null" >
+        Mem_mcPKID,
       </if>
-      <if test="reinewnum != null" >
-        reiNewNum,
+      <if test="mcpkid != null" >
+        mcPKID,
       </if>
       <if test="reireason != null" >
         reiReason,
@@ -64,16 +64,16 @@
         #{reiid,jdbcType=INTEGER},
       </if>
       <if test="memid != null" >
-        #{memid,jdbcType=DECIMAL},
+        #{memid,jdbcType=INTEGER},
       </if>
       <if test="reitime != null" >
         #{reitime,jdbcType=DATE},
       </if>
-      <if test="reioldnum != null" >
-        #{reioldnum,jdbcType=DECIMAL},
+      <if test="memMcpkid != null" >
+        #{memMcpkid,jdbcType=INTEGER},
       </if>
-      <if test="reinewnum != null" >
-        #{reinewnum,jdbcType=DECIMAL},
+      <if test="mcpkid != null" >
+        #{mcpkid,jdbcType=INTEGER},
       </if>
       <if test="reireason != null" >
         #{reireason,jdbcType=LONGVARCHAR},
@@ -84,16 +84,16 @@
     update Reissue
     <set >
       <if test="memid != null" >
-        memID = #{memid,jdbcType=DECIMAL},
+        memID = #{memid,jdbcType=INTEGER},
       </if>
       <if test="reitime != null" >
         reiTime = #{reitime,jdbcType=DATE},
       </if>
-      <if test="reioldnum != null" >
-        reiOldNum = #{reioldnum,jdbcType=DECIMAL},
+      <if test="memMcpkid != null" >
+        Mem_mcPKID = #{memMcpkid,jdbcType=INTEGER},
       </if>
-      <if test="reinewnum != null" >
-        reiNewNum = #{reinewnum,jdbcType=DECIMAL},
+      <if test="mcpkid != null" >
+        mcPKID = #{mcpkid,jdbcType=INTEGER},
       </if>
       <if test="reireason != null" >
         reiReason = #{reireason,jdbcType=LONGVARCHAR},
@@ -103,19 +103,19 @@
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scau.hyskjf.pojo.Reissue" >
     update Reissue
-    set memID = #{memid,jdbcType=DECIMAL},
+    set memID = #{memid,jdbcType=INTEGER},
       reiTime = #{reitime,jdbcType=DATE},
-      reiOldNum = #{reioldnum,jdbcType=DECIMAL},
-      reiNewNum = #{reinewnum,jdbcType=DECIMAL},
+      Mem_mcPKID = #{memMcpkid,jdbcType=INTEGER},
+      mcPKID = #{mcpkid,jdbcType=INTEGER},
       reiReason = #{reireason,jdbcType=LONGVARCHAR}
     where reiID = #{reiid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Reissue" >
     update Reissue
-    set memID = #{memid,jdbcType=DECIMAL},
+    set memID = #{memid,jdbcType=INTEGER},
       reiTime = #{reitime,jdbcType=DATE},
-      reiOldNum = #{reioldnum,jdbcType=DECIMAL},
-      reiNewNum = #{reinewnum,jdbcType=DECIMAL}
+      Mem_mcPKID = #{memMcpkid,jdbcType=INTEGER},
+      mcPKID = #{mcpkid,jdbcType=INTEGER}
     where reiID = #{reiid,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,17 +1,20 @@
 package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Evaluation;
+import com.scau.hyskjf.pojo.EvaluationWithBLOBs;
 
 public interface EvaluationMapper {
     int deleteByPrimaryKey(Integer evaid);
 
-    int insert(Evaluation record);
+    int insert(EvaluationWithBLOBs record);
 
-    int insertSelective(Evaluation record);
+    int insertSelective(EvaluationWithBLOBs record);
 
-    Evaluation selectByPrimaryKey(Integer evaid);
+    EvaluationWithBLOBs selectByPrimaryKey(Integer evaid);
 
-    int updateByPrimaryKeySelective(Evaluation record);
+    int updateByPrimaryKeySelective(EvaluationWithBLOBs record);
+
+    int updateByPrimaryKeyWithBLOBs(EvaluationWithBLOBs record);
 
     int updateByPrimaryKey(Evaluation record);
 }

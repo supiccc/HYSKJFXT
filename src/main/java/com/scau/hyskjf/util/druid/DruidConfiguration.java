@@ -1,4 +1,4 @@
-package com.scau.hyskjf.druid;
+package com.scau.hyskjf.util.druid;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.beans.factory.annotation.Value;

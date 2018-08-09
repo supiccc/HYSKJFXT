@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.scau.hyskjf.dao.MemberMapper" >
   <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Member" >
-    <id column="memID" property="memid" jdbcType="DECIMAL" />
+    <id column="memID" property="memid" jdbcType="INTEGER" />
     <result column="memCer" property="memcer" jdbcType="VARCHAR" />
-    <result column="memCerID" property="memcerid" jdbcType="DECIMAL" />
+    <result column="memCerID" property="memcerid" jdbcType="VARCHAR" />
     <result column="memName" property="memname" jdbcType="VARCHAR" />
     <result column="memSex" property="memsex" jdbcType="VARCHAR" />
     <result column="memBirth" property="membirth" jdbcType="DATE" />
@@ -20,24 +20,24 @@
   <sql id="Blob_Column_List" >
     memAdress
   </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from Member
-    where memID = #{memid,jdbcType=DECIMAL}
+    where memID = #{memid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from Member
-    where memID = #{memid,jdbcType=DECIMAL}
+    where memID = #{memid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.scau.hyskjf.pojo.Member" >
     insert into Member (memID, memCer, memCerID, 
       memName, memSex, memBirth, 
       memPhone, memEmail, memAdress
       )
-    values (#{memid,jdbcType=DECIMAL}, #{memcer,jdbcType=VARCHAR}, #{memcerid,jdbcType=DECIMAL}, 
+    values (#{memid,jdbcType=INTEGER}, #{memcer,jdbcType=VARCHAR}, #{memcerid,jdbcType=VARCHAR}, 
       #{memname,jdbcType=VARCHAR}, #{memsex,jdbcType=VARCHAR}, #{membirth,jdbcType=DATE}, 
       #{memphone,jdbcType=INTEGER}, #{mememail,jdbcType=VARCHAR}, #{memadress,jdbcType=LONGVARCHAR}
       )
@@ -75,13 +75,13 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="memid != null" >
-        #{memid,jdbcType=DECIMAL},
+        #{memid,jdbcType=INTEGER},
       </if>
       <if test="memcer != null" >
         #{memcer,jdbcType=VARCHAR},
       </if>
       <if test="memcerid != null" >
-        #{memcerid,jdbcType=DECIMAL},
+        #{memcerid,jdbcType=VARCHAR},
       </if>
       <if test="memname != null" >
         #{memname,jdbcType=VARCHAR},
@@ -110,7 +110,7 @@
         memCer = #{memcer,jdbcType=VARCHAR},
       </if>
       <if test="memcerid != null" >
-        memCerID = #{memcerid,jdbcType=DECIMAL},
+        memCerID = #{memcerid,jdbcType=VARCHAR},
       </if>
       <if test="memname != null" >
         memName = #{memname,jdbcType=VARCHAR},
@@ -131,29 +131,29 @@
         memAdress = #{memadress,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where memID = #{memid,jdbcType=DECIMAL}
+    where memID = #{memid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scau.hyskjf.pojo.Member" >
     update Member
     set memCer = #{memcer,jdbcType=VARCHAR},
-      memCerID = #{memcerid,jdbcType=DECIMAL},
+      memCerID = #{memcerid,jdbcType=VARCHAR},
       memName = #{memname,jdbcType=VARCHAR},
       memSex = #{memsex,jdbcType=VARCHAR},
       memBirth = #{membirth,jdbcType=DATE},
       memPhone = #{memphone,jdbcType=INTEGER},
       memEmail = #{mememail,jdbcType=VARCHAR},
       memAdress = #{memadress,jdbcType=LONGVARCHAR}
-    where memID = #{memid,jdbcType=DECIMAL}
+    where memID = #{memid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Member" >
     update Member
     set memCer = #{memcer,jdbcType=VARCHAR},
-      memCerID = #{memcerid,jdbcType=DECIMAL},
+      memCerID = #{memcerid,jdbcType=VARCHAR},
       memName = #{memname,jdbcType=VARCHAR},
       memSex = #{memsex,jdbcType=VARCHAR},
       memBirth = #{membirth,jdbcType=DATE},
       memPhone = #{memphone,jdbcType=INTEGER},
       memEmail = #{mememail,jdbcType=VARCHAR}
-    where memID = #{memid,jdbcType=DECIMAL}
+    where memID = #{memid,jdbcType=INTEGER}
   </update>
 </mapper>

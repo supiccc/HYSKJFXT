@@ -3,13 +3,12 @@
 <mapper namespace="com.scau.hyskjf.dao.BalancehistoryMapper" >
   <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Balancehistory" >
     <id column="vhID" property="vhid" jdbcType="INTEGER" />
-    <result column="memID" property="memid" jdbcType="DECIMAL" />
-    <result column="mcID" property="mcid" jdbcType="DECIMAL" />
+    <result column="mcPKID" property="mcpkid" jdbcType="INTEGER" />
     <result column="vhMoney" property="vhmoney" jdbcType="REAL" />
     <result column="vhTime" property="vhtime" jdbcType="DATE" />
   </resultMap>
   <sql id="Base_Column_List" >
-    vhID, memID, mcID, vhMoney, vhTime
+    vhID, mcPKID, vhMoney, vhTime
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -22,10 +21,10 @@
     where vhID = #{vhid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.scau.hyskjf.pojo.Balancehistory" >
-    insert into BalanceHistory (vhID, memID, mcID, 
-      vhMoney, vhTime)
-    values (#{vhid,jdbcType=INTEGER}, #{memid,jdbcType=DECIMAL}, #{mcid,jdbcType=DECIMAL}, 
-      #{vhmoney,jdbcType=REAL}, #{vhtime,jdbcType=DATE})
+    insert into BalanceHistory (vhID, mcPKID, vhMoney, 
+      vhTime)
+    values (#{vhid,jdbcType=INTEGER}, #{mcpkid,jdbcType=INTEGER}, #{vhmoney,jdbcType=REAL}, 
+      #{vhtime,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Balancehistory" >
     insert into BalanceHistory
@@ -33,11 +32,8 @@
       <if test="vhid != null" >
         vhID,
       </if>
-      <if test="memid != null" >
-        memID,
-      </if>
-      <if test="mcid != null" >
-        mcID,
+      <if test="mcpkid != null" >
+        mcPKID,
       </if>
       <if test="vhmoney != null" >
         vhMoney,
@@ -50,11 +46,8 @@
       <if test="vhid != null" >
         #{vhid,jdbcType=INTEGER},
       </if>
-      <if test="memid != null" >
-        #{memid,jdbcType=DECIMAL},
-      </if>
-      <if test="mcid != null" >
-        #{mcid,jdbcType=DECIMAL},
+      <if test="mcpkid != null" >
+        #{mcpkid,jdbcType=INTEGER},
       </if>
       <if test="vhmoney != null" >
         #{vhmoney,jdbcType=REAL},
@@ -67,11 +60,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Balancehistory" >
     update BalanceHistory
     <set >
-      <if test="memid != null" >
-        memID = #{memid,jdbcType=DECIMAL},
-      </if>
-      <if test="mcid != null" >
-        mcID = #{mcid,jdbcType=DECIMAL},
+      <if test="mcpkid != null" >
+        mcPKID = #{mcpkid,jdbcType=INTEGER},
       </if>
       <if test="vhmoney != null" >
         vhMoney = #{vhmoney,jdbcType=REAL},
@@ -84,8 +74,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Balancehistory" >
     update BalanceHistory
-    set memID = #{memid,jdbcType=DECIMAL},
-      mcID = #{mcid,jdbcType=DECIMAL},
+    set mcPKID = #{mcpkid,jdbcType=INTEGER},
       vhMoney = #{vhmoney,jdbcType=REAL},
       vhTime = #{vhtime,jdbcType=DATE}
     where vhID = #{vhid,jdbcType=INTEGER}

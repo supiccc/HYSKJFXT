@@ -5,9 +5,7 @@ import java.util.Date;
 public class Purchase {
     private Integer purid;
 
-    private Long memid;
-
-    private Long mcid;
+    private Integer mcpkid;
 
     private Integer purbelong;
 
@@ -27,20 +25,12 @@ public class Purchase {
         this.purid = purid;
     }
 
-    public Long getMemid() {
-        return memid;
+    public Integer getMcpkid() {
+        return mcpkid;
     }
 
-    public void setMemid(Long memid) {
-        this.memid = memid;
-    }
-
-    public Long getMcid() {
-        return mcid;
-    }
-
-    public void setMcid(Long mcid) {
-        this.mcid = mcid;
+    public void setMcpkid(Integer mcpkid) {
+        this.mcpkid = mcpkid;
     }
 
     public Integer getPurbelong() {

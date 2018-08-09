@@ -1,6 +1,12 @@
 package com.scau.hyskjf.pojo;
 
-public class Membercard extends MembercardKey {
+public class Membercard {
+    private Integer mcpkid;
+
+    private Integer memid;
+
+    private String mcid;
+
     private Integer merid;
 
     private String mctype;
@@ -10,6 +16,30 @@ public class Membercard extends MembercardKey {
     private Float mcbalance;
 
     private Boolean mcenable;
+
+    public Integer getMcpkid() {
+        return mcpkid;
+    }
+
+    public void setMcpkid(Integer mcpkid) {
+        this.mcpkid = mcpkid;
+    }
+
+    public Integer getMemid() {
+        return memid;
+    }
+
+    public void setMemid(Integer memid) {
+        this.memid = memid;
+    }
+
+    public String getMcid() {
+        return mcid;
+    }
+
+    public void setMcid(String mcid) {
+        this.mcid = mcid;
+    }
 
     public Integer getMerid() {
         return merid;

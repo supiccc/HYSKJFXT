@@ -1,7 +1,9 @@
 package com.scau.hyskjf.pojo;
 
-public class Merchantinfomodified extends MerchantinfomodifiedKey {
-    private String merintroduce;
+public class Merchantinfomodified {
+    private Integer attribute249;
+
+    private Integer merid;
 
     private String merimage;
 
@@ -33,22 +35,22 @@ public class Merchantinfomodified extends MerchantinfomodifiedKey {
 
     private String merarea;
 
-    private String merlandmark;
-
-    private String merdiscount;
-
-    private String merdiscountevent;
-
     private String attribute250;
 
-    private String meradress;
-
-    public String getMerintroduce() {
-        return merintroduce;
+    public Integer getAttribute249() {
+        return attribute249;
     }
 
-    public void setMerintroduce(String merintroduce) {
-        this.merintroduce = merintroduce;
+    public void setAttribute249(Integer attribute249) {
+        this.attribute249 = attribute249;
+    }
+
+    public Integer getMerid() {
+        return merid;
+    }
+
+    public void setMerid(Integer merid) {
+        this.merid = merid;
     }
 
     public String getMerimage() {
@@ -171,43 +173,11 @@ public class Merchantinfomodified extends MerchantinfomodifiedKey {
         this.merarea = merarea;
     }
 
-    public String getMerlandmark() {
-        return merlandmark;
-    }
-
-    public void setMerlandmark(String merlandmark) {
-        this.merlandmark = merlandmark;
-    }
-
-    public String getMerdiscount() {
-        return merdiscount;
-    }
-
-    public void setMerdiscount(String merdiscount) {
-        this.merdiscount = merdiscount;
-    }
-
-    public String getMerdiscountevent() {
-        return merdiscountevent;
-    }
-
-    public void setMerdiscountevent(String merdiscountevent) {
-        this.merdiscountevent = merdiscountevent;
-    }
-
     public String getAttribute250() {
         return attribute250;
     }
 
     public void setAttribute250(String attribute250) {
         this.attribute250 = attribute250;
-    }
-
-    public String getMeradress() {
-        return meradress;
-    }
-
-    public void setMeradress(String meradress) {
-        this.meradress = meradress;
     }
 }

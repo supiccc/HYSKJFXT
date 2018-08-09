@@ -5,17 +5,13 @@ import java.util.Date;
 public class Consume {
     private Integer cumid;
 
-    private Long memid;
-
-    private Long mcid;
+    private Integer mcpkid;
 
     private Float cummoney;
 
     private String cumway;
 
     private Float cumcredit;
-
-    private Integer cummerchant;
 
     private Integer macid;
 
@@ -29,20 +25,12 @@ public class Consume {
         this.cumid = cumid;
     }
 
-    public Long getMemid() {
-        return memid;
+    public Integer getMcpkid() {
+        return mcpkid;
     }
 
-    public void setMemid(Long memid) {
-        this.memid = memid;
-    }
-
-    public Long getMcid() {
-        return mcid;
-    }
-
-    public void setMcid(Long mcid) {
-        this.mcid = mcid;
+    public void setMcpkid(Integer mcpkid) {
+        this.mcpkid = mcpkid;
     }
 
     public Float getCummoney() {
@@ -67,14 +55,6 @@ public class Consume {
 
     public void setCumcredit(Float cumcredit) {
         this.cumcredit = cumcredit;
-    }
-
-    public Integer getCummerchant() {
-        return cummerchant;
-    }
-
-    public void setCummerchant(Integer cummerchant) {
-        this.cummerchant = cummerchant;
     }
 
     public Integer getMacid() {

@@ -7,19 +7,13 @@ public class Creditexchange {
 
     private String cestat;
 
-    private Long memid;
-
-    private Long mcid;
+    private Integer mcpkid;
 
     private String ceways;
-
-    private String ceitem;
 
     private Integer ceamount;
 
     private Float cecost;
-
-    private String ceadress;
 
     private Date cetime;
 
@@ -39,20 +33,12 @@ public class Creditexchange {
         this.cestat = cestat;
     }
 
-    public Long getMemid() {
-        return memid;
+    public Integer getMcpkid() {
+        return mcpkid;
     }
 
-    public void setMemid(Long memid) {
-        this.memid = memid;
-    }
-
-    public Long getMcid() {
-        return mcid;
-    }
-
-    public void setMcid(Long mcid) {
-        this.mcid = mcid;
+    public void setMcpkid(Integer mcpkid) {
+        this.mcpkid = mcpkid;
     }
 
     public String getCeways() {
@@ -61,14 +47,6 @@ public class Creditexchange {
 
     public void setCeways(String ceways) {
         this.ceways = ceways;
-    }
-
-    public String getCeitem() {
-        return ceitem;
-    }
-
-    public void setCeitem(String ceitem) {
-        this.ceitem = ceitem;
     }
 
     public Integer getCeamount() {
@@ -85,14 +63,6 @@ public class Creditexchange {
 
     public void setCecost(Float cecost) {
         this.cecost = cecost;
-    }
-
-    public String getCeadress() {
-        return ceadress;
-    }
-
-    public void setCeadress(String ceadress) {
-        this.ceadress = ceadress;
     }
 
     public Date getCetime() {

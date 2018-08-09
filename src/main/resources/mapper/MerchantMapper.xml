@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.scau.hyskjf.dao.MerchantMapper" >
   <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Merchant" >
-    <id column="merID" property="merid" jdbcType="DECIMAL" />
+    <id column="merID" property="merid" jdbcType="INTEGER" />
     <result column="merSubID" property="mersubid" jdbcType="INTEGER" />
     <result column="merTopID" property="mertopid" jdbcType="INTEGER" />
     <result column="merType" property="mertype" jdbcType="VARCHAR" />
@@ -20,18 +20,18 @@
     select 
     <include refid="Base_Column_List" />
     from Merchant
-    where merID = #{merid,jdbcType=DECIMAL}
+    where merID = #{merid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from Merchant
-    where merID = #{merid,jdbcType=DECIMAL}
+    where merID = #{merid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.scau.hyskjf.pojo.Merchant" >
     insert into Merchant (merID, merSubID, merTopID, 
       merType, merName, merCumPresent, 
       merDicPresent, merAppStat, merRecommend
       )
-    values (#{merid,jdbcType=DECIMAL}, #{mersubid,jdbcType=INTEGER}, #{mertopid,jdbcType=INTEGER}, 
+    values (#{merid,jdbcType=INTEGER}, #{mersubid,jdbcType=INTEGER}, #{mertopid,jdbcType=INTEGER}, 
       #{mertype,jdbcType=VARCHAR}, #{mername,jdbcType=VARCHAR}, #{mercumpresent,jdbcType=REAL}, 
       #{merdicpresent,jdbcType=REAL}, #{merappstat,jdbcType=BIT}, #{merrecommend,jdbcType=BIT}
       )
@@ -69,7 +69,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="merid != null" >
-        #{merid,jdbcType=DECIMAL},
+        #{merid,jdbcType=INTEGER},
       </if>
       <if test="mersubid != null" >
         #{mersubid,jdbcType=INTEGER},
@@ -125,7 +125,7 @@
         merRecommend = #{merrecommend,jdbcType=BIT},
       </if>
     </set>
-    where merID = #{merid,jdbcType=DECIMAL}
+    where merID = #{merid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Merchant" >
     update Merchant
@@ -137,6 +137,6 @@
       merDicPresent = #{merdicpresent,jdbcType=REAL},
       merAppStat = #{merappstat,jdbcType=BIT},
       merRecommend = #{merrecommend,jdbcType=BIT}
-    where merID = #{merid,jdbcType=DECIMAL}
+    where merID = #{merid,jdbcType=INTEGER}
   </update>
 </mapper>

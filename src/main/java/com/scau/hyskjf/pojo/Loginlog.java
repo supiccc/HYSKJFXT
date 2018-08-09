@@ -5,8 +5,6 @@ import java.util.Date;
 public class Loginlog {
     private Integer llogid;
 
-    private Integer merid;
-
     private Integer macid;
 
     private Integer llogaccount;
@@ -21,14 +19,6 @@ public class Loginlog {
 
     public void setLlogid(Integer llogid) {
         this.llogid = llogid;
-    }
-
-    public Integer getMerid() {
-        return merid;
-    }
-
-    public void setMerid(Integer merid) {
-        this.merid = merid;
     }
 
     public Integer getMacid() {

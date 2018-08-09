@@ -1,7 +1,7 @@
 package com.scau.hyskjf.pojo;
 
 public class Memberaccount {
-    private Long memid;
+    private Integer memid;
 
     private Integer maid;
 
@@ -13,11 +13,11 @@ public class Memberaccount {
 
     private Boolean maenable;
 
-    public Long getMemid() {
+    public Integer getMemid() {
         return memid;
     }
 
-    public void setMemid(Long memid) {
+    public void setMemid(Integer memid) {
         this.memid = memid;
     }
 

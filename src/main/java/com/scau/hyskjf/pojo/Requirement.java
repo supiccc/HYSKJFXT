@@ -5,17 +5,13 @@ import java.util.Date;
 public class Requirement {
     private Integer reqid;
 
-    private Long memid;
-
-    private String reqinfo;
+    private Integer memid;
 
     private Date reqtime;
 
-    private Long reqby;
+    private Integer reqby;
 
     private Boolean reqreply;
-
-    private String reqrepcontent;
 
     private Integer reqrepby;
 
@@ -29,20 +25,12 @@ public class Requirement {
         this.reqid = reqid;
     }
 
-    public Long getMemid() {
+    public Integer getMemid() {
         return memid;
     }
 
-    public void setMemid(Long memid) {
+    public void setMemid(Integer memid) {
         this.memid = memid;
-    }
-
-    public String getReqinfo() {
-        return reqinfo;
-    }
-
-    public void setReqinfo(String reqinfo) {
-        this.reqinfo = reqinfo;
     }
 
     public Date getReqtime() {
@@ -53,11 +41,11 @@ public class Requirement {
         this.reqtime = reqtime;
     }
 
-    public Long getReqby() {
+    public Integer getReqby() {
         return reqby;
     }
 
-    public void setReqby(Long reqby) {
+    public void setReqby(Integer reqby) {
         this.reqby = reqby;
     }
 
@@ -67,14 +55,6 @@ public class Requirement {
 
     public void setReqreply(Boolean reqreply) {
         this.reqreply = reqreply;
-    }
-
-    public String getReqrepcontent() {
-        return reqrepcontent;
-    }
-
-    public void setReqrepcontent(String reqrepcontent) {
-        this.reqrepcontent = reqrepcontent;
     }
 
     public Integer getReqrepby() {

@@ -3,8 +3,6 @@ package com.scau.hyskjf.pojo;
 public class Merchantinfo {
     private Integer merid;
 
-    private String merintroduce;
-
     private String merimage;
 
     private Boolean mermainimage;
@@ -35,28 +33,12 @@ public class Merchantinfo {
 
     private String merarea;
 
-    private String merlandmark;
-
-    private String merdiscount;
-
-    private String merdiscountevent;
-
-    private String meradress;
-
     public Integer getMerid() {
         return merid;
     }
 
     public void setMerid(Integer merid) {
         this.merid = merid;
-    }
-
-    public String getMerintroduce() {
-        return merintroduce;
-    }
-
-    public void setMerintroduce(String merintroduce) {
-        this.merintroduce = merintroduce;
     }
 
     public String getMerimage() {
@@ -177,37 +159,5 @@ public class Merchantinfo {
 
     public void setMerarea(String merarea) {
         this.merarea = merarea;
-    }
-
-    public String getMerlandmark() {
-        return merlandmark;
-    }
-
-    public void setMerlandmark(String merlandmark) {
-        this.merlandmark = merlandmark;
-    }
-
-    public String getMerdiscount() {
-        return merdiscount;
-    }
-
-    public void setMerdiscount(String merdiscount) {
-        this.merdiscount = merdiscount;
-    }
-
-    public String getMerdiscountevent() {
-        return merdiscountevent;
-    }
-
-    public void setMerdiscountevent(String merdiscountevent) {
-        this.merdiscountevent = merdiscountevent;
-    }
-
-    public String getMeradress() {
-        return meradress;
-    }
-
-    public void setMeradress(String meradress) {
-        this.meradress = meradress;
     }
 }
