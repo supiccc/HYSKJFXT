@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.NewsMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.News" >
+    <id column="newsID" property="newsid" jdbcType="INTEGER" />
+    <result column="newsTitle" property="newstitle" jdbcType="VARCHAR" />
+    <result column="newsType" property="newstype" jdbcType="VARCHAR" />
+    <result column="newsImage" property="newsimage" jdbcType="VARCHAR" />
+    <result column="newsBelong" property="newsbelong" jdbcType="VARCHAR" />
+    <result column="newsEnableHP" property="newsenablehp" jdbcType="BIT" />
+    <result column="newsEnableAct" property="newsenableact" jdbcType="BIT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.News" extends="BaseResultMap" >
+    <result column="newsContent" property="newscontent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    newsID, newsTitle, newsType, newsImage, newsBelong, newsEnableHP, newsEnableAct
+  </sql>
+  <sql id="Blob_Column_List" >
+    newsContent
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from News
+    where newsID = #{newsid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from News
+    where newsID = #{newsid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.News" >
+    insert into News (newsID, newsTitle, newsType, 
+      newsImage, newsBelong, newsEnableHP, 
+      newsEnableAct, newsContent)
+    values (#{newsid,jdbcType=INTEGER}, #{newstitle,jdbcType=VARCHAR}, #{newstype,jdbcType=VARCHAR}, 
+      #{newsimage,jdbcType=VARCHAR}, #{newsbelong,jdbcType=VARCHAR}, #{newsenablehp,jdbcType=BIT}, 
+      #{newsenableact,jdbcType=BIT}, #{newscontent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.News" >
+    insert into News
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="newsid != null" >
+        newsID,
+      </if>
+      <if test="newstitle != null" >
+        newsTitle,
+      </if>
+      <if test="newstype != null" >
+        newsType,
+      </if>
+      <if test="newsimage != null" >
+        newsImage,
+      </if>
+      <if test="newsbelong != null" >
+        newsBelong,
+      </if>
+      <if test="newsenablehp != null" >
+        newsEnableHP,
+      </if>
+      <if test="newsenableact != null" >
+        newsEnableAct,
+      </if>
+      <if test="newscontent != null" >
+        newsContent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="newsid != null" >
+        #{newsid,jdbcType=INTEGER},
+      </if>
+      <if test="newstitle != null" >
+        #{newstitle,jdbcType=VARCHAR},
+      </if>
+      <if test="newstype != null" >
+        #{newstype,jdbcType=VARCHAR},
+      </if>
+      <if test="newsimage != null" >
+        #{newsimage,jdbcType=VARCHAR},
+      </if>
+      <if test="newsbelong != null" >
+        #{newsbelong,jdbcType=VARCHAR},
+      </if>
+      <if test="newsenablehp != null" >
+        #{newsenablehp,jdbcType=BIT},
+      </if>
+      <if test="newsenableact != null" >
+        #{newsenableact,jdbcType=BIT},
+      </if>
+      <if test="newscontent != null" >
+        #{newscontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.News" >
+    update News
+    <set >
+      <if test="newstitle != null" >
+        newsTitle = #{newstitle,jdbcType=VARCHAR},
+      </if>
+      <if test="newstype != null" >
+        newsType = #{newstype,jdbcType=VARCHAR},
+      </if>
+      <if test="newsimage != null" >
+        newsImage = #{newsimage,jdbcType=VARCHAR},
+      </if>
+      <if test="newsbelong != null" >
+        newsBelong = #{newsbelong,jdbcType=VARCHAR},
+      </if>
+      <if test="newsenablehp != null" >
+        newsEnableHP = #{newsenablehp,jdbcType=BIT},
+      </if>
+      <if test="newsenableact != null" >
+        newsEnableAct = #{newsenableact,jdbcType=BIT},
+      </if>
+      <if test="newscontent != null" >
+        newsContent = #{newscontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where newsID = #{newsid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scau.hyskjf.pojo.News" >
+    update News
+    set newsTitle = #{newstitle,jdbcType=VARCHAR},
+      newsType = #{newstype,jdbcType=VARCHAR},
+      newsImage = #{newsimage,jdbcType=VARCHAR},
+      newsBelong = #{newsbelong,jdbcType=VARCHAR},
+      newsEnableHP = #{newsenablehp,jdbcType=BIT},
+      newsEnableAct = #{newsenableact,jdbcType=BIT},
+      newsContent = #{newscontent,jdbcType=LONGVARCHAR}
+    where newsID = #{newsid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.News" >
+    update News
+    set newsTitle = #{newstitle,jdbcType=VARCHAR},
+      newsType = #{newstype,jdbcType=VARCHAR},
+      newsImage = #{newsimage,jdbcType=VARCHAR},
+      newsBelong = #{newsbelong,jdbcType=VARCHAR},
+      newsEnableHP = #{newsenablehp,jdbcType=BIT},
+      newsEnableAct = #{newsenableact,jdbcType=BIT}
+    where newsID = #{newsid,jdbcType=INTEGER}
+  </update>
+</mapper>

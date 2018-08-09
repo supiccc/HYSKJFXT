@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.AdminlogMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Adminlog" >
+    <id column="adlogID" property="adlogid" jdbcType="INTEGER" />
+    <result column="AdminID" property="adminid" jdbcType="INTEGER" />
+    <result column="adlogFunction" property="adlogfunction" jdbcType="VARCHAR" />
+    <result column="adlogTime" property="adlogtime" jdbcType="DATE" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.Adminlog" extends="BaseResultMap" >
+    <result column="adlogInfo" property="adloginfo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    adlogID, AdminID, adlogFunction, adlogTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    adlogInfo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from AdminLog
+    where adlogID = #{adlogid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from AdminLog
+    where adlogID = #{adlogid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Adminlog" >
+    insert into AdminLog (adlogID, AdminID, adlogFunction, 
+      adlogTime, adlogInfo)
+    values (#{adlogid,jdbcType=INTEGER}, #{adminid,jdbcType=INTEGER}, #{adlogfunction,jdbcType=VARCHAR}, 
+      #{adlogtime,jdbcType=DATE}, #{adloginfo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Adminlog" >
+    insert into AdminLog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="adlogid != null" >
+        adlogID,
+      </if>
+      <if test="adminid != null" >
+        AdminID,
+      </if>
+      <if test="adlogfunction != null" >
+        adlogFunction,
+      </if>
+      <if test="adlogtime != null" >
+        adlogTime,
+      </if>
+      <if test="adloginfo != null" >
+        adlogInfo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="adlogid != null" >
+        #{adlogid,jdbcType=INTEGER},
+      </if>
+      <if test="adminid != null" >
+        #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="adlogfunction != null" >
+        #{adlogfunction,jdbcType=VARCHAR},
+      </if>
+      <if test="adlogtime != null" >
+        #{adlogtime,jdbcType=DATE},
+      </if>
+      <if test="adloginfo != null" >
+        #{adloginfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Adminlog" >
+    update AdminLog
+    <set >
+      <if test="adminid != null" >
+        AdminID = #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="adlogfunction != null" >
+        adlogFunction = #{adlogfunction,jdbcType=VARCHAR},
+      </if>
+      <if test="adlogtime != null" >
+        adlogTime = #{adlogtime,jdbcType=DATE},
+      </if>
+      <if test="adloginfo != null" >
+        adlogInfo = #{adloginfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where adlogID = #{adlogid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scau.hyskjf.pojo.Adminlog" >
+    update AdminLog
+    set AdminID = #{adminid,jdbcType=INTEGER},
+      adlogFunction = #{adlogfunction,jdbcType=VARCHAR},
+      adlogTime = #{adlogtime,jdbcType=DATE},
+      adlogInfo = #{adloginfo,jdbcType=LONGVARCHAR}
+    where adlogID = #{adlogid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Adminlog" >
+    update AdminLog
+    set AdminID = #{adminid,jdbcType=INTEGER},
+      adlogFunction = #{adlogfunction,jdbcType=VARCHAR},
+      adlogTime = #{adlogtime,jdbcType=DATE}
+    where adlogID = #{adlogid,jdbcType=INTEGER}
+  </update>
+</mapper>

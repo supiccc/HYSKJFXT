@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.MerchantconfigureMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Merchantconfigure" >
+    <id column="merID" property="merid" jdbcType="INTEGER" />
+    <result column="confIP" property="confip" jdbcType="VARCHAR" />
+    <result column="confCNenable" property="confcnenable" jdbcType="BIT" />
+    <result column="confMPenable" property="confmpenable" jdbcType="BIT" />
+    <result column="confMerKind" property="confmerkind" jdbcType="VARCHAR" />
+    <result column="confEnableLevel" property="confenablelevel" jdbcType="BIT" />
+    <result column="confEnableImage" property="confenableimage" jdbcType="BIT" />
+    <result column="confEnableHotel" property="confenablehotel" jdbcType="BIT" />
+    <result column="confMaxPurchase" property="confmaxpurchase" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    merID, confIP, confCNenable, confMPenable, confMerKind, confEnableLevel, confEnableImage, 
+    confEnableHotel, confMaxPurchase
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from MerchantConfigure
+    where merID = #{merid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from MerchantConfigure
+    where merID = #{merid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Merchantconfigure" >
+    insert into MerchantConfigure (merID, confIP, confCNenable, 
+      confMPenable, confMerKind, confEnableLevel, 
+      confEnableImage, confEnableHotel, confMaxPurchase
+      )
+    values (#{merid,jdbcType=INTEGER}, #{confip,jdbcType=VARCHAR}, #{confcnenable,jdbcType=BIT}, 
+      #{confmpenable,jdbcType=BIT}, #{confmerkind,jdbcType=VARCHAR}, #{confenablelevel,jdbcType=BIT}, 
+      #{confenableimage,jdbcType=BIT}, #{confenablehotel,jdbcType=BIT}, #{confmaxpurchase,jdbcType=REAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Merchantconfigure" >
+    insert into MerchantConfigure
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="merid != null" >
+        merID,
+      </if>
+      <if test="confip != null" >
+        confIP,
+      </if>
+      <if test="confcnenable != null" >
+        confCNenable,
+      </if>
+      <if test="confmpenable != null" >
+        confMPenable,
+      </if>
+      <if test="confmerkind != null" >
+        confMerKind,
+      </if>
+      <if test="confenablelevel != null" >
+        confEnableLevel,
+      </if>
+      <if test="confenableimage != null" >
+        confEnableImage,
+      </if>
+      <if test="confenablehotel != null" >
+        confEnableHotel,
+      </if>
+      <if test="confmaxpurchase != null" >
+        confMaxPurchase,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="merid != null" >
+        #{merid,jdbcType=INTEGER},
+      </if>
+      <if test="confip != null" >
+        #{confip,jdbcType=VARCHAR},
+      </if>
+      <if test="confcnenable != null" >
+        #{confcnenable,jdbcType=BIT},
+      </if>
+      <if test="confmpenable != null" >
+        #{confmpenable,jdbcType=BIT},
+      </if>
+      <if test="confmerkind != null" >
+        #{confmerkind,jdbcType=VARCHAR},
+      </if>
+      <if test="confenablelevel != null" >
+        #{confenablelevel,jdbcType=BIT},
+      </if>
+      <if test="confenableimage != null" >
+        #{confenableimage,jdbcType=BIT},
+      </if>
+      <if test="confenablehotel != null" >
+        #{confenablehotel,jdbcType=BIT},
+      </if>
+      <if test="confmaxpurchase != null" >
+        #{confmaxpurchase,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Merchantconfigure" >
+    update MerchantConfigure
+    <set >
+      <if test="confip != null" >
+        confIP = #{confip,jdbcType=VARCHAR},
+      </if>
+      <if test="confcnenable != null" >
+        confCNenable = #{confcnenable,jdbcType=BIT},
+      </if>
+      <if test="confmpenable != null" >
+        confMPenable = #{confmpenable,jdbcType=BIT},
+      </if>
+      <if test="confmerkind != null" >
+        confMerKind = #{confmerkind,jdbcType=VARCHAR},
+      </if>
+      <if test="confenablelevel != null" >
+        confEnableLevel = #{confenablelevel,jdbcType=BIT},
+      </if>
+      <if test="confenableimage != null" >
+        confEnableImage = #{confenableimage,jdbcType=BIT},
+      </if>
+      <if test="confenablehotel != null" >
+        confEnableHotel = #{confenablehotel,jdbcType=BIT},
+      </if>
+      <if test="confmaxpurchase != null" >
+        confMaxPurchase = #{confmaxpurchase,jdbcType=REAL},
+      </if>
+    </set>
+    where merID = #{merid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Merchantconfigure" >
+    update MerchantConfigure
+    set confIP = #{confip,jdbcType=VARCHAR},
+      confCNenable = #{confcnenable,jdbcType=BIT},
+      confMPenable = #{confmpenable,jdbcType=BIT},
+      confMerKind = #{confmerkind,jdbcType=VARCHAR},
+      confEnableLevel = #{confenablelevel,jdbcType=BIT},
+      confEnableImage = #{confenableimage,jdbcType=BIT},
+      confEnableHotel = #{confenablehotel,jdbcType=BIT},
+      confMaxPurchase = #{confmaxpurchase,jdbcType=REAL}
+    where merID = #{merid,jdbcType=INTEGER}
+  </update>
+</mapper>

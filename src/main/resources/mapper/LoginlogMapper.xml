@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.LoginlogMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Loginlog" >
+    <id column="llogID" property="llogid" jdbcType="INTEGER" />
+    <result column="macID" property="macid" jdbcType="INTEGER" />
+    <result column="llogAccount" property="llogaccount" jdbcType="INTEGER" />
+    <result column="llogDate" property="llogdate" jdbcType="TIMESTAMP" />
+    <result column="llogType" property="llogtype" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    llogID, macID, llogAccount, llogDate, llogType
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from LoginLog
+    where llogID = #{llogid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from LoginLog
+    where llogID = #{llogid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Loginlog" >
+    insert into LoginLog (llogID, macID, llogAccount, 
+      llogDate, llogType)
+    values (#{llogid,jdbcType=INTEGER}, #{macid,jdbcType=INTEGER}, #{llogaccount,jdbcType=INTEGER}, 
+      #{llogdate,jdbcType=TIMESTAMP}, #{llogtype,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Loginlog" >
+    insert into LoginLog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="llogid != null" >
+        llogID,
+      </if>
+      <if test="macid != null" >
+        macID,
+      </if>
+      <if test="llogaccount != null" >
+        llogAccount,
+      </if>
+      <if test="llogdate != null" >
+        llogDate,
+      </if>
+      <if test="llogtype != null" >
+        llogType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="llogid != null" >
+        #{llogid,jdbcType=INTEGER},
+      </if>
+      <if test="macid != null" >
+        #{macid,jdbcType=INTEGER},
+      </if>
+      <if test="llogaccount != null" >
+        #{llogaccount,jdbcType=INTEGER},
+      </if>
+      <if test="llogdate != null" >
+        #{llogdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="llogtype != null" >
+        #{llogtype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Loginlog" >
+    update LoginLog
+    <set >
+      <if test="macid != null" >
+        macID = #{macid,jdbcType=INTEGER},
+      </if>
+      <if test="llogaccount != null" >
+        llogAccount = #{llogaccount,jdbcType=INTEGER},
+      </if>
+      <if test="llogdate != null" >
+        llogDate = #{llogdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="llogtype != null" >
+        llogType = #{llogtype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where llogID = #{llogid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Loginlog" >
+    update LoginLog
+    set macID = #{macid,jdbcType=INTEGER},
+      llogAccount = #{llogaccount,jdbcType=INTEGER},
+      llogDate = #{llogdate,jdbcType=TIMESTAMP},
+      llogType = #{llogtype,jdbcType=VARCHAR}
+    where llogID = #{llogid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.PurchaseMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Purchase" >
+    <id column="purID" property="purid" jdbcType="INTEGER" />
+    <result column="mcPKID" property="mcpkid" jdbcType="INTEGER" />
+    <result column="purBelong" property="purbelong" jdbcType="INTEGER" />
+    <result column="purMerchant" property="purmerchant" jdbcType="INTEGER" />
+    <result column="purMoney" property="purmoney" jdbcType="REAL" />
+    <result column="purRemain" property="purremain" jdbcType="REAL" />
+    <result column="purTime" property="purtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    purID, mcPKID, purBelong, purMerchant, purMoney, purRemain, purTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from Purchase
+    where purID = #{purid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Purchase
+    where purID = #{purid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Purchase" >
+    insert into Purchase (purID, mcPKID, purBelong, 
+      purMerchant, purMoney, purRemain, 
+      purTime)
+    values (#{purid,jdbcType=INTEGER}, #{mcpkid,jdbcType=INTEGER}, #{purbelong,jdbcType=INTEGER}, 
+      #{purmerchant,jdbcType=INTEGER}, #{purmoney,jdbcType=REAL}, #{purremain,jdbcType=REAL}, 
+      #{purtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Purchase" >
+    insert into Purchase
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="purid != null" >
+        purID,
+      </if>
+      <if test="mcpkid != null" >
+        mcPKID,
+      </if>
+      <if test="purbelong != null" >
+        purBelong,
+      </if>
+      <if test="purmerchant != null" >
+        purMerchant,
+      </if>
+      <if test="purmoney != null" >
+        purMoney,
+      </if>
+      <if test="purremain != null" >
+        purRemain,
+      </if>
+      <if test="purtime != null" >
+        purTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="purid != null" >
+        #{purid,jdbcType=INTEGER},
+      </if>
+      <if test="mcpkid != null" >
+        #{mcpkid,jdbcType=INTEGER},
+      </if>
+      <if test="purbelong != null" >
+        #{purbelong,jdbcType=INTEGER},
+      </if>
+      <if test="purmerchant != null" >
+        #{purmerchant,jdbcType=INTEGER},
+      </if>
+      <if test="purmoney != null" >
+        #{purmoney,jdbcType=REAL},
+      </if>
+      <if test="purremain != null" >
+        #{purremain,jdbcType=REAL},
+      </if>
+      <if test="purtime != null" >
+        #{purtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Purchase" >
+    update Purchase
+    <set >
+      <if test="mcpkid != null" >
+        mcPKID = #{mcpkid,jdbcType=INTEGER},
+      </if>
+      <if test="purbelong != null" >
+        purBelong = #{purbelong,jdbcType=INTEGER},
+      </if>
+      <if test="purmerchant != null" >
+        purMerchant = #{purmerchant,jdbcType=INTEGER},
+      </if>
+      <if test="purmoney != null" >
+        purMoney = #{purmoney,jdbcType=REAL},
+      </if>
+      <if test="purremain != null" >
+        purRemain = #{purremain,jdbcType=REAL},
+      </if>
+      <if test="purtime != null" >
+        purTime = #{purtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where purID = #{purid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Purchase" >
+    update Purchase
+    set mcPKID = #{mcpkid,jdbcType=INTEGER},
+      purBelong = #{purbelong,jdbcType=INTEGER},
+      purMerchant = #{purmerchant,jdbcType=INTEGER},
+      purMoney = #{purmoney,jdbcType=REAL},
+      purRemain = #{purremain,jdbcType=REAL},
+      purTime = #{purtime,jdbcType=TIMESTAMP}
+    where purID = #{purid,jdbcType=INTEGER}
+  </update>
+</mapper>

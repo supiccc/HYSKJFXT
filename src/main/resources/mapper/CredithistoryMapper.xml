@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.CredithistoryMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Credithistory" >
+    <id column="chID" property="chid" jdbcType="INTEGER" />
+    <result column="mcPKID" property="mcpkid" jdbcType="INTEGER" />
+    <result column="chCredit" property="chcredit" jdbcType="REAL" />
+    <result column="chRemain" property="chremain" jdbcType="REAL" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.Credithistory" extends="BaseResultMap" >
+    <result column="chType" property="chtype" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    chID, mcPKID, chCredit, chRemain
+  </sql>
+  <sql id="Blob_Column_List" >
+    chType
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CreditHistory
+    where chID = #{chid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from CreditHistory
+    where chID = #{chid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Credithistory" >
+    insert into CreditHistory (chID, mcPKID, chCredit, 
+      chRemain, chType)
+    values (#{chid,jdbcType=INTEGER}, #{mcpkid,jdbcType=INTEGER}, #{chcredit,jdbcType=REAL}, 
+      #{chremain,jdbcType=REAL}, #{chtype,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Credithistory" >
+    insert into CreditHistory
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="chid != null" >
+        chID,
+      </if>
+      <if test="mcpkid != null" >
+        mcPKID,
+      </if>
+      <if test="chcredit != null" >
+        chCredit,
+      </if>
+      <if test="chremain != null" >
+        chRemain,
+      </if>
+      <if test="chtype != null" >
+        chType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="chid != null" >
+        #{chid,jdbcType=INTEGER},
+      </if>
+      <if test="mcpkid != null" >
+        #{mcpkid,jdbcType=INTEGER},
+      </if>
+      <if test="chcredit != null" >
+        #{chcredit,jdbcType=REAL},
+      </if>
+      <if test="chremain != null" >
+        #{chremain,jdbcType=REAL},
+      </if>
+      <if test="chtype != null" >
+        #{chtype,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Credithistory" >
+    update CreditHistory
+    <set >
+      <if test="mcpkid != null" >
+        mcPKID = #{mcpkid,jdbcType=INTEGER},
+      </if>
+      <if test="chcredit != null" >
+        chCredit = #{chcredit,jdbcType=REAL},
+      </if>
+      <if test="chremain != null" >
+        chRemain = #{chremain,jdbcType=REAL},
+      </if>
+      <if test="chtype != null" >
+        chType = #{chtype,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where chID = #{chid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scau.hyskjf.pojo.Credithistory" >
+    update CreditHistory
+    set mcPKID = #{mcpkid,jdbcType=INTEGER},
+      chCredit = #{chcredit,jdbcType=REAL},
+      chRemain = #{chremain,jdbcType=REAL},
+      chType = #{chtype,jdbcType=LONGVARCHAR}
+    where chID = #{chid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Credithistory" >
+    update CreditHistory
+    set mcPKID = #{mcpkid,jdbcType=INTEGER},
+      chCredit = #{chcredit,jdbcType=REAL},
+      chRemain = #{chremain,jdbcType=REAL}
+    where chID = #{chid,jdbcType=INTEGER}
+  </update>
+</mapper>

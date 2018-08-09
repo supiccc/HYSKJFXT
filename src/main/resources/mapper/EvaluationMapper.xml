@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.EvaluationMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Evaluation" >
+    <id column="evaID" property="evaid" jdbcType="INTEGER" />
+    <result column="AdminID" property="adminid" jdbcType="INTEGER" />
+    <result column="merID" property="merid" jdbcType="INTEGER" />
+    <result column="memID" property="memid" jdbcType="INTEGER" />
+    <result column="evaIP" property="evaip" jdbcType="VARCHAR" />
+    <result column="evaBy" property="evaby" jdbcType="INTEGER" />
+    <result column="evaTime" property="evatime" jdbcType="TIMESTAMP" />
+    <result column="evaEnable" property="evaenable" jdbcType="BIT" />
+    <result column="evaReply" property="evareply" jdbcType="BIT" />
+    <result column="evaReplyBy" property="evareplyby" jdbcType="INTEGER" />
+    <result column="evaRepTime" property="evareptime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.EvaluationWithBLOBs" extends="BaseResultMap" >
+    <result column="evaInfo" property="evainfo" jdbcType="LONGVARCHAR" />
+    <result column="evaRepInfo" property="evarepinfo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    evaID, AdminID, merID, memID, evaIP, evaBy, evaTime, evaEnable, evaReply, evaReplyBy, 
+    evaRepTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    evaInfo, evaRepInfo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from Evaluation
+    where evaID = #{evaid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Evaluation
+    where evaID = #{evaid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.EvaluationWithBLOBs" >
+    insert into Evaluation (evaID, AdminID, merID, 
+      memID, evaIP, evaBy, 
+      evaTime, evaEnable, evaReply, 
+      evaReplyBy, evaRepTime, evaInfo, 
+      evaRepInfo)
+    values (#{evaid,jdbcType=INTEGER}, #{adminid,jdbcType=INTEGER}, #{merid,jdbcType=INTEGER}, 
+      #{memid,jdbcType=INTEGER}, #{evaip,jdbcType=VARCHAR}, #{evaby,jdbcType=INTEGER}, 
+      #{evatime,jdbcType=TIMESTAMP}, #{evaenable,jdbcType=BIT}, #{evareply,jdbcType=BIT}, 
+      #{evareplyby,jdbcType=INTEGER}, #{evareptime,jdbcType=TIMESTAMP}, #{evainfo,jdbcType=LONGVARCHAR}, 
+      #{evarepinfo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.EvaluationWithBLOBs" >
+    insert into Evaluation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="evaid != null" >
+        evaID,
+      </if>
+      <if test="adminid != null" >
+        AdminID,
+      </if>
+      <if test="merid != null" >
+        merID,
+      </if>
+      <if test="memid != null" >
+        memID,
+      </if>
+      <if test="evaip != null" >
+        evaIP,
+      </if>
+      <if test="evaby != null" >
+        evaBy,
+      </if>
+      <if test="evatime != null" >
+        evaTime,
+      </if>
+      <if test="evaenable != null" >
+        evaEnable,
+      </if>
+      <if test="evareply != null" >
+        evaReply,
+      </if>
+      <if test="evareplyby != null" >
+        evaReplyBy,
+      </if>
+      <if test="evareptime != null" >
+        evaRepTime,
+      </if>
+      <if test="evainfo != null" >
+        evaInfo,
+      </if>
+      <if test="evarepinfo != null" >
+        evaRepInfo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="evaid != null" >
+        #{evaid,jdbcType=INTEGER},
+      </if>
+      <if test="adminid != null" >
+        #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="merid != null" >
+        #{merid,jdbcType=INTEGER},
+      </if>
+      <if test="memid != null" >
+        #{memid,jdbcType=INTEGER},
+      </if>
+      <if test="evaip != null" >
+        #{evaip,jdbcType=VARCHAR},
+      </if>
+      <if test="evaby != null" >
+        #{evaby,jdbcType=INTEGER},
+      </if>
+      <if test="evatime != null" >
+        #{evatime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="evaenable != null" >
+        #{evaenable,jdbcType=BIT},
+      </if>
+      <if test="evareply != null" >
+        #{evareply,jdbcType=BIT},
+      </if>
+      <if test="evareplyby != null" >
+        #{evareplyby,jdbcType=INTEGER},
+      </if>
+      <if test="evareptime != null" >
+        #{evareptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="evainfo != null" >
+        #{evainfo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="evarepinfo != null" >
+        #{evarepinfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.EvaluationWithBLOBs" >
+    update Evaluation
+    <set >
+      <if test="adminid != null" >
+        AdminID = #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="merid != null" >
+        merID = #{merid,jdbcType=INTEGER},
+      </if>
+      <if test="memid != null" >
+        memID = #{memid,jdbcType=INTEGER},
+      </if>
+      <if test="evaip != null" >
+        evaIP = #{evaip,jdbcType=VARCHAR},
+      </if>
+      <if test="evaby != null" >
+        evaBy = #{evaby,jdbcType=INTEGER},
+      </if>
+      <if test="evatime != null" >
+        evaTime = #{evatime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="evaenable != null" >
+        evaEnable = #{evaenable,jdbcType=BIT},
+      </if>
+      <if test="evareply != null" >
+        evaReply = #{evareply,jdbcType=BIT},
+      </if>
+      <if test="evareplyby != null" >
+        evaReplyBy = #{evareplyby,jdbcType=INTEGER},
+      </if>
+      <if test="evareptime != null" >
+        evaRepTime = #{evareptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="evainfo != null" >
+        evaInfo = #{evainfo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="evarepinfo != null" >
+        evaRepInfo = #{evarepinfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where evaID = #{evaid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scau.hyskjf.pojo.EvaluationWithBLOBs" >
+    update Evaluation
+    set AdminID = #{adminid,jdbcType=INTEGER},
+      merID = #{merid,jdbcType=INTEGER},
+      memID = #{memid,jdbcType=INTEGER},
+      evaIP = #{evaip,jdbcType=VARCHAR},
+      evaBy = #{evaby,jdbcType=INTEGER},
+      evaTime = #{evatime,jdbcType=TIMESTAMP},
+      evaEnable = #{evaenable,jdbcType=BIT},
+      evaReply = #{evareply,jdbcType=BIT},
+      evaReplyBy = #{evareplyby,jdbcType=INTEGER},
+      evaRepTime = #{evareptime,jdbcType=TIMESTAMP},
+      evaInfo = #{evainfo,jdbcType=LONGVARCHAR},
+      evaRepInfo = #{evarepinfo,jdbcType=LONGVARCHAR}
+    where evaID = #{evaid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Evaluation" >
+    update Evaluation
+    set AdminID = #{adminid,jdbcType=INTEGER},
+      merID = #{merid,jdbcType=INTEGER},
+      memID = #{memid,jdbcType=INTEGER},
+      evaIP = #{evaip,jdbcType=VARCHAR},
+      evaBy = #{evaby,jdbcType=INTEGER},
+      evaTime = #{evatime,jdbcType=TIMESTAMP},
+      evaEnable = #{evaenable,jdbcType=BIT},
+      evaReply = #{evareply,jdbcType=BIT},
+      evaReplyBy = #{evareplyby,jdbcType=INTEGER},
+      evaRepTime = #{evareptime,jdbcType=TIMESTAMP}
+    where evaID = #{evaid,jdbcType=INTEGER}
+  </update>
+</mapper>

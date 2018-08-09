@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.MerchantmoneyreturnMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Merchantmoneyreturn" >
+    <result column="merID" property="merid" jdbcType="INTEGER" />
+    <result column="mmrID" property="mmrid" jdbcType="INTEGER" />
+    <result column="mmrMoney" property="mmrmoney" jdbcType="REAL" />
+    <result column="mmrConsumoMoney" property="mmrconsumomoney" jdbcType="REAL" />
+    <result column="mmrStat" property="mmrstat" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Merchantmoneyreturn" >
+    insert into MerchantMoneyReturn (merID, mmrID, mmrMoney, 
+      mmrConsumoMoney, mmrStat)
+    values (#{merid,jdbcType=INTEGER}, #{mmrid,jdbcType=INTEGER}, #{mmrmoney,jdbcType=REAL}, 
+      #{mmrconsumomoney,jdbcType=REAL}, #{mmrstat,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Merchantmoneyreturn" >
+    insert into MerchantMoneyReturn
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="merid != null" >
+        merID,
+      </if>
+      <if test="mmrid != null" >
+        mmrID,
+      </if>
+      <if test="mmrmoney != null" >
+        mmrMoney,
+      </if>
+      <if test="mmrconsumomoney != null" >
+        mmrConsumoMoney,
+      </if>
+      <if test="mmrstat != null" >
+        mmrStat,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="merid != null" >
+        #{merid,jdbcType=INTEGER},
+      </if>
+      <if test="mmrid != null" >
+        #{mmrid,jdbcType=INTEGER},
+      </if>
+      <if test="mmrmoney != null" >
+        #{mmrmoney,jdbcType=REAL},
+      </if>
+      <if test="mmrconsumomoney != null" >
+        #{mmrconsumomoney,jdbcType=REAL},
+      </if>
+      <if test="mmrstat != null" >
+        #{mmrstat,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.MembercardreceiveMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Membercardreceive" >
+    <id column="mcrID" property="mcrid" jdbcType="INTEGER" />
+    <result column="AdminID" property="adminid" jdbcType="INTEGER" />
+    <result column="merID" property="merid" jdbcType="INTEGER" />
+    <result column="mcrReceivedCount" property="mcrreceivedcount" jdbcType="INTEGER" />
+    <result column="mcrZone" property="mcrzone" jdbcType="VARCHAR" />
+    <result column="mcrTime" property="mcrtime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    mcrID, AdminID, merID, mcrReceivedCount, mcrZone, mcrTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from MemberCardReceive
+    where mcrID = #{mcrid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from MemberCardReceive
+    where mcrID = #{mcrid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Membercardreceive" >
+    insert into MemberCardReceive (mcrID, AdminID, merID, 
+      mcrReceivedCount, mcrZone, mcrTime
+      )
+    values (#{mcrid,jdbcType=INTEGER}, #{adminid,jdbcType=INTEGER}, #{merid,jdbcType=INTEGER}, 
+      #{mcrreceivedcount,jdbcType=INTEGER}, #{mcrzone,jdbcType=VARCHAR}, #{mcrtime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Membercardreceive" >
+    insert into MemberCardReceive
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mcrid != null" >
+        mcrID,
+      </if>
+      <if test="adminid != null" >
+        AdminID,
+      </if>
+      <if test="merid != null" >
+        merID,
+      </if>
+      <if test="mcrreceivedcount != null" >
+        mcrReceivedCount,
+      </if>
+      <if test="mcrzone != null" >
+        mcrZone,
+      </if>
+      <if test="mcrtime != null" >
+        mcrTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mcrid != null" >
+        #{mcrid,jdbcType=INTEGER},
+      </if>
+      <if test="adminid != null" >
+        #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="merid != null" >
+        #{merid,jdbcType=INTEGER},
+      </if>
+      <if test="mcrreceivedcount != null" >
+        #{mcrreceivedcount,jdbcType=INTEGER},
+      </if>
+      <if test="mcrzone != null" >
+        #{mcrzone,jdbcType=VARCHAR},
+      </if>
+      <if test="mcrtime != null" >
+        #{mcrtime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Membercardreceive" >
+    update MemberCardReceive
+    <set >
+      <if test="adminid != null" >
+        AdminID = #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="merid != null" >
+        merID = #{merid,jdbcType=INTEGER},
+      </if>
+      <if test="mcrreceivedcount != null" >
+        mcrReceivedCount = #{mcrreceivedcount,jdbcType=INTEGER},
+      </if>
+      <if test="mcrzone != null" >
+        mcrZone = #{mcrzone,jdbcType=VARCHAR},
+      </if>
+      <if test="mcrtime != null" >
+        mcrTime = #{mcrtime,jdbcType=DATE},
+      </if>
+    </set>
+    where mcrID = #{mcrid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Membercardreceive" >
+    update MemberCardReceive
+    set AdminID = #{adminid,jdbcType=INTEGER},
+      merID = #{merid,jdbcType=INTEGER},
+      mcrReceivedCount = #{mcrreceivedcount,jdbcType=INTEGER},
+      mcrZone = #{mcrzone,jdbcType=VARCHAR},
+      mcrTime = #{mcrtime,jdbcType=DATE}
+    where mcrID = #{mcrid,jdbcType=INTEGER}
+  </update>
+</mapper>

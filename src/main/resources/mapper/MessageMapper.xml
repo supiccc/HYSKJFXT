@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.MessageMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Message" >
+    <id column="mesID" property="mesid" jdbcType="INTEGER" />
+    <result column="mesTitle" property="mestitle" jdbcType="VARCHAR" />
+    <result column="mesSource" property="messource" jdbcType="INTEGER" />
+    <result column="mesDestination" property="mesdestination" jdbcType="INTEGER" />
+    <result column="mesRead" property="mesread" jdbcType="BIT" />
+    <result column="mesType" property="mestype" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.Message" extends="BaseResultMap" >
+    <result column="mesContent" property="mescontent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    mesID, mesTitle, mesSource, mesDestination, mesRead, mesType
+  </sql>
+  <sql id="Blob_Column_List" >
+    mesContent
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from Message
+    where mesID = #{mesid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Message
+    where mesID = #{mesid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Message" >
+    insert into Message (mesID, mesTitle, mesSource, 
+      mesDestination, mesRead, mesType, 
+      mesContent)
+    values (#{mesid,jdbcType=INTEGER}, #{mestitle,jdbcType=VARCHAR}, #{messource,jdbcType=INTEGER}, 
+      #{mesdestination,jdbcType=INTEGER}, #{mesread,jdbcType=BIT}, #{mestype,jdbcType=INTEGER}, 
+      #{mescontent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Message" >
+    insert into Message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mesid != null" >
+        mesID,
+      </if>
+      <if test="mestitle != null" >
+        mesTitle,
+      </if>
+      <if test="messource != null" >
+        mesSource,
+      </if>
+      <if test="mesdestination != null" >
+        mesDestination,
+      </if>
+      <if test="mesread != null" >
+        mesRead,
+      </if>
+      <if test="mestype != null" >
+        mesType,
+      </if>
+      <if test="mescontent != null" >
+        mesContent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mesid != null" >
+        #{mesid,jdbcType=INTEGER},
+      </if>
+      <if test="mestitle != null" >
+        #{mestitle,jdbcType=VARCHAR},
+      </if>
+      <if test="messource != null" >
+        #{messource,jdbcType=INTEGER},
+      </if>
+      <if test="mesdestination != null" >
+        #{mesdestination,jdbcType=INTEGER},
+      </if>
+      <if test="mesread != null" >
+        #{mesread,jdbcType=BIT},
+      </if>
+      <if test="mestype != null" >
+        #{mestype,jdbcType=INTEGER},
+      </if>
+      <if test="mescontent != null" >
+        #{mescontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Message" >
+    update Message
+    <set >
+      <if test="mestitle != null" >
+        mesTitle = #{mestitle,jdbcType=VARCHAR},
+      </if>
+      <if test="messource != null" >
+        mesSource = #{messource,jdbcType=INTEGER},
+      </if>
+      <if test="mesdestination != null" >
+        mesDestination = #{mesdestination,jdbcType=INTEGER},
+      </if>
+      <if test="mesread != null" >
+        mesRead = #{mesread,jdbcType=BIT},
+      </if>
+      <if test="mestype != null" >
+        mesType = #{mestype,jdbcType=INTEGER},
+      </if>
+      <if test="mescontent != null" >
+        mesContent = #{mescontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where mesID = #{mesid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scau.hyskjf.pojo.Message" >
+    update Message
+    set mesTitle = #{mestitle,jdbcType=VARCHAR},
+      mesSource = #{messource,jdbcType=INTEGER},
+      mesDestination = #{mesdestination,jdbcType=INTEGER},
+      mesRead = #{mesread,jdbcType=BIT},
+      mesType = #{mestype,jdbcType=INTEGER},
+      mesContent = #{mescontent,jdbcType=LONGVARCHAR}
+    where mesID = #{mesid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Message" >
+    update Message
+    set mesTitle = #{mestitle,jdbcType=VARCHAR},
+      mesSource = #{messource,jdbcType=INTEGER},
+      mesDestination = #{mesdestination,jdbcType=INTEGER},
+      mesRead = #{mesread,jdbcType=BIT},
+      mesType = #{mestype,jdbcType=INTEGER}
+    where mesID = #{mesid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.MemberinfochangeMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Memberinfochange" >
+    <id column="micID" property="micid" jdbcType="INTEGER" />
+    <result column="memID" property="memid" jdbcType="INTEGER" />
+    <result column="micCer" property="miccer" jdbcType="VARCHAR" />
+    <result column="micCerID" property="miccerid" jdbcType="VARCHAR" />
+    <result column="micName" property="micname" jdbcType="VARCHAR" />
+    <result column="micSex" property="micsex" jdbcType="VARCHAR" />
+    <result column="micPhone" property="micphone" jdbcType="INTEGER" />
+    <result column="micBirth" property="micbirth" jdbcType="DATE" />
+    <result column="micAdredd" property="micadredd" jdbcType="VARCHAR" />
+    <result column="micEmail" property="micemail" jdbcType="VARCHAR" />
+    <result column="micReason" property="micreason" jdbcType="VARCHAR" />
+    <result column="micTime" property="mictime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    micID, memID, micCer, micCerID, micName, micSex, micPhone, micBirth, micAdredd, micEmail, 
+    micReason, micTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from MemberInfoChange
+    where micID = #{micid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from MemberInfoChange
+    where micID = #{micid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Memberinfochange" >
+    insert into MemberInfoChange (micID, memID, micCer, 
+      micCerID, micName, micSex, 
+      micPhone, micBirth, micAdredd, 
+      micEmail, micReason, micTime
+      )
+    values (#{micid,jdbcType=INTEGER}, #{memid,jdbcType=INTEGER}, #{miccer,jdbcType=VARCHAR}, 
+      #{miccerid,jdbcType=VARCHAR}, #{micname,jdbcType=VARCHAR}, #{micsex,jdbcType=VARCHAR}, 
+      #{micphone,jdbcType=INTEGER}, #{micbirth,jdbcType=DATE}, #{micadredd,jdbcType=VARCHAR}, 
+      #{micemail,jdbcType=VARCHAR}, #{micreason,jdbcType=VARCHAR}, #{mictime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Memberinfochange" >
+    insert into MemberInfoChange
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="micid != null" >
+        micID,
+      </if>
+      <if test="memid != null" >
+        memID,
+      </if>
+      <if test="miccer != null" >
+        micCer,
+      </if>
+      <if test="miccerid != null" >
+        micCerID,
+      </if>
+      <if test="micname != null" >
+        micName,
+      </if>
+      <if test="micsex != null" >
+        micSex,
+      </if>
+      <if test="micphone != null" >
+        micPhone,
+      </if>
+      <if test="micbirth != null" >
+        micBirth,
+      </if>
+      <if test="micadredd != null" >
+        micAdredd,
+      </if>
+      <if test="micemail != null" >
+        micEmail,
+      </if>
+      <if test="micreason != null" >
+        micReason,
+      </if>
+      <if test="mictime != null" >
+        micTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="micid != null" >
+        #{micid,jdbcType=INTEGER},
+      </if>
+      <if test="memid != null" >
+        #{memid,jdbcType=INTEGER},
+      </if>
+      <if test="miccer != null" >
+        #{miccer,jdbcType=VARCHAR},
+      </if>
+      <if test="miccerid != null" >
+        #{miccerid,jdbcType=VARCHAR},
+      </if>
+      <if test="micname != null" >
+        #{micname,jdbcType=VARCHAR},
+      </if>
+      <if test="micsex != null" >
+        #{micsex,jdbcType=VARCHAR},
+      </if>
+      <if test="micphone != null" >
+        #{micphone,jdbcType=INTEGER},
+      </if>
+      <if test="micbirth != null" >
+        #{micbirth,jdbcType=DATE},
+      </if>
+      <if test="micadredd != null" >
+        #{micadredd,jdbcType=VARCHAR},
+      </if>
+      <if test="micemail != null" >
+        #{micemail,jdbcType=VARCHAR},
+      </if>
+      <if test="micreason != null" >
+        #{micreason,jdbcType=VARCHAR},
+      </if>
+      <if test="mictime != null" >
+        #{mictime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Memberinfochange" >
+    update MemberInfoChange
+    <set >
+      <if test="memid != null" >
+        memID = #{memid,jdbcType=INTEGER},
+      </if>
+      <if test="miccer != null" >
+        micCer = #{miccer,jdbcType=VARCHAR},
+      </if>
+      <if test="miccerid != null" >
+        micCerID = #{miccerid,jdbcType=VARCHAR},
+      </if>
+      <if test="micname != null" >
+        micName = #{micname,jdbcType=VARCHAR},
+      </if>
+      <if test="micsex != null" >
+        micSex = #{micsex,jdbcType=VARCHAR},
+      </if>
+      <if test="micphone != null" >
+        micPhone = #{micphone,jdbcType=INTEGER},
+      </if>
+      <if test="micbirth != null" >
+        micBirth = #{micbirth,jdbcType=DATE},
+      </if>
+      <if test="micadredd != null" >
+        micAdredd = #{micadredd,jdbcType=VARCHAR},
+      </if>
+      <if test="micemail != null" >
+        micEmail = #{micemail,jdbcType=VARCHAR},
+      </if>
+      <if test="micreason != null" >
+        micReason = #{micreason,jdbcType=VARCHAR},
+      </if>
+      <if test="mictime != null" >
+        micTime = #{mictime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where micID = #{micid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Memberinfochange" >
+    update MemberInfoChange
+    set memID = #{memid,jdbcType=INTEGER},
+      micCer = #{miccer,jdbcType=VARCHAR},
+      micCerID = #{miccerid,jdbcType=VARCHAR},
+      micName = #{micname,jdbcType=VARCHAR},
+      micSex = #{micsex,jdbcType=VARCHAR},
+      micPhone = #{micphone,jdbcType=INTEGER},
+      micBirth = #{micbirth,jdbcType=DATE},
+      micAdredd = #{micadredd,jdbcType=VARCHAR},
+      micEmail = #{micemail,jdbcType=VARCHAR},
+      micReason = #{micreason,jdbcType=VARCHAR},
+      micTime = #{mictime,jdbcType=TIMESTAMP}
+    where micID = #{micid,jdbcType=INTEGER}
+  </update>
+</mapper>

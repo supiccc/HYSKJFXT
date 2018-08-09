@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.PremembercardMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Premembercard" >
+    <id column="pmcID" property="pmcid" jdbcType="INTEGER" />
+    <result column="merID" property="merid" jdbcType="INTEGER" />
+    <result column="pmcStat" property="pmcstat" jdbcType="BIT" />
+    <result column="pmcMerMaker" property="pmcmermaker" jdbcType="INTEGER" />
+    <result column="pmcProvider" property="pmcprovider" jdbcType="INTEGER" />
+    <result column="pmcMakeTime" property="pmcmaketime" jdbcType="DATE" />
+    <result column="pmcProvideTime" property="pmcprovidetime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    pmcID, merID, pmcStat, pmcMerMaker, pmcProvider, pmcMakeTime, pmcProvideTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from PreMemberCard
+    where pmcID = #{pmcid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from PreMemberCard
+    where pmcID = #{pmcid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Premembercard" >
+    insert into PreMemberCard (pmcID, merID, pmcStat, 
+      pmcMerMaker, pmcProvider, pmcMakeTime, 
+      pmcProvideTime)
+    values (#{pmcid,jdbcType=INTEGER}, #{merid,jdbcType=INTEGER}, #{pmcstat,jdbcType=BIT}, 
+      #{pmcmermaker,jdbcType=INTEGER}, #{pmcprovider,jdbcType=INTEGER}, #{pmcmaketime,jdbcType=DATE}, 
+      #{pmcprovidetime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Premembercard" >
+    insert into PreMemberCard
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pmcid != null" >
+        pmcID,
+      </if>
+      <if test="merid != null" >
+        merID,
+      </if>
+      <if test="pmcstat != null" >
+        pmcStat,
+      </if>
+      <if test="pmcmermaker != null" >
+        pmcMerMaker,
+      </if>
+      <if test="pmcprovider != null" >
+        pmcProvider,
+      </if>
+      <if test="pmcmaketime != null" >
+        pmcMakeTime,
+      </if>
+      <if test="pmcprovidetime != null" >
+        pmcProvideTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pmcid != null" >
+        #{pmcid,jdbcType=INTEGER},
+      </if>
+      <if test="merid != null" >
+        #{merid,jdbcType=INTEGER},
+      </if>
+      <if test="pmcstat != null" >
+        #{pmcstat,jdbcType=BIT},
+      </if>
+      <if test="pmcmermaker != null" >
+        #{pmcmermaker,jdbcType=INTEGER},
+      </if>
+      <if test="pmcprovider != null" >
+        #{pmcprovider,jdbcType=INTEGER},
+      </if>
+      <if test="pmcmaketime != null" >
+        #{pmcmaketime,jdbcType=DATE},
+      </if>
+      <if test="pmcprovidetime != null" >
+        #{pmcprovidetime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Premembercard" >
+    update PreMemberCard
+    <set >
+      <if test="merid != null" >
+        merID = #{merid,jdbcType=INTEGER},
+      </if>
+      <if test="pmcstat != null" >
+        pmcStat = #{pmcstat,jdbcType=BIT},
+      </if>
+      <if test="pmcmermaker != null" >
+        pmcMerMaker = #{pmcmermaker,jdbcType=INTEGER},
+      </if>
+      <if test="pmcprovider != null" >
+        pmcProvider = #{pmcprovider,jdbcType=INTEGER},
+      </if>
+      <if test="pmcmaketime != null" >
+        pmcMakeTime = #{pmcmaketime,jdbcType=DATE},
+      </if>
+      <if test="pmcprovidetime != null" >
+        pmcProvideTime = #{pmcprovidetime,jdbcType=DATE},
+      </if>
+    </set>
+    where pmcID = #{pmcid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Premembercard" >
+    update PreMemberCard
+    set merID = #{merid,jdbcType=INTEGER},
+      pmcStat = #{pmcstat,jdbcType=BIT},
+      pmcMerMaker = #{pmcmermaker,jdbcType=INTEGER},
+      pmcProvider = #{pmcprovider,jdbcType=INTEGER},
+      pmcMakeTime = #{pmcmaketime,jdbcType=DATE},
+      pmcProvideTime = #{pmcprovidetime,jdbcType=DATE}
+    where pmcID = #{pmcid,jdbcType=INTEGER}
+  </update>
+</mapper>

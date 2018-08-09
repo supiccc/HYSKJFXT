@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.RequirementMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Requirement" >
+    <id column="reqID" property="reqid" jdbcType="INTEGER" />
+    <result column="memID" property="memid" jdbcType="INTEGER" />
+    <result column="reqTime" property="reqtime" jdbcType="TIMESTAMP" />
+    <result column="reqBy" property="reqby" jdbcType="INTEGER" />
+    <result column="reqReply" property="reqreply" jdbcType="BIT" />
+    <result column="reqRepBy" property="reqrepby" jdbcType="INTEGER" />
+    <result column="reqRepTime" property="reqreptime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.RequirementWithBLOBs" extends="BaseResultMap" >
+    <result column="reqInfo" property="reqinfo" jdbcType="LONGVARCHAR" />
+    <result column="reqRepContent" property="reqrepcontent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    reqID, memID, reqTime, reqBy, reqReply, reqRepBy, reqRepTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    reqInfo, reqRepContent
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from Requirement
+    where reqID = #{reqid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Requirement
+    where reqID = #{reqid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.RequirementWithBLOBs" >
+    insert into Requirement (reqID, memID, reqTime, 
+      reqBy, reqReply, reqRepBy, 
+      reqRepTime, reqInfo, reqRepContent
+      )
+    values (#{reqid,jdbcType=INTEGER}, #{memid,jdbcType=INTEGER}, #{reqtime,jdbcType=TIMESTAMP}, 
+      #{reqby,jdbcType=INTEGER}, #{reqreply,jdbcType=BIT}, #{reqrepby,jdbcType=INTEGER}, 
+      #{reqreptime,jdbcType=TIMESTAMP}, #{reqinfo,jdbcType=LONGVARCHAR}, #{reqrepcontent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.RequirementWithBLOBs" >
+    insert into Requirement
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="reqid != null" >
+        reqID,
+      </if>
+      <if test="memid != null" >
+        memID,
+      </if>
+      <if test="reqtime != null" >
+        reqTime,
+      </if>
+      <if test="reqby != null" >
+        reqBy,
+      </if>
+      <if test="reqreply != null" >
+        reqReply,
+      </if>
+      <if test="reqrepby != null" >
+        reqRepBy,
+      </if>
+      <if test="reqreptime != null" >
+        reqRepTime,
+      </if>
+      <if test="reqinfo != null" >
+        reqInfo,
+      </if>
+      <if test="reqrepcontent != null" >
+        reqRepContent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="reqid != null" >
+        #{reqid,jdbcType=INTEGER},
+      </if>
+      <if test="memid != null" >
+        #{memid,jdbcType=INTEGER},
+      </if>
+      <if test="reqtime != null" >
+        #{reqtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reqby != null" >
+        #{reqby,jdbcType=INTEGER},
+      </if>
+      <if test="reqreply != null" >
+        #{reqreply,jdbcType=BIT},
+      </if>
+      <if test="reqrepby != null" >
+        #{reqrepby,jdbcType=INTEGER},
+      </if>
+      <if test="reqreptime != null" >
+        #{reqreptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reqinfo != null" >
+        #{reqinfo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="reqrepcontent != null" >
+        #{reqrepcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.RequirementWithBLOBs" >
+    update Requirement
+    <set >
+      <if test="memid != null" >
+        memID = #{memid,jdbcType=INTEGER},
+      </if>
+      <if test="reqtime != null" >
+        reqTime = #{reqtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reqby != null" >
+        reqBy = #{reqby,jdbcType=INTEGER},
+      </if>
+      <if test="reqreply != null" >
+        reqReply = #{reqreply,jdbcType=BIT},
+      </if>
+      <if test="reqrepby != null" >
+        reqRepBy = #{reqrepby,jdbcType=INTEGER},
+      </if>
+      <if test="reqreptime != null" >
+        reqRepTime = #{reqreptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reqinfo != null" >
+        reqInfo = #{reqinfo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="reqrepcontent != null" >
+        reqRepContent = #{reqrepcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where reqID = #{reqid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scau.hyskjf.pojo.RequirementWithBLOBs" >
+    update Requirement
+    set memID = #{memid,jdbcType=INTEGER},
+      reqTime = #{reqtime,jdbcType=TIMESTAMP},
+      reqBy = #{reqby,jdbcType=INTEGER},
+      reqReply = #{reqreply,jdbcType=BIT},
+      reqRepBy = #{reqrepby,jdbcType=INTEGER},
+      reqRepTime = #{reqreptime,jdbcType=TIMESTAMP},
+      reqInfo = #{reqinfo,jdbcType=LONGVARCHAR},
+      reqRepContent = #{reqrepcontent,jdbcType=LONGVARCHAR}
+    where reqID = #{reqid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Requirement" >
+    update Requirement
+    set memID = #{memid,jdbcType=INTEGER},
+      reqTime = #{reqtime,jdbcType=TIMESTAMP},
+      reqBy = #{reqby,jdbcType=INTEGER},
+      reqReply = #{reqreply,jdbcType=BIT},
+      reqRepBy = #{reqrepby,jdbcType=INTEGER},
+      reqRepTime = #{reqreptime,jdbcType=TIMESTAMP}
+    where reqID = #{reqid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,5 +1,7 @@
 package com.scau.hyskjf.controller;
 
+import com.scau.hyskjf.dao.MemberaccountMapper;
+import com.scau.hyskjf.pojo.Memberaccount;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,7 @@ public class MemberCenterController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseJSON login(long id) {
+    public ResponseJSON login(int id) {
         Memberaccount m = memberaccountMapper.selectByPrimaryKey(id);
         if (m != null) {
             return new ResponseJSON(ResponseCode.SUCCESS, m);

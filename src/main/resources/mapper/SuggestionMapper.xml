@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.SuggestionMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Suggestion" >
+    <id column="sugID" property="sugid" jdbcType="INTEGER" />
+    <result column="merID" property="merid" jdbcType="INTEGER" />
+    <result column="sugTitle" property="sugtitle" jdbcType="VARCHAR" />
+    <result column="sugDate" property="sugdate" jdbcType="DATE" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.Suggestion" extends="BaseResultMap" >
+    <result column="sugContent" property="sugcontent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sugID, merID, sugTitle, sugDate
+  </sql>
+  <sql id="Blob_Column_List" >
+    sugContent
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from Suggestion
+    where sugID = #{sugid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Suggestion
+    where sugID = #{sugid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Suggestion" >
+    insert into Suggestion (sugID, merID, sugTitle, 
+      sugDate, sugContent)
+    values (#{sugid,jdbcType=INTEGER}, #{merid,jdbcType=INTEGER}, #{sugtitle,jdbcType=VARCHAR}, 
+      #{sugdate,jdbcType=DATE}, #{sugcontent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Suggestion" >
+    insert into Suggestion
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sugid != null" >
+        sugID,
+      </if>
+      <if test="merid != null" >
+        merID,
+      </if>
+      <if test="sugtitle != null" >
+        sugTitle,
+      </if>
+      <if test="sugdate != null" >
+        sugDate,
+      </if>
+      <if test="sugcontent != null" >
+        sugContent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sugid != null" >
+        #{sugid,jdbcType=INTEGER},
+      </if>
+      <if test="merid != null" >
+        #{merid,jdbcType=INTEGER},
+      </if>
+      <if test="sugtitle != null" >
+        #{sugtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="sugdate != null" >
+        #{sugdate,jdbcType=DATE},
+      </if>
+      <if test="sugcontent != null" >
+        #{sugcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Suggestion" >
+    update Suggestion
+    <set >
+      <if test="merid != null" >
+        merID = #{merid,jdbcType=INTEGER},
+      </if>
+      <if test="sugtitle != null" >
+        sugTitle = #{sugtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="sugdate != null" >
+        sugDate = #{sugdate,jdbcType=DATE},
+      </if>
+      <if test="sugcontent != null" >
+        sugContent = #{sugcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where sugID = #{sugid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scau.hyskjf.pojo.Suggestion" >
+    update Suggestion
+    set merID = #{merid,jdbcType=INTEGER},
+      sugTitle = #{sugtitle,jdbcType=VARCHAR},
+      sugDate = #{sugdate,jdbcType=DATE},
+      sugContent = #{sugcontent,jdbcType=LONGVARCHAR}
+    where sugID = #{sugid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Suggestion" >
+    update Suggestion
+    set merID = #{merid,jdbcType=INTEGER},
+      sugTitle = #{sugtitle,jdbcType=VARCHAR},
+      sugDate = #{sugdate,jdbcType=DATE}
+    where sugID = #{sugid,jdbcType=INTEGER}
+  </update>
+</mapper>

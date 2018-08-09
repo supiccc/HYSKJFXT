@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.CreditexchangeMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Creditexchange" >
+    <id column="ceID" property="ceid" jdbcType="INTEGER" />
+    <result column="ceStat" property="cestat" jdbcType="VARCHAR" />
+    <result column="mcPKID" property="mcpkid" jdbcType="INTEGER" />
+    <result column="ceWays" property="ceways" jdbcType="VARCHAR" />
+    <result column="ceAmount" property="ceamount" jdbcType="INTEGER" />
+    <result column="ceCost" property="cecost" jdbcType="REAL" />
+    <result column="ceTime" property="cetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.CreditexchangeWithBLOBs" extends="BaseResultMap" >
+    <result column="ceItem" property="ceitem" jdbcType="LONGVARCHAR" />
+    <result column="ceAdress" property="ceadress" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ceID, ceStat, mcPKID, ceWays, ceAmount, ceCost, ceTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    ceItem, ceAdress
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CreditExchange
+    where ceID = #{ceid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from CreditExchange
+    where ceID = #{ceid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.CreditexchangeWithBLOBs" >
+    insert into CreditExchange (ceID, ceStat, mcPKID, 
+      ceWays, ceAmount, ceCost, 
+      ceTime, ceItem, ceAdress
+      )
+    values (#{ceid,jdbcType=INTEGER}, #{cestat,jdbcType=VARCHAR}, #{mcpkid,jdbcType=INTEGER}, 
+      #{ceways,jdbcType=VARCHAR}, #{ceamount,jdbcType=INTEGER}, #{cecost,jdbcType=REAL}, 
+      #{cetime,jdbcType=TIMESTAMP}, #{ceitem,jdbcType=LONGVARCHAR}, #{ceadress,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.CreditexchangeWithBLOBs" >
+    insert into CreditExchange
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ceid != null" >
+        ceID,
+      </if>
+      <if test="cestat != null" >
+        ceStat,
+      </if>
+      <if test="mcpkid != null" >
+        mcPKID,
+      </if>
+      <if test="ceways != null" >
+        ceWays,
+      </if>
+      <if test="ceamount != null" >
+        ceAmount,
+      </if>
+      <if test="cecost != null" >
+        ceCost,
+      </if>
+      <if test="cetime != null" >
+        ceTime,
+      </if>
+      <if test="ceitem != null" >
+        ceItem,
+      </if>
+      <if test="ceadress != null" >
+        ceAdress,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ceid != null" >
+        #{ceid,jdbcType=INTEGER},
+      </if>
+      <if test="cestat != null" >
+        #{cestat,jdbcType=VARCHAR},
+      </if>
+      <if test="mcpkid != null" >
+        #{mcpkid,jdbcType=INTEGER},
+      </if>
+      <if test="ceways != null" >
+        #{ceways,jdbcType=VARCHAR},
+      </if>
+      <if test="ceamount != null" >
+        #{ceamount,jdbcType=INTEGER},
+      </if>
+      <if test="cecost != null" >
+        #{cecost,jdbcType=REAL},
+      </if>
+      <if test="cetime != null" >
+        #{cetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ceitem != null" >
+        #{ceitem,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ceadress != null" >
+        #{ceadress,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.CreditexchangeWithBLOBs" >
+    update CreditExchange
+    <set >
+      <if test="cestat != null" >
+        ceStat = #{cestat,jdbcType=VARCHAR},
+      </if>
+      <if test="mcpkid != null" >
+        mcPKID = #{mcpkid,jdbcType=INTEGER},
+      </if>
+      <if test="ceways != null" >
+        ceWays = #{ceways,jdbcType=VARCHAR},
+      </if>
+      <if test="ceamount != null" >
+        ceAmount = #{ceamount,jdbcType=INTEGER},
+      </if>
+      <if test="cecost != null" >
+        ceCost = #{cecost,jdbcType=REAL},
+      </if>
+      <if test="cetime != null" >
+        ceTime = #{cetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ceitem != null" >
+        ceItem = #{ceitem,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ceadress != null" >
+        ceAdress = #{ceadress,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ceID = #{ceid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scau.hyskjf.pojo.CreditexchangeWithBLOBs" >
+    update CreditExchange
+    set ceStat = #{cestat,jdbcType=VARCHAR},
+      mcPKID = #{mcpkid,jdbcType=INTEGER},
+      ceWays = #{ceways,jdbcType=VARCHAR},
+      ceAmount = #{ceamount,jdbcType=INTEGER},
+      ceCost = #{cecost,jdbcType=REAL},
+      ceTime = #{cetime,jdbcType=TIMESTAMP},
+      ceItem = #{ceitem,jdbcType=LONGVARCHAR},
+      ceAdress = #{ceadress,jdbcType=LONGVARCHAR}
+    where ceID = #{ceid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Creditexchange" >
+    update CreditExchange
+    set ceStat = #{cestat,jdbcType=VARCHAR},
+      mcPKID = #{mcpkid,jdbcType=INTEGER},
+      ceWays = #{ceways,jdbcType=VARCHAR},
+      ceAmount = #{ceamount,jdbcType=INTEGER},
+      ceCost = #{cecost,jdbcType=REAL},
+      ceTime = #{cetime,jdbcType=TIMESTAMP}
+    where ceID = #{ceid,jdbcType=INTEGER}
+  </update>
+</mapper>

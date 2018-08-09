@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.ReissueMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Reissue" >
+    <id column="reiID" property="reiid" jdbcType="INTEGER" />
+    <result column="memID" property="memid" jdbcType="INTEGER" />
+    <result column="reiTime" property="reitime" jdbcType="DATE" />
+    <result column="Mem_mcPKID" property="memMcpkid" jdbcType="INTEGER" />
+    <result column="mcPKID" property="mcpkid" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.Reissue" extends="BaseResultMap" >
+    <result column="reiReason" property="reireason" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    reiID, memID, reiTime, Mem_mcPKID, mcPKID
+  </sql>
+  <sql id="Blob_Column_List" >
+    reiReason
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from Reissue
+    where reiID = #{reiid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Reissue
+    where reiID = #{reiid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Reissue" >
+    insert into Reissue (reiID, memID, reiTime, 
+      Mem_mcPKID, mcPKID, reiReason
+      )
+    values (#{reiid,jdbcType=INTEGER}, #{memid,jdbcType=INTEGER}, #{reitime,jdbcType=DATE}, 
+      #{memMcpkid,jdbcType=INTEGER}, #{mcpkid,jdbcType=INTEGER}, #{reireason,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Reissue" >
+    insert into Reissue
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="reiid != null" >
+        reiID,
+      </if>
+      <if test="memid != null" >
+        memID,
+      </if>
+      <if test="reitime != null" >
+        reiTime,
+      </if>
+      <if test="memMcpkid != null" >
+        Mem_mcPKID,
+      </if>
+      <if test="mcpkid != null" >
+        mcPKID,
+      </if>
+      <if test="reireason != null" >
+        reiReason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="reiid != null" >
+        #{reiid,jdbcType=INTEGER},
+      </if>
+      <if test="memid != null" >
+        #{memid,jdbcType=INTEGER},
+      </if>
+      <if test="reitime != null" >
+        #{reitime,jdbcType=DATE},
+      </if>
+      <if test="memMcpkid != null" >
+        #{memMcpkid,jdbcType=INTEGER},
+      </if>
+      <if test="mcpkid != null" >
+        #{mcpkid,jdbcType=INTEGER},
+      </if>
+      <if test="reireason != null" >
+        #{reireason,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Reissue" >
+    update Reissue
+    <set >
+      <if test="memid != null" >
+        memID = #{memid,jdbcType=INTEGER},
+      </if>
+      <if test="reitime != null" >
+        reiTime = #{reitime,jdbcType=DATE},
+      </if>
+      <if test="memMcpkid != null" >
+        Mem_mcPKID = #{memMcpkid,jdbcType=INTEGER},
+      </if>
+      <if test="mcpkid != null" >
+        mcPKID = #{mcpkid,jdbcType=INTEGER},
+      </if>
+      <if test="reireason != null" >
+        reiReason = #{reireason,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where reiID = #{reiid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scau.hyskjf.pojo.Reissue" >
+    update Reissue
+    set memID = #{memid,jdbcType=INTEGER},
+      reiTime = #{reitime,jdbcType=DATE},
+      Mem_mcPKID = #{memMcpkid,jdbcType=INTEGER},
+      mcPKID = #{mcpkid,jdbcType=INTEGER},
+      reiReason = #{reireason,jdbcType=LONGVARCHAR}
+    where reiID = #{reiid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Reissue" >
+    update Reissue
+    set memID = #{memid,jdbcType=INTEGER},
+      reiTime = #{reitime,jdbcType=DATE},
+      Mem_mcPKID = #{memMcpkid,jdbcType=INTEGER},
+      mcPKID = #{mcpkid,jdbcType=INTEGER}
+    where reiID = #{reiid,jdbcType=INTEGER}
+  </update>
+</mapper>

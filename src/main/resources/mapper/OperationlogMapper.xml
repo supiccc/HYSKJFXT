@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.OperationlogMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Operationlog" >
+    <id column="ologID" property="ologid" jdbcType="INTEGER" />
+    <result column="macID" property="macid" jdbcType="INTEGER" />
+    <result column="ologAccount" property="ologaccount" jdbcType="INTEGER" />
+    <result column="ologTime" property="ologtime" jdbcType="TIMESTAMP" />
+    <result column="ologURL" property="ologurl" jdbcType="VARCHAR" />
+    <result column="ologFuntion" property="ologfuntion" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.OperationlogWithBLOBs" extends="BaseResultMap" >
+    <result column="ologOperation" property="ologoperation" jdbcType="LONGVARCHAR" />
+    <result column="ologInfo" property="ologinfo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ologID, macID, ologAccount, ologTime, ologURL, ologFuntion
+  </sql>
+  <sql id="Blob_Column_List" >
+    ologOperation, ologInfo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from OperationLog
+    where ologID = #{ologid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from OperationLog
+    where ologID = #{ologid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.OperationlogWithBLOBs" >
+    insert into OperationLog (ologID, macID, ologAccount, 
+      ologTime, ologURL, ologFuntion, 
+      ologOperation, ologInfo)
+    values (#{ologid,jdbcType=INTEGER}, #{macid,jdbcType=INTEGER}, #{ologaccount,jdbcType=INTEGER}, 
+      #{ologtime,jdbcType=TIMESTAMP}, #{ologurl,jdbcType=VARCHAR}, #{ologfuntion,jdbcType=VARCHAR}, 
+      #{ologoperation,jdbcType=LONGVARCHAR}, #{ologinfo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.OperationlogWithBLOBs" >
+    insert into OperationLog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ologid != null" >
+        ologID,
+      </if>
+      <if test="macid != null" >
+        macID,
+      </if>
+      <if test="ologaccount != null" >
+        ologAccount,
+      </if>
+      <if test="ologtime != null" >
+        ologTime,
+      </if>
+      <if test="ologurl != null" >
+        ologURL,
+      </if>
+      <if test="ologfuntion != null" >
+        ologFuntion,
+      </if>
+      <if test="ologoperation != null" >
+        ologOperation,
+      </if>
+      <if test="ologinfo != null" >
+        ologInfo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ologid != null" >
+        #{ologid,jdbcType=INTEGER},
+      </if>
+      <if test="macid != null" >
+        #{macid,jdbcType=INTEGER},
+      </if>
+      <if test="ologaccount != null" >
+        #{ologaccount,jdbcType=INTEGER},
+      </if>
+      <if test="ologtime != null" >
+        #{ologtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ologurl != null" >
+        #{ologurl,jdbcType=VARCHAR},
+      </if>
+      <if test="ologfuntion != null" >
+        #{ologfuntion,jdbcType=VARCHAR},
+      </if>
+      <if test="ologoperation != null" >
+        #{ologoperation,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ologinfo != null" >
+        #{ologinfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.OperationlogWithBLOBs" >
+    update OperationLog
+    <set >
+      <if test="macid != null" >
+        macID = #{macid,jdbcType=INTEGER},
+      </if>
+      <if test="ologaccount != null" >
+        ologAccount = #{ologaccount,jdbcType=INTEGER},
+      </if>
+      <if test="ologtime != null" >
+        ologTime = #{ologtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ologurl != null" >
+        ologURL = #{ologurl,jdbcType=VARCHAR},
+      </if>
+      <if test="ologfuntion != null" >
+        ologFuntion = #{ologfuntion,jdbcType=VARCHAR},
+      </if>
+      <if test="ologoperation != null" >
+        ologOperation = #{ologoperation,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ologinfo != null" >
+        ologInfo = #{ologinfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ologID = #{ologid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scau.hyskjf.pojo.OperationlogWithBLOBs" >
+    update OperationLog
+    set macID = #{macid,jdbcType=INTEGER},
+      ologAccount = #{ologaccount,jdbcType=INTEGER},
+      ologTime = #{ologtime,jdbcType=TIMESTAMP},
+      ologURL = #{ologurl,jdbcType=VARCHAR},
+      ologFuntion = #{ologfuntion,jdbcType=VARCHAR},
+      ologOperation = #{ologoperation,jdbcType=LONGVARCHAR},
+      ologInfo = #{ologinfo,jdbcType=LONGVARCHAR}
+    where ologID = #{ologid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Operationlog" >
+    update OperationLog
+    set macID = #{macid,jdbcType=INTEGER},
+      ologAccount = #{ologaccount,jdbcType=INTEGER},
+      ologTime = #{ologtime,jdbcType=TIMESTAMP},
+      ologURL = #{ologurl,jdbcType=VARCHAR},
+      ologFuntion = #{ologfuntion,jdbcType=VARCHAR}
+    where ologID = #{ologid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,5 +1,7 @@
 package com.scau.hyskjf.service.impl;
 
+import com.scau.hyskjf.dao.MemberaccountMapper;
+import com.scau.hyskjf.pojo.Memberaccount;
 import com.scau.hyskjf.service.MemberCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 

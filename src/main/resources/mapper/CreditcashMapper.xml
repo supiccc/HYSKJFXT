@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.CreditcashMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Creditcash" >
+    <id column="ccID" property="ccid" jdbcType="INTEGER" />
+    <result column="mcPKID" property="mcpkid" jdbcType="INTEGER" />
+    <result column="ccWays" property="ccways" jdbcType="VARCHAR" />
+    <result column="ccBankAccount" property="ccbankaccount" jdbcType="VARCHAR" />
+    <result column="ccCredit" property="cccredit" jdbcType="REAL" />
+    <result column="ccMoney" property="ccmoney" jdbcType="REAL" />
+    <result column="ccTime0" property="cctime0" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ccID, mcPKID, ccWays, ccBankAccount, ccCredit, ccMoney, ccTime0
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from CreditCash
+    where ccID = #{ccid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from CreditCash
+    where ccID = #{ccid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Creditcash" >
+    insert into CreditCash (ccID, mcPKID, ccWays, 
+      ccBankAccount, ccCredit, ccMoney, 
+      ccTime0)
+    values (#{ccid,jdbcType=INTEGER}, #{mcpkid,jdbcType=INTEGER}, #{ccways,jdbcType=VARCHAR}, 
+      #{ccbankaccount,jdbcType=VARCHAR}, #{cccredit,jdbcType=REAL}, #{ccmoney,jdbcType=REAL}, 
+      #{cctime0,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Creditcash" >
+    insert into CreditCash
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ccid != null" >
+        ccID,
+      </if>
+      <if test="mcpkid != null" >
+        mcPKID,
+      </if>
+      <if test="ccways != null" >
+        ccWays,
+      </if>
+      <if test="ccbankaccount != null" >
+        ccBankAccount,
+      </if>
+      <if test="cccredit != null" >
+        ccCredit,
+      </if>
+      <if test="ccmoney != null" >
+        ccMoney,
+      </if>
+      <if test="cctime0 != null" >
+        ccTime0,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ccid != null" >
+        #{ccid,jdbcType=INTEGER},
+      </if>
+      <if test="mcpkid != null" >
+        #{mcpkid,jdbcType=INTEGER},
+      </if>
+      <if test="ccways != null" >
+        #{ccways,jdbcType=VARCHAR},
+      </if>
+      <if test="ccbankaccount != null" >
+        #{ccbankaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="cccredit != null" >
+        #{cccredit,jdbcType=REAL},
+      </if>
+      <if test="ccmoney != null" >
+        #{ccmoney,jdbcType=REAL},
+      </if>
+      <if test="cctime0 != null" >
+        #{cctime0,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Creditcash" >
+    update CreditCash
+    <set >
+      <if test="mcpkid != null" >
+        mcPKID = #{mcpkid,jdbcType=INTEGER},
+      </if>
+      <if test="ccways != null" >
+        ccWays = #{ccways,jdbcType=VARCHAR},
+      </if>
+      <if test="ccbankaccount != null" >
+        ccBankAccount = #{ccbankaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="cccredit != null" >
+        ccCredit = #{cccredit,jdbcType=REAL},
+      </if>
+      <if test="ccmoney != null" >
+        ccMoney = #{ccmoney,jdbcType=REAL},
+      </if>
+      <if test="cctime0 != null" >
+        ccTime0 = #{cctime0,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ccID = #{ccid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Creditcash" >
+    update CreditCash
+    set mcPKID = #{mcpkid,jdbcType=INTEGER},
+      ccWays = #{ccways,jdbcType=VARCHAR},
+      ccBankAccount = #{ccbankaccount,jdbcType=VARCHAR},
+      ccCredit = #{cccredit,jdbcType=REAL},
+      ccMoney = #{ccmoney,jdbcType=REAL},
+      ccTime0 = #{cctime0,jdbcType=TIMESTAMP}
+    where ccID = #{ccid,jdbcType=INTEGER}
+  </update>
+</mapper>

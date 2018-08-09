@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.ApplicationMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Application" >
+    <id column="acaID" property="acaid" jdbcType="INTEGER" />
+    <result column="acaMerchant" property="acamerchant" jdbcType="INTEGER" />
+    <result column="acaStat" property="acastat" jdbcType="VARCHAR" />
+    <result column="acaReallo" property="acareallo" jdbcType="INTEGER" />
+    <result column="acaReaTime" property="acareatime" jdbcType="DATE" />
+    <result column="acaaMerchant" property="acaamerchant" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    acaID, acaMerchant, acaStat, acaReallo, acaReaTime, acaaMerchant
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from Application
+    where acaID = #{acaid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Application
+    where acaID = #{acaid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Application" >
+    insert into Application (acaID, acaMerchant, acaStat, 
+      acaReallo, acaReaTime, acaaMerchant
+      )
+    values (#{acaid,jdbcType=INTEGER}, #{acamerchant,jdbcType=INTEGER}, #{acastat,jdbcType=VARCHAR}, 
+      #{acareallo,jdbcType=INTEGER}, #{acareatime,jdbcType=DATE}, #{acaamerchant,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Application" >
+    insert into Application
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="acaid != null" >
+        acaID,
+      </if>
+      <if test="acamerchant != null" >
+        acaMerchant,
+      </if>
+      <if test="acastat != null" >
+        acaStat,
+      </if>
+      <if test="acareallo != null" >
+        acaReallo,
+      </if>
+      <if test="acareatime != null" >
+        acaReaTime,
+      </if>
+      <if test="acaamerchant != null" >
+        acaaMerchant,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="acaid != null" >
+        #{acaid,jdbcType=INTEGER},
+      </if>
+      <if test="acamerchant != null" >
+        #{acamerchant,jdbcType=INTEGER},
+      </if>
+      <if test="acastat != null" >
+        #{acastat,jdbcType=VARCHAR},
+      </if>
+      <if test="acareallo != null" >
+        #{acareallo,jdbcType=INTEGER},
+      </if>
+      <if test="acareatime != null" >
+        #{acareatime,jdbcType=DATE},
+      </if>
+      <if test="acaamerchant != null" >
+        #{acaamerchant,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Application" >
+    update Application
+    <set >
+      <if test="acamerchant != null" >
+        acaMerchant = #{acamerchant,jdbcType=INTEGER},
+      </if>
+      <if test="acastat != null" >
+        acaStat = #{acastat,jdbcType=VARCHAR},
+      </if>
+      <if test="acareallo != null" >
+        acaReallo = #{acareallo,jdbcType=INTEGER},
+      </if>
+      <if test="acareatime != null" >
+        acaReaTime = #{acareatime,jdbcType=DATE},
+      </if>
+      <if test="acaamerchant != null" >
+        acaaMerchant = #{acaamerchant,jdbcType=INTEGER},
+      </if>
+    </set>
+    where acaID = #{acaid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Application" >
+    update Application
+    set acaMerchant = #{acamerchant,jdbcType=INTEGER},
+      acaStat = #{acastat,jdbcType=VARCHAR},
+      acaReallo = #{acareallo,jdbcType=INTEGER},
+      acaReaTime = #{acareatime,jdbcType=DATE},
+      acaaMerchant = #{acaamerchant,jdbcType=INTEGER}
+    where acaID = #{acaid,jdbcType=INTEGER}
+  </update>
+</mapper>
