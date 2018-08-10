@@ -1,7 +1,7 @@
 package com.scau.hyskjf.pojo;
 
 public class Merchantinfomodified {
-    private Integer attribute249;
+    private Integer modifiedid;
 
     private Integer merid;
 
@@ -35,14 +35,14 @@ public class Merchantinfomodified {
 
     private String merarea;
 
-    private String attribute250;
+    private String examinestate;
 
-    public Integer getAttribute249() {
-        return attribute249;
+    public Integer getModifiedid() {
+        return modifiedid;
     }
 
-    public void setAttribute249(Integer attribute249) {
-        this.attribute249 = attribute249;
+    public void setModifiedid(Integer modifiedid) {
+        this.modifiedid = modifiedid;
     }
 
     public Integer getMerid() {
@@ -173,11 +173,11 @@ public class Merchantinfomodified {
         this.merarea = merarea;
     }
 
-    public String getAttribute250() {
-        return attribute250;
+    public String getExaminestate() {
+        return examinestate;
     }
 
-    public void setAttribute250(String attribute250) {
-        this.attribute250 = attribute250;
+    public void setExaminestate(String examinestate) {
+        this.examinestate = examinestate;
     }
 }
