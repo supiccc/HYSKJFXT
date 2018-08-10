@@ -3,7 +3,7 @@
 <mapper namespace="com.scau.hyskjf.dao.MemberaccountMapper" >
   <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Memberaccount" >
     <id column="memID" property="memid" jdbcType="INTEGER" />
-    <result column="maID" property="maid" jdbcType="INTEGER" />
+    <result column="maID" property="maid" jdbcType="VARCHAR" />
     <result column="maName" property="maname" jdbcType="VARCHAR" />
     <result column="maPwd" property="mapwd" jdbcType="VARCHAR" />
     <result column="maCumPwd" property="macumpwd" jdbcType="VARCHAR" />
@@ -32,7 +32,7 @@
     insert into MemberAccount (memID, maID, maName, 
       maPwd, maCumPwd, maEnable
       )
-    values (#{memid,jdbcType=INTEGER}, #{maid,jdbcType=INTEGER}, #{maname,jdbcType=VARCHAR}, 
+    values (#{memid,jdbcType=INTEGER}, #{maid,jdbcType=VARCHAR}, #{maname,jdbcType=VARCHAR}, 
       #{mapwd,jdbcType=VARCHAR}, #{macumpwd,jdbcType=VARCHAR}, #{maenable,jdbcType=BIT}
       )
   </insert>
@@ -63,7 +63,7 @@
         #{memid,jdbcType=INTEGER},
       </if>
       <if test="maid != null" >
-        #{maid,jdbcType=INTEGER},
+        #{maid,jdbcType=VARCHAR},
       </if>
       <if test="maname != null" >
         #{maname,jdbcType=VARCHAR},
@@ -83,7 +83,7 @@
     update MemberAccount
     <set >
       <if test="maid != null" >
-        maID = #{maid,jdbcType=INTEGER},
+        maID = #{maid,jdbcType=VARCHAR},
       </if>
       <if test="maname != null" >
         maName = #{maname,jdbcType=VARCHAR},
@@ -102,7 +102,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Memberaccount" >
     update MemberAccount
-    set maID = #{maid,jdbcType=INTEGER},
+    set maID = #{maid,jdbcType=VARCHAR},
       maName = #{maname,jdbcType=VARCHAR},
       maPwd = #{mapwd,jdbcType=VARCHAR},
       maCumPwd = #{macumpwd,jdbcType=VARCHAR},

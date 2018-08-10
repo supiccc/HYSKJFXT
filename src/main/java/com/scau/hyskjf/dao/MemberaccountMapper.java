@@ -13,9 +13,9 @@ public interface MemberaccountMapper {
 
     Memberaccount selectByPrimaryKey(Integer memid);
 
+    Memberaccount selectBymaid(String maid);
+
     int updateByPrimaryKeySelective(Memberaccount record);
 
     int updateByPrimaryKey(Memberaccount record);
-
-    Memberaccount selectBymaid(int maid);
 }

@@ -25,7 +25,7 @@ public class AuthRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken utoken = (UsernamePasswordToken)authenticationToken; // 获取用户输入的token
-        int maid = Integer.parseInt(utoken.getUsername());
+        String maid = utoken.getUsername();
         String password = utoken.getPassword().toString();
         Memberaccount member = memberCenterService.findBymaiid(maid);
         if (member == null) return null;
