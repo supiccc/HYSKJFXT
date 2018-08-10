@@ -4,13 +4,13 @@ import com.scau.hyskjf.pojo.Merchantinfomodified;
 import com.scau.hyskjf.pojo.MerchantinfomodifiedWithBLOBs;
 
 public interface MerchantinfomodifiedMapper {
-    int deleteByPrimaryKey(Integer attribute249);
+    int deleteByPrimaryKey(Integer modifiedid);
 
     int insert(MerchantinfomodifiedWithBLOBs record);
 
     int insertSelective(MerchantinfomodifiedWithBLOBs record);
 
-    MerchantinfomodifiedWithBLOBs selectByPrimaryKey(Integer attribute249);
+    MerchantinfomodifiedWithBLOBs selectByPrimaryKey(Integer modifiedid);
 
     int updateByPrimaryKeySelective(MerchantinfomodifiedWithBLOBs record);
 

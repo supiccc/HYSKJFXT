@@ -26,7 +26,7 @@ public class MemberCenterController {
     @Autowired
     MemberaccountMapper memberaccountMapper;
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/loginMember", method = RequestMethod.POST)
     @ResponseBody
     public ResponseJSON login(int maid, String mapwd, HttpSession session) {
         UsernamePasswordToken token = new UsernamePasswordToken(Integer.toString(maid), mapwd);
@@ -40,9 +40,13 @@ public class MemberCenterController {
             return new ResponseJSON(ResponseCode.UNKNOWNACCOUNT);
         } catch (IncorrectCredentialsException e) {
             return new ResponseJSON(ResponseCode.INCORRECTPWD);
-        } catch (NumberFormatException e) {
-            return new ResponseJSON(ResponseCode.UNKNOWNACCOUNT);
         }
+    }
 
+    @RequestMapping(value = "/member")
+    @ResponseBody
+    public ResponseJSON getMember(HttpSession session) {
+        Memberaccount m = (Memberaccount) session.getAttribute("user");
+        return new ResponseJSON(ResponseCode.SUCCESS, m);
     }
 }
