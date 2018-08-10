@@ -14,9 +14,9 @@ public class MemberCenterServiceImpl implements MemberCenterService {
     @Autowired
     MemberaccountMapper memberaccountMapper;
 
-    // 通过账号查找
+//     通过账号查找
     @Override
-    public Memberaccount findBymaiid(int maid) {
+    public Memberaccount findBymaiid(String maid) {
         return memberaccountMapper.selectBymaid(maid);
     }
 }

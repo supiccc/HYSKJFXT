@@ -28,8 +28,8 @@ public class MemberCenterController {
 
     @RequestMapping(value = "/loginMember", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseJSON login(int maid, String mapwd, HttpSession session) {
-        UsernamePasswordToken token = new UsernamePasswordToken(Integer.toString(maid), mapwd);
+    public ResponseJSON login(String maid, String mapwd, HttpSession session) {
+        UsernamePasswordToken token = new UsernamePasswordToken(maid, mapwd);
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(token);
