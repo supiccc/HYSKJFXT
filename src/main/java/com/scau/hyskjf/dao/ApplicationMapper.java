@@ -1,6 +1,7 @@
 package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Application;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,5 +20,5 @@ public interface ApplicationMapper {
 
     int updateByPrimaryKey(Application record);
 
-    List<Application> findAllApplications();
+    List<Application> findAllApplications(@Param("state")String state);
 }

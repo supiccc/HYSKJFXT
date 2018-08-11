@@ -104,9 +104,10 @@
     where acaID = #{acaid,jdbcType=INTEGER}
   </update>
 
-  <select id = "findAllApplications" resultMap="BaseResultMap" >
+  <select id = "findAllApplications" resultMap="BaseResultMap" parameterType="java.lang.String">
     select
   <include refid="Base_Column_List" />
-    from Application where acaStat = "未处理";
+    from Application where acaStat = #{state};
   </select>
+
 </mapper>

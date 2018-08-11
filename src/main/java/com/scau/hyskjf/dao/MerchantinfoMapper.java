@@ -11,7 +11,7 @@ public interface MerchantinfoMapper {
 
     int insert(MerchantinfoWithBLOBs record);
 
-    int insertSelective(MerchantinfoWithBLOBs record);
+    int insertSelective(Merchantinfo record);
 
     MerchantinfoWithBLOBs selectByPrimaryKey(Integer merid);
 
