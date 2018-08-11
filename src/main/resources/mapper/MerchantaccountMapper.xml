@@ -20,6 +20,23 @@
     from MerchantAccount
     where macID = #{macid,jdbcType=INTEGER}
   </select>
+   <select id="selectByMerID" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from MerchantAccount
+        where merID = #{merid,jdbcType=INTEGER}
+   </select>
+  <select id="selectByMacAcc" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from MerchantAccount
+    where macAcc = #{macAcc,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from MerchantAccount
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from MerchantAccount
     where macID = #{macid,jdbcType=INTEGER}
