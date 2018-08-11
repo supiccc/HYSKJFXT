@@ -330,4 +330,11 @@
       examineState = #{examinestate,jdbcType=VARCHAR}
     where modifiedId = #{modifiedid,jdbcType=INTEGER}
   </update>
+
+
+  <select id="findAllMerchantModified" resultType="List">
+    select <include refid="Base_Column_List" />
+    from merchantInfoModified
+    where examineState = "未处理"
+  </select>
 </mapper>
