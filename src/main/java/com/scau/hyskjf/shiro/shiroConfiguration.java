@@ -57,6 +57,7 @@ public class shiroConfiguration {
     public CredentialsMatcher credentialsMatcher() {
         return new CredentialsMatcher();
     }
+
     @Bean
     public LifecycleBeanPostProcessor lifecycleBeanPostProcessor(){
         return new LifecycleBeanPostProcessor();
