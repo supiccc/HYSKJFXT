@@ -4,6 +4,7 @@ package com.scau.hyskjf.controller;
 
 import com.scau.hyskjf.pojo.Application;
 import com.scau.hyskjf.pojo.Merchantinfo;
+import com.scau.hyskjf.pojo.Merchantinfomodified;
 import com.scau.hyskjf.service.ExamineService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
@@ -60,7 +61,7 @@ public class ExamineController {
     //查看所有需要审批的商家修改信息
     @RequestMapping("/modified/list")
     public ResponseJSON findAllMerchants(){
-
+        List<Merchantinfomodified> merchantinfomodifieds = examineService.findAllMerchantModified();
         return null;
     }
 

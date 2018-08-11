@@ -5,6 +5,7 @@ import com.scau.hyskjf.pojo.Memberaccount;
 import com.scau.hyskjf.service.MemberCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 /**
  * Created by supiccc on 2018-08-09 08:53
@@ -14,9 +15,9 @@ public class MemberCenterServiceImpl implements MemberCenterService {
     @Autowired
     MemberaccountMapper memberaccountMapper;
 
-    // 通过账号查找
+//     通过账号查找
     @Override
-    public Memberaccount findBymaiid(int maid) {
+    public Memberaccount findBymaiid(String maid) {
         return memberaccountMapper.selectBymaid(maid);
     }
 }

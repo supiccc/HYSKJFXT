@@ -3,7 +3,7 @@ package com.scau.hyskjf.pojo;
 public class Memberaccount {
     private Integer memid;
 
-    private Integer maid;
+    private String maid;
 
     private String maname;
 
@@ -21,11 +21,11 @@ public class Memberaccount {
         this.memid = memid;
     }
 
-    public Integer getMaid() {
+    public String getMaid() {
         return maid;
     }
 
-    public void setMaid(Integer maid) {
+    public void setMaid(String maid) {
         this.maid = maid;
     }
 
