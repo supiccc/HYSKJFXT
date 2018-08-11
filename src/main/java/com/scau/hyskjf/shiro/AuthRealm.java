@@ -24,10 +24,10 @@ public class AuthRealm extends AuthorizingRealm {
     // 认证，登录
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        UsernamePasswordToken utoken = (UsernamePasswordToken)authenticationToken; // 获取用户输入的token
-        String maid = utoken.getUsername();
+        UsernamePasswordRoleToken utoken = (UsernamePasswordRoleToken)authenticationToken; // 获取用户输入的token
+        String username = utoken.getUsername();
         String password = utoken.getPassword().toString();
-        Memberaccount member = memberCenterService.findBymaiid(maid);
+        Memberaccount member = memberCenterService.findBymaiid(username);
         if (member == null) return null;
         return new SimpleAuthenticationInfo(member, member.getMapwd(), this.getClass().getName());
     }
