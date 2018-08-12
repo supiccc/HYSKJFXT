@@ -1,9 +1,7 @@
 package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Merchant;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface MerchantMapper {
     int deleteByPrimaryKey(Integer merid);
 
