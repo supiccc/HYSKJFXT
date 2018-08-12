@@ -1,7 +1,9 @@
 package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Creditcash;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CreditcashMapper {
     int deleteByPrimaryKey(Integer ccid);
 
