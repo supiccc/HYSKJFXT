@@ -1,6 +1,8 @@
 package com.scau.hyskjf.controller;
 
 import com.scau.hyskjf.dao.MemberaccountMapper;
+import com.scau.hyskjf.pojo.Credithistory;
+import com.scau.hyskjf.pojo.Credithistoryview;
 import com.scau.hyskjf.pojo.Memberaccount;
 import com.scau.hyskjf.service.MemberCenterService;
 import com.scau.hyskjf.util.json.ResponseCode;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * Created by supiccc on 2018-08-08 16:35
@@ -67,13 +70,33 @@ public class MemberCenterController {
         return new ResponseJSON(ResponseCode.SUCCESS);
     }
 
+
+    // 修改登录密码
     @RequestMapping(value = "/forgetLoginPassword")
     public ResponseJSON forgetLoginPassword(String newPassword, String verficationCode) {
         String result = memberCenterService.forgetPwd(newPassword, verficationCode);
-        if (result.equals("true")) {
+        if (result.equals("TRUE")) {
             return new ResponseJSON(ResponseCode.SUCCESS);
         } else {
             return new ResponseJSON(ResponseCode.WARN, result);
         }
+    }
+
+    // 修改消费密码
+    @RequestMapping(value = "/forgetCumPassword")
+    public ResponseJSON forgetDealPassword(String oldPassword, String newPassword) {
+        String result = memberCenterService.forgetDealPwd(oldPassword, newPassword);
+        if (result.equals("TRUE")) {
+            return new ResponseJSON(ResponseCode.SUCCESS);
+        } else {
+            return new ResponseJSON(ResponseCode.WARN, result);
+        }
+    }
+
+    // 查询个人积分历史
+    @RequestMapping(value = "/ShowCreditHistory")
+    public ResponseJSON CreditHistory() {
+        List<Credithistoryview> credithistory = memberCenterService.showCreditHistory();
+        return new ResponseJSON(ResponseCode.SUCCESS, credithistory);
     }
 }
