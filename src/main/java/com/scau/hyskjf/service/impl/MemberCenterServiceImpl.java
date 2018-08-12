@@ -4,13 +4,11 @@ import com.scau.hyskjf.dao.CredithistoryviewMapper;
 import com.scau.hyskjf.dao.MemberaccountMapper;
 import com.scau.hyskjf.pojo.Credithistoryview;
 import com.scau.hyskjf.pojo.Memberaccount;
-import com.scau.hyskjf.pojo.Merchant;
 import com.scau.hyskjf.service.MemberCenterService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.DigestUtils;
 
 import java.util.List;
 
