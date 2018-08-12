@@ -23,7 +23,6 @@ public interface ExamineService {
 
 
 
-
     //查看所有未处理的商家资料变更历史
     public List<Merchantinfomodified> findAllMerchantModified();
 

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+
 import java.util.List;
 
 @Service
@@ -25,6 +26,7 @@ public class ExamineServiceImpl implements ExamineService {
     @Autowired
     private MerchantMapper merchantMapper;
 
+
     @Autowired
     private MerchantaccountMapper merchantaccountMapper;
 
@@ -32,6 +34,7 @@ public class ExamineServiceImpl implements ExamineService {
     public List<Application> findAllApplications(String state) {
         //查询所有状态为未处理的申请，并返回
         List<Application> applicationList = applicationMapper.findAllApplications(state);
+
         return applicationList;
     }
 
@@ -40,9 +43,6 @@ public class ExamineServiceImpl implements ExamineService {
         //查询商家编号为id的商家资料，返回
         return merchantinfoMapper.findById(id);
     }
-
-
-
 
     @Override
     @Transactional
@@ -109,7 +109,6 @@ public class ExamineServiceImpl implements ExamineService {
     }
 
 
-
     @Override
     public List<Merchantinfomodified> findAllMerchantModified() {
 
@@ -125,5 +124,4 @@ public class ExamineServiceImpl implements ExamineService {
     public boolean updateModifiedState(int id, boolean state) {
         return false;
     }
-
 }

@@ -21,4 +21,5 @@ public interface ApplicationMapper {
     int updateByPrimaryKey(Application record);
 
     List<Application> findAllApplications(@Param("state")String state);
+
 }
