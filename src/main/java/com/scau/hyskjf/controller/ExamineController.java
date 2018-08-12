@@ -41,6 +41,7 @@ public class ExamineController {
     }
     //入盟商家审核通过、且分配账号给商家并提醒
     @RequestMapping("application/{id}/agree")
+
     public ResponseJSON applicationAgree(@PathVariable int id,
                                          @RequestParam(value = "operator",required=true) Integer operator){
         System.out.println(operator);
@@ -50,6 +51,7 @@ public class ExamineController {
 
     //审核不通过，发送结果给商家
     @RequestMapping("application/{id}/disagree")
+
     public ResponseJSON applicationDisagree(@PathVariable int id){
         return null;
     }

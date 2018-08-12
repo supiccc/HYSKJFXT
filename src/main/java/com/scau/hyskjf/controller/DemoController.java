@@ -1,17 +1,12 @@
 package com.scau.hyskjf.controller;
 
-import com.aliyuncs.DefaultAcsClient;
-import com.aliyuncs.IAcsClient;
-import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
-import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
-import com.aliyuncs.exceptions.ClientException;
-import com.aliyuncs.http.MethodType;
-import com.aliyuncs.profile.DefaultProfile;
-import com.aliyuncs.profile.IClientProfile;
 import com.scau.hyskjf.dao.AdminMapper;
-import com.scau.hyskjf.util.SMS.sendSMS;
+import com.scau.hyskjf.util.SMS.AuditSMS;
+import com.scau.hyskjf.util.SMS.IndustrySMS;
+import com.scau.hyskjf.util.SMS.PassSMS;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +37,7 @@ public class DemoController {
     @RequestMapping(value = "/adminCreate")
     public ResponseJSON hello() {
         try {
-            System.err.println(new Md5Hash("password", "13602800453", 3));
+            System.err.println(new Md5Hash("password", "13572878765", 3));
         } catch (Exception e) {
             return new ResponseJSON(ResponseCode.WARN);
         }
@@ -50,15 +45,34 @@ public class DemoController {
         return new ResponseJSON(ResponseCode.SUCCESS);
     }
 
-//    发送短信
+//    发送验证短信
     @RequestMapping(value = "/sendMessage")
     public ResponseJSON sendMessage() throws Exception {
-        if (new sendSMS().send("13602800453")) {
-            return new ResponseJSON(ResponseCode.SUCCESS);
-        } else {
-            return new ResponseJSON(ResponseCode.UNKNOWNACCOUNT);
-        }
+//        if (new sendSMS().send("13602800453")) {
+//            return new ResponseJSON(ResponseCode.SUCCESS);
+//        } else {
+//            return new ResponseJSON(ResponseCode.UNKNOWNACCOUNT);
+//        }
+        String verficationCode = IndustrySMS.execute("13602800453");
+        SecurityUtils.getSubject().getSession().setAttribute("verficationCode", verficationCode);
+        return new ResponseJSON(ResponseCode.SUCCESS);
+    }
 
+    // 发送审核结果信息
+    @RequestMapping(value = "/sendAuditNoPassSMS")
+    public String sendAuditSMSNoPass() {
+        String result = AuditSMS.nopass("13602800453", "supiccc", "Nike旗舰店");
+        return result;
+    }
+    @RequestMapping(value = "/sendAuditPassSMS")
+    public String sendAuditSMSPass() {
+        try {
+            String result = PassSMS.pass("13602800453", "supiccc", "Nike旗舰店",
+                    "woaini");
+            return result;
+        } catch (Exception e) {
+            return e.toString();
+        }
     }
 
 }
