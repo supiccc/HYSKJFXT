@@ -1,9 +1,7 @@
 package com.scau.hyskjf.service;
 
-import com.scau.hyskjf.pojo.Credithistory;
 import com.scau.hyskjf.pojo.Credithistoryview;
-import com.scau.hyskjf.pojo.Memberaccount;
-
+import com.scau.hyskjf.pojo.Member;
 import java.util.List;
 
 /**
@@ -14,5 +12,7 @@ public interface MemberCenterService {
 
     String forgetDealPwd(String oldPwd, String newPwd); // 修改交易密码
 
-    List<Credithistoryview> showCreditHistory();
+    List<Credithistoryview> showCreditHistory(); // 读取积分变化数据
+
+    Member showMember(); // 读取用户信息
 }

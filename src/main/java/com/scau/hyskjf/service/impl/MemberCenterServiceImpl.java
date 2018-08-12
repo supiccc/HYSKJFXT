@@ -1,8 +1,10 @@
 package com.scau.hyskjf.service.impl;
 
 import com.scau.hyskjf.dao.CredithistoryviewMapper;
+import com.scau.hyskjf.dao.MemberMapper;
 import com.scau.hyskjf.dao.MemberaccountMapper;
 import com.scau.hyskjf.pojo.Credithistoryview;
+import com.scau.hyskjf.pojo.Member;
 import com.scau.hyskjf.pojo.Memberaccount;
 import com.scau.hyskjf.service.MemberCenterService;
 import org.apache.shiro.SecurityUtils;
@@ -22,6 +24,9 @@ public class MemberCenterServiceImpl implements MemberCenterService {
 
     @Autowired
     CredithistoryviewMapper credithistoryviewMapper;
+
+    @Autowired
+    MemberMapper memberMapper;
 
     @Override
     public String forgetPwd(String newPwd, String verficationCode) {
@@ -55,6 +60,14 @@ public class MemberCenterServiceImpl implements MemberCenterService {
         } catch (Exception e) {
             return e.toString();
         }
+    }
+
+    @Override
+    public Member showMember() {
+        Memberaccount tmp = (Memberaccount) SecurityUtils.getSubject().getSession().getAttribute("user");
+        Member m = memberMapper.selectByPrimaryKey(tmp.getMemid());
+        if (m == null) return null;
+        return m;
     }
 
     @Override
