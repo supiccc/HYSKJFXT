@@ -2,7 +2,6 @@ package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Merchantaccount;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository
