@@ -1,7 +1,9 @@
 package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Message;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface MessageMapper {
     int deleteByPrimaryKey(Integer mesid);
 

@@ -1,9 +1,6 @@
 package com.scau.hyskjf.service;
 
-import com.scau.hyskjf.pojo.Application;
-import com.scau.hyskjf.pojo.Merchantaccount;
-import com.scau.hyskjf.pojo.Merchantinfo;
-import com.scau.hyskjf.pojo.Merchantinfomodified;
+import com.scau.hyskjf.pojo.*;
 
 import java.util.List;
 
@@ -25,13 +22,14 @@ public interface ExamineService {
 
 
     //查看所有未处理的商家资料变更历史
-    public List<Merchantinfomodified> findAllMerchantModified();
+    public List<MerchantinfomodifiedWithBLOBs> findAllMerchantModified(String state);
 
     //查看单个商家资料变更
-    public Merchantinfo findMerchantModified(int id);
+    public MerchantinfomodifiedWithBLOBs findMerchantModified(int id);
 
+    public MerchantinfoWithBLOBs modifiedAgree(int id,int operator);
 
-    //修改资料变更表状态，并发送消息
-    public boolean updateModifiedState(int id,boolean state);
+    public MerchantinfoWithBLOBs modifiedDisagree(int id,int operator);
+
 
 }
