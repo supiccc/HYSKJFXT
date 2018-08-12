@@ -142,4 +142,11 @@
       macEnable = #{macenable,jdbcType=BIT}
     where macID = #{macid,jdbcType=INTEGER}
   </update>
+
+
+  <update id="forbidBymerId" parameterType="com.scau.hyskjf.pojo.Merchantaccount">
+    update MerchantAccount
+    set macEnable = #{macenable,jdbcType=BIT}
+    where merID = #{merid,jdbcType=INTEGER}
+  </update>
 </mapper>

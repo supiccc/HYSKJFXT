@@ -11,7 +11,7 @@
     <result column="merDicPresent" property="merdicpresent" jdbcType="REAL" />
     <result column="merAppStat" property="merappstat" jdbcType="BIT" />
     <result column="merRecommend" property="merrecommend" jdbcType="BIT" />
-    <result column="isIndex" property="isindex" jdbcType="TINYINT" />
+    <result column="isIndex" property="isindex" jdbcType="BIT" />
     <result column="merImage" property="merimage" jdbcType="VARCHAR" />
     <result column="merMainImage" property="mermainimage" jdbcType="BIT" />
     <result column="merTelphone" property="mertelphone" jdbcType="VARCHAR" />
@@ -38,6 +38,18 @@
   <sql id="Blob_Column_List" >
     merIntroduce, merAdress, merLandmark, merDiscount, merDiscountEvent
   </sql>
+
+  <sql id="Base_Column_List">
+      merID, merSubID, merTopID,
+      merType, merName, merCumPresent,
+      merDicPresent, merAppStat, merRecommend,
+      isIndex, merImage, merMainImage,
+      merTelphone, merFax, merURL,
+      merEmail, merPrincipal, merAppellation,
+      merDuty, merPhone, merLevel,
+      merPostNum, merProvince, merCity,
+      merArea
+  </sql>
   <insert id="insert" parameterType="com.scau.hyskjf.pojo.MerchantdetailWithBLOBs" >
     insert into MerchantDetail (merID, merSubID, merTopID, 
       merType, merName, merCumPresent, 
@@ -53,7 +65,7 @@
     values (#{merid,jdbcType=INTEGER}, #{mersubid,jdbcType=INTEGER}, #{mertopid,jdbcType=INTEGER}, 
       #{mertype,jdbcType=VARCHAR}, #{mername,jdbcType=VARCHAR}, #{mercumpresent,jdbcType=REAL}, 
       #{merdicpresent,jdbcType=REAL}, #{merappstat,jdbcType=BIT}, #{merrecommend,jdbcType=BIT}, 
-      #{isindex,jdbcType=TINYINT}, #{merimage,jdbcType=VARCHAR}, #{mermainimage,jdbcType=BIT}, 
+      #{isindex,jdbcType=BIT}, #{merimage,jdbcType=VARCHAR}, #{mermainimage,jdbcType=BIT},
       #{mertelphone,jdbcType=VARCHAR}, #{merfax,jdbcType=VARCHAR}, #{merurl,jdbcType=VARCHAR}, 
       #{meremail,jdbcType=VARCHAR}, #{merprincipal,jdbcType=VARCHAR}, #{merappellation,jdbcType=VARCHAR}, 
       #{merduty,jdbcType=VARCHAR}, #{merphone,jdbcType=VARCHAR}, #{merlevel,jdbcType=INTEGER}, 
@@ -185,7 +197,7 @@
         #{merrecommend,jdbcType=BIT},
       </if>
       <if test="isindex != null" >
-        #{isindex,jdbcType=TINYINT},
+        #{isindex,jdbcType=BIT},
       </if>
       <if test="merimage != null" >
         #{merimage,jdbcType=VARCHAR},
@@ -249,4 +261,14 @@
       </if>
     </trim>
   </insert>
+
+
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from MerchantDetail
+    where merID = #{merid,jdbcType=INTEGER}
+  </select>
 </mapper>

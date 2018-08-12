@@ -2,10 +2,7 @@ package com.scau.hyskjf.controller;
 
 //该类为审核模块控制类，主要负责商家入盟申请审核和商家展示信息审核
 
-import com.scau.hyskjf.pojo.Application;
-import com.scau.hyskjf.pojo.Merchantaccount;
-import com.scau.hyskjf.pojo.Merchantinfo;
-import com.scau.hyskjf.pojo.Merchantinfomodified;
+import com.scau.hyskjf.pojo.*;
 import com.scau.hyskjf.service.ExamineService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
@@ -67,27 +64,33 @@ public class ExamineController {
     //查看所有需要审批的商家修改信息
     @RequestMapping("/modified/list")
     public ResponseJSON findAllMerchants(){
-        List<Merchantinfomodified> merchantinfomodifieds = examineService.findAllMerchantModified();
-        return null;
+        List<MerchantinfomodifiedWithBLOBs> merchantinfomodifieds = examineService.findAllMerchantModified("未处理");
+        return new ResponseJSON(ResponseCode.SUCCESS,merchantinfomodifieds);
     }
 
     //查看单个需要审批的商家修改信息
     @RequestMapping("/modified/{id}")
-    public ResponseJSON findMerchantById(){
+    public ResponseJSON findMerchantById(@PathVariable int id,
+    @RequestParam(value = "operator",required=true) Integer operator){
 
-        return null;
+        MerchantinfomodifiedWithBLOBs merchantinfomodified = examineService.findMerchantModified(id);
+        return new ResponseJSON(ResponseCode.SUCCESS,merchantinfomodified);
     }
 
     //商家修改信息通过审核，更新
     @RequestMapping("/modified/{id}/agree")
-    public ResponseJSON merchantAgree(){
-        return null;
+    public ResponseJSON merchantAgree(@PathVariable int id,
+    @RequestParam(value = "operator",required=true) Integer operator){
+        MerchantinfoWithBLOBs merchantinfoWithBLOBs = examineService.modifiedAgree(id,operator);
+        return new ResponseJSON(ResponseCode.SUCCESS,merchantinfoWithBLOBs);
     }
 
     //不通过，发送站内消息给商家
     @RequestMapping("/modified/{id}/disagree")
-    public ResponseJSON merchantDisagree(){
-        return null;
+    public ResponseJSON merchantDisagree(@PathVariable int id,
+    @RequestParam(value = "operator",required=true) Integer operator){
+        examineService.modifiedDisagree(id,operator);
+        return new ResponseJSON(ResponseCode.SUCCESS,null);
     }
 
 }
