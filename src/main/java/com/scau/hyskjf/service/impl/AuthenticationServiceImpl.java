@@ -5,7 +5,6 @@ import com.scau.hyskjf.dao.MemberaccountMapper;
 import com.scau.hyskjf.dao.MerchantaccountMapper;
 import com.scau.hyskjf.pojo.Admin;
 import com.scau.hyskjf.pojo.Memberaccount;
-import com.scau.hyskjf.pojo.Merchant;
 import com.scau.hyskjf.pojo.Merchantaccount;
 import com.scau.hyskjf.service.AuthenticationService;
 import com.scau.hyskjf.shiro.UsernamePasswordRoleToken;
