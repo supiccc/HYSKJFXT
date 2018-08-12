@@ -11,6 +11,7 @@ import com.aliyuncs.profile.IClientProfile;
 import com.scau.hyskjf.dao.AdminMapper;
 import com.scau.hyskjf.util.SMS.AuditSMS;
 import com.scau.hyskjf.util.SMS.IndustrySMS;
+import com.scau.hyskjf.util.SMS.PassSMS;
 import com.scau.hyskjf.util.SMS.common.VerficationCode;
 import com.scau.hyskjf.util.SMS.sendSMS;
 import com.scau.hyskjf.util.json.ResponseCode;
@@ -75,9 +76,13 @@ public class DemoController {
     }
     @RequestMapping(value = "/sendAuditPassSMS")
     public String sendAuditSMSPass() {
-        String result = AuditSMS.pass("13602800453", "supiccc", "Nike旗舰店",
-                "woaini");
-        return result;
+        try {
+            String result = PassSMS.pass("13602800453", "supiccc", "Nike旗舰店",
+                    "woaini");
+            return result;
+        } catch (Exception e) {
+            return e.toString();
+        }
     }
 
 }
