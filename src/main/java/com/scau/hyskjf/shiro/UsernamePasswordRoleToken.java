@@ -1,6 +1,7 @@
 package com.scau.hyskjf.shiro;
 
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.crypto.hash.Md5Hash;
 
 /**
  * Created by supiccc on 2018-08-10 11:45
@@ -23,5 +24,12 @@ public class UsernamePasswordRoleToken extends UsernamePasswordToken {
 
     public String getRole() {
         return role;
+    }
+
+    @Override
+    public char[] getPassword() {
+        // 将取得的密码加密
+        this.setPassword(new Md5Hash(super.getPassword(), super.getUsername(), 3).toString().toCharArray());
+        return super.getPassword();
     }
 }

@@ -42,7 +42,7 @@ public class DemoController {
     @RequestMapping(value = "/adminCreate")
     public ResponseJSON hello() {
         try {
-            System.err.println(new Md5Hash("password", "13602800453", 3));
+            System.err.println(new Md5Hash("password", "13572878765", 3));
         } catch (Exception e) {
             return new ResponseJSON(ResponseCode.WARN);
         }
