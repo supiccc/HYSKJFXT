@@ -19,7 +19,7 @@ public class Merchantdetail {
 
     private Boolean merrecommend;
 
-    private Byte isindex;
+    private Boolean isindex;
 
     private String merimage;
 
@@ -123,11 +123,11 @@ public class Merchantdetail {
         this.merrecommend = merrecommend;
     }
 
-    public Byte getIsindex() {
+    public Boolean getIsindex() {
         return isindex;
     }
 
-    public void setIsindex(Byte isindex) {
+    public void setIsindex(Boolean isindex) {
         this.isindex = isindex;
     }
 

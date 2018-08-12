@@ -2,7 +2,9 @@ package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Merchantaccount;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
+
 
 @Repository
 public interface MerchantaccountMapper {
@@ -23,4 +25,6 @@ public interface MerchantaccountMapper {
     int updateByPrimaryKey(Merchantaccount record);
 
     Merchantaccount selectByMacAcc(String macAcc);
+
+    int forbidBymerId(Merchantaccount merchantaccount);
 }
