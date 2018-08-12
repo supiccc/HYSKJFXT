@@ -1,8 +1,6 @@
 package com.scau.hyskjf.service;
 
-import com.scau.hyskjf.pojo.Credithistory;
 import com.scau.hyskjf.pojo.Credithistoryview;
-import com.scau.hyskjf.pojo.Memberaccount;
 
 import java.util.List;
 

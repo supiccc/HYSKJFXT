@@ -1,21 +1,18 @@
 package com.scau.hyskjf.controller;
 
 import com.scau.hyskjf.dao.MemberaccountMapper;
-import com.scau.hyskjf.pojo.Credithistory;
 import com.scau.hyskjf.pojo.Credithistoryview;
 import com.scau.hyskjf.pojo.Memberaccount;
 import com.scau.hyskjf.service.MemberCenterService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
 import com.scau.hyskjf.util.sms.IndustrySMS;
-import com.scau.hyskjf.util.sms.common.VerficationCode;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;

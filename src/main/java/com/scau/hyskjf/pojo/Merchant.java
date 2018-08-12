@@ -19,7 +19,7 @@ public class Merchant {
 
     private Boolean merrecommend;
 
-    private Byte isindex;
+    private Boolean isindex;
 
     public Integer getMerid() {
         return merid;
@@ -93,11 +93,11 @@ public class Merchant {
         this.merrecommend = merrecommend;
     }
 
-    public Byte getIsindex() {
+    public Boolean getIsindex() {
         return isindex;
     }
 
-    public void setIsindex(Byte isindex) {
+    public void setIsindex(Boolean isindex) {
         this.isindex = isindex;
     }
 }
