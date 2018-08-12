@@ -10,7 +10,7 @@
   <sql id="Base_Column_List" >
     AdminID, AdminName, AdminAcc, AdminPwd
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultType="Admin" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from Admin

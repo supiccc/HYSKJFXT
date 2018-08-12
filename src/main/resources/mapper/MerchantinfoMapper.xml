@@ -305,4 +305,12 @@
       merArea = #{merarea,jdbcType=VARCHAR}
     where merID = #{merid,jdbcType=INTEGER}
   </update>
+
+
+  <select id="findById" resultType="Merchantinfo" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from MerchantInfo
+    where merId = #{id}
+  </select>
 </mapper>

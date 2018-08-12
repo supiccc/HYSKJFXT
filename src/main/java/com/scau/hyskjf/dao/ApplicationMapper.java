@@ -1,7 +1,11 @@
 package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Application;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
 public interface ApplicationMapper {
     int deleteByPrimaryKey(Integer acaid);
 
@@ -14,4 +18,6 @@ public interface ApplicationMapper {
     int updateByPrimaryKeySelective(Application record);
 
     int updateByPrimaryKey(Application record);
+
+    List<Application> findAllApplications();
 }

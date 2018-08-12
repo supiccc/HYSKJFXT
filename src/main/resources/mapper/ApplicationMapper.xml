@@ -103,4 +103,10 @@
       acaaMerchant = #{acaamerchant,jdbcType=INTEGER}
     where acaID = #{acaid,jdbcType=INTEGER}
   </update>
+
+  <select id = "findAllApplications" resultMap="BaseResultMap" >
+    select
+  <include refid="Base_Column_List" />
+    from Application where acaStat = "未处理";
+  </select>
 </mapper>
