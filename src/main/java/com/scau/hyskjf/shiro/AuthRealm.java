@@ -1,11 +1,15 @@
 package com.scau.hyskjf.shiro;
 
+import com.scau.hyskjf.pojo.Admin;
 import com.scau.hyskjf.pojo.Memberaccount;
+import com.scau.hyskjf.pojo.Merchantaccount;
+import com.scau.hyskjf.service.AuthenticationService;
 import com.scau.hyskjf.service.MemberCenterService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -13,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class AuthRealm extends AuthorizingRealm {
     @Autowired
-    MemberCenterService memberCenterService;
+    AuthenticationService authenticationService;
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
@@ -26,9 +30,20 @@ public class AuthRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordRoleToken utoken = (UsernamePasswordRoleToken)authenticationToken; // 获取用户输入的token
         String username = utoken.getUsername();
-        String password = utoken.getPassword().toString();
-        Memberaccount member = memberCenterService.findBymaiid(username);
-        if (member == null) return null;
-        return new SimpleAuthenticationInfo(member, member.getMapwd(), this.getClass().getName());
+        String role = utoken.getRole().toString();
+        if (role.equals("admin")) {
+            Admin user = authenticationService.findAdminByacc(username);
+            if (user == null) return null;
+            return new SimpleAuthenticationInfo(user, user.getAdminpwd(), this.getClass().getName());
+        } else if (role.equals("member")) {
+            Memberaccount user = authenticationService.findBymaiid(username);
+            if (user == null) return null;
+            return new SimpleAuthenticationInfo(user, user.getMapwd(), this.getClass().getName());
+        } else if (role.equals("merchant")) {
+            Merchantaccount user = authenticationService.findMerchantByacc(username);
+            if (user == null) return null;
+            return new SimpleAuthenticationInfo(user, user.getMacpasswd(), this.getClass().getName());
+        }
+        return null;
     }
 }

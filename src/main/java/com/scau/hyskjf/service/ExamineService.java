@@ -1,6 +1,7 @@
 package com.scau.hyskjf.service;
 
 import com.scau.hyskjf.pojo.Application;
+import com.scau.hyskjf.pojo.Merchantaccount;
 import com.scau.hyskjf.pojo.Merchantinfo;
 import com.scau.hyskjf.pojo.Merchantinfomodified;
 
@@ -9,14 +10,17 @@ import java.util.List;
 public interface ExamineService {
 
     //查询所有申请入盟商家
-    public List<Application> findAllApplications();
+    public List<Application> findAllApplications(String state);
 
     //查询单个申请入盟商家
     public Merchantinfo findApplicationById(int id);
 
+    //同意入盟申请
+    public Merchantaccount applicationAgree(int id, int operator);
 
-    //入盟申请状态修改，并发送消息
-    public boolean updateMerchantState(int id,boolean state);
+    //不同意入盟申请
+    public void applicationDisagree(int id);
+
 
 
     //查看所有未处理的商家资料变更历史

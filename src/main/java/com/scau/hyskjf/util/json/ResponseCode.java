@@ -6,9 +6,10 @@ package com.scau.hyskjf.util.json;
 public enum ResponseCode {
 
     SUCCESS(0, "请求成功"),
-    WARN(-1, "网络异常，请稍后重试"),
+    WARN(-1, "请求失败"),
     UNKNOWNACCOUNT(-1, "账号不存在"),
     INCORRECTPWD(-1, "密码错误"),
+    HASLOGIN(-1, "用户已登录"),
     NOTFOUND(-1,"没有查到");
 
     private int code;
