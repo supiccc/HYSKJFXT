@@ -1,4 +1,4 @@
-package com.scau.hyskjf.util.SMS.common;
+package com.scau.hyskjf.util.sms.common;
 
 /**
  * 系统常量
