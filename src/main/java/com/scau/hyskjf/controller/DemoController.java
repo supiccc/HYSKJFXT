@@ -1,9 +1,11 @@
 package com.scau.hyskjf.controller;
 
 import com.scau.hyskjf.dao.AdminMapper;
-import com.scau.hyskjf.util.SMS.AuditSMS;
-import com.scau.hyskjf.util.SMS.IndustrySMS;
-import com.scau.hyskjf.util.SMS.PassSMS;
+
+import com.scau.hyskjf.util.sms.AuditSMS;
+import com.scau.hyskjf.util.sms.IndustrySMS;
+import com.scau.hyskjf.util.sms.PassSMS;
+
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
 import org.apache.shiro.SecurityUtils;
@@ -37,7 +39,7 @@ public class DemoController {
     @RequestMapping(value = "/adminCreate")
     public ResponseJSON hello() {
         try {
-            System.err.println(new Md5Hash("password", "13572878765", 3));
+            System.err.println(new Md5Hash("password", "13602800453", 3));
         } catch (Exception e) {
             return new ResponseJSON(ResponseCode.WARN);
         }

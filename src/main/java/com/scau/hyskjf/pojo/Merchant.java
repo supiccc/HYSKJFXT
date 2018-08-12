@@ -19,6 +19,8 @@ public class Merchant {
 
     private Boolean merrecommend;
 
+    private Boolean isindex;
+
     public Integer getMerid() {
         return merid;
     }
@@ -89,5 +91,13 @@ public class Merchant {
 
     public void setMerrecommend(Boolean merrecommend) {
         this.merrecommend = merrecommend;
+    }
+
+    public Boolean getIsindex() {
+        return isindex;
+    }
+
+    public void setIsindex(Boolean isindex) {
+        this.isindex = isindex;
     }
 }

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.CredithistoryviewMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Credithistoryview" >
+    <result column="merID" property="merid" jdbcType="INTEGER" />
+    <result column="mcPKID" property="mcpkid" jdbcType="INTEGER" />
+    <result column="chID" property="chid" jdbcType="INTEGER" />
+    <result column="chCredit" property="chcredit" jdbcType="REAL" />
+    <result column="chRemain" property="chremain" jdbcType="REAL" />
+    <result column="memID" property="memid" jdbcType="INTEGER" />
+    <result column="merType" property="mertype" jdbcType="VARCHAR" />
+    <result column="merName" property="mername" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.Credithistoryview" extends="BaseResultMap" >
+    <result column="chType" property="chtype" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Blob_Column_List" >
+    chType
+  </sql>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Credithistoryview" >
+    insert into CreditHistoryView (merID, mcPKID, chID, 
+      chCredit, chRemain, memID, 
+      merType, merName, chType
+      )
+    values (#{merid,jdbcType=INTEGER}, #{mcpkid,jdbcType=INTEGER}, #{chid,jdbcType=INTEGER}, 
+      #{chcredit,jdbcType=REAL}, #{chremain,jdbcType=REAL}, #{memid,jdbcType=INTEGER}, 
+      #{mertype,jdbcType=VARCHAR}, #{mername,jdbcType=VARCHAR}, #{chtype,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Credithistoryview" >
+    insert into CreditHistoryView
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="merid != null" >
+        merID,
+      </if>
+      <if test="mcpkid != null" >
+        mcPKID,
+      </if>
+      <if test="chid != null" >
+        chID,
+      </if>
+      <if test="chcredit != null" >
+        chCredit,
+      </if>
+      <if test="chremain != null" >
+        chRemain,
+      </if>
+      <if test="memid != null" >
+        memID,
+      </if>
+      <if test="mertype != null" >
+        merType,
+      </if>
+      <if test="mername != null" >
+        merName,
+      </if>
+      <if test="chtype != null" >
+        chType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="merid != null" >
+        #{merid,jdbcType=INTEGER},
+      </if>
+      <if test="mcpkid != null" >
+        #{mcpkid,jdbcType=INTEGER},
+      </if>
+      <if test="chid != null" >
+        #{chid,jdbcType=INTEGER},
+      </if>
+      <if test="chcredit != null" >
+        #{chcredit,jdbcType=REAL},
+      </if>
+      <if test="chremain != null" >
+        #{chremain,jdbcType=REAL},
+      </if>
+      <if test="memid != null" >
+        #{memid,jdbcType=INTEGER},
+      </if>
+      <if test="mertype != null" >
+        #{mertype,jdbcType=VARCHAR},
+      </if>
+      <if test="mername != null" >
+        #{mername,jdbcType=VARCHAR},
+      </if>
+      <if test="chtype != null" >
+        #{chtype,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select *
+    from CreditHistoryView
+    where memID=#{memID}
+  </select>
+</mapper>

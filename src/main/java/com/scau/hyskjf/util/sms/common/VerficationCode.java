@@ -1,4 +1,4 @@
-package com.scau.hyskjf.util.SMS.common;
+package com.scau.hyskjf.util.sms.common;
 
 /**
  * Created by supiccc on 2018-08-12 12:17

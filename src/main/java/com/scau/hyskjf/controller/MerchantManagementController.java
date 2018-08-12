@@ -1,6 +1,7 @@
 package com.scau.hyskjf.controller;
 
 import com.scau.hyskjf.pojo.Merchantaccount;
+import com.scau.hyskjf.pojo.Merchantdetail;
 import com.scau.hyskjf.pojo.MerchantinfoWithBLOBs;
 import com.scau.hyskjf.service.MerchantManagementService;
 import com.scau.hyskjf.util.json.ResponseCode;
@@ -66,9 +67,32 @@ public class MerchantManagementController {
         return null;
     }
 
-    //积分划拨比列设置
 
+    //设置为推荐商家
+    @RequestMapping("/setRecommend/{id}")
+    public ResponseJSON setRecommend(@PathVariable int id){
 
+        Merchantdetail merchantdetail = merchantManagementService.setRecommend(id);
+        return new ResponseJSON(ResponseCode.SUCCESS,merchantdetail);
+    }
+    //取消推荐商家设置
+    @RequestMapping("/setUnrecommend/{id}")
+    public ResponseJSON setUnrecommend(@PathVariable int id){
+        Merchantdetail merchantdetail = merchantManagementService.setUnrecommend(id);
+        return new ResponseJSON(ResponseCode.SUCCESS,merchantdetail);
+    }
 
-    //
+    //设置为首页显示
+    @RequestMapping("/setIndex/{id}")
+    public ResponseJSON setIndex(@PathVariable int id){
+        Merchantdetail merchantdetail = merchantManagementService.setIndex(id);
+        return new ResponseJSON(ResponseCode.SUCCESS,merchantdetail);
+    }
+    //设置不为首页显示
+    @RequestMapping("/setNotIndex/{id}")
+    public ResponseJSON setNotIndex(@PathVariable int id){
+        Merchantdetail merchantdetail = merchantManagementService.setNotIndex(id);
+        return new ResponseJSON(ResponseCode.SUCCESS,merchantdetail);
+    }
+
 }
