@@ -5,6 +5,7 @@ import com.scau.hyskjf.dao.MemberaccountMapper;
 import com.scau.hyskjf.dao.MerchantaccountMapper;
 import com.scau.hyskjf.pojo.Admin;
 import com.scau.hyskjf.pojo.Memberaccount;
+import com.scau.hyskjf.pojo.Merchant;
 import com.scau.hyskjf.pojo.Merchantaccount;
 import com.scau.hyskjf.service.AuthenticationService;
 import com.scau.hyskjf.shiro.UsernamePasswordRoleToken;
@@ -53,6 +54,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             UsernamePasswordRoleToken token = new UsernamePasswordRoleToken(username, pwd.toCharArray(), role);
             subject.login(token);
             Object m = (Object) subject.getPrincipal();
+            if (role.equals("admin")) {
+                ((Admin) m).setAdminpwd(null);
+            } else if (role.equals("member")) {
+                ((Memberaccount) m).setMapwd(null);
+                ((Memberaccount) m).setMacumpwd(null);
+            } else if (role.equals("merchant")) {
+                ((Merchantaccount) m).setMacpasswd(null);
+            }
             SecurityUtils.getSubject().getSession().setAttribute("user", m);
             SecurityUtils.getSubject().getSession().setAttribute("role", role);
             return new ResponseJSON(ResponseCode.SUCCESS, m);

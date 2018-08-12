@@ -30,4 +30,10 @@ public class AuthenticationController {
         ResponseJSON result = authenticationService.login(username, pwd, role);
         return result;
     }
+
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    public ResponseJSON checkout() {
+        Object o = SecurityUtils.getSubject().getSession().getAttribute("user");
+        return new ResponseJSON(ResponseCode.SUCCESS, o);
+    }
 }
