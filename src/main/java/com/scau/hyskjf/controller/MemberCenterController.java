@@ -21,6 +21,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by supiccc on 2018-08-08 16:35
@@ -86,19 +87,22 @@ public class MemberCenterController {
     // 查询用户信息
     @RequestMapping(value = "/showMember", method = RequestMethod.GET)
     public ResponseJSON showMember() {
-        Member m = memberCenterService.showMember();
+        Map m = memberCenterService.showMember();
         if (m == null) return new ResponseJSON(ResponseCode.WARN);
         return new ResponseJSON(ResponseCode.SUCCESS, m);
     }
 
     // 修改用户信息
     @RequestMapping(value = "/updateMember", method = RequestMethod.POST)
-    public ResponseJSON updateMember(Member member, String birth, HttpSession session) throws ParseException {
+    public ResponseJSON updateMember(Member member, String birth, HttpSession session) {
         member.setMemid(((Memberaccount)session.getAttribute("user")).getMemid());
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = format.parse(birth);
-        System.out.println(date);
-        member.setMembirth(date);
-        return new ResponseJSON(ResponseCode.SUCCESS, member);
+        try {
+            Map result = memberCenterService.updateMember(member, birth);
+            return new ResponseJSON(ResponseCode.SUCCESS, result);
+        } catch (ParseException e) {
+            return new ResponseJSON(ResponseCode.ILLEGALCODE, e.toString());
+        } catch (Exception e) {
+            return new ResponseJSON(ResponseCode.WARN);
+        }
     }
 }

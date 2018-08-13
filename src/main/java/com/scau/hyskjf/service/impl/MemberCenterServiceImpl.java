@@ -12,7 +12,13 @@ import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by supiccc on 2018-08-09 08:53
@@ -62,18 +68,41 @@ public class MemberCenterServiceImpl implements MemberCenterService {
         }
     }
 
+    // 显示会员信息
     @Override
-    public Member showMember() {
+    public Map showMember() {
         Memberaccount tmp = (Memberaccount) SecurityUtils.getSubject().getSession().getAttribute("user");
         Member m = memberMapper.selectByPrimaryKey(tmp.getMemid());
         if (m == null) return null;
-        return m;
+        Map result = new HashMap();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String date = formatter.format(m.getMembirth());
+        m.setMembirth(null);
+        result.put("Object", m);
+        result.put("birth", date);
+        return result;
     }
 
+    // 显示积分变动历史
     @Override
     public List<Credithistoryview> showCreditHistory() {
         Memberaccount m = (Memberaccount) SecurityUtils.getSubject().getSession().getAttribute("user");
         if (m == null) return null;
         return credithistoryviewMapper.selectAll(m.getMemid());
+    }
+
+
+    // 更新会员信息
+    @Override
+    public Map<String, Object> updateMember(Member member, String birth) throws ParseException {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = format.parse(birth);
+        member.setMembirth(date);
+        memberMapper.updateByPrimaryKeySelective(member);
+        member.setMembirth(null);
+        Map<String, Object> result = new HashMap<>();
+        result.put("Object", member);
+        result.put("Birth", birth);
+        return result;
     }
 }
