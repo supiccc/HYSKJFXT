@@ -1,7 +1,9 @@
 package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Advertise;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface AdvertiseMapper {
     int deleteByPrimaryKey(Integer adverid);
 
