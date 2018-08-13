@@ -11,10 +11,11 @@
     <result column="merDicPresent" property="merdicpresent" jdbcType="REAL" />
     <result column="merAppStat" property="merappstat" jdbcType="BIT" />
     <result column="merRecommend" property="merrecommend" jdbcType="BIT" />
+    <result column="isIndex" property="isindex" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
     merID, merSubID, merTopID, merType, merName, merCumPresent, merDicPresent, merAppStat, 
-    merRecommend
+    merRecommend, isIndex
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -29,12 +30,12 @@
   <insert id="insert" parameterType="com.scau.hyskjf.pojo.Merchant" >
     insert into Merchant (merID, merSubID, merTopID, 
       merType, merName, merCumPresent, 
-      merDicPresent, merAppStat, merRecommend
-      )
+      merDicPresent, merAppStat, merRecommend, 
+      isIndex)
     values (#{merid,jdbcType=INTEGER}, #{mersubid,jdbcType=INTEGER}, #{mertopid,jdbcType=INTEGER}, 
       #{mertype,jdbcType=VARCHAR}, #{mername,jdbcType=VARCHAR}, #{mercumpresent,jdbcType=REAL}, 
-      #{merdicpresent,jdbcType=REAL}, #{merappstat,jdbcType=BIT}, #{merrecommend,jdbcType=BIT}
-      )
+      #{merdicpresent,jdbcType=REAL}, #{merappstat,jdbcType=BIT}, #{merrecommend,jdbcType=BIT}, 
+      #{isindex,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Merchant" >
     insert into Merchant
@@ -66,6 +67,9 @@
       <if test="merrecommend != null" >
         merRecommend,
       </if>
+      <if test="isindex != null" >
+        isIndex,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="merid != null" >
@@ -94,6 +98,9 @@
       </if>
       <if test="merrecommend != null" >
         #{merrecommend,jdbcType=BIT},
+      </if>
+      <if test="isindex != null" >
+        #{isindex,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -124,6 +131,9 @@
       <if test="merrecommend != null" >
         merRecommend = #{merrecommend,jdbcType=BIT},
       </if>
+      <if test="isindex != null" >
+        isIndex = #{isindex,jdbcType=BIT},
+      </if>
     </set>
     where merID = #{merid,jdbcType=INTEGER}
   </update>
@@ -136,7 +146,8 @@
       merCumPresent = #{mercumpresent,jdbcType=REAL},
       merDicPresent = #{merdicpresent,jdbcType=REAL},
       merAppStat = #{merappstat,jdbcType=BIT},
-      merRecommend = #{merrecommend,jdbcType=BIT}
+      merRecommend = #{merrecommend,jdbcType=BIT},
+      isIndex = #{isindex,jdbcType=BIT}
     where merID = #{merid,jdbcType=INTEGER}
   </update>
 </mapper>

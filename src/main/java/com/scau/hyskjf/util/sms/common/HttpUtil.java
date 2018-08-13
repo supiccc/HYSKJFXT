@@ -1,4 +1,4 @@
-package com.scau.hyskjf.util.SMS.common;
+package com.scau.hyskjf.util.sms.common;
 
 import java.io.BufferedReader;
 import java.io.IOException;

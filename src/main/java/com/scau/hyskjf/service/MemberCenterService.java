@@ -1,11 +1,16 @@
 package com.scau.hyskjf.service;
 
-import com.scau.hyskjf.pojo.Memberaccount;
+import com.scau.hyskjf.pojo.Credithistoryview;
+
+import java.util.List;
 
 /**
  * Created by supiccc on 2018-08-08 16:03
  */
 public interface MemberCenterService {
-    Memberaccount findBymaiid(String id); // 通过账号查找
+    String forgetPwd(String newPwd, String verficationCode); // 修改登录密码
 
+    String forgetDealPwd(String oldPwd, String newPwd); // 修改交易密码
+
+    List<Credithistoryview> showCreditHistory();
 }
