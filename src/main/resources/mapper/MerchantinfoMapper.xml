@@ -313,10 +313,6 @@
     from MerchantInfo
     where merId = #{id}
   </select>
-<<<<<<< HEAD
-  <select id="findByMerName" resultType="Merchantinfo" parameterType="java.lang.String">
-=======
-
   <update id="updateByModified" parameterType="MerchantinfomodifiedWithBLOBs">
     update MerchantInfo
     set merImage = #{merimage,jdbcType=VARCHAR},
@@ -343,16 +339,12 @@
   </update>
 
   <select id="findAllMerchantinfo" resultMap="ResultMapWithBLOBs">
->>>>>>> d76e751531137599dd03a5f1e0c6be40ff1e10cf
     select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-<<<<<<< HEAD
     from Merchant a left join MerchantInfo b on a.merID=b.merID
     where a.merName= #{mName}
-=======
     from MerchantInfo
->>>>>>> d76e751531137599dd03a5f1e0c6be40ff1e10cf
   </select>
 </mapper>
