@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.MerchantdetailMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Merchantdetail" >
+    <result column="merID" property="merid" jdbcType="INTEGER" />
+    <result column="merSubID" property="mersubid" jdbcType="INTEGER" />
+    <result column="merTopID" property="mertopid" jdbcType="INTEGER" />
+    <result column="merType" property="mertype" jdbcType="VARCHAR" />
+    <result column="merName" property="mername" jdbcType="VARCHAR" />
+    <result column="merCumPresent" property="mercumpresent" jdbcType="REAL" />
+    <result column="merDicPresent" property="merdicpresent" jdbcType="REAL" />
+    <result column="merAppStat" property="merappstat" jdbcType="BIT" />
+    <result column="merRecommend" property="merrecommend" jdbcType="BIT" />
+    <result column="isIndex" property="isindex" jdbcType="BIT" />
+    <result column="merImage" property="merimage" jdbcType="VARCHAR" />
+    <result column="merMainImage" property="mermainimage" jdbcType="BIT" />
+    <result column="merTelphone" property="mertelphone" jdbcType="VARCHAR" />
+    <result column="merFax" property="merfax" jdbcType="VARCHAR" />
+    <result column="merURL" property="merurl" jdbcType="VARCHAR" />
+    <result column="merEmail" property="meremail" jdbcType="VARCHAR" />
+    <result column="merPrincipal" property="merprincipal" jdbcType="VARCHAR" />
+    <result column="merAppellation" property="merappellation" jdbcType="VARCHAR" />
+    <result column="merDuty" property="merduty" jdbcType="VARCHAR" />
+    <result column="merPhone" property="merphone" jdbcType="VARCHAR" />
+    <result column="merLevel" property="merlevel" jdbcType="INTEGER" />
+    <result column="merPostNum" property="merpostnum" jdbcType="VARCHAR" />
+    <result column="merProvince" property="merprovince" jdbcType="VARCHAR" />
+    <result column="merCity" property="mercity" jdbcType="VARCHAR" />
+    <result column="merArea" property="merarea" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.MerchantdetailWithBLOBs" extends="BaseResultMap" >
+    <result column="merIntroduce" property="merintroduce" jdbcType="LONGVARCHAR" />
+    <result column="merAdress" property="meradress" jdbcType="LONGVARCHAR" />
+    <result column="merLandmark" property="merlandmark" jdbcType="LONGVARCHAR" />
+    <result column="merDiscount" property="merdiscount" jdbcType="LONGVARCHAR" />
+    <result column="merDiscountEvent" property="merdiscountevent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Blob_Column_List" >
+    merIntroduce, merAdress, merLandmark, merDiscount, merDiscountEvent
+  </sql>
+
+  <sql id="Base_Column_List">
+      merID, merSubID, merTopID,
+      merType, merName, merCumPresent,
+      merDicPresent, merAppStat, merRecommend,
+      isIndex, merImage, merMainImage,
+      merTelphone, merFax, merURL,
+      merEmail, merPrincipal, merAppellation,
+      merDuty, merPhone, merLevel,
+      merPostNum, merProvince, merCity,
+      merArea
+  </sql>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.MerchantdetailWithBLOBs" >
+    insert into MerchantDetail (merID, merSubID, merTopID, 
+      merType, merName, merCumPresent, 
+      merDicPresent, merAppStat, merRecommend, 
+      isIndex, merImage, merMainImage, 
+      merTelphone, merFax, merURL, 
+      merEmail, merPrincipal, merAppellation, 
+      merDuty, merPhone, merLevel, 
+      merPostNum, merProvince, merCity, 
+      merArea, merIntroduce, merAdress, 
+      merLandmark, merDiscount, merDiscountEvent
+      )
+    values (#{merid,jdbcType=INTEGER}, #{mersubid,jdbcType=INTEGER}, #{mertopid,jdbcType=INTEGER}, 
+      #{mertype,jdbcType=VARCHAR}, #{mername,jdbcType=VARCHAR}, #{mercumpresent,jdbcType=REAL}, 
+      #{merdicpresent,jdbcType=REAL}, #{merappstat,jdbcType=BIT}, #{merrecommend,jdbcType=BIT}, 
+      #{isindex,jdbcType=BIT}, #{merimage,jdbcType=VARCHAR}, #{mermainimage,jdbcType=BIT},
+      #{mertelphone,jdbcType=VARCHAR}, #{merfax,jdbcType=VARCHAR}, #{merurl,jdbcType=VARCHAR}, 
+      #{meremail,jdbcType=VARCHAR}, #{merprincipal,jdbcType=VARCHAR}, #{merappellation,jdbcType=VARCHAR}, 
+      #{merduty,jdbcType=VARCHAR}, #{merphone,jdbcType=VARCHAR}, #{merlevel,jdbcType=INTEGER}, 
+      #{merpostnum,jdbcType=VARCHAR}, #{merprovince,jdbcType=VARCHAR}, #{mercity,jdbcType=VARCHAR}, 
+      #{merarea,jdbcType=VARCHAR}, #{merintroduce,jdbcType=LONGVARCHAR}, #{meradress,jdbcType=LONGVARCHAR}, 
+      #{merlandmark,jdbcType=LONGVARCHAR}, #{merdiscount,jdbcType=LONGVARCHAR}, #{merdiscountevent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.MerchantdetailWithBLOBs" >
+    insert into MerchantDetail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="merid != null" >
+        merID,
+      </if>
+      <if test="mersubid != null" >
+        merSubID,
+      </if>
+      <if test="mertopid != null" >
+        merTopID,
+      </if>
+      <if test="mertype != null" >
+        merType,
+      </if>
+      <if test="mername != null" >
+        merName,
+      </if>
+      <if test="mercumpresent != null" >
+        merCumPresent,
+      </if>
+      <if test="merdicpresent != null" >
+        merDicPresent,
+      </if>
+      <if test="merappstat != null" >
+        merAppStat,
+      </if>
+      <if test="merrecommend != null" >
+        merRecommend,
+      </if>
+      <if test="isindex != null" >
+        isIndex,
+      </if>
+      <if test="merimage != null" >
+        merImage,
+      </if>
+      <if test="mermainimage != null" >
+        merMainImage,
+      </if>
+      <if test="mertelphone != null" >
+        merTelphone,
+      </if>
+      <if test="merfax != null" >
+        merFax,
+      </if>
+      <if test="merurl != null" >
+        merURL,
+      </if>
+      <if test="meremail != null" >
+        merEmail,
+      </if>
+      <if test="merprincipal != null" >
+        merPrincipal,
+      </if>
+      <if test="merappellation != null" >
+        merAppellation,
+      </if>
+      <if test="merduty != null" >
+        merDuty,
+      </if>
+      <if test="merphone != null" >
+        merPhone,
+      </if>
+      <if test="merlevel != null" >
+        merLevel,
+      </if>
+      <if test="merpostnum != null" >
+        merPostNum,
+      </if>
+      <if test="merprovince != null" >
+        merProvince,
+      </if>
+      <if test="mercity != null" >
+        merCity,
+      </if>
+      <if test="merarea != null" >
+        merArea,
+      </if>
+      <if test="merintroduce != null" >
+        merIntroduce,
+      </if>
+      <if test="meradress != null" >
+        merAdress,
+      </if>
+      <if test="merlandmark != null" >
+        merLandmark,
+      </if>
+      <if test="merdiscount != null" >
+        merDiscount,
+      </if>
+      <if test="merdiscountevent != null" >
+        merDiscountEvent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="merid != null" >
+        #{merid,jdbcType=INTEGER},
+      </if>
+      <if test="mersubid != null" >
+        #{mersubid,jdbcType=INTEGER},
+      </if>
+      <if test="mertopid != null" >
+        #{mertopid,jdbcType=INTEGER},
+      </if>
+      <if test="mertype != null" >
+        #{mertype,jdbcType=VARCHAR},
+      </if>
+      <if test="mername != null" >
+        #{mername,jdbcType=VARCHAR},
+      </if>
+      <if test="mercumpresent != null" >
+        #{mercumpresent,jdbcType=REAL},
+      </if>
+      <if test="merdicpresent != null" >
+        #{merdicpresent,jdbcType=REAL},
+      </if>
+      <if test="merappstat != null" >
+        #{merappstat,jdbcType=BIT},
+      </if>
+      <if test="merrecommend != null" >
+        #{merrecommend,jdbcType=BIT},
+      </if>
+      <if test="isindex != null" >
+        #{isindex,jdbcType=BIT},
+      </if>
+      <if test="merimage != null" >
+        #{merimage,jdbcType=VARCHAR},
+      </if>
+      <if test="mermainimage != null" >
+        #{mermainimage,jdbcType=BIT},
+      </if>
+      <if test="mertelphone != null" >
+        #{mertelphone,jdbcType=VARCHAR},
+      </if>
+      <if test="merfax != null" >
+        #{merfax,jdbcType=VARCHAR},
+      </if>
+      <if test="merurl != null" >
+        #{merurl,jdbcType=VARCHAR},
+      </if>
+      <if test="meremail != null" >
+        #{meremail,jdbcType=VARCHAR},
+      </if>
+      <if test="merprincipal != null" >
+        #{merprincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="merappellation != null" >
+        #{merappellation,jdbcType=VARCHAR},
+      </if>
+      <if test="merduty != null" >
+        #{merduty,jdbcType=VARCHAR},
+      </if>
+      <if test="merphone != null" >
+        #{merphone,jdbcType=VARCHAR},
+      </if>
+      <if test="merlevel != null" >
+        #{merlevel,jdbcType=INTEGER},
+      </if>
+      <if test="merpostnum != null" >
+        #{merpostnum,jdbcType=VARCHAR},
+      </if>
+      <if test="merprovince != null" >
+        #{merprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="mercity != null" >
+        #{mercity,jdbcType=VARCHAR},
+      </if>
+      <if test="merarea != null" >
+        #{merarea,jdbcType=VARCHAR},
+      </if>
+      <if test="merintroduce != null" >
+        #{merintroduce,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meradress != null" >
+        #{meradress,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="merlandmark != null" >
+        #{merlandmark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="merdiscount != null" >
+        #{merdiscount,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="merdiscountevent != null" >
+        #{merdiscountevent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from MerchantDetail
+    where merID = #{merid,jdbcType=INTEGER}
+  </select>
+</mapper>

@@ -30,6 +30,9 @@ public class ExamineServiceImpl implements ExamineService {
     @Autowired
     private MerchantaccountMapper merchantaccountMapper;
 
+    @Autowired
+    private MessageMapper messageMapper;
+
     @Override
     public List<Application> findAllApplications(String state) {
         //查询所有状态为未处理的申请，并返回
@@ -99,29 +102,70 @@ public class ExamineServiceImpl implements ExamineService {
         merchant.setMerid(id);
         merchant.setMerappstat(false);
         merchantMapper.updateByPrimaryKeySelective(merchant);
+
+        //发送邮件通知
     }
 
 
-    //发送消息给商家
-    public Merchantaccount sendMessage(Merchantaccount merchantaccount){
 
-        return null;
+
+    @Override
+    public List<MerchantinfomodifiedWithBLOBs> findAllMerchantModified(String state) {
+
+
+        List<MerchantinfomodifiedWithBLOBs> merchantinfomodifieds = merchantinfomodifiedMapper.findAllMerchantModified(state);
+        return merchantinfomodifieds;
     }
 
 
     @Override
-    public List<Merchantinfomodified> findAllMerchantModified() {
-
-        return null;
+    public MerchantinfomodifiedWithBLOBs findMerchantModified(int id) {
+        MerchantinfomodifiedWithBLOBs merchantinfomodified = merchantinfomodifiedMapper.selectByPrimaryKey(id);
+        return merchantinfomodified;
     }
 
     @Override
-    public Merchantinfo findMerchantModified(int id) {
-        return null;
+    public MerchantinfoWithBLOBs modifiedAgree(int id,int operator) {
+        //首先修改申请表的状态，然后修改商家资料表对应的商家信息
+        //以历史表的id创建一个实体对象，将其状态设置为"通过"，同时更新数据库
+        MerchantinfomodifiedWithBLOBs merchantinfomodifiedWithBLOBs = new MerchantinfomodifiedWithBLOBs();
+        merchantinfomodifiedWithBLOBs.setModifiedid(id);
+        merchantinfomodifiedWithBLOBs.setExaminestate("通过");
+        merchantinfomodifiedMapper.updateByPrimaryKeySelective(merchantinfomodifiedWithBLOBs);
+        //查找历史表为id的编号对应的数据信息
+        merchantinfomodifiedWithBLOBs = merchantinfomodifiedMapper.selectByPrimaryKey(id);
+        //因为两张表的数据项列名基本相同，所以以修改后的历史表对象为参数，修改商家资料表
+        merchantinfoMapper.updateByModified(merchantinfomodifiedWithBLOBs);
+        //查询修改后的商家资料表，返回
+        MerchantinfoWithBLOBs merchantinfoWithBLOBs = merchantinfoMapper.selectByPrimaryKey(merchantinfomodifiedWithBLOBs.getMerid());
+        return merchantinfoWithBLOBs;
     }
 
     @Override
-    public boolean updateModifiedState(int id, boolean state) {
-        return false;
+    public MerchantinfoWithBLOBs modifiedDisagree(int id,int operator) {
+        //首先修改申请表的状态，然后发送站内消息给商家
+        //首先修改申请表的状态，然后修改商家资料表对应的商家信息
+        //以历史表的id创建一个实体对象，将其状态设置为"不通过"，同时更新数据库
+        MerchantinfomodifiedWithBLOBs merchantinfomodifiedWithBLOBs = new MerchantinfomodifiedWithBLOBs();
+        merchantinfomodifiedWithBLOBs.setModifiedid(id);
+        merchantinfomodifiedWithBLOBs.setExaminestate("不通过");
+        merchantinfomodifiedMapper.updateByPrimaryKeySelective(merchantinfomodifiedWithBLOBs);
+        merchantinfomodifiedWithBLOBs = merchantinfomodifiedMapper.selectByPrimaryKey(id);
+        //发送消息给商家
+        String title = "商家资料申请审核结果";
+        String content = "很抱歉，您提交的审核未通过，请重新修改";
+        int source = operator;
+        int destination = merchantinfomodifiedWithBLOBs.getMerid();
+        int type = 0;
+        Message message = new Message();
+        message.setMestitle(title);
+        message.setMescontent(content);
+        message.setMesdestination(destination);
+        message.setMessource(source);
+        message.setMestype(type);
+        message.setMesread(false);
+        messageMapper.insertSelective(message);
+        return null;
+
     }
 }
