@@ -5,14 +5,13 @@
     <id column="reiID" property="reiid" jdbcType="INTEGER" />
     <result column="memID" property="memid" jdbcType="INTEGER" />
     <result column="reiTime" property="reitime" jdbcType="DATE" />
-    <result column="Mem_mcPKID" property="memMcpkid" jdbcType="INTEGER" />
     <result column="mcPKID" property="mcpkid" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.Reissue" extends="BaseResultMap" >
     <result column="reiReason" property="reireason" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    reiID, memID, reiTime, Mem_mcPKID, mcPKID
+    reiID, memID, reiTime, mcPKID
   </sql>
   <sql id="Blob_Column_List" >
     reiReason
@@ -31,11 +30,9 @@
   </delete>
   <insert id="insert" parameterType="com.scau.hyskjf.pojo.Reissue" >
     insert into Reissue (reiID, memID, reiTime, 
-      Mem_mcPKID, mcPKID, reiReason
-      )
+      mcPKID, reiReason)
     values (#{reiid,jdbcType=INTEGER}, #{memid,jdbcType=INTEGER}, #{reitime,jdbcType=DATE}, 
-      #{memMcpkid,jdbcType=INTEGER}, #{mcpkid,jdbcType=INTEGER}, #{reireason,jdbcType=LONGVARCHAR}
-      )
+      #{mcpkid,jdbcType=INTEGER}, #{reireason,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Reissue" >
     insert into Reissue
@@ -48,9 +45,6 @@
       </if>
       <if test="reitime != null" >
         reiTime,
-      </if>
-      <if test="memMcpkid != null" >
-        Mem_mcPKID,
       </if>
       <if test="mcpkid != null" >
         mcPKID,
@@ -69,9 +63,6 @@
       <if test="reitime != null" >
         #{reitime,jdbcType=DATE},
       </if>
-      <if test="memMcpkid != null" >
-        #{memMcpkid,jdbcType=INTEGER},
-      </if>
       <if test="mcpkid != null" >
         #{mcpkid,jdbcType=INTEGER},
       </if>
@@ -89,9 +80,6 @@
       <if test="reitime != null" >
         reiTime = #{reitime,jdbcType=DATE},
       </if>
-      <if test="memMcpkid != null" >
-        Mem_mcPKID = #{memMcpkid,jdbcType=INTEGER},
-      </if>
       <if test="mcpkid != null" >
         mcPKID = #{mcpkid,jdbcType=INTEGER},
       </if>
@@ -105,7 +93,6 @@
     update Reissue
     set memID = #{memid,jdbcType=INTEGER},
       reiTime = #{reitime,jdbcType=DATE},
-      Mem_mcPKID = #{memMcpkid,jdbcType=INTEGER},
       mcPKID = #{mcpkid,jdbcType=INTEGER},
       reiReason = #{reireason,jdbcType=LONGVARCHAR}
     where reiID = #{reiid,jdbcType=INTEGER}
@@ -114,7 +101,6 @@
     update Reissue
     set memID = #{memid,jdbcType=INTEGER},
       reiTime = #{reitime,jdbcType=DATE},
-      Mem_mcPKID = #{memMcpkid,jdbcType=INTEGER},
       mcPKID = #{mcpkid,jdbcType=INTEGER}
     where reiID = #{reiid,jdbcType=INTEGER}
   </update>
