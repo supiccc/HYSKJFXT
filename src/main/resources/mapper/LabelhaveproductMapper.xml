@@ -28,4 +28,19 @@
       </if>
     </trim>
   </insert>
+  <delete id="deleteByPduID" parameterType="java.lang.Integer" >
+      delete from LabelHaveProduct
+      where pduID = #{pduId,jdbcType=INTEGER}
+  </delete>
+
+  <delete id="deleteByLabelID" parameterType="java.lang.Integer" >
+      delete from LabelHaveProduct
+      where LabelID = #{labelId,jdbcType=INTEGER}
+  </delete>
+
+  <delete id="deleteByLabelhaveproduct" parameterType="com.scau.hyskjf.pojo.Labelhaveproduct">
+      delete from LabelHaveProduct
+      where pduID = #{pduid,jdbcType=INTEGER} and LabelID = #{labelid,jdbcType=INTEGER}
+  </delete>
+
 </mapper>

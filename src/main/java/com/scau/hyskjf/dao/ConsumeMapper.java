@@ -1,7 +1,9 @@
 package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Consume;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ConsumeMapper {
     int deleteByPrimaryKey(Integer cumid);
 

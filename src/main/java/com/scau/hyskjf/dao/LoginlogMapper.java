@@ -1,7 +1,9 @@
 package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Loginlog;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface LoginlogMapper {
     int deleteByPrimaryKey(Integer llogid);
 

@@ -1,7 +1,9 @@
 package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Membercardreceive;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface MembercardreceiveMapper {
     int deleteByPrimaryKey(Integer mcrid);
 

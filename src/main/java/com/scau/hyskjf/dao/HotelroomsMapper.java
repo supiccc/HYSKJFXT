@@ -2,7 +2,9 @@ package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Hotelrooms;
 import com.scau.hyskjf.pojo.HotelroomsWithBLOBs;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface HotelroomsMapper {
     int deleteByPrimaryKey(Integer pduid);
 
