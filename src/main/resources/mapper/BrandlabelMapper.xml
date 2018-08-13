@@ -15,6 +15,17 @@
     from BrandLabel
     where LabelID = #{labelid,jdbcType=INTEGER}
   </select>
+  <select id="queryAllLabel" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from BrandLabel
+  </select>
+  <select id="queryLabelByType" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from BrandLabel
+    where LabelType = #{labeltype,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from BrandLabel
     where LabelID = #{labelid,jdbcType=INTEGER}

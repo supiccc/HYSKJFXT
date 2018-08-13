@@ -1,7 +1,10 @@
 package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Productinfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface ProductinfoMapper {
@@ -16,4 +19,8 @@ public interface ProductinfoMapper {
     int updateByPrimaryKeySelective(Productinfo record);
 
     int updateByPrimaryKey(Productinfo record);
+
+    List<Productinfo> selectProductByMerID(Integer merId);
+
+    List<Productinfo> queryLabelProduct(@Param("merID")Integer merID, @Param("labelID")Integer labelID);
 }

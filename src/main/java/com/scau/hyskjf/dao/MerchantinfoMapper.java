@@ -22,4 +22,6 @@ public interface MerchantinfoMapper {
     int updateByPrimaryKeyWithBLOBs(MerchantinfoWithBLOBs record);
 
     int updateByPrimaryKey(Merchantinfo record);
+
+    MerchantinfoWithBLOBs findByMerName(@Param("mName") String merName);
 }
