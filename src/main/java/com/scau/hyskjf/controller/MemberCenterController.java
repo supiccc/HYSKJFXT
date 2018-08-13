@@ -10,6 +10,7 @@ import com.scau.hyskjf.util.json.ResponseJSON;
 import com.scau.hyskjf.util.sms.IndustrySMS;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -104,5 +105,12 @@ public class MemberCenterController {
         } catch (Exception e) {
             return new ResponseJSON(ResponseCode.WARN);
         }
+    }
+
+    @RequestMapping(value = "/showConsume", method = RequestMethod.GET)
+    public ResponseJSON showConsume() {
+        List result = memberCenterService.showConsumedetail();
+        if (result == null) return new ResponseJSON(ResponseCode.WARN);
+        return new ResponseJSON(ResponseCode.SUCCESS, result);
     }
 }

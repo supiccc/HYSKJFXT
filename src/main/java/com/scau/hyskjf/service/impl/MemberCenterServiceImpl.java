@@ -1,11 +1,10 @@
 package com.scau.hyskjf.service.impl;
 
+import com.scau.hyskjf.dao.ConsumedetailMapper;
 import com.scau.hyskjf.dao.CredithistoryviewMapper;
 import com.scau.hyskjf.dao.MemberMapper;
 import com.scau.hyskjf.dao.MemberaccountMapper;
-import com.scau.hyskjf.pojo.Credithistoryview;
-import com.scau.hyskjf.pojo.Member;
-import com.scau.hyskjf.pojo.Memberaccount;
+import com.scau.hyskjf.pojo.*;
 import com.scau.hyskjf.service.MemberCenterService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.Md5Hash;
@@ -15,10 +14,7 @@ import org.springframework.stereotype.Service;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by supiccc on 2018-08-09 08:53
@@ -33,6 +29,9 @@ public class MemberCenterServiceImpl implements MemberCenterService {
 
     @Autowired
     MemberMapper memberMapper;
+
+    @Autowired
+    ConsumedetailMapper consumedetailMapper;
 
     @Override
     public String forgetPwd(String newPwd, String verficationCode) {
@@ -103,6 +102,46 @@ public class MemberCenterServiceImpl implements MemberCenterService {
         Map<String, Object> result = new HashMap<>();
         result.put("Object", member);
         result.put("Birth", birth);
+        return result;
+    }
+
+    // 查询所有消费记录
+    @Override
+    public List showConsumedetail() {
+        Memberaccount m = (Memberaccount) SecurityUtils.getSubject().getSession().getAttribute("user");
+        if (m == null) return null;
+        List<Consumedetail> consumedetails = consumedetailMapper.selectAllBymemID(m.getMemid());
+        return FormatConsumedetail(consumedetails);
+    }
+
+    // 格式化消费记录时间
+    @Override
+    public List FormatConsumedetail(List list) {
+        List result = new ArrayList();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        for (int i = 0; i < list.size(); i++) {
+            ConsumedetailFormatTime c = new ConsumedetailFormatTime();
+            Consumedetail tmp = (Consumedetail)list.get(i);
+            c.setCumid(tmp.getCumid());
+            c.setMacid(tmp.getMacid());
+            c.setMcpkid(tmp.getMcpkid());
+            c.setCummoney(tmp.getCummoney());
+            c.setCumway(tmp.getCumway());
+            c.setCumcredit(tmp.getCumcredit());
+            Date date = tmp.getCumtime();
+            c.setDate(simpleDateFormat.format(date));
+            c.setCumtime(null);
+            c.setMemid(tmp.getMemid());
+            c.setMerid(tmp.getMerid());
+            c.setMertype(tmp.getMertype());
+            c.setMername(tmp.getMername());
+            c.setPduid(tmp.getPduid());
+            c.setPduimage(tmp.getPduimage());
+            c.setPduintro(tmp.getPduintro());
+            c.setPduname(tmp.getPduname());
+            c.setPduprice(tmp.getPduprice());
+            result.add(c);
+        }
         return result;
     }
 }

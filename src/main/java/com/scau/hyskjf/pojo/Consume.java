@@ -17,6 +17,8 @@ public class Consume {
 
     private Date cumtime;
 
+    private Integer pduid;
+
     public Integer getCumid() {
         return cumid;
     }
@@ -71,5 +73,13 @@ public class Consume {
 
     public void setCumtime(Date cumtime) {
         this.cumtime = cumtime;
+    }
+
+    public Integer getPduid() {
+        return pduid;
+    }
+
+    public void setPduid(Integer pduid) {
+        this.pduid = pduid;
     }
 }
