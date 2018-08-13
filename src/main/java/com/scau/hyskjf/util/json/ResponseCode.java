@@ -10,7 +10,8 @@ public enum ResponseCode {
     UNKNOWNACCOUNT(-1, "账号不存在"),
     INCORRECTPWD(-1, "密码错误"),
     HASLOGIN(-1, "用户已登录"),
-    NOTFOUND(-1,"没有查到");
+    NOTFOUND(-1,"没有查到"),
+    ILLEGALCODE(-1, "非法入参");
 
     private int code;
     private String msg;
