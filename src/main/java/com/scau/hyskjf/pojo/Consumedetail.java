@@ -17,6 +17,8 @@ public class Consumedetail {
 
     private Date cumtime;
 
+    private Integer pduid;
+
     private Integer memid;
 
     private Integer merid;
@@ -24,6 +26,14 @@ public class Consumedetail {
     private String mertype;
 
     private String mername;
+
+    private String pduname;
+
+    private Float pduprice;
+
+    private String pduintro;
+
+    private String pduimage;
 
     public Integer getCumid() {
         return cumid;
@@ -81,6 +91,14 @@ public class Consumedetail {
         this.cumtime = cumtime;
     }
 
+    public Integer getPduid() {
+        return pduid;
+    }
+
+    public void setPduid(Integer pduid) {
+        this.pduid = pduid;
+    }
+
     public Integer getMemid() {
         return memid;
     }
@@ -111,5 +129,37 @@ public class Consumedetail {
 
     public void setMername(String mername) {
         this.mername = mername;
+    }
+
+    public String getPduname() {
+        return pduname;
+    }
+
+    public void setPduname(String pduname) {
+        this.pduname = pduname;
+    }
+
+    public Float getPduprice() {
+        return pduprice;
+    }
+
+    public void setPduprice(Float pduprice) {
+        this.pduprice = pduprice;
+    }
+
+    public String getPduintro() {
+        return pduintro;
+    }
+
+    public void setPduintro(String pduintro) {
+        this.pduintro = pduintro;
+    }
+
+    public String getPduimage() {
+        return pduimage;
+    }
+
+    public void setPduimage(String pduimage) {
+        this.pduimage = pduimage;
     }
 }

@@ -1,5 +1,6 @@
 package com.scau.hyskjf.service;
 
+import com.scau.hyskjf.pojo.Consumedetail;
 import com.scau.hyskjf.pojo.Credithistoryview;
 import com.scau.hyskjf.pojo.Member;
 
@@ -19,5 +20,9 @@ public interface MemberCenterService {
 
     Map showMember(); // 读取用户信息
 
-    Map<String, Object> updateMember(Member member, String birth) throws ParseException;
+    Map<String, Object> updateMember(Member member, String birth) throws ParseException; // 更新用户
+
+    List showConsumedetail(); // 显示消费记录
+
+    List FormatConsumedetail(List list); // 格式化消费记录时间
 }
