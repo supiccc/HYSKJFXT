@@ -1,6 +1,5 @@
 package com.scau.hyskjf.service;
 
-import com.scau.hyskjf.pojo.Consumedetail;
 import com.scau.hyskjf.pojo.Credithistoryview;
 import com.scau.hyskjf.pojo.Member;
 
