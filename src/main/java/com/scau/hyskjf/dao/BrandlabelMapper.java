@@ -1,7 +1,9 @@
 package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Brandlabel;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface BrandlabelMapper {
     int deleteByPrimaryKey(Integer labelid);
 

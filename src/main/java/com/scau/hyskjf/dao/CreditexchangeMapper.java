@@ -2,7 +2,9 @@ package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Creditexchange;
 import com.scau.hyskjf.pojo.CreditexchangeWithBLOBs;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CreditexchangeMapper {
     int deleteByPrimaryKey(Integer ceid);
 
