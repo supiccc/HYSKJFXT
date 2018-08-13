@@ -313,7 +313,7 @@
     from MerchantInfo
     where merId = #{id}
   </select>
-
+  
   <update id="updateByModified" parameterType="MerchantinfomodifiedWithBLOBs">
     update MerchantInfo
     set merImage = #{merimage,jdbcType=VARCHAR},
