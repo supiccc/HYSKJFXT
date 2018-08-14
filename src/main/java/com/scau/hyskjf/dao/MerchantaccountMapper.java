@@ -18,7 +18,7 @@ public interface MerchantaccountMapper {
 
     List<Merchantaccount> selectAll();
 
-    List<Merchantaccount> selectByMerID(Integer merid);
+    List<Merchantaccount> selectByMerID(Integer merID);
 
     int updateByPrimaryKeySelective(Merchantaccount record);
 
