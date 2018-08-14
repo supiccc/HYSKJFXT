@@ -11,7 +11,8 @@ public enum ResponseCode {
     INCORRECTPWD(-1, "密码错误"),
     HASLOGIN(-1, "用户已登录"),
     NOTFOUND(-1,"没有查到"),
-    ILLEGALCODE(-1, "非法入参");
+    ILLEGALCODE(-1, "非法入参"),
+    NOTLOGIN(-1, "未登录");
 
     private int code;
     private String msg;

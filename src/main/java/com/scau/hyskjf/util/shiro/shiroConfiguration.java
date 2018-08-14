@@ -1,4 +1,4 @@
-package com.scau.hyskjf.shiro;
+package com.scau.hyskjf.util.shiro;
 
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -9,8 +9,6 @@ import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreato
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.LinkedHashMap;
 
 /**
  * Created by supiccc on 2018-08-09 14:23

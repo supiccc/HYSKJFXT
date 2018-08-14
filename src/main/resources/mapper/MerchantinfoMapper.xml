@@ -313,6 +313,7 @@
     from MerchantInfo
     where merId = #{id}
   </select>
+  
   <update id="updateByModified" parameterType="MerchantinfomodifiedWithBLOBs">
     update MerchantInfo
     set merImage = #{merimage,jdbcType=VARCHAR},
@@ -337,7 +338,6 @@
       merDiscountEvent = #{merdiscountevent,jdbcType=LONGVARCHAR}
     where merID = #{merid,jdbcType=INTEGER}
   </update>
-
   <select id="findAllMerchantinfo" resultMap="ResultMapWithBLOBs">
     select
     <include refid="Base_Column_List" />

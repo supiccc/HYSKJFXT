@@ -10,9 +10,10 @@
     <result column="macID" jdbcType="INTEGER" property="macid" />
     <result column="cumTime" jdbcType="TIMESTAMP" property="cumtime" />
     <result column="pduID" jdbcType="INTEGER" property="pduid" />
+    <result column="hasComment" jdbcType="BIT" property="hascomment" />
   </resultMap>
   <sql id="Base_Column_List">
-    cumID, mcPKID, cumMoney, cumWay, cumCredit, macID, cumTime, pduID
+    cumID, mcPKID, cumMoney, cumWay, cumCredit, macID, cumTime, pduID, hasComment
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -27,10 +28,12 @@
   <insert id="insert" parameterType="com.scau.hyskjf.pojo.Consume">
     insert into Consume (cumID, mcPKID, cumMoney, 
       cumWay, cumCredit, macID, 
-      cumTime, pduID)
+      cumTime, pduID, hasComment
+      )
     values (#{cumid,jdbcType=INTEGER}, #{mcpkid,jdbcType=INTEGER}, #{cummoney,jdbcType=REAL}, 
       #{cumway,jdbcType=VARCHAR}, #{cumcredit,jdbcType=REAL}, #{macid,jdbcType=INTEGER}, 
-      #{cumtime,jdbcType=TIMESTAMP}, #{pduid,jdbcType=INTEGER})
+      #{cumtime,jdbcType=TIMESTAMP}, #{pduid,jdbcType=INTEGER}, #{hascomment,jdbcType=BIT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Consume">
     insert into Consume
@@ -59,6 +62,9 @@
       <if test="pduid != null">
         pduID,
       </if>
+      <if test="hascomment != null">
+        hasComment,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="cumid != null">
@@ -84,6 +90,9 @@
       </if>
       <if test="pduid != null">
         #{pduid,jdbcType=INTEGER},
+      </if>
+      <if test="hascomment != null">
+        #{hascomment,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -111,6 +120,9 @@
       <if test="pduid != null">
         pduID = #{pduid,jdbcType=INTEGER},
       </if>
+      <if test="hascomment != null">
+        hasComment = #{hascomment,jdbcType=BIT},
+      </if>
     </set>
     where cumID = #{cumid,jdbcType=INTEGER}
   </update>
@@ -122,7 +134,13 @@
       cumCredit = #{cumcredit,jdbcType=REAL},
       macID = #{macid,jdbcType=INTEGER},
       cumTime = #{cumtime,jdbcType=TIMESTAMP},
-      pduID = #{pduid,jdbcType=INTEGER}
+      pduID = #{pduid,jdbcType=INTEGER},
+      hasComment = #{hascomment,jdbcType=BIT}
     where cumID = #{cumid,jdbcType=INTEGER}
   </update>
+  <!--<select id="selectByMerAndMem" resultMap="BaseResultMap">-->
+    <!--select *-->
+    <!--from Consume-->
+    <!--where merID = #{merID} and memID = #{memID}-->
+  <!--</select>-->
 </mapper>

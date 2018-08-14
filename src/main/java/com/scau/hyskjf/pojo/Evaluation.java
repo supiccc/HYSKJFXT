@@ -25,6 +25,8 @@ public class Evaluation {
 
     private Date evareptime;
 
+    private Integer cumid;
+
     public Integer getEvaid() {
         return evaid;
     }
@@ -111,5 +113,13 @@ public class Evaluation {
 
     public void setEvareptime(Date evareptime) {
         this.evareptime = evareptime;
+    }
+
+    public Integer getCumid() {
+        return cumid;
+    }
+
+    public void setCumid(Integer cumid) {
+        this.cumid = cumid;
     }
 }

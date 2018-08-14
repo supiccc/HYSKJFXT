@@ -19,6 +19,8 @@ public class Consume {
 
     private Integer pduid;
 
+    private Boolean hascomment;
+
     public Integer getCumid() {
         return cumid;
     }
@@ -81,5 +83,13 @@ public class Consume {
 
     public void setPduid(Integer pduid) {
         this.pduid = pduid;
+    }
+
+    public Boolean getHascomment() {
+        return hascomment;
+    }
+
+    public void setHascomment(Boolean hascomment) {
+        this.hascomment = hascomment;
     }
 }

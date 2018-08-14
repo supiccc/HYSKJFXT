@@ -3,6 +3,7 @@ package com.scau.hyskjf.service;
 import com.scau.hyskjf.pojo.Credithistoryview;
 import com.scau.hyskjf.pojo.Member;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
@@ -24,4 +25,8 @@ public interface MemberCenterService {
     List showConsumedetail(); // 显示消费记录
 
     List FormatConsumedetail(List list); // 格式化消费记录时间
+
+//    List showNoComment(); // 显示未点评消费记录
+
+    String comment(Integer merID, String info, HttpServletRequest request); // 选择某记录进行点评
 }
