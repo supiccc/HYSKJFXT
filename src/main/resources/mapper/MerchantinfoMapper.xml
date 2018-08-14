@@ -313,7 +313,21 @@
     from MerchantInfo
     where merId = #{id}
   </select>
+<<<<<<< HEAD
+<<<<<<< HEAD
+  <select id="findByMerName" resultType="Merchantinfo" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from Merchant a left join MerchantInfo b on a.merID=b.merID
+    where a.merName= #{mName}
+  </select>
+=======
+>>>>>>> 9b4ff9ea42253397b4b07419e093159430660d1f
+=======
   
+>>>>>>> d52c46a427ab81b7bcbf73a2d462a79b4bc912cf
   <update id="updateByModified" parameterType="MerchantinfomodifiedWithBLOBs">
     update MerchantInfo
     set merImage = #{merimage,jdbcType=VARCHAR},
@@ -343,8 +357,11 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
+<<<<<<< HEAD
+=======
     from Merchant a left join MerchantInfo b on a.merID=b.merID
     where a.merName= #{mName}
+>>>>>>> 9b4ff9ea42253397b4b07419e093159430660d1f
     from MerchantInfo
   </select>
 </mapper>

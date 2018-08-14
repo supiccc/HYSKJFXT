@@ -24,7 +24,7 @@
         select
         <include refid="Base_Column_List" />
         from MerchantAccount
-        where merID = #{merid,jdbcType=INTEGER}
+        where merID = #{merID,jdbcType=INTEGER}
    </select>
   <select id="selectByMacAcc" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select

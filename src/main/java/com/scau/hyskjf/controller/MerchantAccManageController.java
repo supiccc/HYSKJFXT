@@ -52,6 +52,28 @@ public class MerchantAccManageController {
     }
 
     /*
+     * (吕浩泰要求的接口)添加子账号：
+     * 输入：
+     * Merchantaccount类：
+     * 商家编号Integer、登陆名（手机号码）String、密码String、
+     * 账号类型（11为管理员，2为前台账户，3为客户经理，14为部门经理,大于10的拥有为用户充值权限，管理员可为前台和客户经理添加充值权限，加权后数值为前台12和客户经理13）int、
+     * 启用状态Boolean、结账账户Integer
+     *
+     * 返回：
+     * 商家ID对应的所有账号信息MerchantAccount类
+     * */
+    @RequestMapping(value = "/addAccountReturn", method = RequestMethod.POST)
+    public ResponseJSON addAccountReturn(@RequestBody Merchantaccount merchantaccount){
+        try{
+            this.addAffiliateAccount(merchantaccount);
+            List<Merchantaccount> accList = merchantAccManageService.queryMerchantAccountByMerID(merchantaccount.getMerid());
+            return new ResponseJSON(ResponseCode.SUCCESS,accList);
+        }catch(Exception e){
+            return new ResponseJSON(ResponseCode.WARN);
+        }
+    }
+
+    /*
     * 查询整个系统所有商家账户：
     * 输入：
     * 无
@@ -103,7 +125,7 @@ public class MerchantAccManageController {
     }
 
     /*
-     * 修改子账号密码
+     * 修改子账号密码(普通商家账号接口)
      * 输入：
      * 1、Merchantaccount类：必须有账户登录名macAcc+原密码macPasswd
      * 2、String 新密码
@@ -114,16 +136,45 @@ public class MerchantAccManageController {
     public ResponseJSON updatePwdByMacAcc(Merchantaccount merchantaccount,String newPwd){
         try{
             String uncheckedPwd = new Md5Hash(merchantaccount.getMacpasswd(),merchantaccount.getMacacc(),3).toString();//对用户输入账户的原密码进行MD5加密
+            String newPwdMD5 = new Md5Hash(newPwd,merchantaccount.getMacacc(),3).toString();
             Merchantaccount acc =merchantAccManageService.queryMerchantAccountByMacAcc(merchantaccount.getMacacc());//从数据库获取登录名对应的账户实例
             String truePwd = acc.getMacpasswd();//获取正确的MD5密码
             if(truePwd.equals(uncheckedPwd)){//正确的MD5密码与输入的原密码MD5匹配，正确则执行更改密码
-                acc.setMacpasswd(uncheckedPwd);
+                acc.setMacpasswd(newPwdMD5);
                 merchantAccManageService.updateMerchantAccount(acc);
                 return new ResponseJSON(ResponseCode.SUCCESS);
             }
             else{
                 return new ResponseJSON(ResponseCode.WARN,new String("输入的原密码不匹配"));
             }
+        }catch(Exception e){
+            return new ResponseJSON(ResponseCode.WARN);
+        }
+    }
+
+    /*
+     * 修改子账号密码(商家管理员账号接口)
+     * 输入：
+     * 1、Merchantaccount类：必须有账户登录名macAcc(原密码不需要)
+     * 2、String 新密码
+     * 返回：
+     * 成功或失败码
+     * */
+    @RequestMapping(value = "/updateManagerPwdByMacAcc", method = RequestMethod.POST)
+    public ResponseJSON updateManagerPwdByMacAcc(Merchantaccount merchantaccount,String newPwd){
+        try{
+            //String uncheckedPwd = new Md5Hash(merchantaccount.getMacpasswd(),merchantaccount.getMacacc(),3).toString();//对用户输入账户的原密码进行MD5加密
+            Merchantaccount acc =merchantAccManageService.queryMerchantAccountByMacAcc(merchantaccount.getMacacc());//从数据库获取登录名对应的账户实例
+            String newPwdMD5 = new Md5Hash(newPwd,merchantaccount.getMacacc(),3).toString();
+            //String truePwd = acc.getMacpasswd();//获取正确的MD5密码
+            //if(truePwd.equals(uncheckedPwd)){//正确的MD5密码与输入的原密码MD5匹配，正确则执行更改密码
+            acc.setMacpasswd(newPwdMD5);
+            merchantAccManageService.updateMerchantAccount(acc);
+            return new ResponseJSON(ResponseCode.SUCCESS);
+            //}
+            //else{
+            //    return new ResponseJSON(ResponseCode.WARN,new String("输入的原密码不匹配"));
+            //}
         }catch(Exception e){
             return new ResponseJSON(ResponseCode.WARN);
         }
@@ -139,6 +190,7 @@ public class MerchantAccManageController {
     @RequestMapping(value = "/updateByMacID", method = RequestMethod.POST)
     public ResponseJSON updateByMacID(Merchantaccount merchantaccount){
         try{
+            merchantaccount.setMacpasswd(null);//不能改密码
             merchantAccManageService.updateMerchantAccount(merchantaccount);
             return new ResponseJSON(ResponseCode.SUCCESS);
         }catch(Exception e){
