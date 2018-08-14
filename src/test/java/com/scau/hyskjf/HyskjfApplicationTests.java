@@ -1,9 +1,12 @@
 package com.scau.hyskjf;
 
+import com.scau.hyskjf.dao.ConsumedetailMapper;
 import com.scau.hyskjf.dao.CredithistoryviewMapper;
 import com.scau.hyskjf.pojo.Admin;
+import com.scau.hyskjf.pojo.Consumedetail;
 import com.scau.hyskjf.pojo.Credithistoryview;
 import com.scau.hyskjf.service.AuthenticationService;
+import com.scau.hyskjf.service.MemberCenterService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +19,11 @@ import java.util.List;
 @SpringBootTest
 public class HyskjfApplicationTests {
     @Autowired
-    AuthenticationService authenticationService;
-    @Autowired
-    CredithistoryviewMapper credithistoryviewMapper;
+    MemberCenterService memberCenterService;
 
     @Test
     public void contextLoads() {
-        Admin a = authenticationService.findAdminByacc("13602800453");
-        List<Credithistoryview> c = credithistoryviewMapper.selectAll(1);
-        System.out.println(c.get(0).getMemid());
+
     }
 
 }

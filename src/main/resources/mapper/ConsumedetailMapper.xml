@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scau.hyskjf.dao.ConsumedetailMapper">
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Consumedetail">
+    <result column="cumID" jdbcType="INTEGER" property="cumid" />
+    <result column="macID" jdbcType="INTEGER" property="macid" />
+    <result column="mcPKID" jdbcType="INTEGER" property="mcpkid" />
+    <result column="cumMoney" jdbcType="REAL" property="cummoney" />
+    <result column="cumWay" jdbcType="VARCHAR" property="cumway" />
+    <result column="cumCredit" jdbcType="REAL" property="cumcredit" />
+    <result column="cumTime" jdbcType="TIMESTAMP" property="cumtime" />
+    <result column="pduID" jdbcType="INTEGER" property="pduid" />
+    <result column="memID" jdbcType="INTEGER" property="memid" />
+    <result column="merID" jdbcType="INTEGER" property="merid" />
+    <result column="merType" jdbcType="VARCHAR" property="mertype" />
+    <result column="merName" jdbcType="VARCHAR" property="mername" />
+    <result column="pduName" jdbcType="VARCHAR" property="pduname" />
+    <result column="pduPrice" jdbcType="REAL" property="pduprice" />
+    <result column="pduIntro" jdbcType="VARCHAR" property="pduintro" />
+    <result column="pduImage" jdbcType="VARCHAR" property="pduimage" />
+  </resultMap>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Consumedetail">
+    insert into ConsumeDetail (cumID, macID, mcPKID, 
+      cumMoney, cumWay, cumCredit, 
+      cumTime, pduID, memID, 
+      merID, merType, merName, 
+      pduName, pduPrice, pduIntro, 
+      pduImage)
+    values (#{cumid,jdbcType=INTEGER}, #{macid,jdbcType=INTEGER}, #{mcpkid,jdbcType=INTEGER}, 
+      #{cummoney,jdbcType=REAL}, #{cumway,jdbcType=VARCHAR}, #{cumcredit,jdbcType=REAL}, 
+      #{cumtime,jdbcType=TIMESTAMP}, #{pduid,jdbcType=INTEGER}, #{memid,jdbcType=INTEGER}, 
+      #{merid,jdbcType=INTEGER}, #{mertype,jdbcType=VARCHAR}, #{mername,jdbcType=VARCHAR}, 
+      #{pduname,jdbcType=VARCHAR}, #{pduprice,jdbcType=REAL}, #{pduintro,jdbcType=VARCHAR}, 
+      #{pduimage,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Consumedetail">
+    insert into ConsumeDetail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cumid != null">
+        cumID,
+      </if>
+      <if test="macid != null">
+        macID,
+      </if>
+      <if test="mcpkid != null">
+        mcPKID,
+      </if>
+      <if test="cummoney != null">
+        cumMoney,
+      </if>
+      <if test="cumway != null">
+        cumWay,
+      </if>
+      <if test="cumcredit != null">
+        cumCredit,
+      </if>
+      <if test="cumtime != null">
+        cumTime,
+      </if>
+      <if test="pduid != null">
+        pduID,
+      </if>
+      <if test="memid != null">
+        memID,
+      </if>
+      <if test="merid != null">
+        merID,
+      </if>
+      <if test="mertype != null">
+        merType,
+      </if>
+      <if test="mername != null">
+        merName,
+      </if>
+      <if test="pduname != null">
+        pduName,
+      </if>
+      <if test="pduprice != null">
+        pduPrice,
+      </if>
+      <if test="pduintro != null">
+        pduIntro,
+      </if>
+      <if test="pduimage != null">
+        pduImage,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cumid != null">
+        #{cumid,jdbcType=INTEGER},
+      </if>
+      <if test="macid != null">
+        #{macid,jdbcType=INTEGER},
+      </if>
+      <if test="mcpkid != null">
+        #{mcpkid,jdbcType=INTEGER},
+      </if>
+      <if test="cummoney != null">
+        #{cummoney,jdbcType=REAL},
+      </if>
+      <if test="cumway != null">
+        #{cumway,jdbcType=VARCHAR},
+      </if>
+      <if test="cumcredit != null">
+        #{cumcredit,jdbcType=REAL},
+      </if>
+      <if test="cumtime != null">
+        #{cumtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pduid != null">
+        #{pduid,jdbcType=INTEGER},
+      </if>
+      <if test="memid != null">
+        #{memid,jdbcType=INTEGER},
+      </if>
+      <if test="merid != null">
+        #{merid,jdbcType=INTEGER},
+      </if>
+      <if test="mertype != null">
+        #{mertype,jdbcType=VARCHAR},
+      </if>
+      <if test="mername != null">
+        #{mername,jdbcType=VARCHAR},
+      </if>
+      <if test="pduname != null">
+        #{pduname,jdbcType=VARCHAR},
+      </if>
+      <if test="pduprice != null">
+        #{pduprice,jdbcType=REAL},
+      </if>
+      <if test="pduintro != null">
+        #{pduintro,jdbcType=VARCHAR},
+      </if>
+      <if test="pduimage != null">
+        #{pduimage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="selectAllBymemID" resultMap="BaseResultMap">
+    select *
+    from ConsumeDetail
+    where memID = #{memid}
+  </select>
+</mapper>

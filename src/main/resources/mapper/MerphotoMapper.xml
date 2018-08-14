@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.MerphotoMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Merphoto" >
+    <id column="photoID" property="photoid" jdbcType="INTEGER" />
+    <result column="merID" property="merid" jdbcType="INTEGER" />
+    <result column="photoLink" property="photolink" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    photoID, merID, photoLink, note
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from MerPhoto
+    where photoID = #{photoid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from MerPhoto
+    where photoID = #{photoid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Merphoto" >
+    insert into MerPhoto (photoID, merID, photoLink, 
+      note)
+    values (#{photoid,jdbcType=INTEGER}, #{merid,jdbcType=INTEGER}, #{photolink,jdbcType=VARCHAR}, 
+      #{note,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Merphoto" >
+    insert into MerPhoto
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="photoid != null" >
+        photoID,
+      </if>
+      <if test="merid != null" >
+        merID,
+      </if>
+      <if test="photolink != null" >
+        photoLink,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="photoid != null" >
+        #{photoid,jdbcType=INTEGER},
+      </if>
+      <if test="merid != null" >
+        #{merid,jdbcType=INTEGER},
+      </if>
+      <if test="photolink != null" >
+        #{photolink,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Merphoto" >
+    update MerPhoto
+    <set >
+      <if test="merid != null" >
+        merID = #{merid,jdbcType=INTEGER},
+      </if>
+      <if test="photolink != null" >
+        photoLink = #{photolink,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where photoID = #{photoid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Merphoto" >
+    update MerPhoto
+    set merID = #{merid,jdbcType=INTEGER},
+      photoLink = #{photolink,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR}
+    where photoID = #{photoid,jdbcType=INTEGER}
+  </update>
+</mapper>

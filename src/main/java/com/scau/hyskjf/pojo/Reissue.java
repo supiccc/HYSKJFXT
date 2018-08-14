@@ -9,8 +9,6 @@ public class Reissue {
 
     private Date reitime;
 
-    private Integer memMcpkid;
-
     private Integer mcpkid;
 
     private String reireason;
@@ -37,14 +35,6 @@ public class Reissue {
 
     public void setReitime(Date reitime) {
         this.reitime = reitime;
-    }
-
-    public Integer getMemMcpkid() {
-        return memMcpkid;
-    }
-
-    public void setMemMcpkid(Integer memMcpkid) {
-        this.memMcpkid = memMcpkid;
     }
 
     public Integer getMcpkid() {

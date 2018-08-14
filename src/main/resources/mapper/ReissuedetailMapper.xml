@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scau.hyskjf.dao.ReissuedetailMapper">
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Reissuedetail">
+    <result column="memID" jdbcType="INTEGER" property="memid" />
+    <result column="mcPKID" jdbcType="INTEGER" property="mcpkid" />
+    <result column="reiID" jdbcType="INTEGER" property="reiid" />
+    <result column="reiTime" jdbcType="DATE" property="reitime" />
+    <result column="mcID" jdbcType="VARCHAR" property="mcid" />
+    <result column="merID" jdbcType="INTEGER" property="merid" />
+    <result column="mcType" jdbcType="VARCHAR" property="mctype" />
+    <result column="mcCredit" jdbcType="REAL" property="mccredit" />
+    <result column="mcBalance" jdbcType="REAL" property="mcbalance" />
+    <result column="mcEnable" jdbcType="BIT" property="mcenable" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.Reissuedetail">
+    <result column="reiReason" jdbcType="LONGVARCHAR" property="reireason" />
+  </resultMap>
+  <sql id="Blob_Column_List">
+    reiReason
+  </sql>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Reissuedetail">
+    insert into ReissueDetail (memID, mcPKID, reiID, 
+      reiTime, mcID, merID, 
+      mcType, mcCredit, mcBalance, 
+      mcEnable, reiReason)
+    values (#{memid,jdbcType=INTEGER}, #{mcpkid,jdbcType=INTEGER}, #{reiid,jdbcType=INTEGER}, 
+      #{reitime,jdbcType=DATE}, #{mcid,jdbcType=VARCHAR}, #{merid,jdbcType=INTEGER}, 
+      #{mctype,jdbcType=VARCHAR}, #{mccredit,jdbcType=REAL}, #{mcbalance,jdbcType=REAL}, 
+      #{mcenable,jdbcType=BIT}, #{reireason,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Reissuedetail">
+    insert into ReissueDetail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="memid != null">
+        memID,
+      </if>
+      <if test="mcpkid != null">
+        mcPKID,
+      </if>
+      <if test="reiid != null">
+        reiID,
+      </if>
+      <if test="reitime != null">
+        reiTime,
+      </if>
+      <if test="mcid != null">
+        mcID,
+      </if>
+      <if test="merid != null">
+        merID,
+      </if>
+      <if test="mctype != null">
+        mcType,
+      </if>
+      <if test="mccredit != null">
+        mcCredit,
+      </if>
+      <if test="mcbalance != null">
+        mcBalance,
+      </if>
+      <if test="mcenable != null">
+        mcEnable,
+      </if>
+      <if test="reireason != null">
+        reiReason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="memid != null">
+        #{memid,jdbcType=INTEGER},
+      </if>
+      <if test="mcpkid != null">
+        #{mcpkid,jdbcType=INTEGER},
+      </if>
+      <if test="reiid != null">
+        #{reiid,jdbcType=INTEGER},
+      </if>
+      <if test="reitime != null">
+        #{reitime,jdbcType=DATE},
+      </if>
+      <if test="mcid != null">
+        #{mcid,jdbcType=VARCHAR},
+      </if>
+      <if test="merid != null">
+        #{merid,jdbcType=INTEGER},
+      </if>
+      <if test="mctype != null">
+        #{mctype,jdbcType=VARCHAR},
+      </if>
+      <if test="mccredit != null">
+        #{mccredit,jdbcType=REAL},
+      </if>
+      <if test="mcbalance != null">
+        #{mcbalance,jdbcType=REAL},
+      </if>
+      <if test="mcenable != null">
+        #{mcenable,jdbcType=BIT},
+      </if>
+      <if test="reireason != null">
+        #{reireason,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
