@@ -2,9 +2,7 @@ package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Evaluation;
 import com.scau.hyskjf.pojo.EvaluationWithBLOBs;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface EvaluationMapper {
     int deleteByPrimaryKey(Integer evaid);
 

@@ -45,7 +45,7 @@ public class MemberCenterController {
         return new ResponseJSON(ResponseCode.SUCCESS, m);
     }
 
-    // 发送验证码
+    // 用户已登录情况下发送验证码
     @RequestMapping(value = "/sendSMS")
     public ResponseJSON sendSMS() {
         String username = ((Memberaccount)SecurityUtils.getSubject().getSession().getAttribute("user")).getMaid();
