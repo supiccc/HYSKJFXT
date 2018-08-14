@@ -1,15 +1,13 @@
-package com.scau.hyskjf.shiro;
+package com.scau.hyskjf.util.shiro;
 
 import com.scau.hyskjf.pojo.Admin;
 import com.scau.hyskjf.pojo.Memberaccount;
 import com.scau.hyskjf.pojo.Merchantaccount;
 import com.scau.hyskjf.service.AuthenticationService;
-import com.scau.hyskjf.service.MemberCenterService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

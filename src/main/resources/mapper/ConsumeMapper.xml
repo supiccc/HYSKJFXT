@@ -138,4 +138,9 @@
       hasComment = #{hascomment,jdbcType=BIT}
     where cumID = #{cumid,jdbcType=INTEGER}
   </update>
+  <!--<select id="selectByMerAndMem" resultMap="BaseResultMap">-->
+    <!--select *-->
+    <!--from Consume-->
+    <!--where merID = #{merID} and memID = #{memID}-->
+  <!--</select>-->
 </mapper>

@@ -143,4 +143,14 @@
       </if>
     </trim>
   </insert>
+  <select id="selectByMemID" resultMap="BaseResultMap">
+    select *
+    from ConsumeComment
+    where memID = #{memID} and hasComment = 0
+  </select>
+  <select id="selectByMerAndMem" resultMap="BaseResultMap">
+    select *
+    from ConsumeComment
+    where merID = #{param1} and memID = #{param2}
+  </select>
 </mapper>
