@@ -58,8 +58,8 @@ public class MerchantAccManageController {
     * 返回：
     * 所有商家账户表的信息
     * */
-    @RequestMapping(value = "/queryMerchantAccount", method = RequestMethod.POST)
-    public ResponseJSON queryAllMerchantAccount(){
+    @RequestMapping(value = "/queryAll", method = RequestMethod.POST)
+    public ResponseJSON queryAll(){
         try{
             List<Merchantaccount> accList =merchantAccManageService.queryAllMerchantAccount();
             return new ResponseJSON(ResponseCode.SUCCESS,accList);
@@ -75,8 +75,8 @@ public class MerchantAccManageController {
      * 返回：
      * 商家编号对应商家的所有商家账户表的信息
      * */
-    @RequestMapping(value = "/queryMerchantAccountByMerID", method = RequestMethod.POST)
-    public ResponseJSON queryMerchantAccountByMerID(Integer merID){
+    @RequestMapping(value = "/queryByMerID", method = RequestMethod.POST)
+    public ResponseJSON queryByMerID(Integer merID){
         try{
             List<Merchantaccount> accList =merchantAccManageService.queryMerchantAccountByMerID(merID);
             return new ResponseJSON(ResponseCode.SUCCESS,accList);
@@ -92,8 +92,8 @@ public class MerchantAccManageController {
      * 返回：
      * 账户登陆名对应账户信息
      * */
-    @RequestMapping(value = "/queryMerchantAccountByMacAcc", method = RequestMethod.POST)
-    public ResponseJSON queryMerchantAccountByMacAcc(String macAcc){
+    @RequestMapping(value = "/queryByMacAcc", method = RequestMethod.POST)
+    public ResponseJSON queryByMacAcc(String macAcc){
         try{
             Merchantaccount acc =merchantAccManageService.queryMerchantAccountByMacAcc(macAcc);
             return new ResponseJSON(ResponseCode.SUCCESS,acc);
@@ -110,8 +110,8 @@ public class MerchantAccManageController {
      * 返回：
      * 成功或失败码
      * */
-    @RequestMapping(value = "/updateMerchantAccountPwd", method = RequestMethod.POST)
-    public ResponseJSON updateMerchantAccountPwd(Merchantaccount merchantaccount,String newPwd){
+    @RequestMapping(value = "/updatePwdByMacAcc", method = RequestMethod.POST)
+    public ResponseJSON updatePwdByMacAcc(Merchantaccount merchantaccount,String newPwd){
         try{
             String uncheckedPwd = new Md5Hash(merchantaccount.getMacpasswd(),merchantaccount.getMacacc(),3).toString();//对用户输入账户的原密码进行MD5加密
             Merchantaccount acc =merchantAccManageService.queryMerchantAccountByMacAcc(merchantaccount.getMacacc());//从数据库获取登录名对应的账户实例
@@ -136,8 +136,8 @@ public class MerchantAccManageController {
     * 返回：
     * 成功或失败码
     * */
-    @RequestMapping(value = "/updateMerchantAccount", method = RequestMethod.POST)
-    public ResponseJSON updateMerchantAccount(Merchantaccount merchantaccount){
+    @RequestMapping(value = "/updateByMacID", method = RequestMethod.POST)
+    public ResponseJSON updateByMacID(Merchantaccount merchantaccount){
         try{
             merchantAccManageService.updateMerchantAccount(merchantaccount);
             return new ResponseJSON(ResponseCode.SUCCESS);
@@ -153,8 +153,8 @@ public class MerchantAccManageController {
      * 返回：
      * 成功或失败码
      * */
-    @RequestMapping(value = "/deleteMerchantAccount", method = RequestMethod.POST)
-    public ResponseJSON deleteMerchantAccount(Merchantaccount merchantaccount){
+    @RequestMapping(value = "/deleteByMacID", method = RequestMethod.POST)
+    public ResponseJSON deleteByMacID(Merchantaccount merchantaccount){
         try{
             merchantaccount.setMacenable(false);
             merchantAccManageService.updateMerchantAccount(merchantaccount);
@@ -171,8 +171,8 @@ public class MerchantAccManageController {
      * 返回：
      * 成功或失败码
      * */
-    @RequestMapping(value = "/addMerchantAccountPermission", method = RequestMethod.POST)
-    public ResponseJSON addMerchantAccountPermission(Merchantaccount merchantaccount){
+    @RequestMapping(value = "/addPermissionByMacID", method = RequestMethod.POST)
+    public ResponseJSON addPermissionByMacID(Merchantaccount merchantaccount){
         try{
             if(merchantaccount.getMacacctype()!=null&&merchantaccount.getMacacctype()<10){
                 merchantaccount.setMacacctype(merchantaccount.getMacacctype()+10);
@@ -191,8 +191,9 @@ public class MerchantAccManageController {
     * 短信验证更改密码
     * 未写完
     * */
-    @RequestMapping(value = "/updateMerchantAccountPwdByMassage", method = RequestMethod.POST)
+    @RequestMapping(value = "/updatePwdByMassage", method = RequestMethod.POST)
     public ResponseJSON updateMerchantAccountPwdByMassage(){
         return new ResponseJSON(ResponseCode.WARN);
+
     }
 }

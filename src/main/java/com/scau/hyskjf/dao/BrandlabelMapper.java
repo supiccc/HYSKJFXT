@@ -3,6 +3,10 @@ package com.scau.hyskjf.dao;
 import com.scau.hyskjf.pojo.Brandlabel;
 import org.springframework.stereotype.Repository;
 
+
+import java.util.List;
+
+
 @Repository
 public interface BrandlabelMapper {
     int deleteByPrimaryKey(Integer labelid);
@@ -16,4 +20,8 @@ public interface BrandlabelMapper {
     int updateByPrimaryKeySelective(Brandlabel record);
 
     int updateByPrimaryKey(Brandlabel record);
+
+    List<Brandlabel> queryAllLabel();
+
+    List<Brandlabel> queryLabelByType(String labeltype);
 }

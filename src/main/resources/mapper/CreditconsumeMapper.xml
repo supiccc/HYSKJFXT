@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.CreditconsumeMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Creditconsume" >
+    <id column="creconId" property="creconid" jdbcType="INTEGER" />
+    <result column="memID" property="memid" jdbcType="INTEGER" />
+    <result column="merID" property="merid" jdbcType="INTEGER" />
+    <result column="AdminID" property="adminid" jdbcType="INTEGER" />
+    <result column="credits" property="credits" jdbcType="REAL" />
+    <result column="value" property="value" jdbcType="REAL" />
+    <result column="handleState" property="handlestate" jdbcType="BIT" />
+    <result column="recordTime" property="recordtime" jdbcType="TIMESTAMP" />
+    <result column="transferState" property="transferstate" jdbcType="BIT" />
+    <result column="handleTime" property="handletime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    creconId, memID, merID, AdminID, credits, value, handleState, recordTime, transferState, 
+    handleTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from CreditConsume
+    where creconId = #{creconid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from CreditConsume
+    where creconId = #{creconid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Creditconsume" >
+    insert into CreditConsume (creconId, memID, merID, 
+      AdminID, credits, value, 
+      handleState, recordTime, transferState, 
+      handleTime)
+    values (#{creconid,jdbcType=INTEGER}, #{memid,jdbcType=INTEGER}, #{merid,jdbcType=INTEGER}, 
+      #{adminid,jdbcType=INTEGER}, #{credits,jdbcType=REAL}, #{value,jdbcType=REAL}, 
+      #{handlestate,jdbcType=BIT}, #{recordtime,jdbcType=TIMESTAMP}, #{transferstate,jdbcType=BIT}, 
+      #{handletime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Creditconsume" >
+    insert into CreditConsume
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="creconid != null" >
+        creconId,
+      </if>
+      <if test="memid != null" >
+        memID,
+      </if>
+      <if test="merid != null" >
+        merID,
+      </if>
+      <if test="adminid != null" >
+        AdminID,
+      </if>
+      <if test="credits != null" >
+        credits,
+      </if>
+      <if test="value != null" >
+        value,
+      </if>
+      <if test="handlestate != null" >
+        handleState,
+      </if>
+      <if test="recordtime != null" >
+        recordTime,
+      </if>
+      <if test="transferstate != null" >
+        transferState,
+      </if>
+      <if test="handletime != null" >
+        handleTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="creconid != null" >
+        #{creconid,jdbcType=INTEGER},
+      </if>
+      <if test="memid != null" >
+        #{memid,jdbcType=INTEGER},
+      </if>
+      <if test="merid != null" >
+        #{merid,jdbcType=INTEGER},
+      </if>
+      <if test="adminid != null" >
+        #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="credits != null" >
+        #{credits,jdbcType=REAL},
+      </if>
+      <if test="value != null" >
+        #{value,jdbcType=REAL},
+      </if>
+      <if test="handlestate != null" >
+        #{handlestate,jdbcType=BIT},
+      </if>
+      <if test="recordtime != null" >
+        #{recordtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transferstate != null" >
+        #{transferstate,jdbcType=BIT},
+      </if>
+      <if test="handletime != null" >
+        #{handletime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Creditconsume" >
+    update CreditConsume
+    <set >
+      <if test="memid != null" >
+        memID = #{memid,jdbcType=INTEGER},
+      </if>
+      <if test="merid != null" >
+        merID = #{merid,jdbcType=INTEGER},
+      </if>
+      <if test="adminid != null" >
+        AdminID = #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="credits != null" >
+        credits = #{credits,jdbcType=REAL},
+      </if>
+      <if test="value != null" >
+        value = #{value,jdbcType=REAL},
+      </if>
+      <if test="handlestate != null" >
+        handleState = #{handlestate,jdbcType=BIT},
+      </if>
+      <if test="recordtime != null" >
+        recordTime = #{recordtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transferstate != null" >
+        transferState = #{transferstate,jdbcType=BIT},
+      </if>
+      <if test="handletime != null" >
+        handleTime = #{handletime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where creconId = #{creconid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Creditconsume" >
+    update CreditConsume
+    set memID = #{memid,jdbcType=INTEGER},
+      merID = #{merid,jdbcType=INTEGER},
+      AdminID = #{adminid,jdbcType=INTEGER},
+      credits = #{credits,jdbcType=REAL},
+      value = #{value,jdbcType=REAL},
+      handleState = #{handlestate,jdbcType=BIT},
+      recordTime = #{recordtime,jdbcType=TIMESTAMP},
+      transferState = #{transferstate,jdbcType=BIT},
+      handleTime = #{handletime,jdbcType=TIMESTAMP}
+    where creconId = #{creconid,jdbcType=INTEGER}
+  </update>
+
+  <select id="findAllCreditsoncumeOrderByStateAndTime" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from CreditConsume
+    order by transferState
+    <if test=" stateType == 1">
+      desc
+    </if>
+    ,recordTime
+    <if test=" timeType == 1">
+      desc
+    </if>
+  </select>
+  <select id="findAllCreditsoncumeOrderByTime" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from CreditConsume
+    order by recordTime
+    <if test=" timeType == 1">
+      desc
+    </if>
+  </select>
+
+  <select id="findAllCreditsoncumeOrderByState" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from CreditConsume
+  order by transferState
+  <if test=" stateType == 1">
+    desc
+  </if>
+  </select>
+
+  <select id="findAllCreditsoncume" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from CreditConsume
+  </select>
+</mapper>

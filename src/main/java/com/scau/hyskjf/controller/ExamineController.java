@@ -7,14 +7,12 @@ import com.scau.hyskjf.service.ExamineService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@SessionAttributes("user")
 @RequestMapping("/examine")
 public class ExamineController {
 
@@ -36,24 +34,24 @@ public class ExamineController {
     //查询单个入盟申请商家
     @RequestMapping("/application/{id}")
     public ResponseJSON findApplicationById(@PathVariable int id){
-        Merchantinfo merchantinfo = examineService.findApplicationById(id);
-        return new ResponseJSON(ResponseCode.SUCCESS,merchantinfo);
+        Merchantdetail merchantdetail = examineService.findApplicationById(id);
+        return new ResponseJSON(ResponseCode.SUCCESS,merchantdetail);
     }
     //入盟商家审核通过、且分配账号给商家并提醒
     @RequestMapping("application/{id}/agree")
 
-    public ResponseJSON applicationAgree(@PathVariable int id,
-                                         @RequestParam(value = "operator",required=true) Integer operator){
-        System.out.println(operator);
-        Merchantaccount merchantaccount = examineService.applicationAgree(id, operator);
+    public ResponseJSON applicationAgree(@ModelAttribute("user") Admin admin, @PathVariable int id){
+        System.out.println(admin.getAdminid());
+        Merchantaccount merchantaccount = examineService.applicationAgree(id, admin.getAdminid());
         return new ResponseJSON(ResponseCode.SUCCESS,merchantaccount);
     }
 
     //审核不通过，发送结果给商家
     @RequestMapping("application/{id}/disagree")
 
-    public ResponseJSON applicationDisagree(@PathVariable int id){
-        return null;
+    public ResponseJSON applicationDisagree(@ModelAttribute("user") Admin admin,@PathVariable int id){
+        Merchantdetail merchantdetail = examineService.applicationDisagree(id,admin.getAdminid());
+        return new ResponseJSON(ResponseCode.SUCCESS,merchantdetail);
     }
 
 
@@ -70,8 +68,7 @@ public class ExamineController {
 
     //查看单个需要审批的商家修改信息
     @RequestMapping("/modified/{id}")
-    public ResponseJSON findMerchantById(@PathVariable int id,
-    @RequestParam(value = "operator",required=true) Integer operator){
+    public ResponseJSON findMerchantById(@PathVariable int id){
 
         MerchantinfomodifiedWithBLOBs merchantinfomodified = examineService.findMerchantModified(id);
         return new ResponseJSON(ResponseCode.SUCCESS,merchantinfomodified);
@@ -79,17 +76,15 @@ public class ExamineController {
 
     //商家修改信息通过审核，更新
     @RequestMapping("/modified/{id}/agree")
-    public ResponseJSON merchantAgree(@PathVariable int id,
-    @RequestParam(value = "operator",required=true) Integer operator){
-        MerchantinfoWithBLOBs merchantinfoWithBLOBs = examineService.modifiedAgree(id,operator);
+    public ResponseJSON merchantAgree(@ModelAttribute("user") Admin admin,@PathVariable int id){
+        MerchantinfoWithBLOBs merchantinfoWithBLOBs = examineService.modifiedAgree(id,admin.getAdminid());
         return new ResponseJSON(ResponseCode.SUCCESS,merchantinfoWithBLOBs);
     }
 
     //不通过，发送站内消息给商家
     @RequestMapping("/modified/{id}/disagree")
-    public ResponseJSON merchantDisagree(@PathVariable int id,
-    @RequestParam(value = "operator",required=true) Integer operator){
-        examineService.modifiedDisagree(id,operator);
+    public ResponseJSON merchantDisagree(@ModelAttribute("user") Admin admin,@PathVariable int id){
+        examineService.modifiedDisagree(id,admin.getAdminid());
         return new ResponseJSON(ResponseCode.SUCCESS,null);
     }
 

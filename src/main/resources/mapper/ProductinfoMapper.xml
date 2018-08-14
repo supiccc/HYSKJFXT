@@ -20,6 +20,12 @@
     from ProductInfo
     where pduID = #{pduid,jdbcType=INTEGER}
   </select>
+  <select id="selectProductByMerID" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from ProductInfo
+    where merID = #{merId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from ProductInfo
     where pduID = #{pduid,jdbcType=INTEGER}
@@ -125,4 +131,10 @@
       pduRemain = #{pduremain,jdbcType=INTEGER}
     where pduID = #{pduid,jdbcType=INTEGER}
   </update>
+  <select id="queryLabelProduct" resultMap="BaseResultMap">
+    select
+    pduID, merID, pduName, pduPrice, pduMemPrice, pduIntro, pduImage, pduRemain
+    from LabelHaveProduct a left join ProductInfo b on a.pduID=b.pduID
+    where a.LabelID=#{labelID} and b.merID=#{merID}
+  </select>
 </mapper>

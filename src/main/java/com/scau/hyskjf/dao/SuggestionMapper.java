@@ -1,7 +1,9 @@
 package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Suggestion;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SuggestionMapper {
     int deleteByPrimaryKey(Integer sugid);
 

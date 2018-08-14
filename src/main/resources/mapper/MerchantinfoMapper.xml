@@ -313,7 +313,6 @@
     from MerchantInfo
     where merId = #{id}
   </select>
-
   <update id="updateByModified" parameterType="MerchantinfomodifiedWithBLOBs">
     update MerchantInfo
     set merImage = #{merimage,jdbcType=VARCHAR},
@@ -344,6 +343,8 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
+    from Merchant a left join MerchantInfo b on a.merID=b.merID
+    where a.merName= #{mName}
     from MerchantInfo
   </select>
 </mapper>
