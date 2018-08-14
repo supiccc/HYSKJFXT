@@ -1,9 +1,10 @@
 package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Productinfo;
-import org.apache.ibatis.annotations.Param;
+
 import org.springframework.stereotype.Repository;
 
+import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 @Repository
