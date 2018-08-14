@@ -7,7 +7,7 @@ import com.scau.hyskjf.pojo.Admin;
 import com.scau.hyskjf.pojo.Memberaccount;
 import com.scau.hyskjf.pojo.Merchantaccount;
 import com.scau.hyskjf.service.AuthenticationService;
-import com.scau.hyskjf.shiro.UsernamePasswordRoleToken;
+import com.scau.hyskjf.util.shiro.UsernamePasswordRoleToken;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
 import org.apache.shiro.SecurityUtils;

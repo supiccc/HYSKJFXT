@@ -5,6 +5,8 @@ import java.util.Date;
 public class Member {
     private Integer memid;
 
+    private Float memcredit;
+
     private String memcer;
 
     private String memcerid;
@@ -27,6 +29,14 @@ public class Member {
 
     public void setMemid(Integer memid) {
         this.memid = memid;
+    }
+
+    public Float getMemcredit() {
+        return memcredit;
+    }
+
+    public void setMemcredit(Float memcredit) {
+        this.memcredit = memcredit;
     }
 
     public String getMemcer() {
