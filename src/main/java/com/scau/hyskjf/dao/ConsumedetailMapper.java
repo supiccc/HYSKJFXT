@@ -12,4 +12,6 @@ public interface ConsumedetailMapper {
     int insertSelective(Consumedetail record);
 
     List<Consumedetail> selectAllBymemID(Integer memid);
+
+    Consumedetail selectByCumID(Integer cumID);
 }

@@ -8,13 +8,17 @@ import com.scau.hyskjf.service.MemberCenterService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
 import com.scau.hyskjf.util.sms.IndustrySMS;
+import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.util.List;
@@ -41,7 +45,9 @@ public class MemberCenterController {
         return new ResponseJSON(ResponseCode.SUCCESS, m);
     }
 
-    // 发送验证码
+    /*用户已登录情况下发送验证码
+    **发送验证码并将生成验证码放入session中的verficationCode
+    * */
     @RequestMapping(value = "/sendSMS")
     public ResponseJSON sendSMS() {
         String username = ((Memberaccount)SecurityUtils.getSubject().getSession().getAttribute("user")).getMaid();
@@ -103,10 +109,38 @@ public class MemberCenterController {
         }
     }
 
+    // 显示消费记录
     @RequestMapping(value = "/showConsume", method = RequestMethod.GET)
     public ResponseJSON showConsume() {
         List result = memberCenterService.showConsumedetail();
         if (result == null) return new ResponseJSON(ResponseCode.WARN);
         return new ResponseJSON(ResponseCode.SUCCESS, result);
+    }
+
+    // 显示未点评消费记录
+//    @RequestMapping(value = "/showNOTComment", method = RequestMethod.GET)
+//    public ResponseJSON showNotComment() {
+//        List result = memberCenterService.showNoComment();
+//        if (SecurityUtils.getSubject().getSession().getAttribute("user") == null) return new ResponseJSON(ResponseCode.NOTLOGIN);
+//        return new ResponseJSON(ResponseCode.SUCCESS, result);
+//    }
+
+    /* 进行点评
+    ** 请求：消费记录编号
+    */
+    @RequestMapping(value = "/comment/{merID}", method = RequestMethod.POST)
+    public ResponseJSON doComment(@PathVariable Integer merID, String info, HttpServletRequest request) {
+        String result = memberCenterService.comment(merID, info, request);
+        if (result.equals("success")) {
+            return new ResponseJSON(ResponseCode.SUCCESS);
+        } else if (result.equals("nologin")) {
+            return new ResponseJSON(ResponseCode.NOTLOGIN, "未登录");
+        } else if (result.equals("noconsume")) {
+            return new ResponseJSON(ResponseCode.WARN, "未消费");
+        } else if (result.equals("hascomment")){
+            return new ResponseJSON(ResponseCode.WARN, "已点评");
+        } else {
+            return new ResponseJSON(ResponseCode.WARN);
+        }
     }
 }

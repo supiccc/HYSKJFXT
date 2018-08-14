@@ -313,6 +313,14 @@
     from MerchantInfo
     where merId = #{id}
   </select>
+  <select id="findByMerName" resultType="Merchantinfo" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from Merchant a left join MerchantInfo b on a.merID=b.merID
+    where a.merName= #{mName}
+  </select>
   <update id="updateByModified" parameterType="MerchantinfomodifiedWithBLOBs">
     update MerchantInfo
     set merImage = #{merimage,jdbcType=VARCHAR},
@@ -337,7 +345,6 @@
       merDiscountEvent = #{merdiscountevent,jdbcType=LONGVARCHAR}
     where merID = #{merid,jdbcType=INTEGER}
   </update>
-
   <select id="findAllMerchantinfo" resultMap="ResultMapWithBLOBs">
     select
     <include refid="Base_Column_List" />

@@ -283,15 +283,15 @@ public class MerchantInfoController {
      * 返回：
      * Productinfo类
      * */
-//    @RequestMapping(value = "/insertProductLabel", method = RequestMethod.POST)
-//    public ResponseJSON queryLabelProduct(Integer merID,Integer labelID) {
-//        try {
-//            List<Productinfo> labelProductList =productInfoService.queryLabelProduct(merID,labelID);
-//            return new ResponseJSON(ResponseCode.SUCCESS,labelProductList);
-//        } catch (Exception e) {
-//            return new ResponseJSON(ResponseCode.WARN);
-//        }
-//    }
+    @RequestMapping(value = "/queryLabelProduct", method = RequestMethod.POST)
+    public ResponseJSON queryLabelProduct(Integer merID,Integer labelID) {
+        try {
+            List<Productinfo> labelProductList =productInfoService.queryLabelProduct(merID,labelID);
+            return new ResponseJSON(ResponseCode.SUCCESS,labelProductList);
+        } catch (Exception e) {
+            return new ResponseJSON(ResponseCode.WARN);
+        }
+    }
 
 
 }

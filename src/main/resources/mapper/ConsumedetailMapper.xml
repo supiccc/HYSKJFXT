@@ -141,5 +141,9 @@
     from ConsumeDetail
     where memID = #{memid}
   </select>
-
+  <select id="selectByCumID" resultMap="BaseResultMap">
+    select *
+    from ConsumeDetail
+    where cumID = #{cumID}
+  </select>
 </mapper>

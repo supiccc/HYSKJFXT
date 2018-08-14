@@ -1,9 +1,6 @@
 package com.scau.hyskjf.service.impl;
 
-import com.scau.hyskjf.dao.ConsumedetailMapper;
-import com.scau.hyskjf.dao.CredithistoryviewMapper;
-import com.scau.hyskjf.dao.MemberMapper;
-import com.scau.hyskjf.dao.MemberaccountMapper;
+import com.scau.hyskjf.dao.*;
 import com.scau.hyskjf.pojo.*;
 import com.scau.hyskjf.service.MemberCenterService;
 import org.apache.shiro.SecurityUtils;
@@ -11,6 +8,7 @@ import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,6 +30,15 @@ public class MemberCenterServiceImpl implements MemberCenterService {
 
     @Autowired
     ConsumedetailMapper consumedetailMapper;
+
+    @Autowired
+    EvaluationMapper evaluationMapper;
+
+    @Autowired
+    ConsumeMapper consumeMapper;
+
+    @Autowired
+    ConsumecommentMapper consumecommentMapper;
 
     @Override
     public String forgetPwd(String newPwd, String verficationCode) {
@@ -117,7 +124,7 @@ public class MemberCenterServiceImpl implements MemberCenterService {
     // 格式化消费记录时间
     @Override
     public List FormatConsumedetail(List list) {
-        List result = new ArrayList();
+        ArrayList result = new ArrayList();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         for (int i = 0; i < list.size(); i++) {
             ConsumedetailFormatTime c = new ConsumedetailFormatTime();
@@ -143,5 +150,71 @@ public class MemberCenterServiceImpl implements MemberCenterService {
             result.add(c);
         }
         return result;
+    }
+
+    /*
+    * 显示未点评消费记录
+    * */
+//    @Override
+//    public List showNoComment() {
+//        Memberaccount m = (Memberaccount) SecurityUtils.getSubject().getSession().getAttribute("user");
+//        if(m == null) return null;
+//        return consumecommentMapper.selectByMemID(m.getMemid());
+//    }
+
+    /*
+    *  进行点评
+    *  更新消费记录表状态，点评表插入点评数据
+    * */
+    @Override
+    public String comment(Integer merID, String info, HttpServletRequest request) {
+        // 获取登录用户信息
+        Memberaccount m = (Memberaccount) SecurityUtils.getSubject().getSession().getAttribute("user");
+        if (m == null) return "nologin";
+        List<Consumecomment> consumes = consumecommentMapper.selectByMerAndMem(merID, m.getMemid());
+        if (consumes.equals(null)) return "noconsume";
+        int i = 0;
+        for (i = 0; i < consumes.size(); i++) {
+            if (consumes.get(i).getHascomment().equals(true)) break;
+        }
+        if (i != consumes.size()) {
+            return "hascomment";
+        }
+//         获取该消费记录信息
+//        Consumedetail consumedetail = consumedetailMapper.selectByCumID(consumes.get(i).getCumid());
+        // 判断是否用户本人消费记录
+//        if (m.getMemid().equals(consumedetail.getMemid())) return "noself";
+        // 新建评论对象，并设置属性
+        EvaluationWithBLOBs evaluation = new EvaluationWithBLOBs();
+        evaluation.setMerid(merID);
+        evaluation.setMemid(m.getMemid());
+        evaluation.setEvainfo(info);
+        evaluation.setEvaip(getIpAddr(request));
+        evaluation.setEvatime(new Date());
+        evaluation.setEvaenable(true);
+//        evaluation.setCumid(cumID);
+        // 插入数据库
+        evaluationMapper.insert(evaluation);
+        Consume consume = consumeMapper.selectByPrimaryKey(consumes.get(0).getCumid());
+        // 更新消费记录表状态为已评论
+        consume.setHascomment(true);
+        consumeMapper.updateByPrimaryKey(consume);
+        return "success";
+    }
+
+
+    // 获取客户端ip
+    public String getIpAddr(HttpServletRequest request) {
+        String ip = request.getHeader("x-forwarded-for");
+        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+        }
+        return ip;
     }
 }

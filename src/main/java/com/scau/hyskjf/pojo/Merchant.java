@@ -21,6 +21,8 @@ public class Merchant {
 
     private Boolean isindex;
 
+    private Float owecredit;
+
     public Integer getMerid() {
         return merid;
     }
@@ -99,5 +101,13 @@ public class Merchant {
 
     public void setIsindex(Boolean isindex) {
         this.isindex = isindex;
+    }
+
+    public Float getOwecredit() {
+        return owecredit;
+    }
+
+    public void setOwecredit(Float owecredit) {
+        this.owecredit = owecredit;
     }
 }

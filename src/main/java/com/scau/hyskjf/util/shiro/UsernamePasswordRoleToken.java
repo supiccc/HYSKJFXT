@@ -1,4 +1,4 @@
-package com.scau.hyskjf.shiro;
+package com.scau.hyskjf.util.shiro;
 
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.Md5Hash;
