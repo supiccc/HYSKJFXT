@@ -1,9 +1,7 @@
 package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Member;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface MemberMapper {
     int deleteByPrimaryKey(Integer memid);
 
