@@ -6,10 +6,7 @@ import com.scau.hyskjf.service.MerchantInfoService;
 import com.scau.hyskjf.service.ProductInfoService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
-import net.sf.ehcache.util.ProductInfo;
-import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -286,7 +283,6 @@ public class MerchantInfoController {
      * 返回：
      * Productinfo类
      * */
-<<<<<<< HEAD
     @RequestMapping(value = "/queryLabelProduct", method = RequestMethod.POST)
     public ResponseJSON queryLabelProduct(Integer merID,Integer labelID) {
         try {
@@ -296,17 +292,6 @@ public class MerchantInfoController {
             return new ResponseJSON(ResponseCode.WARN);
         }
     }
-=======
-//    @RequestMapping(value = "/insertProductLabel", method = RequestMethod.POST)
-//    public ResponseJSON queryLabelProduct(Integer merID,Integer labelID) {
-//        try {
-//            List<Productinfo> labelProductList =productInfoService.queryLabelProduct(merID,labelID);
-//            return new ResponseJSON(ResponseCode.SUCCESS,labelProductList);
-//        } catch (Exception e) {
-//            return new ResponseJSON(ResponseCode.WARN);
-//        }
-//    }
->>>>>>> 9b4ff9ea42253397b4b07419e093159430660d1f
 
 
 }

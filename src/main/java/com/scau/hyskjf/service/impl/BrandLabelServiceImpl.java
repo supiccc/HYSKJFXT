@@ -5,7 +5,6 @@ import com.scau.hyskjf.dao.LabelhaveproductMapper;
 import com.scau.hyskjf.pojo.Brandlabel;
 import com.scau.hyskjf.pojo.Labelhaveproduct;
 import com.scau.hyskjf.service.BrandLabelService;
-import net.sf.ehcache.util.ProductInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

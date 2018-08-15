@@ -2,6 +2,7 @@ package com.scau.hyskjf.controller;
 
 
 import com.scau.hyskjf.pojo.Memberinfochange;
+import com.scau.hyskjf.pojo.Reissuedetail;
 import com.scau.hyskjf.service.MemberManagementService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
@@ -49,15 +50,18 @@ public class MemberManagementController {
     }
 
     //会员补卡历史查询，所有会员信息
-
+    @RequestMapping("/reissue/list")
     public ResponseJSON findAllReissueHistory(){
-        return null;
+        List<Reissuedetail> reissuedetails = memberManagementService.findAllReissue();
+        return new ResponseJSON(ResponseCode.SUCCESS,reissuedetails);
     }
 
     //会员补卡历史查询，单个会员信息
 
-    public ResponseJSON findReissueHistory(){
-        return null;
+    @RequestMapping("/ressiue/{memid}")
+    public ResponseJSON findReissueHistory(@PathVariable int id){
+        List<Reissuedetail> reissuedetails = memberManagementService.findReissueByMemid(id);
+        return new ResponseJSON(ResponseCode.SUCCESS,reissuedetails);
     }
 
 

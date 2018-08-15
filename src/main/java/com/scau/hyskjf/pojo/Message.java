@@ -1,5 +1,7 @@
 package com.scau.hyskjf.pojo;
 
+import java.util.Date;
+
 public class Message {
     private Integer mesid;
 
@@ -14,6 +16,8 @@ public class Message {
     private Integer mestype;
 
     private String mescontent;
+
+    private Date mestime;
 
     public Integer getMesid() {
         return mesid;
@@ -69,5 +73,14 @@ public class Message {
 
     public void setMescontent(String mescontent) {
         this.mescontent = mescontent;
+    }
+
+
+    public Date getMestime() {
+        return mestime;
+    }
+
+    public void setMestime(Date mestime) {
+        this.mestime = mestime;
     }
 }

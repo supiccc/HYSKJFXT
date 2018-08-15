@@ -10,13 +10,13 @@ public interface ExamineService {
     public List<Application> findAllApplications(String state);
 
     //查询单个申请入盟商家
-    public Merchantinfo findApplicationById(int id);
+    public Merchantdetail findApplicationById(int id);
 
     //同意入盟申请
     public Merchantaccount applicationAgree(int id, int operator);
 
     //不同意入盟申请
-    public void applicationDisagree(int id);
+    public Merchantdetail applicationDisagree(int id,int operator);
 
 
 

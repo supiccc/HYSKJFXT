@@ -150,4 +150,43 @@
       handleTime = #{handletime,jdbcType=TIMESTAMP}
     where creconId = #{creconid,jdbcType=INTEGER}
   </update>
+
+  <select id="findAllCreditsoncumeOrderByStateAndTime" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from CreditConsume
+    order by transferState
+    <if test=" stateType == 1">
+      desc
+    </if>
+    ,recordTime
+    <if test=" timeType == 1">
+      desc
+    </if>
+  </select>
+  <select id="findAllCreditsoncumeOrderByTime" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from CreditConsume
+    order by recordTime
+    <if test=" timeType == 1">
+      desc
+    </if>
+  </select>
+
+  <select id="findAllCreditsoncumeOrderByState" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from CreditConsume
+  order by transferState
+  <if test=" stateType == 1">
+    desc
+  </if>
+  </select>
+
+  <select id="findAllCreditsoncume" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from CreditConsume
+  </select>
 </mapper>
