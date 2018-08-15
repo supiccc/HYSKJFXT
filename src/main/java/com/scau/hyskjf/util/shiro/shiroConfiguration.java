@@ -13,10 +13,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.LinkedHashMap;
 
 /**
@@ -52,7 +48,7 @@ public class shiroConfiguration {
         System.out.println("--------------shiro已经加载----------------");
         DefaultWebSecurityManager manager=new DefaultWebSecurityManager();
         manager.setRealm(authRealm);
-//        manager.setRememberMeManager(rememberMeManager());
+        manager.setRememberMeManager(rememberMeManager());
         return manager;
     }
 
@@ -91,20 +87,20 @@ public class shiroConfiguration {
     * cookie 管理器
     * */
     @Bean
-    public CookieRememberMeManager rememberMeManager() throws NoSuchAlgorithmException {
+    public CookieRememberMeManager rememberMeManager() {
 //        logger.info("注入Shiro的记住我(CookieRememberMeManager)管理器-->rememberMeManager", CookieRememberMeManager.class);
         CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
         //rememberme cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度（128 256 512 位），通过以下代码可以获取
 //         KeyGenerator keygen = KeyGenerator.getInstance("AES");
 //        SecretKey deskey = keygen.generateKey();
 //        System.out.println(Base64.encodeToString(deskey.getEncoded()));
-        SecureRandom random=SecureRandom.getInstance("SHA1PRNG");
-        random.setSeed("rememberMe".getBytes());
+//        SecureRandom random=SecureRandom.getInstance("SHA1PRNG");
+//        random.setSeed("rememberMe".getBytes());
 //        keygen.init(128, random);
 //        SecretKey skey = keygen.generateKey();
-//        byte[] cipherKey = Base64.decode("6ZmI6I2j5Y+R5aSn5ZOlAA==");
+        byte[] cipherKey = Base64.decode("6ZmI6I2j5Y+R5aSn5ZOlAA==");
 //        byte[] cipherKey = Base64.decode(skey.getEncoded());
-//        cookieRememberMeManager.setCipherKey(cipherKey);
+        cookieRememberMeManager.setCipherKey(cipherKey);
         cookieRememberMeManager.setCookie(rememberMeCookie());
         return cookieRememberMeManager;
     }
