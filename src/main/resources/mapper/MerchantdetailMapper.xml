@@ -261,9 +261,22 @@
       </if>
     </trim>
   </insert>
-
-
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from MerchantDetail
+    where merID = #{merid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from MerchantDetail
+  </select>
+  <select id="selectByMerID" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
     select
     <include refid="Base_Column_List" />
     ,
