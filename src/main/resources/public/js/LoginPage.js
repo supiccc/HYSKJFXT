@@ -52,7 +52,7 @@ var accountMgr={
                 success : function(res) {
                     if (res.code == 0) {
                         // 登录成功
-                        alert("hey!")
+                        alert("登陆成功，欢迎用户"+username);
                         var to = "";
                         switch (user_type) {
                             case '1':

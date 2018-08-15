@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RestfulController {
     @RequestMapping(value = "/")
     public String signin() {
-        return "sign_in";
+        return null;
     }
 }
