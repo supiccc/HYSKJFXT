@@ -20,4 +20,7 @@ public interface AuthenticationService {
 
     // 登录
     ResponseJSON login(String username, String pwd, String role);
+
+    // 忘记密码
+    String forgetpwd(String username, String pwd, String vc, String role);
 }

@@ -1,10 +1,13 @@
 package com.scau.hyskjf.controller;
 
+import com.scau.hyskjf.pojo.Memberaccount;
 import com.scau.hyskjf.service.AuthenticationService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
+import com.scau.hyskjf.util.sms.IndustrySMS;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +30,39 @@ public class AuthenticationController {
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public ResponseJSON checkout() {
-        Object o = SecurityUtils.getSubject().getSession().getAttribute("user");
-        return new ResponseJSON(ResponseCode.SUCCESS, o);
+//        Object o = SecurityUtils.getSubject().getSession().getAttribute("user");
+        return new ResponseJSON(ResponseCode.SUCCESS, SecurityUtils.getSubject().getPrincipal());
     }
+
+
+    /*忘记密码下发送验证码
+     **发送验证码并将生成验证码放入session中的verficationCode
+     * */
+    @RequestMapping(value = "/sendSMS", method = RequestMethod.POST)
+    public ResponseJSON sendSMS(String username) {
+//        String username = ((Memberaccount)SecurityUtils.getSubject().getSession().getAttribute("user")).getMaid();
+        String verficationCode = IndustrySMS.execute(username);
+//        String verficationCode = VerficationCode.getCode();  // 获取验证码
+        SecurityUtils.getSubject().getSession().setAttribute("verficationCode", verficationCode);
+        return new ResponseJSON(ResponseCode.SUCCESS);
+    }
+
+
+    /*
+    * 忘记密码
+    * 传入数据：用户名，新密码，验证码
+    * */
+    @RequestMapping(value = "/forget", method = RequestMethod.POST)
+    public ResponseJSON forgetpwd(String username, String pwd, String vc, String role) {
+        String result = authenticationService.forgetpwd(username, pwd, vc, role);
+        if (result.equals("success")) {
+            return new ResponseJSON(ResponseCode.SUCCESS);
+        } else if (result.equals("incorrectcode")) {
+            return new ResponseJSON(ResponseCode.WARN, "验证码错误");
+        } else if (result.equals("incorrectrole")) {
+            return new ResponseJSON(ResponseCode.WARN, "角色错误");
+        }
+        return new ResponseJSON(ResponseCode.WARN, "服务器未知错误");
+    }
+
 }
