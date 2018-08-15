@@ -21,9 +21,10 @@ public interface MessageMapper {
 
     int updateByPrimaryKey(Message record);
 
-    List<Message> findSendedMessage();
+    List<Message> findSendedMessage(int messource);
 
-    List<Message> findReceivedMessahe();
+    List<Message> findReceivedMessahe(int mesdestination);
 
-    List<Message> findUnlookMessage();
+
+    List<Message> findUnlookMessage(int mesdestination);
 }

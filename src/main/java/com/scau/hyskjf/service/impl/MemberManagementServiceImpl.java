@@ -1,7 +1,9 @@
 package com.scau.hyskjf.service.impl;
 
+import com.scau.hyskjf.dao.MemberMapper;
 import com.scau.hyskjf.dao.MemberinfochangeMapper;
 import com.scau.hyskjf.dao.ReissuedetailMapper;
+import com.scau.hyskjf.pojo.Member;
 import com.scau.hyskjf.pojo.Memberinfochange;
 import com.scau.hyskjf.pojo.Reissuedetail;
 import com.scau.hyskjf.service.MemberManagementService;
@@ -17,6 +19,9 @@ public class MemberManagementServiceImpl implements MemberManagementService {
 
     @Autowired
     private ReissuedetailMapper reissuedetailMapper;
+
+    @Autowired
+    private MemberMapper memberMapper;
 
     @Override
     public List<Memberinfochange> findAllMemberinfochange() {
@@ -36,5 +41,10 @@ public class MemberManagementServiceImpl implements MemberManagementService {
     @Override
     public List<Reissuedetail> findReissueByMemid(int id) {
         return reissuedetailMapper.findByMemId(id);
+    }
+
+    @Override
+    public Member findMemberinfoById(int id) {
+        return memberMapper.selectByPrimaryKey(id);
     }
 }

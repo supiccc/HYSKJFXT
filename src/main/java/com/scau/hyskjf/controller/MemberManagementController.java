@@ -1,6 +1,7 @@
 package com.scau.hyskjf.controller;
 
 
+import com.scau.hyskjf.pojo.Member;
 import com.scau.hyskjf.pojo.Memberinfochange;
 import com.scau.hyskjf.pojo.Reissuedetail;
 import com.scau.hyskjf.service.MemberManagementService;
@@ -23,8 +24,10 @@ public class MemberManagementController {
     private MemberManagementService memberManagementService;
 
     //查询单个会员基本信息
-    public ResponseJSON findMemberById(){
-        return null;
+    @RequestMapping("/meminfo/{id}")
+    public ResponseJSON findMemberById(@PathVariable int id){
+       Member member = memberManagementService.findMemberinfoById(id);
+        return new ResponseJSON(ResponseCode.SUCCESS,member);
     }
     //会员基本信息变更
     public ResponseJSON memberupdate(){

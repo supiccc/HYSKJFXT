@@ -3,17 +3,17 @@ package com.scau.hyskjf.controller;
 //站内消息管理控制器
 
 
+import com.scau.hyskjf.pojo.Admin;
 import com.scau.hyskjf.pojo.Message;
 import com.scau.hyskjf.service.MessageManagementService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@SessionAttributes("user")
 @RestController
 @RequestMapping("/messageManegement")
 public class MessageManagementController {
@@ -22,24 +22,24 @@ public class MessageManagementController {
     private MessageManagementService messageManagementService;
     //查看已发送消息
     @RequestMapping("/sended")
-    public ResponseJSON browseSendedMessages(){
-        List<Message> messageList = messageManagementService.findSendedMessage();
+    public ResponseJSON browseSendedMessages(@ModelAttribute("user")Admin admin){
+        List<Message> messageList = messageManagementService.findSendedMessage(admin.getAdminid());
         return new ResponseJSON(ResponseCode.SUCCESS,messageList);
     }
 
 
     //查看已接收消息
     @RequestMapping("/received")
-    public ResponseJSON browseReceivedMessages(){
-        List<Message> messages = messageManagementService.findReceivedMessage();
+    public ResponseJSON browseReceivedMessages(@ModelAttribute("user")Admin admin){
+        List<Message> messages = messageManagementService.findReceivedMessage(admin.getAdminid());
         return new ResponseJSON(ResponseCode.SUCCESS,messages);
     }
 
 
     //查看未浏览消息
     @RequestMapping("/unlook")
-    public ResponseJSON browseUntreatedMessages(){
-        List<Message> messages = messageManagementService.findUnlookMessage();
+    public ResponseJSON browseUntreatedMessages(@ModelAttribute("user")Admin admin){
+        List<Message> messages = messageManagementService.findUnlookMessage(admin.getAdminid());
         return new ResponseJSON(ResponseCode.SUCCESS,messages);
     }
 

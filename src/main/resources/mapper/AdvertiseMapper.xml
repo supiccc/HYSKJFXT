@@ -156,4 +156,13 @@
       adverEnd = #{adverend,jdbcType=DATE}
     where adverID = #{adverid,jdbcType=INTEGER}
   </update>
+
+
+  <select id="findAllAdvertise" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from Advertise
+  </select>
 </mapper>

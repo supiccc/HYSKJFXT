@@ -10,11 +10,11 @@ import java.util.List;
  * @Version 1.0
  */
 public interface MessageManagementService {
-    List<Message> findSendedMessage();
+    List<Message> findSendedMessage(int id);
 
-    List<Message> findReceivedMessage();
+    List<Message> findReceivedMessage(int id);
 
-    List<Message> findUnlookMessage();
+    List<Message> findUnlookMessage(int id);
 
     Message findMessageDetail(int id);
 
