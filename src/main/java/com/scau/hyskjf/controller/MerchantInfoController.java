@@ -2,6 +2,7 @@ package com.scau.hyskjf.controller;
 
 import com.scau.hyskjf.pojo.*;
 import com.scau.hyskjf.service.BrandLabelService;
+import com.scau.hyskjf.service.EmailService;
 import com.scau.hyskjf.service.MerchantInfoService;
 import com.scau.hyskjf.service.ProductInfoService;
 import com.scau.hyskjf.util.json.ResponseCode;
@@ -22,6 +23,7 @@ import java.util.List;
 * （1）商家资料维护MerchantInfo表查询和修改（不能删除，只能由系统管理员删除，商家资料添加只能在商家入盟时添加）
 * （2）产品维护ProductInfo表：添加增删查改产品标签
 * （3）产品标签维护：增删查改BrandLabel标签表，增删查改产品和标签的多对多关系表LabelHaveProduct
+* （4）商家意见反馈发邮件（所有商家账户可用）
 * */
 
 @RestController
@@ -35,6 +37,9 @@ public class MerchantInfoController {
 
     @Autowired
     BrandLabelService brandLabelService;
+
+    @Autowired
+    EmailService emailService;
 
     /*
      * 根据商家编号merID查询商家资料：
@@ -286,7 +291,6 @@ public class MerchantInfoController {
      * 返回：
      * Productinfo类
      * */
-<<<<<<< HEAD
     @RequestMapping(value = "/queryLabelProduct", method = RequestMethod.POST)
     public ResponseJSON queryLabelProduct(Integer merID,Integer labelID) {
         try {
@@ -296,17 +300,23 @@ public class MerchantInfoController {
             return new ResponseJSON(ResponseCode.WARN);
         }
     }
-=======
-//    @RequestMapping(value = "/insertProductLabel", method = RequestMethod.POST)
-//    public ResponseJSON queryLabelProduct(Integer merID,Integer labelID) {
-//        try {
-//            List<Productinfo> labelProductList =productInfoService.queryLabelProduct(merID,labelID);
-//            return new ResponseJSON(ResponseCode.SUCCESS,labelProductList);
-//        } catch (Exception e) {
-//            return new ResponseJSON(ResponseCode.WARN);
-//        }
-//    }
->>>>>>> 9b4ff9ea42253397b4b07419e093159430660d1f
 
+    /*****************************************下面是意见反馈发邮箱*****************************************/
 
+    /*
+     * 意见反馈：
+     * 输入：
+     * 反馈意见content String
+     * 返回：
+     * 成功码和失败码
+     * */
+    @RequestMapping(value = "/feedbackEmail", method = RequestMethod.POST)
+    public ResponseJSON feedbackEmail(String content) {
+        try {
+            emailService.sendSimpleEmail("1961534631@qq.com","意见反馈",content);//to为收件人，subject为主题，content为内容
+            return new ResponseJSON(ResponseCode.SUCCESS);
+        } catch (Exception e) {
+            return new ResponseJSON(ResponseCode.WARN);
+        }
+    }
 }

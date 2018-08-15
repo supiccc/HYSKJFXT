@@ -40,6 +40,9 @@ public class MemberCenterServiceImpl implements MemberCenterService {
     @Autowired
     ConsumecommentMapper consumecommentMapper;
 
+    @Autowired
+    MembercardMapper membercardMapper;
+
     @Override
     public String forgetPwd(String newPwd, String verficationCode) {
         try {
@@ -216,5 +219,28 @@ public class MemberCenterServiceImpl implements MemberCenterService {
             ip = request.getRemoteAddr();
         }
         return ip;
+    }
+
+    @Override
+    public int addMemberAccount(Member member,String pwd,String shopPwd){
+        memberMapper.insert(member);
+        Integer id = memberMapper.getMemID();
+        Memberaccount memberaccount = new Memberaccount();
+        memberaccount.setMemid(id);
+        memberaccount.setMaid(member.getMemphone());//登陆账号为手机号
+        memberaccount.setManame(member.getMemname());//账户名为姓名
+        String pwdMd5 = new Md5Hash(pwd,memberaccount.getMemid(),3).toString();//对账户的密码进行MD5加密
+        String shopPwdMd5 = new Md5Hash(shopPwd,memberaccount.getMemid(),3).toString();//对账户的支付密码进行MD5加密
+        memberaccount.setMaenable(true);
+        return memberaccountMapper.insert(memberaccount);
+    }
+
+    @Override
+    public String addMemberCard(Membercard membercard){
+        String merID = String.format("%011d",membercard.getMerid());
+        String memID = merID+String.format("%011d",membercard.getMemid());
+        membercard.setMcid(memID);
+        membercardMapper.insert(membercard);
+        return memID;
     }
 }

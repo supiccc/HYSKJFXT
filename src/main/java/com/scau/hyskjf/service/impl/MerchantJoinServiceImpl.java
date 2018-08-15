@@ -25,20 +25,24 @@ public class MerchantJoinServiceImpl implements MerchantJoinService {
     ApplicationMapper applicationMapper;
 
     public void developJoin(MerchantinfoWithBLOBs merchantinfoWithBLOBs, Merchant merchant) {
-        int createMerID = merchantMapper.insert(merchant);
-        merchantinfoWithBLOBs.setMerid(new Integer(createMerID));
+        Integer createMerID = merchantMapper.getMerID();
+        merchant.setMerid(createMerID);
+        merchantMapper.insert(merchant);
+        merchantinfoWithBLOBs.setMerid(createMerID);
         merchantinfoMapper.insert(merchantinfoWithBLOBs);
         Application application = new Application();
         application.setAcamerchant(merchant.getMersubid());//设置申请商家（上级）
-        application.setAcaamerchant(new Integer(createMerID));//设置入盟上级（本体）
+        application.setAcaamerchant(createMerID);//设置入盟上级（本体）
         application.setAcareatime(new Date());//设置申请时间
         application.setAcastat("未处理");//设置审核状态
         applicationMapper.insert(application);
     }
 
     public void independentJoin(MerchantinfoWithBLOBs merchantinfoWithBLOBs, Merchant merchant) {
-        int createMerID = merchantMapper.insert(merchant);
-        Integer cMerID = new Integer(createMerID);
+        Integer createMerID = merchantMapper.getMerID();
+        merchant.setMerid(createMerID);
+        merchantMapper.insert(merchant);
+        Integer cMerID = createMerID;
         Merchant updateMerchant = new Merchant();
         updateMerchant.setMerid(cMerID);
         updateMerchant.setMersubid(cMerID);

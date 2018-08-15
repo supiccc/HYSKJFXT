@@ -168,4 +168,8 @@
       memEmail = #{mememail,jdbcType=VARCHAR}
     where memID = #{memid,jdbcType=INTEGER}
   </update>
+  <select id="getMemID" resultType="java.lang.Integer">
+    select max(memID)+1 as mmemID
+    from Member
+  </select>
 </mapper>
