@@ -3,6 +3,8 @@ package com.scau.hyskjf.dao;
 import com.scau.hyskjf.pojo.Message;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface MessageMapper {
     int deleteByPrimaryKey(Integer mesid);
@@ -18,4 +20,10 @@ public interface MessageMapper {
     int updateByPrimaryKeyWithBLOBs(Message record);
 
     int updateByPrimaryKey(Message record);
+
+    List<Message> findSendedMessage();
+
+    List<Message> findReceivedMessahe();
+
+    List<Message> findUnlookMessage();
 }
