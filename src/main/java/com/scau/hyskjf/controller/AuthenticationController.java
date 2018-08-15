@@ -1,5 +1,6 @@
 package com.scau.hyskjf.controller;
 
+import com.scau.hyskjf.pojo.Member;
 import com.scau.hyskjf.pojo.Memberaccount;
 import com.scau.hyskjf.service.AuthenticationService;
 import com.scau.hyskjf.util.json.ResponseCode;
@@ -23,8 +24,8 @@ public class AuthenticationController {
     AuthenticationService authenticationService;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseJSON login(String username, String pwd, String role) {
-        ResponseJSON result = authenticationService.login(username, pwd, role);
+    public ResponseJSON login(String username, String pwd, String role, int rememberMe) {
+        ResponseJSON result = authenticationService.login(username, pwd, role, rememberMe);
         return result;
     }
 
@@ -63,6 +64,12 @@ public class AuthenticationController {
             return new ResponseJSON(ResponseCode.WARN, "角色错误");
         }
         return new ResponseJSON(ResponseCode.WARN, "服务器未知错误");
+    }
+
+    @RequestMapping(value = "/logout")
+    public ResponseJSON logout() {
+        SecurityUtils.getSubject().logout();
+        return new ResponseJSON(ResponseCode.SUCCESS);
     }
 
 }

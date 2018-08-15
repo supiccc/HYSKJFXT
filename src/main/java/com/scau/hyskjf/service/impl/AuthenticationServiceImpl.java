@@ -49,10 +49,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public ResponseJSON login(String username, String pwd, String role) {
+    public ResponseJSON login(String username, String pwd, String role, int rememberMe) {
         try {
             Subject subject = SecurityUtils.getSubject();
             UsernamePasswordRoleToken token = new UsernamePasswordRoleToken(username, pwd.toCharArray(), role);
+            if (rememberMe == 1) {
+                token.setRememberMe(true);
+            }
             subject.login(token);
             Object m = (Object) subject.getPrincipal();
             if (role.equals("admin")) {
