@@ -4,6 +4,7 @@ import com.scau.hyskjf.pojo.Memberinfochange;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.List;
+
 @Repository
 public interface MemberinfochangeMapper {
     int deleteByPrimaryKey(Integer micid);

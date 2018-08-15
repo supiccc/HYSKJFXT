@@ -19,6 +19,12 @@
   <sql id="Blob_Column_List">
     reiReason
   </sql>
+  <sql id="Base_Column_List">
+    memID, mcPKID, reiID,
+      reiTime, mcID, merID,
+      mcType, mcCredit, mcBalance,
+      mcEnable
+  </sql>
   <insert id="insert" parameterType="com.scau.hyskjf.pojo.Reissuedetail">
     insert into ReissueDetail (memID, mcPKID, reiID, 
       reiTime, mcID, merID, 
@@ -102,4 +108,21 @@
       </if>
     </trim>
   </insert>
+
+  <select id="findAllReissue" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ReissueDetail
+  </select>
+
+  <select id="findByMemId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ReissueDetail
+    where memID = #{memid}
+  </select>
 </mapper>
