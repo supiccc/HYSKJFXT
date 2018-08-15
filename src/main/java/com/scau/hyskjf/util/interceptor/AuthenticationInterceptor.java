@@ -1,5 +1,6 @@
 package com.scau.hyskjf.util.interceptor;
 
+import com.scau.hyskjf.pojo.*;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -17,10 +18,17 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 //                SecurityUtils.getSubject().getSession().getAttribute("user").equals(null)) {
 //            SecurityUtils.getSubject().getSession().setAttribute("user", SecurityUtils.getSubject().getPrincipal());
 //        }
-        if (!o.equals(null)) {
+        if (o != null) {
 
             if (SecurityUtils.getSubject().getSession().getAttribute("user") == null) {
                 SecurityUtils.getSubject().getSession().setAttribute("user", SecurityUtils.getSubject().getPrincipal());
+                if (o instanceof Memberaccount) {
+                    SecurityUtils.getSubject().getSession().setAttribute("role", "member");
+                } else if (o instanceof Merchantaccount) {
+                    SecurityUtils.getSubject().getSession().setAttribute("role", "merchant");
+                } else if (o instanceof Admin) {
+                    SecurityUtils.getSubject().getSession().setAttribute("role", "admin");
+                }
             }
         }
         return true;

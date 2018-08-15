@@ -32,7 +32,7 @@ public class AuthenticationController {
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public ResponseJSON checkout() {
 //        Object o = SecurityUtils.getSubject().getSession().getAttribute("user");
-        return new ResponseJSON(ResponseCode.SUCCESS, SecurityUtils.getSubject().getPrincipal());
+        return new ResponseJSON(ResponseCode.SUCCESS, SecurityUtils.getSubject().getSession().getAttribute("role"));
     }
 
 

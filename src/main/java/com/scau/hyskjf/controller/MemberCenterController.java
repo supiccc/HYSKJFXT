@@ -40,7 +40,7 @@ public class MemberCenterController {
     @ResponseBody
     public ResponseJSON getMember(HttpSession session) {
         Memberaccount m = (Memberaccount) session.getAttribute("user");
-        return new ResponseJSON(ResponseCode.SUCCESS, m);
+        return new ResponseJSON(ResponseCode.SUCCESS, SecurityUtils.getSubject().getSession().getAttribute("role"));
     }
 
     /*用户已登录情况下发送验证码
