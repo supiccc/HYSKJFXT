@@ -12,7 +12,12 @@ public enum ResponseCode {
     HASLOGIN(-1, "用户已登录"),
     NOTFOUND(-1,"没有查到"),
     ILLEGALCODE(-1, "非法入参"),
-    NOTLOGIN(-1, "未登录");
+    NOTLOGIN(-1, "未登录"),
+    ERRORCARD(-2, "会员卡号错误"),
+    ERRORSHOPPWD(-3, "消费密码错误"),
+    LACKCREDIT(-4, "积分不足"),
+    LACKSTORE(-5, "储值余额不足");
+
 
     private int code;
     private String msg;
