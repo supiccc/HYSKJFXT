@@ -24,6 +24,8 @@ public interface MerchantdetailMapper {
                                                            @Param("mercity") String mercity,
                                                            @Param("merarea") String merarea,
                                                            @Param("mertype") String mertype,
-                                                           @Param("merrecommend") boolean merrecommend,
-                                                           @Param("isindex") boolean isindex);
+                                                           @Param("merrecommend") Integer merrecommend,
+                                                           @Param("isindex") Integer isindex);
+
+    List<MerchantdetailWithBLOBs> findAllMerchantinfo();
 }

@@ -23,19 +23,19 @@ public class MerchantManagementController {
     //商家查询，浏览联盟内商家，查询商家
     @RequestMapping("/query/list")
     public ResponseJSON findAllMerchant(){
-        List<MerchantinfoWithBLOBs> merchantinfos = merchantManagementService.findAllMerchant();
-        return new ResponseJSON(ResponseCode.SUCCESS,merchantinfos);
+
+        List<MerchantdetailWithBLOBs> merchandetails = merchantManagementService.findAllMerchant();
+        return new ResponseJSON(ResponseCode.SUCCESS,merchandetails);
     }
 
-    //查询商家，可按条件模糊查询（商家名称、所在省、市、区、是否为推荐商家，是否为首页显示商家）
+    //查询商家，可按条件模糊查询（商家名称、所在省、市、区、是否为推荐商家、是否为首页显示商家）
     @RequestMapping("/query")
     public ResponseJSON queryMerchant(String merName, String province,String city, String area,
-                                      String type,boolean merrecommend,boolean isindex){
+                                      String type,Integer merrecommend,Integer isindex){
 
         System.out.println(merName);
         System.out.println(province);
-        System.out.println(merrecommend);
-        System.out.println(isindex);
+
         List<MerchantdetailWithBLOBs> merchantdetails = merchantManagementService.findMerchantDetailByWord
                 (merName, province, city, area,type,merrecommend,isindex);
         return new ResponseJSON(ResponseCode.SUCCESS,merchantdetails);

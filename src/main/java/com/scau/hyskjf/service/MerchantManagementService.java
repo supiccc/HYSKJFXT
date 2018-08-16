@@ -11,7 +11,7 @@ public interface MerchantManagementService {
 
     Merchantdetail setRecommend(int id);
 
-    List<MerchantinfoWithBLOBs> findAllMerchant();
+    List<MerchantdetailWithBLOBs> findAllMerchant();
 
     MerchantinfoWithBLOBs findMerchantById(int id);
 
@@ -31,5 +31,5 @@ public interface MerchantManagementService {
 
     List<MerchantdetailWithBLOBs> findMerchantDetailByWord(String merName, String province,
                                                            String city, String area,String type,
-                                                           boolean merrecommend,boolean isindex);
+                                                            Integer merrecommend,Integer isindex);
 }

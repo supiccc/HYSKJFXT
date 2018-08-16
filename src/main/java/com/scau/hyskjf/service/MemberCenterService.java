@@ -2,6 +2,7 @@ package com.scau.hyskjf.service;
 
 import com.scau.hyskjf.pojo.Credithistoryview;
 import com.scau.hyskjf.pojo.Member;
+import com.scau.hyskjf.pojo.Memberandcard;
 import com.scau.hyskjf.pojo.Membercard;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,4 +45,8 @@ public interface MemberCenterService {
     Membercard queryCardByMcid(String mcid);//根据会员卡号查询会员卡信息
 
     int updateCard(Membercard membercard);//修改会员卡信息
+
+    Memberandcard findMemDetailByCarId(String cardId);
+
+    Memberandcard rechargeMemberCard(String cardId, float money);
 }

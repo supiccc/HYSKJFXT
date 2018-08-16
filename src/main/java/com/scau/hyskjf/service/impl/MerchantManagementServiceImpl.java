@@ -23,6 +23,7 @@ public class MerchantManagementServiceImpl implements MerchantManagementService 
     @Autowired
     private MerchantdetailMapper merchantdetailMapper;
 
+
     @Override
     public Merchantdetail setRecommend(int id) {
         Merchant merchant = new Merchant();
@@ -35,8 +36,8 @@ public class MerchantManagementServiceImpl implements MerchantManagementService 
     }
 
     @Override
-    public List<MerchantinfoWithBLOBs> findAllMerchant() {
-        return merchantinfoMapper.findAllMerchantinfo();
+    public List<MerchantdetailWithBLOBs> findAllMerchant() {
+        return merchantdetailMapper.findAllMerchantinfo();
     }
 
     @Override
@@ -107,7 +108,7 @@ public class MerchantManagementServiceImpl implements MerchantManagementService 
     @Override
     public List<MerchantdetailWithBLOBs> findMerchantDetailByWord(String merName, String province,
                                                                   String city, String area,String type,
-                                                                  boolean merrecommend,boolean isindex) {
+                                                                  Integer merrecommend,Integer isindex) {
         return merchantdetailMapper.findMerchantDetailByWord(merName,province,city,area,type,merrecommend,isindex);
     }
 }
