@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.MerchantlabelMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Merchantlabel" >
+    <id column="labelID" property="labelid" jdbcType="INTEGER" />
+    <result column="labelName" property="labelname" jdbcType="VARCHAR" />
+    <result column="labelType" property="labeltype" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    labelID, labelName, labelType
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from MerchantLabel
+    where labelID = #{labelid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from MerchantLabel
+    where labelID = #{labelid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Merchantlabel" >
+    insert into MerchantLabel (labelID, labelName, labelType
+      )
+    values (#{labelid,jdbcType=INTEGER}, #{labelname,jdbcType=VARCHAR}, #{labeltype,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Merchantlabel" >
+    insert into MerchantLabel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="labelid != null" >
+        labelID,
+      </if>
+      <if test="labelname != null" >
+        labelName,
+      </if>
+      <if test="labeltype != null" >
+        labelType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="labelid != null" >
+        #{labelid,jdbcType=INTEGER},
+      </if>
+      <if test="labelname != null" >
+        #{labelname,jdbcType=VARCHAR},
+      </if>
+      <if test="labeltype != null" >
+        #{labeltype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Merchantlabel" >
+    update MerchantLabel
+    <set >
+      <if test="labelname != null" >
+        labelName = #{labelname,jdbcType=VARCHAR},
+      </if>
+      <if test="labeltype != null" >
+        labelType = #{labeltype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where labelID = #{labelid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Merchantlabel" >
+    update MerchantLabel
+    set labelName = #{labelname,jdbcType=VARCHAR},
+      labelType = #{labeltype,jdbcType=VARCHAR}
+    where labelID = #{labelid,jdbcType=INTEGER}
+  </update>
+</mapper>

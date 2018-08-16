@@ -142,6 +142,7 @@
     where mesID = #{mesid,jdbcType=INTEGER}
   </update>
 
+  <!-- 管理员查询已发送消息 -->
   <select id="findAdminSendedMessage" resultMap="ResultMapWithBLOBs">
     select
     <include refid="Base_Column_List" />
@@ -151,6 +152,8 @@
     where mesSource = #{messource} and (mesType = 0 or mesType = 1)
     order by mesTime desc
   </select>
+
+  <!-- 管理员查询已接收消息 -->
   <select id="findAdminReceivedMessage" resultMap="ResultMapWithBLOBs">
     select
     <include refid="Base_Column_List" />
@@ -161,6 +164,7 @@
     order by mesTime desc
   </select>
 
+  <!-- 管理员查询未读消息 -->
   <select id="findAdminUnlookMessage" resultMap="ResultMapWithBLOBs">
     select
     <include refid="Base_Column_List" />
@@ -171,4 +175,10 @@
     (mesType = 2 or mesType = 3) and (mesRead = false or mesRead is null)
     order by mesTime desc
   </select>
+
+  <!-- 商家查询未读消息 -->
+
+  <!-- 商家查询已发送消息 -->
+
+  <!-- -->
 </mapper>

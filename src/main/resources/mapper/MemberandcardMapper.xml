@@ -22,6 +22,14 @@
   <resultMap id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.Memberandcard" extends="BaseResultMap" >
     <result column="memAdress" property="memadress" jdbcType="LONGVARCHAR" />
   </resultMap>
+  <sql id="Base_Column_List">
+    memID, memCredit, memCer,
+      memCerID, memName, memSex,
+      memBirth, memPhone, memEmail,
+      mcPKID, mcID, merID,
+      mcType, mcCredit, mcBalance,
+      mcEnable
+  </sql>
   <sql id="Blob_Column_List" >
     memAdress
   </sql>
@@ -148,4 +156,13 @@
       </if>
     </trim>
   </insert>
+
+  <select id="selectByCarId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from MemberAndCard
+    where mcID = #{cardId,jdbcType=VARCHAR}
+  </select>
 </mapper>
