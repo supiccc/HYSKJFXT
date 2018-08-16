@@ -27,6 +27,16 @@ spring:
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
       # 合并多个DruidDataSource的监控数据
       useGlobalDataSourceStat: true
+    mail:
+      host: smtp.qq.com
+      username: 1961534631@qq.com
+      password: lcvqvrerfsioebcb
+      default-encoding: UTF-8
+      port: 587
+#邮件发送人
+mail:
+    fromMail:
+        addr: 1961534631@qq.com
 
 mybatis:
     #Mybatis扫描

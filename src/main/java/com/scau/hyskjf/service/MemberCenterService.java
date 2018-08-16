@@ -2,6 +2,7 @@ package com.scau.hyskjf.service;
 
 import com.scau.hyskjf.pojo.Credithistoryview;
 import com.scau.hyskjf.pojo.Member;
+import com.scau.hyskjf.pojo.Membercard;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
@@ -29,4 +30,8 @@ public interface MemberCenterService {
 //    List showNoComment(); // 显示未点评消费记录
 
     String comment(Integer merID, String info, HttpServletRequest request); // 选择某记录进行点评
+
+    int addMemberAccount(Member member,String pwd,String shopPwd);//添加会员用户
+
+    String addMemberCard(Membercard membercard);
 }
