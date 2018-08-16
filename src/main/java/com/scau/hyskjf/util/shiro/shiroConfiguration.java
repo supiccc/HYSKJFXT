@@ -1,15 +1,22 @@
 package com.scau.hyskjf.util.shiro;
 
+import org.apache.log4j.Logger;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
+import org.crazycake.shiro.RedisCacheManager;
+import org.crazycake.shiro.RedisManager;
+import org.crazycake.shiro.RedisSessionDAO;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,6 +27,17 @@ import java.util.LinkedHashMap;
  */
 @Configuration
 public class shiroConfiguration {
+    Logger logger = Logger.getLogger(shiroConfiguration.class);
+
+    @Value("${spring.redis.host}")
+    private String host;
+
+    @Value("${spring.redis.port}")
+    private int port;
+
+    @Value("${spring.redis.password}")
+    private String password;
+
     @Bean(name="shiroFilter")
     public ShiroFilterFactoryBean shiroFilter(@Qualifier("securityManager") SecurityManager manager) {
         ShiroFilterFactoryBean bean=new ShiroFilterFactoryBean();
@@ -29,7 +47,9 @@ public class shiroConfiguration {
 //        bean.setSuccessUrl("/home");
         //配置访问权限
         LinkedHashMap<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
-
+        filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/sign*.html", "anon");
+        filterChainDefinitionMap.put("/forget_password.html", "anon");
 //        filterChainDefinitionMap.put("/jsp/login.jsp*", "anon"); //表示可以匿名访问
         filterChainDefinitionMap.put("/**", "user");  //配置记住我或认证通过可以访问的地址
 //        filterChainDefinitionMap.put("/loginUser", "anon");
@@ -38,17 +58,20 @@ public class shiroConfiguration {
 //        filterChainDefinitionMap.put("/jsp/index.jsp*","authc");
 //        filterChainDefinitionMap.put("/*", "authc");//表示需要认证才可以访问
 //        filterChainDefinitionMap.put("/**", "authc");//表示需要认证才可以访问
-//        filterChainDefinitionMap.put("/shopAdminAccountManagement.html", "anon");
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return bean;
     }
     //配置核心安全事务管理器
     @Bean(name="securityManager")
-    public SecurityManager securityManager(@Qualifier("authRealm") AuthRealm authRealm) {
+    public SecurityManager securityManager(@Qualifier("authRealm") AuthRealm authRealm,
+                                           @Qualifier("sessionManager") SessionManager sessionManager,
+                                           @Qualifier("catheManager")RedisCacheManager redisCacheManager) {
         System.out.println("--------------shiro已经加载----------------");
         DefaultWebSecurityManager manager=new DefaultWebSecurityManager();
-        manager.setRealm(authRealm);
-        manager.setRememberMeManager(rememberMeManager());
+        manager.setRealm(authRealm); // 加入用户数据源
+        manager.setRememberMeManager(rememberMeManager()); // 加入记住我管理器
+//        manager.setSessionManager(sessionManager);
+//        manager.setCacheManager(redisCacheManager);
         return manager;
     }
 
@@ -59,10 +82,47 @@ public class shiroConfiguration {
         authRealm.setCredentialsMatcher(matcher);
         return authRealm;
     }
+
     //配置自定义的密码比较器
     @Bean(name="credentialsMatcher")
     public CredentialsMatcher credentialsMatcher() {
         return new CredentialsMatcher();
+    }
+
+    // 配置会话管理器
+    @Bean(name = "sessionManager")
+    public SessionManager sessionManager(@Qualifier("redisSessionDAO") RedisSessionDAO redisSessionDAO) {
+        SessionManager sessionManager = new DefaultWebSessionManager();
+        ((DefaultWebSessionManager) sessionManager).setSessionDAO(redisSessionDAO);
+//        ((DefaultWebSessionManager) sessionManager).setCacheManager(catheManage());
+        return sessionManager;
+    }
+
+    // 配置会话操作
+    @Bean(name = "redisSessionDAO")
+    public RedisSessionDAO redisSessionDAO(@Qualifier("redisManage") RedisManager redisManager) {
+        RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
+        redisSessionDAO.setRedisManager(redisManager);
+        return redisSessionDAO;
+    }
+
+    // 配置shiro redisManage
+    @Bean(name = "redisManage")
+    public RedisManager redisManage() {
+        RedisManager redisManager = new RedisManager();
+        redisManager.setHost(host);
+        redisManager.setPort(port);
+        redisManager.setExpire(1800);// 配置缓存过期时间
+        redisManager.setPassword(password);
+        return redisManager;
+    }
+
+    //cacheManager 缓存，使用redis实现
+    @Bean(name = "catheManager")
+    public RedisCacheManager catheManage(@Qualifier("redisManage") RedisManager redisManager) {
+        RedisCacheManager redisCacheManager = new RedisCacheManager();
+        redisCacheManager.setRedisManager(redisManager);
+        return redisCacheManager;
     }
 
     @Bean

@@ -33,6 +33,10 @@ spring:
       password: lcvqvrerfsioebcb
       default-encoding: UTF-8
       port: 587
+    redis:
+      host: 120.78.74.194
+      port: 6379
+      password: 123456
 #邮件发送人
 mail:
     fromMail:
