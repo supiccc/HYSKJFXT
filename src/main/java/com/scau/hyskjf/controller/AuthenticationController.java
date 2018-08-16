@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 /**
  * Created by supiccc on 2018-08-10 09:24
  * 认证、登录、注册控制器
@@ -42,10 +44,12 @@ public class AuthenticationController {
     @RequestMapping(value = "/sendSMS", method = RequestMethod.POST)
     public ResponseJSON sendSMS(String username) {
 //        String username = ((Memberaccount)SecurityUtils.getSubject().getSession().getAttribute("user")).getMaid();
-        String verficationCode = IndustrySMS.execute(username);
+        Map result = IndustrySMS.execute(username);
+        String verficationCode = (String) result.get("verficationCode");
+        String msg = (String) result.get("result");
 //        String verficationCode = VerficationCode.getCode();  // 获取验证码
         SecurityUtils.getSubject().getSession().setAttribute("verficationCode", verficationCode);
-        return new ResponseJSON(ResponseCode.SUCCESS);
+        return new ResponseJSON(ResponseCode.SUCCESS, msg);
     }
 
 

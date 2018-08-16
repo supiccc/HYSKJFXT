@@ -137,6 +137,12 @@
     from MemberCard
     where mcID = #{mcid,jdbcType=VARCHAR}
   </select>
+  <select id="selectByMember" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from MemberCard
+    where memID = #{memid}
+  </select>
 
   <update id="updateMoneyByCarId">
     update MemberCard

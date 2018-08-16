@@ -20,15 +20,19 @@ var accountMgr={
     login:function () {
         username = $('#phoneNumber').val();
         password = $('#passWord').val();
-        role=$('#userType').val();
+        role = $('#userType').val();
         roleString = '';
-        rememberMe1 = 1;
+        if ($("input[type=checkbox]").is(':checked')) {
+            rememberMeString = 1;
+        } else {
+            rememberMeString = 0;
+        }
         if(role=='1'){
-            roleString = "admin";
-        }else if(role=='2'){
             roleString = "member";
-        }else{
+        }else if(role=='2'){
             roleString = "merchant";
+        }else{
+            roleString = "admin";
         }
 
         if(role!='1'&&role!='2'&&role!='3'){
@@ -48,7 +52,7 @@ var accountMgr={
                     username : username,
                     pwd : password,
                     role : roleString,
-                    rememberMe: rememberMe1
+                    rememberMe: rememberMeString
                 },
                 dataType : 'json',
                 success : function(res) {
@@ -56,9 +60,9 @@ var accountMgr={
                         // 登录成功
                         alert("登陆成功，欢迎用户"+username);
                         var to = "";
-                        switch (user_type) {
+                        switch (role) {
                             case '1':
-                                // to = "./school_main.html";
+                                to = "indexReal.html";
                                 break;
                             case '2':
                                 // to = "./county_main.html";
@@ -72,7 +76,7 @@ var accountMgr={
                             default:
                                 break;
                         }
-                        // window.location.href = to;
+                        window.location.href = to;
                     } else {
                         alert(res.msg);
                         return;

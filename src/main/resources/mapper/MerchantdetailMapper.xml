@@ -282,15 +282,6 @@
     ,
     <include refid="Blob_Column_List" />
     from MerchantDetail
-  </select>
-
-  <select id="selectByMerID" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
-    select
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from MerchantDetail
-    where merID = #{merid,jdbcType=INTEGER}
     <where>
       <if test="mername != null and !&quot;&quot;.equals(mername.trim()) ">
         and merName like concat('%' ,#{mername}, '%')
@@ -321,6 +312,15 @@
       </if>
     </where>
     order by merID
+  </select>
+
+  <select id="selectByMerID" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from MerchantDetail
+    where merID = #{merid,jdbcType=INTEGER}
   </select>
 
   <select id="findAllMerchantinfo" resultMap="ResultMapWithBLOBs">

@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 /**
  * Created by supiccc on 2018-08-07 17:11
  */
@@ -39,7 +41,7 @@ public class DemoController {
     @RequestMapping(value = "/adminCreate")
     public ResponseJSON hello() {
         try {
-            System.err.println(new Md5Hash("password", "13602800453", 3));
+            System.err.println(new Md5Hash("password", "13811223344", 3));
         } catch (Exception e) {
             return new ResponseJSON(ResponseCode.WARN);
         }
@@ -55,7 +57,9 @@ public class DemoController {
 //        } else {
 //            return new ResponseJSON(ResponseCode.UNKNOWNACCOUNT);
 //        }
-        String verficationCode = IndustrySMS.execute("13602800453");
+        Map result = IndustrySMS.execute("13602800453");
+        String verficationCode = (String) result.get("verficationCode");
+        String msg = (String) result.get("result");
         SecurityUtils.getSubject().getSession().setAttribute("verficationCode", verficationCode);
         return new ResponseJSON(ResponseCode.SUCCESS);
     }
