@@ -46,6 +46,9 @@ public class MemberCenterServiceImpl implements MemberCenterService {
     @Autowired
     MembercarddetailMapper membercarddetailMapper;
 
+    @Autowired
+    MemberandcardMapper memberandcardMapper;
+
     @Override
     public String forgetPwd(String newPwd, String verficationCode) {
         try {
@@ -270,5 +273,17 @@ public class MemberCenterServiceImpl implements MemberCenterService {
     public int updateCard(Membercard membercard){
         return membercardMapper.updateByPrimaryKeySelective(membercard);
     }
+
+    @Override
+    public Memberandcard findMemDetailByCarId(String cardId) {
+        return memberandcardMapper.selectByCarId(cardId);
+    }
+
+    @Override
+    public Memberandcard rechargeMemberCard(String cardId, float money) {
+        membercardMapper.updateMoneyByCarId(cardId,money);
+        return memberandcardMapper.selectByCarId(cardId);
+    }
+
 
 }

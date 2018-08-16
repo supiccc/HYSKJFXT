@@ -143,4 +143,10 @@
     from MemberCard
     where memID = #{memid}
   </select>
+
+  <update id="updateMoneyByCarId">
+    update MemberCard
+    set mcBalance = mcBalance + #{money}
+    where mcID = #{cardId}
+  </update>
 </mapper>
