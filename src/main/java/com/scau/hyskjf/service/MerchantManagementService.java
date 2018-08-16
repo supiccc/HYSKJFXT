@@ -2,6 +2,7 @@ package com.scau.hyskjf.service;
 
 import com.scau.hyskjf.pojo.Merchantaccount;
 import com.scau.hyskjf.pojo.Merchantdetail;
+import com.scau.hyskjf.pojo.MerchantdetailWithBLOBs;
 import com.scau.hyskjf.pojo.MerchantinfoWithBLOBs;
 
 import java.util.List;
@@ -27,4 +28,8 @@ public interface MerchantManagementService {
     Merchantdetail setIndex(int id);
 
     Merchantdetail setNotIndex(int id);
+
+    List<MerchantdetailWithBLOBs> findMerchantDetailByWord(String merName, String province,
+                                                           String city, String area,String type,
+                                                           boolean merrecommend,boolean isindex);
 }

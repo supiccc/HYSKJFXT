@@ -1,5 +1,6 @@
 package com.scau.hyskjf.service;
 
+import com.scau.hyskjf.pojo.Member;
 import com.scau.hyskjf.pojo.Memberinfochange;
 import com.scau.hyskjf.pojo.Reissuedetail;
 
@@ -13,4 +14,6 @@ public interface MemberManagementService {
     List<Reissuedetail> findAllReissue();
 
     List<Reissuedetail> findReissueByMemid(int id);
+
+    Member findMemberinfoById(int id);
 }

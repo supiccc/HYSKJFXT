@@ -1,19 +1,18 @@
 package com.scau.hyskjf.controller;
 
+import com.scau.hyskjf.pojo.Admin;
 import com.scau.hyskjf.pojo.Creditsubmit;
 import com.scau.hyskjf.service.ConsumeCreditService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 //消费积分管理
 @RestController
+@SessionAttributes("user")
 @RequestMapping("/consumecredit")
 public class ConsumeCreditController {
 
@@ -46,8 +45,8 @@ public class ConsumeCreditController {
 
     //上缴情况修改
     @RequestMapping("/submit/update/{id}")
-    public ResponseJSON UpdateCsInfo(@PathVariable int id,
-            @RequestParam(value = "state",required=true) boolean state){
+    public ResponseJSON UpdateCsInfo(@ModelAttribute("user")Admin admin,@PathVariable int id,
+                                     @RequestParam(value = "state",required=true) boolean state){
 
         boolean flag = consumeCreditService.updateState(id,state);
         if(flag){
