@@ -49,10 +49,12 @@ public class MemberCenterController {
     @RequestMapping(value = "/sendSMS")
     public ResponseJSON sendSMS() {
         String username = ((Memberaccount)SecurityUtils.getSubject().getSession().getAttribute("user")).getMaid();
-        String verficationCode = IndustrySMS.execute(username);
+        Map result = IndustrySMS.execute(username);
+        String verficationCode = (String) result.get("verficationCode");
+        String msg = (String) result.get("result");
 //        String verficationCode = VerficationCode.getCode();  // 获取验证码
         SecurityUtils.getSubject().getSession().setAttribute("verficationCode", verficationCode);
-        return new ResponseJSON(ResponseCode.SUCCESS);
+        return new ResponseJSON(ResponseCode.SUCCESS, msg);
     }
 
 

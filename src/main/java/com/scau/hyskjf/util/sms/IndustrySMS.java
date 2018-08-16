@@ -3,8 +3,11 @@ package com.scau.hyskjf.util.sms;
 import com.scau.hyskjf.util.sms.common.Config;
 import com.scau.hyskjf.util.sms.common.HttpUtil;
 import com.scau.hyskjf.util.sms.common.VerficationCode;
+import org.json.JSONObject;
 
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by supiccc on 2018-08-12 11:59
@@ -19,7 +22,7 @@ public class IndustrySMS {
     /**
      * 验证码通知短信
      */
-    public static String execute(String phonenumber)
+    public static Map execute(String phonenumber)
     {
         to = phonenumber;
         smsContent = "【华迪科技】您的验证码为";
@@ -38,6 +41,10 @@ public class IndustrySMS {
         // 提交请求
         String result = HttpUtil.post(url, body);
         System.out.println("result:" + System.lineSeparator() + result);
-        return verficationCode;
+        JSONObject o = new JSONObject(result);
+        Map r = new HashMap();
+        r.put("verficationCode", verficationCode);
+        r.put("result", o.get("respDesc"));
+        return r;
     }
 }
