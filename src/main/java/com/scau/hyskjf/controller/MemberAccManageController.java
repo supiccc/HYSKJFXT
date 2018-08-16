@@ -1,17 +1,14 @@
 package com.scau.hyskjf.controller;
 
 import com.scau.hyskjf.dao.MemberMapper;
-import com.scau.hyskjf.dao.MerchantMapper;
 import com.scau.hyskjf.pojo.Member;
+import com.scau.hyskjf.pojo.Memberandcard;
 import com.scau.hyskjf.pojo.Membercard;
-import com.scau.hyskjf.pojo.Memberinfochange;
-import com.scau.hyskjf.pojo.Merchantaccount;
 import com.scau.hyskjf.service.MemberCenterService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -135,4 +132,22 @@ public class MemberAccManageController {
         }
     }
 
+
+
+
+    //根据会员卡卡号查询会员详细信息
+    @RequestMapping("/queryMemdetailByMcid")
+    public ResponseJSON queryMemberDetailByCardId(String cardId){
+        Memberandcard memberandcard = memberCenterService.findMemDetailByCarId(cardId);
+        return new ResponseJSON(ResponseCode.SUCCESS,memberandcard);
+    }
+
+    //会员充值
+    @RequestMapping("/recharge")
+    public ResponseJSON rechargeMemberCard(String cardId,Float money){
+        Memberandcard memberandcard = memberCenterService.rechargeMemberCard(cardId,money);
+        return new ResponseJSON(ResponseCode.SUCCESS,memberandcard);
+    }
+
+    //会员充值历史查询
 }
