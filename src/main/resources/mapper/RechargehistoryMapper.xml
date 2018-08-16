@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.RechargehistoryMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Rechargehistory" >
+    <id column="rhID" property="rhid" jdbcType="INTEGER" />
+    <result column="merID" property="merid" jdbcType="INTEGER" />
+    <result column="memID" property="memid" jdbcType="INTEGER" />
+    <result column="macID" property="macid" jdbcType="INTEGER" />
+    <result column="mcID" property="mcid" jdbcType="VARCHAR" />
+    <result column="rechargeMoney" property="rechargemoney" jdbcType="REAL" />
+    <result column="balance" property="balance" jdbcType="REAL" />
+    <result column="rechargeTime" property="rechargetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    rhID, merID, memID, macID, mcID, rechargeMoney, balance, rechargeTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from RechargeHistory
+    where rhID = #{rhid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from RechargeHistory
+    where rhID = #{rhid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Rechargehistory" >
+    insert into RechargeHistory (rhID, merID, memID, 
+      macID, mcID, rechargeMoney, 
+      balance, rechargeTime)
+    values (#{rhid,jdbcType=INTEGER}, #{merid,jdbcType=INTEGER}, #{memid,jdbcType=INTEGER}, 
+      #{macid,jdbcType=INTEGER}, #{mcid,jdbcType=VARCHAR}, #{rechargemoney,jdbcType=REAL}, 
+      #{balance,jdbcType=REAL}, #{rechargetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Rechargehistory" >
+    insert into RechargeHistory
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rhid != null" >
+        rhID,
+      </if>
+      <if test="merid != null" >
+        merID,
+      </if>
+      <if test="memid != null" >
+        memID,
+      </if>
+      <if test="macid != null" >
+        macID,
+      </if>
+      <if test="mcid != null" >
+        mcID,
+      </if>
+      <if test="rechargemoney != null" >
+        rechargeMoney,
+      </if>
+      <if test="balance != null" >
+        balance,
+      </if>
+      <if test="rechargetime != null" >
+        rechargeTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rhid != null" >
+        #{rhid,jdbcType=INTEGER},
+      </if>
+      <if test="merid != null" >
+        #{merid,jdbcType=INTEGER},
+      </if>
+      <if test="memid != null" >
+        #{memid,jdbcType=INTEGER},
+      </if>
+      <if test="macid != null" >
+        #{macid,jdbcType=INTEGER},
+      </if>
+      <if test="mcid != null" >
+        #{mcid,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargemoney != null" >
+        #{rechargemoney,jdbcType=REAL},
+      </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=REAL},
+      </if>
+      <if test="rechargetime != null" >
+        #{rechargetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Rechargehistory" >
+    update RechargeHistory
+    <set >
+      <if test="merid != null" >
+        merID = #{merid,jdbcType=INTEGER},
+      </if>
+      <if test="memid != null" >
+        memID = #{memid,jdbcType=INTEGER},
+      </if>
+      <if test="macid != null" >
+        macID = #{macid,jdbcType=INTEGER},
+      </if>
+      <if test="mcid != null" >
+        mcID = #{mcid,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargemoney != null" >
+        rechargeMoney = #{rechargemoney,jdbcType=REAL},
+      </if>
+      <if test="balance != null" >
+        balance = #{balance,jdbcType=REAL},
+      </if>
+      <if test="rechargetime != null" >
+        rechargeTime = #{rechargetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where rhID = #{rhid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Rechargehistory" >
+    update RechargeHistory
+    set merID = #{merid,jdbcType=INTEGER},
+      memID = #{memid,jdbcType=INTEGER},
+      macID = #{macid,jdbcType=INTEGER},
+      mcID = #{mcid,jdbcType=VARCHAR},
+      rechargeMoney = #{rechargemoney,jdbcType=REAL},
+      balance = #{balance,jdbcType=REAL},
+      rechargeTime = #{rechargetime,jdbcType=TIMESTAMP}
+    where rhID = #{rhid,jdbcType=INTEGER}
+  </update>
+</mapper>

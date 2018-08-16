@@ -28,7 +28,7 @@ public class AuthRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordRoleToken utoken = (UsernamePasswordRoleToken)authenticationToken; // 获取用户输入的token
         String username = utoken.getUsername();
-        String role = utoken.getRole().toString();
+        String role = utoken.getRole();
         if (role.equals("admin")) {
             Admin user = authenticationService.findAdminByacc(username);
             if (user == null) return null;
