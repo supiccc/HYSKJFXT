@@ -1,6 +1,8 @@
 package com.scau.hyskjf.pojo;
 
-public class Memberaccount {
+import java.io.Serializable;
+
+public class Memberaccount implements Serializable {
     private Integer memid;
 
     private String maid;

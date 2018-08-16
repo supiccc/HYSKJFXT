@@ -1,8 +1,9 @@
 package com.scau.hyskjf.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Merchantaccount {
+public class Merchantaccount implements Serializable {
     private Integer macid;
 
     private Integer merid;

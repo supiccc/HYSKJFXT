@@ -19,5 +19,8 @@ public interface AuthenticationService {
     Admin findAdminByacc(String acc);
 
     // 登录
-    ResponseJSON login(String username, String pwd, String role);
+    ResponseJSON login(String username, String pwd, String role, int rememberMe);
+
+    // 忘记密码
+    String forgetpwd(String username, String pwd, String vc, String role);
 }
