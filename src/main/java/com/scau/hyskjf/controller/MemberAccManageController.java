@@ -80,8 +80,59 @@ public class MemberAccManageController {
     }
 
     /*
-    * 会员基本信息变更:
-    *
+     * 查看商家发放的所有会员卡
+     * 输入：
+     * 商家编号 Integer merid;
+     *
+     * 返回：
+     * 会员卡类列表List<Membercard>
+     * */
+    @RequestMapping("/queryAllMemCard")
+    public ResponseJSON queryAllMemCard(Integer merid){
+        try{
+            List<Membercard> list = memberCenterService.queryAllMemCard(merid);
+            return new ResponseJSON(ResponseCode.SUCCESS,list);
+        }
+        catch (Exception e){
+            return new ResponseJSON(ResponseCode.WARN);
+        }
+    }
+
+    /*
+     * 根据会员卡卡号String mcid查询会员卡信息
+     * 输入：
+     * 会员卡卡号String mcid
+     *
+     * 返回：
+     * 会员卡类Membercard membercard
+     * */
+    @RequestMapping("/queryCardByMcid")
+    public ResponseJSON queryCardByMcid(String mcid){
+        try{
+            Membercard membercard = memberCenterService.queryCardByMcid(mcid);
+            return new ResponseJSON(ResponseCode.SUCCESS,membercard);
+        }
+        catch (Exception e){
+            return new ResponseJSON(ResponseCode.WARN);
+        }
+    }
+
+    /*
+    * 会员卡基本信息变更:（会员卡主键id必填，主键id调用以上两个查询接口可获得，其他信息不需要修改则不用填）
+    * 输入：
+    * 会员卡类Membercard membercard：（会员卡主键id Integer mcpkid;（必填）+ 会员卡类 String mctype;或 积分 Float mccredit 或 余额 Float mcbalance;或 是否启用 Boolean mcenable;）
+    * 输出：
+    * 成功码或失败码
     * */
+    @RequestMapping("/updateCard")
+    public ResponseJSON updateCard(Membercard membercard){
+        try{
+            memberCenterService.updateCard(membercard);
+            return new ResponseJSON(ResponseCode.SUCCESS);
+        }
+        catch (Exception e){
+            return new ResponseJSON(ResponseCode.WARN);
+        }
+    }
 
 }
