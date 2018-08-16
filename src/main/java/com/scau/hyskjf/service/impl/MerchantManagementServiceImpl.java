@@ -107,7 +107,7 @@ public class MerchantManagementServiceImpl implements MerchantManagementService 
     @Override
     public List<MerchantdetailWithBLOBs> findMerchantDetailByWord(String merName, String province,
                                                                   String city, String area,String type,
-                                                                  boolean merrecommend,boolean isindex) {
+                                                                  Integer merrecommend,Integer isindex) {
         return merchantdetailMapper.findMerchantDetailByWord(merName,province,city,area,type,merrecommend,isindex);
     }
 }

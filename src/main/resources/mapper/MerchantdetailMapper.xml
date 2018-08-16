@@ -294,11 +294,17 @@
       <if test="mertype != null and !&quot;&quot;.equals(mertype.trim()) ">
         and merType like concat('%' ,#{mertype}, '%')
       </if>
-      <if test="merrecommend != null">
-        and merRecommend  = #{merrecommend}
+      <if test="merrecommend == 1">
+        and merRecommend = true
       </if>
-      <if test="isindex != null ">
-        and isIndex = #{isindex}
+      <if test="merrecommend == 0 ">
+        and merrecommend = false
+      </if>
+      <if test="isindex == 1 ">
+        and isIndex = true
+      </if>
+      <if test="isindex == 0">
+        and isIndex = false
       </if>
     </where>
     order by merID

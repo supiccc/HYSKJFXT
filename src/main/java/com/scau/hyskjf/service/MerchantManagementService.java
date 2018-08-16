@@ -31,5 +31,5 @@ public interface MerchantManagementService {
 
     List<MerchantdetailWithBLOBs> findMerchantDetailByWord(String merName, String province,
                                                            String city, String area,String type,
-                                                           boolean merrecommend,boolean isindex);
+                                                            Integer merrecommend,Integer isindex);
 }
