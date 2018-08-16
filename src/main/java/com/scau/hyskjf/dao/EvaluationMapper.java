@@ -4,6 +4,8 @@ import com.scau.hyskjf.pojo.Evaluation;
 import com.scau.hyskjf.pojo.EvaluationWithBLOBs;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface EvaluationMapper {
     int deleteByPrimaryKey(Integer evaid);
@@ -19,4 +21,6 @@ public interface EvaluationMapper {
     int updateByPrimaryKeyWithBLOBs(EvaluationWithBLOBs record);
 
     int updateByPrimaryKey(Evaluation record);
+
+    List<EvaluationWithBLOBs> selectByMerid(Integer merid);
 }

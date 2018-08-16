@@ -1,0 +1,19 @@
+[
+  {
+    "phoneNumber":"13760636739",
+    "userType":"qiantai",
+    "isOn":"YES"
+  },
+
+  {
+    "phoneNumber":"13760636738",
+    "userType":"kehujingli",
+    "isOn":"YES"
+  },
+
+  {
+    "phoneNumber":"13760636737",
+    "userType":"bumenjingli",
+    "isOn":"NO"
+  }
+]

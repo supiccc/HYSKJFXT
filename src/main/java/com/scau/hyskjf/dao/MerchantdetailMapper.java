@@ -15,6 +15,10 @@ public interface MerchantdetailMapper {
 
     Merchantdetail selectByPrimaryKey(int merid);
 
+    List<MerchantdetailWithBLOBs> selectAll();
+
+    MerchantdetailWithBLOBs selectByMerID(Integer merid);
+
     List<MerchantdetailWithBLOBs> findMerchantDetailByWord(@Param("mername") String mername,
                                                            @Param("merprovince") String merprovince,
                                                            @Param("mercity") String mercity,

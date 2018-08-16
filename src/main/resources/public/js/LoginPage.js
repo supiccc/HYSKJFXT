@@ -22,6 +22,7 @@ var accountMgr={
         password = $('#passWord').val();
         role=$('#userType').val();
         roleString = '';
+        rememberMe1 = 1;
         if(role=='1'){
             roleString = "admin";
         }else if(role=='2'){
@@ -42,17 +43,18 @@ var accountMgr={
         }else{
             $.ajax({
                 type : 'POST',
-                url : 'http://localhost:8080/login',
+                url : '/login',
                 data : {
                     username : username,
                     pwd : password,
-                    role : roleString
+                    role : roleString,
+                    rememberMe: rememberMe1
                 },
                 dataType : 'json',
                 success : function(res) {
                     if (res.code == 0) {
                         // 登录成功
-                        alert("hey!")
+                        alert("登陆成功，欢迎用户"+username);
                         var to = "";
                         switch (user_type) {
                             case '1':
