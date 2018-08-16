@@ -21,7 +21,7 @@ public interface MembercardMapper {
 
     int updateByPrimaryKey(Membercard record);
 
-    @Select("select * from MemberCard where memID = #{memid}")
+//    @Select("select * from MemberCard where memID = #{memid}")
     List selectByMember(Integer memid);
 
     List<Membercard> queryAllCard(Integer merid);

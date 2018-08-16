@@ -43,6 +43,9 @@ public class MemberCenterServiceImpl implements MemberCenterService {
     @Autowired
     MembercardMapper membercardMapper;
 
+    @Autowired
+    MembercarddetailMapper membercarddetailMapper;
+
     @Override
     public String forgetPwd(String newPwd, String verficationCode) {
         try {
@@ -221,11 +224,12 @@ public class MemberCenterServiceImpl implements MemberCenterService {
         return ip;
     }
 
+    // 查看会员卡
     @Override
     public List showMemberCardInfo() {
         Memberaccount m = (Memberaccount) SecurityUtils.getSubject().getSession().getAttribute("user");
         if(m == null) return null;
-        List<Memberaccount> result = membercardMapper.selectByMember(m.getMemid());
+        List<Memberaccount> result = membercarddetailMapper.selectByMemID(m.getMemid());
         return result;
     }
 

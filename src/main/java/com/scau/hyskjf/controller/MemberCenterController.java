@@ -151,7 +151,7 @@ public class MemberCenterController {
             List result = memberCenterService.showMemberCardInfo();
             return new ResponseJSON(ResponseCode.SUCCESS, result);
         } catch (Exception e) {
-            return new ResponseJSON(ResponseCode.WARN);
+            return new ResponseJSON(ResponseCode.WARN, e.toString());
         }
     }
 }
