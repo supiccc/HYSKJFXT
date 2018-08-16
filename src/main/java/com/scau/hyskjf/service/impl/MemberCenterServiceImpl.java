@@ -40,6 +40,9 @@ public class MemberCenterServiceImpl implements MemberCenterService {
     @Autowired
     ConsumecommentMapper consumecommentMapper;
 
+    @Autowired
+    MembercardMapper membercardMapper;
+
     @Override
     public String forgetPwd(String newPwd, String verficationCode) {
         try {
@@ -216,5 +219,13 @@ public class MemberCenterServiceImpl implements MemberCenterService {
             ip = request.getRemoteAddr();
         }
         return ip;
+    }
+
+    @Override
+    public List showMemberCardInfo() {
+        Memberaccount m = (Memberaccount) SecurityUtils.getSubject().getSession().getAttribute("user");
+        if(m == null) return null;
+        List<Memberaccount> result = membercardMapper.selectByMember(m.getMemid());
+        return result;
     }
 }

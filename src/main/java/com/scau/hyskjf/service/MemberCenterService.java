@@ -29,4 +29,6 @@ public interface MemberCenterService {
 //    List showNoComment(); // 显示未点评消费记录
 
     String comment(Integer merID, String info, HttpServletRequest request); // 选择某记录进行点评
+
+    List showMemberCardInfo(); // 显示会员卡记录
 }

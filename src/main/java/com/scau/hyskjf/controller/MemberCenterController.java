@@ -141,4 +141,17 @@ public class MemberCenterController {
             return new ResponseJSON(ResponseCode.WARN);
         }
     }
+
+    /*
+    * 显示用户所持有的会员卡
+    * */
+    @RequestMapping("/showMemberCard")
+    public ResponseJSON showmembercard() {
+        try {
+            List result = memberCenterService.showMemberCardInfo();
+            return new ResponseJSON(ResponseCode.SUCCESS, result);
+        } catch (Exception e) {
+            return new ResponseJSON(ResponseCode.WARN);
+        }
+    }
 }
