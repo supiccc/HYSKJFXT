@@ -23,6 +23,7 @@ public class MerchantManagementServiceImpl implements MerchantManagementService 
     @Autowired
     private MerchantdetailMapper merchantdetailMapper;
 
+
     @Override
     public Merchantdetail setRecommend(int id) {
         Merchant merchant = new Merchant();
@@ -35,8 +36,8 @@ public class MerchantManagementServiceImpl implements MerchantManagementService 
     }
 
     @Override
-    public List<MerchantinfoWithBLOBs> findAllMerchant() {
-        return merchantinfoMapper.findAllMerchantinfo();
+    public List<MerchantdetailWithBLOBs> findAllMerchant() {
+        return merchantdetailMapper.findAllMerchantinfo();
     }
 
     @Override

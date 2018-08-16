@@ -11,7 +11,7 @@ public interface MerchantManagementService {
 
     Merchantdetail setRecommend(int id);
 
-    List<MerchantinfoWithBLOBs> findAllMerchant();
+    List<MerchantdetailWithBLOBs> findAllMerchant();
 
     MerchantinfoWithBLOBs findMerchantById(int id);
 

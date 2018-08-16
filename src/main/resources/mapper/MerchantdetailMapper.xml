@@ -309,4 +309,12 @@
     </where>
     order by merID
   </select>
+
+  <select id="findAllMerchantinfo" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from MerchantDetail
+  </select>
 </mapper>

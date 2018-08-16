@@ -6,8 +6,6 @@ import com.scau.hyskjf.pojo.MerchantinfomodifiedWithBLOBs;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 public interface MerchantinfoMapper {
     int deleteByPrimaryKey(Integer merid);
@@ -30,5 +28,4 @@ public interface MerchantinfoMapper {
 
     int updateByModified(MerchantinfomodifiedWithBLOBs record);
 
-    List<MerchantinfoWithBLOBs> findAllMerchantinfo();
 }

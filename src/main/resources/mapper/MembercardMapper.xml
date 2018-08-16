@@ -137,4 +137,10 @@
     from MemberCard
     where mcID = #{mcid,jdbcType=VARCHAR}
   </select>
+
+  <update id="updateMoneyByCarId">
+    update MemberCard
+    set mcBalance = mcBalance + #{money}
+    where mcID = #{cardId}
+  </update>
 </mapper>
