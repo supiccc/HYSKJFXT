@@ -8,14 +8,12 @@ import com.scau.hyskjf.service.MemberCenterService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
 import com.scau.hyskjf.util.sms.IndustrySMS;
-import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,7 +40,7 @@ public class MemberCenterController {
     @ResponseBody
     public ResponseJSON getMember(HttpSession session) {
         Memberaccount m = (Memberaccount) session.getAttribute("user");
-        return new ResponseJSON(ResponseCode.SUCCESS, m);
+        return new ResponseJSON(ResponseCode.SUCCESS, SecurityUtils.getSubject().getSession().getAttribute("role"));
     }
 
     /*用户已登录情况下发送验证码
@@ -140,6 +138,19 @@ public class MemberCenterController {
         } else if (result.equals("hascomment")){
             return new ResponseJSON(ResponseCode.WARN, "已点评");
         } else {
+            return new ResponseJSON(ResponseCode.WARN);
+        }
+    }
+
+    /*
+    * 显示用户所持有的会员卡
+    * */
+    @RequestMapping("/showMemberCard")
+    public ResponseJSON showmembercard() {
+        try {
+            List result = memberCenterService.showMemberCardInfo();
+            return new ResponseJSON(ResponseCode.SUCCESS, result);
+        } catch (Exception e) {
             return new ResponseJSON(ResponseCode.WARN);
         }
     }

@@ -218,4 +218,10 @@
       cumID = #{cumid,jdbcType=INTEGER}
     where evaID = #{evaid,jdbcType=INTEGER}
   </update>
+  <select id="selectByMerid" resultMap="ResultMapWithBLOBs">
+    select <include refid="Base_Column_List" />
+    ,<include refid="Blob_Column_List" />
+    from Evaluation
+    where merID = #{merid}
+  </select>
 </mapper>

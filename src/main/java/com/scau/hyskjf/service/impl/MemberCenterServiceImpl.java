@@ -224,6 +224,13 @@ public class MemberCenterServiceImpl implements MemberCenterService {
     }
 
     @Override
+    public List showMemberCardInfo() {
+        Memberaccount m = (Memberaccount) SecurityUtils.getSubject().getSession().getAttribute("user");
+        if(m == null) return null;
+        List<Memberaccount> result = membercardMapper.selectByMember(m.getMemid());
+        return result;
+    }
+
     public int addMemberAccount(Member member,String pwd,String shopPwd){
         memberMapper.insert(member);
         Integer id = memberMapper.getMemID();
