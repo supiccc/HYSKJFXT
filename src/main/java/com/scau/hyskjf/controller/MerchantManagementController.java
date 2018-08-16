@@ -2,6 +2,7 @@ package com.scau.hyskjf.controller;
 
 import com.scau.hyskjf.pojo.Merchantaccount;
 import com.scau.hyskjf.pojo.Merchantdetail;
+import com.scau.hyskjf.pojo.MerchantdetailWithBLOBs;
 import com.scau.hyskjf.pojo.MerchantinfoWithBLOBs;
 import com.scau.hyskjf.service.MerchantManagementService;
 import com.scau.hyskjf.util.json.ResponseCode;
@@ -20,11 +21,26 @@ public class MerchantManagementController {
     @Autowired
     private MerchantManagementService merchantManagementService;
     //商家查询，浏览联盟内商家，查询商家
-    @RequestMapping("/merchantinfo/list")
+    @RequestMapping("/query/list")
     public ResponseJSON findAllMerchant(){
         List<MerchantinfoWithBLOBs> merchantinfos = merchantManagementService.findAllMerchant();
         return new ResponseJSON(ResponseCode.SUCCESS,merchantinfos);
     }
+
+    //查询商家，可按条件模糊查询（商家名称、所在省、市、区、是否为推荐商家，是否为首页显示商家）
+    @RequestMapping("/query")
+    public ResponseJSON queryMerchant(String merName, String province,String city, String area,
+                                      String type,boolean merrecommend,boolean isindex){
+
+        System.out.println(merName);
+        System.out.println(province);
+        System.out.println(merrecommend);
+        System.out.println(isindex);
+        List<MerchantdetailWithBLOBs> merchantdetails = merchantManagementService.findMerchantDetailByWord
+                (merName, province, city, area,type,merrecommend,isindex);
+        return new ResponseJSON(ResponseCode.SUCCESS,merchantdetails);
+    }
+
 
     //查看单个商家
     @RequestMapping("/merchantinfo/{id}")
@@ -94,5 +110,7 @@ public class MerchantManagementController {
         Merchantdetail merchantdetail = merchantManagementService.setNotIndex(id);
         return new ResponseJSON(ResponseCode.SUCCESS,merchantdetail);
     }
+
+
 
 }

@@ -3,6 +3,8 @@ package com.scau.hyskjf.dao;
 import com.scau.hyskjf.pojo.Advertise;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface AdvertiseMapper {
     int deleteByPrimaryKey(Integer adverid);
@@ -18,4 +20,6 @@ public interface AdvertiseMapper {
     int updateByPrimaryKeyWithBLOBs(Advertise record);
 
     int updateByPrimaryKey(Advertise record);
+
+    List<Advertise> findAllAdvertise();
 }

@@ -130,7 +130,6 @@ public class ExamineServiceImpl implements ExamineService {
             return null;
         }
 
-        //发送邮件通知
     }
 
 
