@@ -2,6 +2,7 @@ package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Merchantdetail;
 import com.scau.hyskjf.pojo.MerchantdetailWithBLOBs;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,4 +18,12 @@ public interface MerchantdetailMapper {
     List<MerchantdetailWithBLOBs> selectAll();
 
     MerchantdetailWithBLOBs selectByMerID(Integer merid);
+
+    List<MerchantdetailWithBLOBs> findMerchantDetailByWord(@Param("mername") String mername,
+                                                           @Param("merprovince") String merprovince,
+                                                           @Param("mercity") String mercity,
+                                                           @Param("merarea") String merarea,
+                                                           @Param("mertype") String mertype,
+                                                           @Param("merrecommend") boolean merrecommend,
+                                                           @Param("isindex") boolean isindex);
 }

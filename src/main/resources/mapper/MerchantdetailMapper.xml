@@ -276,6 +276,14 @@
     <include refid="Blob_Column_List" />
     from MerchantDetail
   </select>
+  <select id="findMerchantDetailByWord" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from MerchantDetail
+  </select>
+
   <select id="selectByMerID" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
     select
     <include refid="Base_Column_List" />
@@ -283,5 +291,29 @@
     <include refid="Blob_Column_List" />
     from MerchantDetail
     where merID = #{merid,jdbcType=INTEGER}
+    <where>
+      <if test="mername != null and !&quot;&quot;.equals(mername.trim()) ">
+        and merName like concat('%' ,#{mername}, '%')
+      </if>
+      <if test="merprovince != null and !&quot;&quot;.equals(merprovince.trim()) ">
+        and merProvince like concat('%' ,#{merprovince}, '%')
+      </if>
+      <if test="mercity != null and !&quot;&quot;.equals(mercity.trim()) ">
+        and merCity like  concat('%' ,#{mercity}, '%')
+      </if>
+      <if test="merarea != null and !&quot;&quot;.equals(merarea.trim()) ">
+        and merArea like concat('%' ,#{merarea}, '%')
+      </if>
+      <if test="mertype != null and !&quot;&quot;.equals(mertype.trim()) ">
+        and merType like concat('%' ,#{mertype}, '%')
+      </if>
+      <if test="merrecommend != null">
+        and merRecommend  = #{merrecommend}
+      </if>
+      <if test="isindex != null ">
+        and isIndex = #{isindex}
+      </if>
+    </where>
+    order by merID
   </select>
 </mapper>

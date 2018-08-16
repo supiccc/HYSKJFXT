@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.MemberandcardMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Memberandcard" >
+    <result column="memID" property="memid" jdbcType="INTEGER" />
+    <result column="memCredit" property="memcredit" jdbcType="REAL" />
+    <result column="memCer" property="memcer" jdbcType="VARCHAR" />
+    <result column="memCerID" property="memcerid" jdbcType="VARCHAR" />
+    <result column="memName" property="memname" jdbcType="VARCHAR" />
+    <result column="memSex" property="memsex" jdbcType="VARCHAR" />
+    <result column="memBirth" property="membirth" jdbcType="DATE" />
+    <result column="memPhone" property="memphone" jdbcType="VARCHAR" />
+    <result column="memEmail" property="mememail" jdbcType="VARCHAR" />
+    <result column="mcPKID" property="mcpkid" jdbcType="INTEGER" />
+    <result column="mcID" property="mcid" jdbcType="VARCHAR" />
+    <result column="merID" property="merid" jdbcType="INTEGER" />
+    <result column="mcType" property="mctype" jdbcType="VARCHAR" />
+    <result column="mcCredit" property="mccredit" jdbcType="REAL" />
+    <result column="mcBalance" property="mcbalance" jdbcType="REAL" />
+    <result column="mcEnable" property="mcenable" jdbcType="BIT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.Memberandcard" extends="BaseResultMap" >
+    <result column="memAdress" property="memadress" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Blob_Column_List" >
+    memAdress
+  </sql>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Memberandcard" >
+    insert into MemberAndCard (memID, memCredit, memCer, 
+      memCerID, memName, memSex, 
+      memBirth, memPhone, memEmail, 
+      mcPKID, mcID, merID, 
+      mcType, mcCredit, mcBalance, 
+      mcEnable, memAdress)
+    values (#{memid,jdbcType=INTEGER}, #{memcredit,jdbcType=REAL}, #{memcer,jdbcType=VARCHAR}, 
+      #{memcerid,jdbcType=VARCHAR}, #{memname,jdbcType=VARCHAR}, #{memsex,jdbcType=VARCHAR}, 
+      #{membirth,jdbcType=DATE}, #{memphone,jdbcType=VARCHAR}, #{mememail,jdbcType=VARCHAR}, 
+      #{mcpkid,jdbcType=INTEGER}, #{mcid,jdbcType=VARCHAR}, #{merid,jdbcType=INTEGER}, 
+      #{mctype,jdbcType=VARCHAR}, #{mccredit,jdbcType=REAL}, #{mcbalance,jdbcType=REAL}, 
+      #{mcenable,jdbcType=BIT}, #{memadress,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Memberandcard" >
+    insert into MemberAndCard
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="memid != null" >
+        memID,
+      </if>
+      <if test="memcredit != null" >
+        memCredit,
+      </if>
+      <if test="memcer != null" >
+        memCer,
+      </if>
+      <if test="memcerid != null" >
+        memCerID,
+      </if>
+      <if test="memname != null" >
+        memName,
+      </if>
+      <if test="memsex != null" >
+        memSex,
+      </if>
+      <if test="membirth != null" >
+        memBirth,
+      </if>
+      <if test="memphone != null" >
+        memPhone,
+      </if>
+      <if test="mememail != null" >
+        memEmail,
+      </if>
+      <if test="mcpkid != null" >
+        mcPKID,
+      </if>
+      <if test="mcid != null" >
+        mcID,
+      </if>
+      <if test="merid != null" >
+        merID,
+      </if>
+      <if test="mctype != null" >
+        mcType,
+      </if>
+      <if test="mccredit != null" >
+        mcCredit,
+      </if>
+      <if test="mcbalance != null" >
+        mcBalance,
+      </if>
+      <if test="mcenable != null" >
+        mcEnable,
+      </if>
+      <if test="memadress != null" >
+        memAdress,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="memid != null" >
+        #{memid,jdbcType=INTEGER},
+      </if>
+      <if test="memcredit != null" >
+        #{memcredit,jdbcType=REAL},
+      </if>
+      <if test="memcer != null" >
+        #{memcer,jdbcType=VARCHAR},
+      </if>
+      <if test="memcerid != null" >
+        #{memcerid,jdbcType=VARCHAR},
+      </if>
+      <if test="memname != null" >
+        #{memname,jdbcType=VARCHAR},
+      </if>
+      <if test="memsex != null" >
+        #{memsex,jdbcType=VARCHAR},
+      </if>
+      <if test="membirth != null" >
+        #{membirth,jdbcType=DATE},
+      </if>
+      <if test="memphone != null" >
+        #{memphone,jdbcType=VARCHAR},
+      </if>
+      <if test="mememail != null" >
+        #{mememail,jdbcType=VARCHAR},
+      </if>
+      <if test="mcpkid != null" >
+        #{mcpkid,jdbcType=INTEGER},
+      </if>
+      <if test="mcid != null" >
+        #{mcid,jdbcType=VARCHAR},
+      </if>
+      <if test="merid != null" >
+        #{merid,jdbcType=INTEGER},
+      </if>
+      <if test="mctype != null" >
+        #{mctype,jdbcType=VARCHAR},
+      </if>
+      <if test="mccredit != null" >
+        #{mccredit,jdbcType=REAL},
+      </if>
+      <if test="mcbalance != null" >
+        #{mcbalance,jdbcType=REAL},
+      </if>
+      <if test="mcenable != null" >
+        #{mcenable,jdbcType=BIT},
+      </if>
+      <if test="memadress != null" >
+        #{memadress,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

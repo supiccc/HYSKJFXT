@@ -313,7 +313,7 @@
     from MerchantInfo
     where merId = #{id}
   </select>
-  <select id="findByMerName" resultType="Merchantinfo" parameterType="java.lang.String">
+  <select id="findByMerName" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String">
     select
     <include refid="Base_Column_List" />
     ,
@@ -350,8 +350,6 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from Merchant a left join MerchantInfo b on a.merID=b.merID
-    where a.merName= #{mName}
     from MerchantInfo
   </select>
 </mapper>

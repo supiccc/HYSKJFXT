@@ -2,6 +2,7 @@ package com.scau.hyskjf.service;
 
 import com.scau.hyskjf.pojo.Credithistoryview;
 import com.scau.hyskjf.pojo.Member;
+import com.scau.hyskjf.pojo.Membercard;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
@@ -31,4 +32,16 @@ public interface MemberCenterService {
     String comment(Integer merID, String info, HttpServletRequest request); // 选择某记录进行点评
 
     List showMemberCardInfo(); // 显示会员卡记录
+
+    int addMemberAccount(Member member,String pwd,String shopPwd);//添加会员用户
+
+    String addMemberCard(Membercard membercard);//添加会员卡
+
+    List<Membercard> queryAllMemCard(Integer merid);//查询某商家发放的所有会员卡
+
+    //List<Membercard> queryCardByMemid(Integer memid);//根据会员id查询会员卡信息
+
+    Membercard queryCardByMcid(String mcid);//根据会员卡号查询会员卡信息
+
+    int updateCard(Membercard membercard);//修改会员卡信息
 }

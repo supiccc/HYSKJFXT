@@ -24,14 +24,14 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class HyskjfApplicationTests {
-    @Autowired
-    MemberCenterService memberCenterService;
+//    @Autowired
+//    MemberCenterService memberCenterService;
+//
+//    @Autowired
+//    AuthenticationController authenticationController;
 
-    @Autowired
-    AuthenticationController authenticationController;
-
-    @Autowired
-    SecurityManager securityManager;
+//    @Autowired
+//    SecurityManager securityManager;
 
     @Test
     public void contextLoads() {

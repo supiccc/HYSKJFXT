@@ -38,7 +38,7 @@ public class MerchantAccManageController {
     * 成功码或失败码
     * */
     @RequestMapping(value = "/addAffiliateAccount", method = RequestMethod.POST)
-    public ResponseJSON addAffiliateAccount(@RequestBody Merchantaccount merchantaccount){
+    public ResponseJSON addAffiliateAccount( Merchantaccount merchantaccount){
         try{
             Md5Hash md5Hash =new Md5Hash(merchantaccount.getMacpasswd(),merchantaccount.getMacacc(),3);//MD5加密密码,登陆名作掩码，加密3次
             String MD5pwd = md5Hash.toString();
@@ -63,7 +63,7 @@ public class MerchantAccManageController {
      * 商家ID对应的所有账号信息MerchantAccount类
      * */
     @RequestMapping(value = "/addAccountReturn", method = RequestMethod.POST)
-    public ResponseJSON addAccountReturn(@RequestBody Merchantaccount merchantaccount){
+    public ResponseJSON addAccountReturn(Merchantaccount merchantaccount){
         try{
             this.addAffiliateAccount(merchantaccount);
             List<Merchantaccount> accList = merchantAccManageService.queryMerchantAccountByMerID(merchantaccount.getMerid());

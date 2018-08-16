@@ -18,4 +18,6 @@ public interface MemberMapper {
     int updateByPrimaryKeyWithBLOBs(Member record);
 
     int updateByPrimaryKey(Member record);
+
+    Integer getMemID();
 }

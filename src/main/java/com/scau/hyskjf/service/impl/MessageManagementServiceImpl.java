@@ -20,18 +20,18 @@ public class MessageManagementServiceImpl implements MessageManagementService {
     @Autowired
     private MessageMapper messageMapper;
     @Override
-    public List<Message> findSendedMessage() {
-        return messageMapper.findSendedMessage();
+    public List<Message> findSendedMessage(int id) {
+        return messageMapper.findSendedMessage(id);
     }
 
     @Override
-    public List<Message> findReceivedMessage() {
-        return messageMapper.findReceivedMessahe();
+    public List<Message> findReceivedMessage(int id) {
+        return messageMapper.findReceivedMessahe(id);
     }
 
     @Override
-    public List<Message> findUnlookMessage() {
-        return messageMapper.findUnlookMessage();
+    public List<Message> findUnlookMessage(int id) {
+        return messageMapper.findUnlookMessage(id);
     }
 
     @Override

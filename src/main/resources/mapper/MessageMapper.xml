@@ -142,32 +142,33 @@
     where mesID = #{mesid,jdbcType=INTEGER}
   </update>
 
-  <select id="findSendedMessage" resultMap="ResultMapWithBLOBs">
+  <select id="findAdminSendedMessage" resultMap="ResultMapWithBLOBs">
     select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from Message
-    where mesType = 0 or mesType = 1
+    where mesSource = #{messource} and (mesType = 0 or mesType = 1)
     order by mesTime desc
   </select>
-  <select id="findReceivedMessahe" resultMap="ResultMapWithBLOBs">
+  <select id="findAdminReceivedMessage" resultMap="ResultMapWithBLOBs">
     select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from Message
-    where mesType = 2 or mesType = 3
+    where where mesDestination = #{mesdestination} and  ( mesType = 2 or mesType = 3 )
     order by mesTime desc
   </select>
 
-  <select id="findUnlookMessage" resultMap="ResultMapWithBLOBs">
+  <select id="findAdminUnlookMessage" resultMap="ResultMapWithBLOBs">
     select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from Message
-    where (mesType = 2 or mesType = 3) and (mesRead = false or mesRead is null)
+    where mesDestination = #{mesdestination} and
+    (mesType = 2 or mesType = 3) and (mesRead = false or mesRead is null)
     order by mesTime desc
   </select>
 </mapper>

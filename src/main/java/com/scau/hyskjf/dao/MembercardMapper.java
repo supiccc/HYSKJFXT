@@ -23,4 +23,8 @@ public interface MembercardMapper {
 
     @Select("select * from MemberCard where memID = #{memid}")
     List selectByMember(Integer memid);
+
+    List<Membercard> queryAllCard(Integer merid);
+
+    Membercard queryCardByMcid(String mcid);
 }

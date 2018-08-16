@@ -4,10 +4,7 @@ import com.scau.hyskjf.dao.MerchantMapper;
 import com.scau.hyskjf.dao.MerchantaccountMapper;
 import com.scau.hyskjf.dao.MerchantdetailMapper;
 import com.scau.hyskjf.dao.MerchantinfoMapper;
-import com.scau.hyskjf.pojo.Merchant;
-import com.scau.hyskjf.pojo.Merchantaccount;
-import com.scau.hyskjf.pojo.Merchantdetail;
-import com.scau.hyskjf.pojo.MerchantinfoWithBLOBs;
+import com.scau.hyskjf.pojo.*;
 import com.scau.hyskjf.service.MerchantManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -105,5 +102,12 @@ public class MerchantManagementServiceImpl implements MerchantManagementService 
         merchant.setIsindex(false);
         merchantMapper.updateByPrimaryKey(merchant);
         return merchantdetailMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<MerchantdetailWithBLOBs> findMerchantDetailByWord(String merName, String province,
+                                                                  String city, String area,String type,
+                                                                  boolean merrecommend,boolean isindex) {
+        return merchantdetailMapper.findMerchantDetailByWord(merName,province,city,area,type,merrecommend,isindex);
     }
 }
