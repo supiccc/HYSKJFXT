@@ -47,11 +47,11 @@ public class shiroConfiguration {
 //        bean.setSuccessUrl("/home");
         //配置访问权限
         LinkedHashMap<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/login", "anon");
-        filterChainDefinitionMap.put("/sign*.html", "anon");
-        filterChainDefinitionMap.put("/forget_password.html", "anon");
+//        filterChainDefinitionMap.put("/login", "anon");
+//        filterChainDefinitionMap.put("/sign*.html", "anon");
+//        filterChainDefinitionMap.put("/forget_password.html", "anon");
 //        filterChainDefinitionMap.put("/jsp/login.jsp*", "anon"); //表示可以匿名访问
-        filterChainDefinitionMap.put("/**", "user");  //配置记住我或认证通过可以访问的地址
+//        filterChainDefinitionMap.put("/**", "user");  //配置记住我或认证通过可以访问的地址
 //        filterChainDefinitionMap.put("/loginUser", "anon");
 //        filterChainDefinitionMap.put("/logout*","anon");
 //        filterChainDefinitionMap.put("/jsp/error.jsp*","anon");
