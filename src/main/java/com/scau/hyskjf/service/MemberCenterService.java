@@ -33,5 +33,13 @@ public interface MemberCenterService {
 
     int addMemberAccount(Member member,String pwd,String shopPwd);//添加会员用户
 
-    String addMemberCard(Membercard membercard);
+    String addMemberCard(Membercard membercard);//添加会员卡
+
+    List<Membercard> queryAllMemCard(Integer merid);//查询某商家发放的所有会员卡
+
+    //List<Membercard> queryCardByMemid(Integer memid);//根据会员id查询会员卡信息
+
+    Membercard queryCardByMcid(String mcid);//根据会员卡号查询会员卡信息
+
+    int updateCard(Membercard membercard);//修改会员卡信息
 }

@@ -243,4 +243,21 @@ public class MemberCenterServiceImpl implements MemberCenterService {
         membercardMapper.insert(membercard);
         return memID;
     }
+
+    @Override
+    public List<Membercard> queryAllMemCard(Integer merid){
+        List<Membercard> list = membercardMapper.queryAllCard(merid);
+        return list;
+    }
+
+    @Override
+    public Membercard queryCardByMcid(String mcid){
+        return membercardMapper.queryCardByMcid(mcid);
+    }
+
+    @Override
+    public int updateCard(Membercard membercard){
+        return membercardMapper.updateByPrimaryKeySelective(membercard);
+    }
+
 }

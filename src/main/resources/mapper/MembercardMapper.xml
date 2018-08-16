@@ -125,4 +125,16 @@
       mcEnable = #{mcenable,jdbcType=BIT}
     where mcPKID = #{mcpkid,jdbcType=INTEGER}
   </update>
+  <select id="queryAllCard" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from MemberCard
+    where merID = #{merid,jdbcType=INTEGER}
+  </select>
+  <select id="queryCardByMcid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from MemberCard
+    where mcID = #{mcid,jdbcType=VARCHAR}
+  </select>
 </mapper>
