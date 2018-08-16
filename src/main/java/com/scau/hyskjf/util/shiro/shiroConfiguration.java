@@ -25,20 +25,20 @@ public class shiroConfiguration {
         ShiroFilterFactoryBean bean=new ShiroFilterFactoryBean();
         bean.setSecurityManager(manager);
         //配置登录的url和登录成功的url
-//        bean.setLoginUrl("/login");
+        bean.setLoginUrl("/sign_in.html");
 //        bean.setSuccessUrl("/home");
         //配置访问权限
         LinkedHashMap<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
-        //配置记住我或认证通过可以访问的地址
-        filterChainDefinitionMap.put("/", "user");
+
 //        filterChainDefinitionMap.put("/jsp/login.jsp*", "anon"); //表示可以匿名访问
+        filterChainDefinitionMap.put("/**", "user");  //配置记住我或认证通过可以访问的地址
 //        filterChainDefinitionMap.put("/loginUser", "anon");
 //        filterChainDefinitionMap.put("/logout*","anon");
 //        filterChainDefinitionMap.put("/jsp/error.jsp*","anon");
 //        filterChainDefinitionMap.put("/jsp/index.jsp*","authc");
 //        filterChainDefinitionMap.put("/*", "authc");//表示需要认证才可以访问
 //        filterChainDefinitionMap.put("/**", "authc");//表示需要认证才可以访问
-//        filterChainDefinitionMap.put("/*.*", "authc");
+//        filterChainDefinitionMap.put("/shopAdminAccountManagement.html", "anon");
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return bean;
     }
