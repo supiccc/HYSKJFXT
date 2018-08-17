@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scau.hyskjf.dao.MembercarddetailMapper" >
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Membercarddetail" >
+    <result column="merID" property="merid" jdbcType="INTEGER" />
+    <result column="mcPKID" property="mcpkid" jdbcType="INTEGER" />
+    <result column="memID" property="memid" jdbcType="INTEGER" />
+    <result column="mcID" property="mcid" jdbcType="VARCHAR" />
+    <result column="mcType" property="mctype" jdbcType="VARCHAR" />
+    <result column="mcCredit" property="mccredit" jdbcType="REAL" />
+    <result column="mcBalance" property="mcbalance" jdbcType="REAL" />
+    <result column="mcEnable" property="mcenable" jdbcType="BIT" />
+    <result column="merType" property="mertype" jdbcType="VARCHAR" />
+    <result column="merName" property="mername" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Membercarddetail" >
+    insert into MembercardDetail (merID, mcPKID, memID, 
+      mcID, mcType, mcCredit, 
+      mcBalance, mcEnable, merType, 
+      merName)
+    values (#{merid,jdbcType=INTEGER}, #{mcpkid,jdbcType=INTEGER}, #{memid,jdbcType=INTEGER}, 
+      #{mcid,jdbcType=VARCHAR}, #{mctype,jdbcType=VARCHAR}, #{mccredit,jdbcType=REAL}, 
+      #{mcbalance,jdbcType=REAL}, #{mcenable,jdbcType=BIT}, #{mertype,jdbcType=VARCHAR}, 
+      #{mername,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Membercarddetail" >
+    insert into MembercardDetail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="merid != null" >
+        merID,
+      </if>
+      <if test="mcpkid != null" >
+        mcPKID,
+      </if>
+      <if test="memid != null" >
+        memID,
+      </if>
+      <if test="mcid != null" >
+        mcID,
+      </if>
+      <if test="mctype != null" >
+        mcType,
+      </if>
+      <if test="mccredit != null" >
+        mcCredit,
+      </if>
+      <if test="mcbalance != null" >
+        mcBalance,
+      </if>
+      <if test="mcenable != null" >
+        mcEnable,
+      </if>
+      <if test="mertype != null" >
+        merType,
+      </if>
+      <if test="mername != null" >
+        merName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="merid != null" >
+        #{merid,jdbcType=INTEGER},
+      </if>
+      <if test="mcpkid != null" >
+        #{mcpkid,jdbcType=INTEGER},
+      </if>
+      <if test="memid != null" >
+        #{memid,jdbcType=INTEGER},
+      </if>
+      <if test="mcid != null" >
+        #{mcid,jdbcType=VARCHAR},
+      </if>
+      <if test="mctype != null" >
+        #{mctype,jdbcType=VARCHAR},
+      </if>
+      <if test="mccredit != null" >
+        #{mccredit,jdbcType=REAL},
+      </if>
+      <if test="mcbalance != null" >
+        #{mcbalance,jdbcType=REAL},
+      </if>
+      <if test="mcenable != null" >
+        #{mcenable,jdbcType=BIT},
+      </if>
+      <if test="mertype != null" >
+        #{mertype,jdbcType=VARCHAR},
+      </if>
+      <if test="mername != null" >
+        #{mername,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="selectByMemID" resultMap="BaseResultMap">
+    select *
+    from MembercardDetail
+    where memID = #{memid}
+  </select>
+</mapper>
