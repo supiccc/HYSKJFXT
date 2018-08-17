@@ -1,5 +1,8 @@
 package com.scau.hyskjf.controller;
 
+import com.scau.hyskjf.pojo.MManager;
+import com.scau.hyskjf.pojo.MemberMShow;
+import com.scau.hyskjf.pojo.Membermanager;
 import com.scau.hyskjf.pojo.Merchantaccount;
 import com.scau.hyskjf.service.MerchantAccManageService;
 import com.scau.hyskjf.util.json.ResponseCode;
@@ -11,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /*
@@ -145,7 +151,7 @@ public class MerchantAccManageController {
                 return new ResponseJSON(ResponseCode.SUCCESS);
             }
             else{
-                return new ResponseJSON(ResponseCode.WARN,new String("输入的原密码不匹配"));
+                return new ResponseJSON(ResponseCode.WARN,"输入的原密码不匹配");
             }
         }catch(Exception e){
             return new ResponseJSON(ResponseCode.WARN);
@@ -243,9 +249,71 @@ public class MerchantAccManageController {
     * 短信验证更改密码
     * 未写完
     * */
-    @RequestMapping(value = "/updatePwdByMassage", method = RequestMethod.POST)
-    public ResponseJSON updateMerchantAccountPwdByMassage(){
-        return new ResponseJSON(ResponseCode.WARN);
+    //@RequestMapping(value = "/updatePwdByMassage", method = RequestMethod.POST)
+    //public ResponseJSON updateMerchantAccountPwdByMassage(){
+    //    return new ResponseJSON(ResponseCode.WARN);
+    //
+    //}
 
+    /*
+     * 查询商家的没有分配客户经理的会员：
+     * 输入：
+     * 商家编号 Integer merID
+     *
+     * 输出：
+     * 没有分配客户经理的会员 List<MemberMShow> list（包含属性：会员id Integer memid;+会员名字 String memname;+会员手机号 String memphone;）
+     * */
+    @RequestMapping(value = "/queryMember", method = RequestMethod.POST)
+    public ResponseJSON queryMember(Integer merID){
+        try{
+            List<MemberMShow> list = merchantAccManageService.queryMemberByMerID(merID);
+            return new ResponseJSON(ResponseCode.SUCCESS,list);
+        }catch(Exception e){
+            return new ResponseJSON(ResponseCode.WARN);
+        }
+    }
+
+    /*
+     * 查询商家的客户经理：
+     * 输入：
+     * 商家编号 Integer merID
+     *
+     * 输出：
+     * 商家的客户经理 List<MManager> list（包含属性：客户经理账号id Integer macid;+商家编号id Integer merid;+ 客户经理账户登陆名（为手机号） String macacc;）
+     * */
+    @RequestMapping(value = "/queryMManager", method = RequestMethod.POST)
+    public ResponseJSON queryMManager(Integer merID){
+        try{
+            List<MManager> list = merchantAccManageService.queryMemberManagerByMerID(merID);
+            return new ResponseJSON(ResponseCode.SUCCESS,list);
+        }catch(Exception e){
+            return new ResponseJSON(ResponseCode.WARN);
+        }
+    }
+
+    /*
+    * 指派客户经理：
+    * 输入：
+    * 会员编号 List<Integer> memIDList ,客户经理的商家账户编号 Integer macID
+    *
+    * 输出：
+    * 正确码或错误码
+    * */
+    @RequestMapping(value = "/setMemberManager", method = RequestMethod.POST)
+    public ResponseJSON setMemberManager(List<Integer> memIDList ,Integer macID){
+        try{
+            List<Membermanager> mmList =new ArrayList<>();
+            Membermanager membermanager = new Membermanager();
+            membermanager.setMmatime(new Date());
+            membermanager.setMmanagerid(macID);
+            for(int i=0;i<memIDList.size();i++){
+                membermanager.setMemid(memIDList.get(i));
+                mmList.add(membermanager);
+            }
+            merchantAccManageService.setMemberManager(mmList);
+            return new ResponseJSON(ResponseCode.SUCCESS);
+        }catch(Exception e){
+            return new ResponseJSON(ResponseCode.WARN);
+        }
     }
 }

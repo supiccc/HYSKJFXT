@@ -172,4 +172,19 @@
     set oweCredit=oweCredit+#{addCredit}
     where merID=#{merID}
   </update>
+
+  <resultMap id="memshow" type="com.scau.hyskjf.pojo.MemberMShow">
+    <id column="memID" property="memid" />
+    <result column="memPhone" property="memphone" />
+    <result column="memName" property="memname" />
+  </resultMap>
+  <select id="queryMember" resultMap="memshow">
+    select c.memID,c.memPhone,c.memName
+    from Merchant a left join MemberCard b on a.merID=b.merID
+    left join Member c on b.memID=c.memID
+    left join MemberManager d on d.memID=c.memID
+    where a.merID=#{merID} and d.mmanagerID=null
+  </select>
+
+
 </mapper>
