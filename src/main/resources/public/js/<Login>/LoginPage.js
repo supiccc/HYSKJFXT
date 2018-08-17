@@ -25,12 +25,17 @@ var accountMgr={
         password = $('#passWord').val();
         role=$('#userType').val();
         roleString = '';
+        if ($("input[type='checkbox']").is(':checked')) {
+            vc = 1;
+        } else {
+            vc = 0;
+        }
         if(role=='1'){
-            roleString = "admin";
-        }else if(role=='2'){
             roleString = "member";
-        }else{
+        }else if(role=='2'){
             roleString = "merchant";
+        }else{
+            roleString = "admin";
         }
 
         if(role!='1'&&role!='2'&&role!='3'){
@@ -49,7 +54,8 @@ var accountMgr={
                 data : {
                     username : username,
                     pwd : password,
-                    role : roleString
+                    role : roleString,
+                    rememberMe: vc
                 },
                 dataType : 'json',
                 success : function(res) {
