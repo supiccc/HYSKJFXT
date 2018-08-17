@@ -1,6 +1,7 @@
 package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Merchant;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -18,4 +19,6 @@ public interface MerchantMapper {
     int updateByPrimaryKey(Merchant record);
 
     Integer getMerID();
+
+    int updateAddCredit(@Param("merID")Integer merID,@Param("addCredit")Float addCredit);
 }

@@ -166,4 +166,10 @@
     select max(merID)+1 as mmerID
     from Merchant
   </select>
+
+  <update id="updateAddCredit" >
+    update Merchant
+    set oweCredit=oweCredit+#{addCredit}
+    where merID=#{merID}
+  </update>
 </mapper>
