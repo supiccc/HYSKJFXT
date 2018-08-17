@@ -1,14 +1,10 @@
 package com.scau.hyskjf.controller;
 
 import com.scau.hyskjf.dao.AdminMapper;
-
-import com.scau.hyskjf.util.sms.AuditSMS;
-import com.scau.hyskjf.util.sms.IndustrySMS;
-import com.scau.hyskjf.util.sms.PassSMS;
-
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
-import org.apache.shiro.SecurityUtils;
+import com.scau.hyskjf.util.sms.AuditSMS;
+import com.scau.hyskjf.util.sms.PassSMS;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,8 +51,8 @@ public class DemoController {
 //        } else {
 //            return new ResponseJSON(ResponseCode.UNKNOWNACCOUNT);
 //        }
-        String verficationCode = IndustrySMS.execute("13602800453");
-        SecurityUtils.getSubject().getSession().setAttribute("verficationCode", verficationCode);
+    //    String verficationCode = com.scau.hyskjf.util.sms.IndustrySMS.execute("13602800453");
+   //     SecurityUtils.getSubject().getSession().setAttribute("verficationCode", verficationCode);
         return new ResponseJSON(ResponseCode.SUCCESS);
     }
 

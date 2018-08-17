@@ -12,6 +12,7 @@
     <result column="merAppStat" property="merappstat" jdbcType="BIT" />
     <result column="merRecommend" property="merrecommend" jdbcType="BIT" />
     <result column="isIndex" property="isindex" jdbcType="BIT" />
+    <result column="oweCredit" property="owecredit" jdbcType="REAL"/>
     <result column="merImage" property="merimage" jdbcType="VARCHAR" />
     <result column="merMainImage" property="mermainimage" jdbcType="BIT" />
     <result column="merTelphone" property="mertelphone" jdbcType="VARCHAR" />
@@ -43,7 +44,7 @@
       merID, merSubID, merTopID,
       merType, merName, merCumPresent,
       merDicPresent, merAppStat, merRecommend,
-      isIndex, merImage, merMainImage,
+      isIndex,oweCredit, merImage, merMainImage,
       merTelphone, merFax, merURL,
       merEmail, merPrincipal, merAppellation,
       merDuty, merPhone, merLevel,
@@ -54,7 +55,7 @@
     insert into MerchantDetail (merID, merSubID, merTopID, 
       merType, merName, merCumPresent, 
       merDicPresent, merAppStat, merRecommend, 
-      isIndex, merImage, merMainImage, 
+      isIndex,oweCredit, merImage, merMainImage,
       merTelphone, merFax, merURL, 
       merEmail, merPrincipal, merAppellation, 
       merDuty, merPhone, merLevel, 
@@ -282,15 +283,6 @@
     ,
     <include refid="Blob_Column_List" />
     from MerchantDetail
-  </select>
-
-  <select id="selectByMerID" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
-    select
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from MerchantDetail
-    where merID = #{merid,jdbcType=INTEGER}
     <where>
       <if test="mername != null and !&quot;&quot;.equals(mername.trim()) ">
         and merName like concat('%' ,#{mername}, '%')
@@ -321,6 +313,15 @@
       </if>
     </where>
     order by merID
+  </select>
+
+  <select id="selectByMerID" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from MerchantDetail
+    where merID = #{merid,jdbcType=INTEGER}
   </select>
 
   <select id="findAllMerchantinfo" resultMap="ResultMapWithBLOBs">

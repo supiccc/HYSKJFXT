@@ -1,17 +1,16 @@
 package com.scau.hyskjf.controller;
 
-import com.scau.hyskjf.pojo.Member;
-import com.scau.hyskjf.pojo.Memberaccount;
 import com.scau.hyskjf.service.AuthenticationService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
 import com.scau.hyskjf.util.sms.IndustrySMS;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 /**
  * Created by supiccc on 2018-08-10 09:24
@@ -42,10 +41,12 @@ public class AuthenticationController {
     @RequestMapping(value = "/sendSMS", method = RequestMethod.POST)
     public ResponseJSON sendSMS(String username) {
 //        String username = ((Memberaccount)SecurityUtils.getSubject().getSession().getAttribute("user")).getMaid();
-        String verficationCode = IndustrySMS.execute(username);
+        Map result = IndustrySMS.execute(username);
+        String verficationCode = (String) result.get("verficationCode");
+        String msg = (String) result.get("result");
 //        String verficationCode = VerficationCode.getCode();  // 获取验证码
         SecurityUtils.getSubject().getSession().setAttribute("verficationCode", verficationCode);
-        return new ResponseJSON(ResponseCode.SUCCESS);
+        return new ResponseJSON(ResponseCode.SUCCESS, msg);
     }
 
 
