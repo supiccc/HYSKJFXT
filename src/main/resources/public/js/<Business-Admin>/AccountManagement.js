@@ -10,7 +10,27 @@ $(function () {
 
 var InitPage={
     init:function () {
-        accountManagement.getAccountList();
+        $.ajax({
+            type : 'POST',
+            //现在是查询所有账号，迟些界面连起来后要记得该成查询相关的子账号
+            url: "http://localhost:8080/merchantAccManage/queryAll",
+            dataType: 'json',
+            success: function (result) {
+                if(result.code == 0){
+                    // accountManagement.getAccountList(result);
+                    accountManagement.initList(result);
+                    alert("查询成功，找到"+result.data.length+"条记录,正在加载中");
+                }else{
+                    alert("查询失败，后台故障");
+                    return;
+                }
+            },
+            error: function () {
+                alert("查询失败，服务器异常");
+                return;
+            }
+        })
+
     },
 
     action:function () {
@@ -18,24 +38,63 @@ var InitPage={
       //     //添加子账号的触发方法
       //     accountManagement.addAccount();
       // });
+            //商家管理员
+            //跳转《账户管理》
+            $('#AccountMrgBtn').on('click',function () {
+                window.location.href = "./shopAdminAccountManagement.html";
+            });
+            //跳转《展示信息》
+            $('#InfoMrgBtn').on('click',function () {
+                window.location.href = "./shopAdminShowInfo.html";
+            });
+            //跳转《同盟管理》
+            $('#AllianceBtn').on('click',function () {
+                window.location.href = "./shopAdminAlliance.html";
+            });
+
+            //我的
+            //跳转《积分管理》
+            $('#pointsMgrBtn').on('click',function () {
+                window.location.href = "./";
+            });
+            //弹出《配置管理》
+            $('#settingBtn').on('click',function () {
+
+            });
+            //修改密码
+            $('#updatePwdBtn').on('click',function () {
+
+            });
+            //弹出《发送反馈》
+            $('#adviceBtn').on('click',function () {
+
+            });
+
+
+            //跳转《所有站内消息》
+            $('#InfoBtn').on('click',function () {
+
+            });
     }
 };
 
 var accountManagement = {
-    getAccountList:function(){
-        $.ajax({
-           type: "POST",
-           url: "testJson/accountManagement.json",
-           dataType: "json",
-           success: function (result) {
-               accountManagement.initList(result);
-           }
-        });
-    },
+    // getAccountList:function(result){
+    //     $.ajax({
+    //        type: "POST",
+    //        url: "testJson/accountManagement.json",
+    //        dataType: "json",
+    //        success: function (result) {
+    //            accountManagement.initList(result);
+    //        }
+    //     });
+    // },
 
     initList:function(result){
-        alert(result.length);
         $('#content-wrapper').empty();
+        qiantaiCount = 0;
+        kehujingliCount = 0;
+        bumenjingliCount = 0;
         $('#content-wrapper').append(
             "<br/>\n" +
             "            <!--添加子账号设置开始-->\n" +
@@ -63,7 +122,7 @@ var accountManagement = {
             "                                <label class='radio inline'>\n" +
             "                                    <input type='radio' value='' name=\"typeRadios\"/>客户经理</label>\n" +
             "                                <label class='radio inline'>\n" +
-            "                                    <input type='radio' value='' name=\"typeRadios\"/>部门经理</label>\n" +
+            "                                    <input type='radio' value='' name=\"typeRadios\" checked/>部门经理</label>\n" +
             "                            </div>\n" +
             "                    </div>\n" +
             "                    <!--选择账号类型设置结束-->\n" +
@@ -102,10 +161,9 @@ var accountManagement = {
             "    </div>\n" +
             "</div>"
         );
-        for (var i = 0; i < result.length; i++) {
-            // info = "";
+        for (var i = 0; i < result.data.length; i++) {
             // 启用的《前台》账号
-            if (result[i].userType == "qiantai" && result[i].isOn == "YES") {
+            if ((result.data[i].macacctype == 2 || result.data[i].macacctype == 12) && result.data[i].macenable == 1) {
                 qiantaiCount++;
                 $('#content-wrapper').append(
                     "<br/>\n" +
@@ -145,7 +203,7 @@ var accountManagement = {
                     "                            <div class='control-group'>\n" +
                     "                                <label class='control-label'>账号</label>\n" +
                     "                                <div class='controls'>\n" +
-                    "                                    <input id='phoneNum' value='"+result[i].phoneNumber+"' type='text' required=\"required\"/>\n" +
+                    "                                    <input id='phoneNum' value='"+result.data[i].macacc+"' type='text' required=\"required\"/>\n" +
                     "                                </div>\n" +
                     "                            </div>\n" +
                     //prev+4
@@ -193,9 +251,9 @@ var accountManagement = {
                     "                    </div>\n" +
                     "                </div>"
                 );
-                // 未启用的《前台》账号
             }
-            else if (result[i].userType == "qiantai" && result[i].isOn == "NO") {
+            // 未启用的《前台》账号
+            else if ((result.data[i].macacctype == 2 || result.data[i].macacctype == 12) && result.data[i].macenable != 1) {
                 qiantaiCount++;
                 info = "qiantaiClose_"+qiantaiCount;
                 $('#content-wrapper').append(
@@ -236,7 +294,7 @@ var accountManagement = {
                     "                            <div class='control-group'>\n" +
                     "                                <label class='control-label'>账号</label>\n" +
                     "                                <div class='controls'>\n" +
-                    "                                    <input id='phoneNum' value='"+result[i].phoneNumber+"' type='text' required=\"required\"/>\n" +
+                    "                                    <input id='phoneNum' value='"+result.data[i].macacc+"' type='text' required=\"required\"/>\n" +
                     "                                </div>\n" +
                     "                            </div>\n" +
                     //prev+4
@@ -284,9 +342,9 @@ var accountManagement = {
                     "                    </div>\n" +
                     "                </div>"
                 );
-                // 启用的《客户经理》账号
             }
-            else if (result[i].userType == "kehujingli" && result[i].isOn == "YES") {
+            // 启用的《客户经理》账号
+            else if ((result.data[i].macacctype == 3 || result.data[i].macacctype == 13 )&& result.data[i].macenable == 1) {
                 kehujingliCount++;
                 info = "kehujingliOpen_"+kehujingliCount;
                 $('#content-wrapper').append(
@@ -327,7 +385,7 @@ var accountManagement = {
                     "                            <div class='control-group'>\n" +
                     "                                <label class='control-label'>账号</label>\n" +
                     "                                <div class='controls'>\n" +
-                    "                                    <input id='phoneNum' value='"+result[i].phoneNumber+"' type='text' required=\"required\"/>\n" +
+                    "                                    <input id='phoneNum' value='"+result.data[i].macacc+"' type='text' required=\"required\"/>\n" +
                     "                                </div>\n" +
                     "                            </div>\n" +
                     //prev+4
@@ -375,9 +433,9 @@ var accountManagement = {
                     "                    </div>\n" +
                     "                </div>"
                     );
-                // 未启用的《客户经理》账号
             }
-            else if (result[i].userType == "kehujingli" && result[i].isOn == "NO") {
+            // 未启用的《客户经理》账号
+            else if ((result.data[i].macacctype == 3 || result.data[i].macacctype == 13 )&& result.data[i].macenable != 1) {
                 kehujingliCount++;
                 info = "kehujingliClose_"+kehujingliCount;
                 $('#content-wrapper').append(
@@ -418,7 +476,7 @@ var accountManagement = {
                     "                            <div class='control-group'>\n" +
                     "                                <label class='control-label'>账号</label>\n" +
                     "                                <div class='controls'>\n" +
-                    "                                    <input id='phoneNum' value='"+result[i].phoneNumber+"' type='text' required=\"required\"/>\n" +
+                    "                                    <input id='phoneNum' value='"+result.data[i].macacc+"' type='text' required=\"required\"/>\n" +
                     "                                </div>\n" +
                     "                            </div>\n" +
                     //prev+4
@@ -466,9 +524,9 @@ var accountManagement = {
                     "                    </div>\n" +
                     "                </div>"
                 );
-                // 启用的《部门经理》账号
             }
-            else if (result[i].userType == "bumenjingli" && result[i].isOn == "YES") {
+            // 启用的《部门经理》账号
+            else if (result.data[i].macacctype == 4 && result.data[i].macenable == 1) {
                 bumenjingliCount++;
                 info = "bumenjingliOpen_"+bumenjingliCount;
                 $('#content-wrapper').append(
@@ -509,7 +567,7 @@ var accountManagement = {
                     "                            <div class='control-group'>\n" +
                     "                                <label class='control-label'>账号</label>\n" +
                     "                                <div class='controls'>\n" +
-                    "                                    <input id='phoneNum' value='"+result[i].phoneNumber+"' type='text' required=\"required\"/>\n" +
+                    "                                    <input id='phoneNum' value='"+result.data[i].macacc+"' type='text' required=\"required\"/>\n" +
                     "                                </div>\n" +
                     "                            </div>\n" +
                     //prev+4
@@ -557,9 +615,9 @@ var accountManagement = {
                     "                    </div>\n" +
                     "                </div>"
                 );
-                // 未启用的《部门经理》账号
             }
-            else if (result[i].userType == "bumenjingli" && result[i].isOn == "NO") {
+            // 未启用的《部门经理》账号
+            else if (result.data[i].macacctype == 4 && result.data[i].macenable != 1) {
                 bumenjingliCount++;
                 info = "bumenjingliClose_"+bumenjingliCount;
                 $('#content-wrapper').append(
@@ -600,7 +658,7 @@ var accountManagement = {
                     "                            <div class='control-group'>\n" +
                     "                                <label class='control-label'>账号</label>\n" +
                     "                                <div class='controls'>\n" +
-                    "                                    <input id='phoneNum' value='"+result[i].phoneNumber+"' type='text' required=\"required\"/>\n" +
+                    "                                    <input id='phoneNum' value='"+result.data[i].macacc+"' type='text' required=\"required\"/>\n" +
                     "                                </div>\n" +
                     "                            </div>\n" +
                     //prev+4
@@ -650,7 +708,7 @@ var accountManagement = {
                 );
             }
             else {
-                alert("无法识别数据源 "+result[i].userType+" &isON: "+result[i].isON);
+                alert("无法识别数据源 : "+result.data[i].macid);
             }
         }
     },
@@ -662,9 +720,12 @@ var accountManagement = {
         var pwdTextAgain = $(btn).parents().prev().prev().prev().children().eq(1).children().eq(0).val();
 
         // 判断用户类型
-        var isQiantai = $(btn).parents().prev().prev().prev().prev().prev().prev().prev().children().eq(1).children().eq(0).children().eq(0).attr("checked");
-        var isKehujingli = $(btn).parents().prev().prev().prev().prev().prev().prev().prev().children().eq(1).children().eq(1).children().eq(0).attr("checked");
-        var isBumenjingli = $(btn).parents().prev().prev().prev().prev().prev().prev().prev().children().eq(1).children().eq(2).children().eq(0).attr("checked")
+        var isQiantai = $(btn).parents().prev().prev().prev().prev().prev().prev().prev().children().eq(1).children().eq(0).
+        children().eq(0).attr("checked");
+        var isKehujingli = $(btn).parents().prev().prev().prev().prev().prev().prev().prev().children().eq(1).children().eq(1).
+        children().eq(0).attr("checked");
+        var isBumenjingli = $(btn).parents().prev().prev().prev().prev().prev().prev().prev().children().eq(1).children().eq(2).
+        children().eq(0).attr("checked")
         var userTypeText = "";
 
         if(isQiantai == "checked"){
@@ -688,17 +749,44 @@ var accountManagement = {
 
         var userTypeText = "";
 
-        if(isQiantai == "checked"){
-            userTypeText = "qiantai";
-        }else  if (isKehujingli == "checked"){
-            userTypeText = "kehujingli";
-        } else{
-            userTypeText = "bumenjingli";
+        if (isQiantai == "checked") {
+            userTypeText = 12;
+        } else if (isKehujingli == "checked") {
+            userTypeText = 13;
+        } else {
+            userTypeText = 4;
         }
 
         var phoneNumberText = $('#addPhoneNumber').val();
 
-        alert("添加内容为:[账号]"+phoneNumberText+"[用户类型]"+userTypeText);
+        alert("添加内容为:[账号]" + phoneNumberText + "[用户类型]" + userTypeText);
+
+        $.ajax({
+            type : 'POST',
+            url : 'http://localhost:8080/merchantAccManage/addAffiliateAccount',
+            data : {
+                merid : 2,
+                macacc : phoneNumberText,
+                //初始密码123456
+                macpasswd : "123456",
+                macacctype : userTypeText,
+                //默认开启
+                macenable : 1
+            },
+            dataType: 'json',
+            success : function (result) {
+                if(result.code == 0){
+                    alert('子账号申请成功');
+                    InitPage.init();
+                }else{
+                    alert('子账号申请失败，后台异常');
+                }
+            },
+            error : function () {
+                alert('子账号申请失败，服务器异常')
+            }
+
+        })
     },
 
     deleteAccount:function (abtn) {
