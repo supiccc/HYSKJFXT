@@ -46,10 +46,6 @@ public class MerchantAccManageController {
     @RequestMapping(value = "/addAffiliateAccount", method = RequestMethod.POST)
     public ResponseJSON addAffiliateAccount( Merchantaccount merchantaccount){
         try{
-            Md5Hash md5Hash =new Md5Hash(merchantaccount.getMacpasswd(),merchantaccount.getMacacc(),3);//MD5加密密码,登陆名作掩码，加密3次
-            String MD5pwd = md5Hash.toString();
-            merchantaccount.setMacpasswd(MD5pwd);
-            merchantaccount.setMacenable(true);
             merchantAccManageService.addMerchantAccount(merchantaccount);//插入到商家账户表
             return new ResponseJSON(ResponseCode.SUCCESS);
         }catch(Exception e){

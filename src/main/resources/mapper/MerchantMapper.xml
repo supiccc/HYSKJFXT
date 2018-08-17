@@ -163,7 +163,7 @@
   </update>
 
   <select id="getMerID" resultType="java.lang.Integer">
-    select max(merID)+1 as mmerID
+    select max(merID) as mmerID
     from Merchant
   </select>
 

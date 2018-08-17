@@ -24,7 +24,7 @@ public class MerchantJoinServiceImpl implements MerchantJoinService {
     @Autowired
     ApplicationMapper applicationMapper;
 
-    public void developJoin(MerchantinfoWithBLOBs merchantinfoWithBLOBs, Merchant merchant) {
+    public Integer developJoin(MerchantinfoWithBLOBs merchantinfoWithBLOBs, Merchant merchant) {
         Integer createMerID = merchantMapper.getMerID();
         merchant.setMerid(createMerID);
         merchantMapper.insert(merchant);
@@ -36,9 +36,10 @@ public class MerchantJoinServiceImpl implements MerchantJoinService {
         application.setAcareatime(new Date());//设置申请时间
         application.setAcastat("未处理");//设置审核状态
         applicationMapper.insert(application);
+        return createMerID;
     }
 
-    public void independentJoin(MerchantinfoWithBLOBs merchantinfoWithBLOBs, Merchant merchant) {
+    public Integer independentJoin(MerchantinfoWithBLOBs merchantinfoWithBLOBs, Merchant merchant) {
         Integer createMerID = merchantMapper.getMerID();
         merchant.setMerid(createMerID);
         merchantMapper.insert(merchant);
@@ -55,5 +56,6 @@ public class MerchantJoinServiceImpl implements MerchantJoinService {
         application.setAcareatime(new Date());//设置申请时间
         application.setAcastat("未处理");//设置审核状态
         applicationMapper.insert(application);
+        return createMerID;
     }
 }

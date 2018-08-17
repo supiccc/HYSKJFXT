@@ -5,6 +5,7 @@ import com.scau.hyskjf.dao.MerchantMapper;
 import com.scau.hyskjf.dao.MerchantaccountMapper;
 import com.scau.hyskjf.pojo.*;
 import com.scau.hyskjf.service.MerchantAccManageService;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,10 @@ public class MerchantAccManageServiceImpl implements MerchantAccManageService {
     MerchantMapper merchantMapper;
 
     public int addMerchantAccount(Merchantaccount merchantaccount){
+        Md5Hash md5Hash =new Md5Hash(merchantaccount.getMacpasswd(),merchantaccount.getMacacc(),3);//MD5加密密码,登陆名作掩码，加密3次
+        String MD5pwd = md5Hash.toString();
+        merchantaccount.setMacpasswd(MD5pwd);
+        merchantaccount.setMacenable(true);
         return merchantaccountMapper.insert(merchantaccount);
     }
 
