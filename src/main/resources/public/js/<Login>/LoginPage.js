@@ -12,6 +12,9 @@ var InitPage={
         $('#loginBtn').on('click',function () {
             accountMgr.login();
         })
+        $('#submitBtn').on('click',function () {
+            accountMgr.register();
+        })
     }
 };
 
@@ -20,19 +23,14 @@ var accountMgr={
     login:function () {
         username = $('#phoneNumber').val();
         password = $('#passWord').val();
-        role = $('#userType').val();
+        role=$('#userType').val();
         roleString = '';
-        if ($("input[type=checkbox]").is(':checked')) {
-            rememberMeString = 1;
-        } else {
-            rememberMeString = 0;
-        }
         if(role=='1'){
-            roleString = "member";
-        }else if(role=='2'){
-            roleString = "merchant";
-        }else{
             roleString = "admin";
+        }else if(role=='2'){
+            roleString = "member";
+        }else{
+            roleString = "merchant";
         }
 
         if(role!='1'&&role!='2'&&role!='3'){
@@ -47,12 +45,11 @@ var accountMgr={
         }else{
             $.ajax({
                 type : 'POST',
-                url : '/login',
+                url : 'http://localhost:8080/login',
                 data : {
                     username : username,
                     pwd : password,
-                    role : roleString,
-                    rememberMe: rememberMeString
+                    role : roleString
                 },
                 dataType : 'json',
                 success : function(res) {
@@ -60,9 +57,9 @@ var accountMgr={
                         // 登录成功
                         alert("登陆成功，欢迎用户"+username);
                         var to = "";
-                        switch (role) {
+                        switch (user_type) {
                             case '1':
-                                to = "indexReal.html";
+                                // to = "./school_main.html";
                                 break;
                             case '2':
                                 // to = "./county_main.html";
@@ -76,7 +73,7 @@ var accountMgr={
                             default:
                                 break;
                         }
-                        window.location.href = to;
+                        // window.location.href = to;
                     } else {
                         alert(res.msg);
                         return;
@@ -88,5 +85,43 @@ var accountMgr={
                 }
             });
         }
+    },
+
+    register:function () {
+        alert('registing'+$('#email').val());
+        if($('#email').val()!=""){
+            $.ajax({
+                type : 'POST',
+                url: 'http://localhost:8080/merchantJoin/independentJoin',
+                data: {
+                    mertype : $('#shopType').val(),
+                    mername : $('#shopName').val(),
+                    //暂存地址
+                    merarea: $('#shopAddress').val(),
+                    mertelphone: $("#phoneNumber").val(),
+                    mercumpresent: $('#ratio').val(),
+                    merdicpresent: $('#disCount').val(),
+                    merprincipal: $('#realName').val(),
+                    merappellation: $('#sex').val(),
+                    merduty: $('#job').val(),
+                    merphone: $('#personalPhoneNumber').val(),
+                    merfax: $('#fax').val(),
+                    meremail: $('#email').val()
+                },
+                dataType: 'json',
+                success: function (result) {
+                    if(result.code == 0){
+                        alert('申请成功，我们回第一时间回复您的!');
+                    }else{
+                        alert('申请失败，后台故障');
+                    }
+                },
+                error: function (result) {
+                    alert(result.code+' : 申请失败，服务器异常');
+                }
+
+            });
+        }
+
     }
 };
