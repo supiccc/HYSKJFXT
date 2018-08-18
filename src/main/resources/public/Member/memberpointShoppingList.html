@@ -1,0 +1,615 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!--设置网页标题-->
+    <title>七彩云会员积分平台</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport' />
+
+    <!--[if lt IE 9]>
+    <script src='../assets/javascripts/html5shiv.js' type='text/javascript'></script>
+    <![endif]-->
+
+    <link href='../assets/stylesheets/bootstrap/bootstrap.css' media='all' rel='stylesheet' type='text/css' />
+    <link href='../assets/stylesheets/bootstrap/bootstrap-responsive.css' media='all' rel='stylesheet' type='text/css' />
+    <!-- / jquery ui -->
+    <link href='../assets/stylesheets/jquery_ui/jquery-ui-1.10.0.custom.css' media='all' rel='stylesheet' type='text/css' />
+    <link href='../assets/stylesheets/jquery_ui/jquery.ui.1.10.0.ie.css' media='all' rel='stylesheet' type='text/css' />
+    <!-- / switch buttons -->
+    <link href='../assets/stylesheets/plugins/bootstrap_switch/bootstrap-switch.css' media='all' rel='stylesheet' type='text/css' />
+    <!-- / xeditable -->
+    <link href='../assets/stylesheets/plugins/xeditable/bootstrap-editable.css' media='all' rel='stylesheet' type='text/css' />
+    <link href='../assets/stylesheets/plugins/common/bootstrap-wysihtml5.css' media='all' rel='stylesheet' type='text/css' />
+    <!-- / wysihtml5 (wysywig) -->
+    <link href='../assets/stylesheets/plugins/common/bootstrap-wysihtml5.css' media='all' rel='stylesheet' type='text/css' />
+    <!-- / jquery file upload -->
+    <link href='../assets/stylesheets/plugins/jquery_fileupload/jquery.fileupload-ui.css' media='all' rel='stylesheet' type='text/css' />
+    <!-- / full calendar -->
+    <link href='../assets/stylesheets/plugins/fullcalendar/fullcalendar.css' media='all' rel='stylesheet' type='text/css' />
+    <!-- / select2 -->
+    <link href='../assets/stylesheets/plugins/select2/select2.css' media='all' rel='stylesheet' type='text/css' />
+    <!-- / mention -->
+    <link href='../assets/stylesheets/plugins/mention/mention.css' media='all' rel='stylesheet' type='text/css' />
+    <!-- / tabdrop (responsive tabs) -->
+    <link href='../assets/stylesheets/plugins/tabdrop/tabdrop.css' media='all' rel='stylesheet' type='text/css' />
+    <!-- / jgrowl notifications -->
+    <link href='../assets/stylesheets/plugins/jgrowl/jquery.jgrowl.min.css' media='all' rel='stylesheet' type='text/css' />
+    <!-- / datatables -->
+    <link href='../assets/stylesheets/plugins/datatables/bootstrap-datatable.css' media='all' rel='stylesheet' type='text/css' />
+    <!-- / dynatrees (file trees) -->
+    <link href='../assets/stylesheets/plugins/dynatree/ui.dynatree.css' media='all' rel='stylesheet' type='text/css' />
+    <!-- / color picker -->
+    <link href='../assets/stylesheets/plugins/bootstrap_colorpicker/bootstrap-colorpicker.css' media='all' rel='stylesheet' type='text/css' />
+    <!-- / datetime picker -->
+    <link href='../assets/stylesheets/plugins/bootstrap_datetimepicker/bootstrap-datetimepicker.min.css' media='all' rel='stylesheet' type='text/css' />
+    <!-- / daterange picker) -->
+    <link href='../assets/stylesheets/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.css' media='all' rel='stylesheet' type='text/css' />
+    <!-- / flags (country flags) -->
+    <link href='../assets/stylesheets/plugins/flags/flags.css' media='all' rel='stylesheet' type='text/css' />
+    <!-- / slider nav (address book) -->
+    <link href='../assets/stylesheets/plugins/slider_nav/slidernav.css' media='all' rel='stylesheet' type='text/css' />
+    <!-- / fuelux (wizard) -->
+    <link href='../assets/stylesheets/plugins/fuelux/wizard.css' media='all' rel='stylesheet' type='text/css' />
+    <!-- / flatty theme -->
+    <link href='../assets/stylesheets/light-theme.css' id='color-settings-body-color' media='all' rel='stylesheet' type='text/css' />
+    <!-- / demo -->
+    <link href='../assets/stylesheets/demo.css' media='all' rel='stylesheet' type='text/css' />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--<script>-->
+        <!--function show (){-->
+            <!--$('#modal-container-625459').modal('show');-->
+        <!--}-->
+        <!--function showIntegral(){-->
+            <!--$('#modal-container-Integral').modal('show');-->
+        <!--}-->
+        <!--function showFeedback(){-->
+            <!--$('#modal-container-feedback').modal('show');-->
+        <!--}-->
+    <!--</script>-->
+</head>
+<body class='contrast-dark'>
+<header>
+    <!--导航栏-->
+    <div class='navbar'>
+        <div class='navbar-inner'>
+            <!--容器设置-->
+            <div class='container-fluid'>
+                <!--导航栏左边-->
+                <a class='brand' href='index.html'>
+                    <!--这里可以考虑要不要放logo-->
+                    <i class='icon-heart-empty'></i>
+                    <!--放平台的名称-->
+                    <span class='hidden-phone'>七彩云会员积分平台</span>
+                </a>
+                <!--点击七彩云平台后面的按钮后可实现左边侧边栏弹出或收起-->
+                <a class='toggle-nav btn pull-left' href='#'>
+                    <i class='icon-reorder'></i>
+                </a>
+                <!--导航栏右边的内容-->
+                <!--注意商家客户经理的顶部导航栏是全部一样的-->
+                <ul class='nav pull-right'>
+                    <!--平台商家 会员登录后的默认页面-->
+                    <li><a href="#" id="indexBtn">首页</a></li>
+                    <!--记录查询-->
+                    <li><a href="#" id="shopListBtn">平台商家</a></li></li>
+                    <!--消息提醒-->
+                    <!--默认显示最新五条未处理的消息-->
+                    <li class='dropdown medium only-icon widget'>
+                        <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
+                            <i class='icon-rss'></i>
+                            <!--下面的数字5为新消息的条数-->
+                            <div class='label'>5</div>
+                        </a>
+                        <ul class='dropdown-menu'>
+                            <li>
+                                <a href='#'>
+                                    <div class='widget-body'>
+                                        <div class='pull-left icon'>
+                                            <!--含有user图标的都是站内信息-->
+                                            <i class='icon-user text-success'></i>
+                                        </div>
+                                        <!--显示的是信息的标题-->
+                                        <div class='pull-left text'>
+                                            麦当劳七夕薯条买一送一
+                                            <!--显示的是多久之前收到信息，时间差-->
+                                            <small class='muted'>刚刚</small>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <!--每条信息之间都用分隔线隔开-->
+                            <li class='divider'></li>
+                            <!--是信息图标的都是点评信息，默认显示的是点评的前几个字呢-->
+                            <li>
+                                <a href='#'>
+                                    <div class='widget-body'>
+                                        <div class='pull-left icon'>
+                                            <!--点评信息图标-->
+                                            <i class='icon-comment text-warning'></i>
+                                        </div>
+                                        <div class='pull-left text'>
+                                            麦当劳的辣翅真的好好味啊！
+                                            <!--显示的是多久之前收到信息，时间差-->
+                                            <small class='muted'>1h前</small>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class='divider'></li>
+
+                            <li class='widget-footer'>
+                                <a href='#'>所有点评信息</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--导航栏最右边 就是"我的"-->
+                    <li class='dropdown dark user-menu' id="myMenu">
+                        <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
+                            <!--身份或者名称 建议显示的是身份就可以了-->
+                            <span class='user-name hidden-phone'>会员</span>
+                            <b class='caret'></b>
+                        </a>
+                        <!--点开菜单后弹出的内容-->
+                        <ul class='dropdown-menu'>
+                            <!--点击菜单项后跳转的页面或弹出模态框-->
+                            <!--总积分-->
+                            <li>
+                                <a id="totalPointBtn">
+                                    <i class='icon-key'></i>
+                                    总积分
+                                </a>
+                            </li>
+                            <li>
+                                <a id="memberSearchBtn">
+                                    <i class='icon-key'></i>
+                                    消费记录
+                                </a>
+                            </li>
+                            <!--我的资料 同账户管理-->
+                            <li>
+                                <a id="myInfoBtn">
+                                    <i class='icon-info'></i>
+                                    我的资料
+                                </a>
+                            </li>
+                            <!--我的卡包-->
+                            <li>
+                                <a href='' id="cardListBtn">
+                                    <i class='icon-credit-card'></i>
+                                    我的卡包
+                                </a>
+                            </li>
+                            <!--修改登录密码-->
+                            <li>
+                                <a href='#' id="updatePwdBtn">
+                                    <i class='icon-cog'></i>
+                                    修改登录密码
+                                </a>
+                            </li>
+                            <!--修改交易密码-->
+                            <li>
+                                <a id="updatePayPwdBtn">
+                                    <i class='icon-cog'></i>
+                                    修改交易密码
+                                </a>
+                            </li>
+                            <!--反馈-->
+                            <li>
+                                <a id="adviceBtn">
+                                    <i class='icon-frown'></i>
+                                    发送反馈
+                                </a>
+                            </li>
+                            <!--分隔线-->
+                            <li class='divider'></li>
+                            <li>
+                                <a btn="cancelBtn">
+                                    <i class='icon-signout'></i>
+                                    注销退出
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!--搜索框表单-->
+                <form accept-charset="UTF-8" action="search_results.html" class="navbar-search pull-right hidden-phone" method="get" />
+                <!--设置搜索框样式-->
+                <div style="margin:0;padding:0;display:inline">
+                    <input name="utf8" type="hidden" value="&#x2713;" />
+                </div>
+                <!--在搜索框内插入放大镜的按钮-->
+                <button class="btn btn-link icon-search" name="button" type="submit"></button>
+                <input autocomplete="off" class="search-query span2" id="q_header" name="q" placeholder="搜索" type="text" value="" />
+                </form>
+            </div>
+        </div>
+    </div>
+</header>
+<!--至此 顶部导航栏设置结束-->
+<!--接下来开始设置侧边栏-->
+<div id='wrapper'>
+    <div id='main-nav-bg'></div>
+    <nav class='' id='main-nav'>
+        <div class='navigation'>
+            <div class='search'>
+                <form accept-charset="UTF-8" action="search_results.html" method="get" />
+                <div style="margin:0;padding:0;display:inline">
+                    <input name="utf8" type="hidden" value="&#x2713;" />
+                </div>
+                <div class='search-wrapper'>
+                    <input autocomplete="off" class="search-query" id="q" name="q" placeholder="Search..." type="text" value="" />
+                    <button class="btn btn-link icon-search" name="button" type="submit"></button>
+                </div>
+                </form>
+            </div>
+            <!--垂直导航栏设置-->
+            <!--如果需要再添加或修改以li为单位修改-->
+            <ul class='nav nav-stacked'>
+                <!--记录查询分为 积分查询和消费查询-->
+                <!--消费查询-->
+                <li class=''>
+                    <!--设置点击文字后跳转的链接-->
+                    <a id="shoppingListBtn">
+                        <!--需要设置图标在这里修改\|/-->
+                        <i class='icon-money'></i>
+                        <!--需要设置文字就在这里修改-->
+                        <span>储值/现金消费记录</span>
+                    </a>
+                </li>
+                <!--积分查询-->
+                <li class=''>
+                    <!--设置点击文字后跳转的链接-->
+                    <a id="pointShoppingListBtn">
+                        <!--需要设置图标在这里修改\|/-->
+                        <i class='icon-download-alt'></i>
+                        <!--需要设置文字就在这里修改-->
+                        <span>积分消费记录</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--容器设置-->
+    <div id="content">
+        <div class='container-fluid'>
+            <div class='row-fluid' id='content-wrapper'>
+                <div class='span12'>
+                    <br/>
+                    <!--插入表格-->
+                    <div class='box-content box-no-padding'>
+                        <div class='responsive-table'>
+                            <div class='scrollable-area'>
+                                <!--删除了class属性的data-table-column-filter-->
+                                <table class=' table table-bordered table-striped table-hover' style='margin-bottom:0;'>
+                                    <thead id="thead">
+                                    <tr style="height: 45px">
+                                        <th style="text-align: center;width: 5%" >上缴编号</th>
+                                        <th style="text-align: center">商家编号</th>
+                                        <th style="text-align: center">会员编号</th>
+                                        <th style="text-align: center">积分数量</th>
+                                        <th style="text-align: center">提交时间</th>
+                                        <!--<th style="text-align: center">可用金额</th>-->
+                                        <!--<th style="text-align: center">充值时间</th>-->
+                                        <th style="text-align: right">操作</th>
+                                    </tr>
+
+                                    </thead>
+                                    <tbody id="tbody">
+                                    <tr>
+                                        <td style="text-align: center" >11231232</td>
+                                        <td style="text-align: center" >2131232</td>
+                                        <td style="text-align: center">1231241</td>
+                                        <!--<td style="text-align: center" id="state">-->
+                                        <!--<span class="label label-success">储值</span>-->
+                                        <!--&lt;!&ndash;<span class="label label-important">已驳回</span>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<span class="label label-warning">未处理</span>&ndash;&gt;-->
+                                        <!--</td>-->
+                                        <td style="text-align: center">520</td>
+                                        <td style="text-align: center">2018-08-13T16:00:00.000+0000</td>
+                                        <td>
+                                            <div value =""></div>
+                                            <div class='text-right'>
+                                                <a class='btn btn-success btn-mini' href='#' onclick='PointsMgr.showInfo(this)'>
+                                                    <i class='icon-pencil'></i>
+                                                </a>
+                                                <a class='btn btn-danger btn-mini' href='#'>
+                                                    <i class='icon-remove'></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="text-align: center" >11231232</td>
+                                        <td style="text-align: center" >2131232</td>
+                                        <td style="text-align: center">1231241</td>
+                                        <!--<td style="text-align: center" id="state2">-->
+                                        <!--&lt;!&ndash;<span class="label label-success">储值</span>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<span class="label label-important">已驳回</span>&ndash;&gt;-->
+                                        <!--<span class="label label-warning">现金</span>-->
+                                        <!--</td>-->
+                                        <td style="text-align: center">520</td>
+                                        <td style="text-align: center">2018-08-13T16:00:00.000+0000</td>
+                                        <td>
+                                            <div value =""></div>
+                                            <div class='text-right'>
+                                                <a class='btn btn-success btn-mini' href='#' onclick='PointsMgr.showInfo(this)'>
+                                                    <i class='icon-pencil'></i>
+                                                </a>
+                                                <a class='btn btn-danger btn-mini' href='#'>
+                                                    <i class='icon-remove'></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+
+                                    <tfoot id="tfoot">
+
+
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--至此侧边导航栏设置结束-->
+
+<!--触发模态框-->
+    <!--“总积分”遮罩窗体-->
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <!--<a id="modal-625459" href=" " role="button" class="btn" data-toggle="modal">触发遮罩窗体</ a>-->
+                <div id="modal-container-Integral" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-header" style="background-color: black">
+                        <!--关闭按钮-->
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: white ;opacity: 1.0">×</button>
+                        <!--传入编辑的记录编号-->
+                        <h3 id="recordSum" style="color: white">
+                            总积分
+                        </h3>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form" style="text-align: left">
+                            <div class="form-group">
+                                <!--总积分 Integral-->
+                                <label  class="col-sm-2 control-label" style="text-align: left">您当前的积分有:</label>
+                                <!--这里要改总积分的值 我在这里先写死-->
+                                <h2 style="text-align:center">3423</h2>
+                                <!--总积分设置结束-->
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <!--<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button> -->
+                        <button class="btn btn-primary" style="background-color: black">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--“总积分”遮罩窗体设置结束-->
+
+    <!--”我的资料“ 遮罩窗体-->
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <!--<a id="modal-625459" href=" " role="button" class="btn" data-toggle="modal">触发遮罩窗体</ a>-->
+                <div id="modal-container-625459" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-header" style="background-color: black">
+                        <!--关闭按钮-->
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: white ;opacity: 1.0">×</button>
+                        <!--传入编辑的记录编号-->
+                        <h3 style="color: white">
+                            我的资料
+                        </h3>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form" style="text-align: left">
+                            <div class="form-group">
+                                <!--证件类型 paperType-->
+                                <label for="paperType" class="col-sm-2 control-label" style="text-align: left">证件类型</label>
+                                <select id="paperType" style="width: 510px; background-color: white">
+                                    <option style="display:none;" disabled selected >请选择您的证件类型</option>
+                                    <option value="1">身份证</option>
+                                    <option value="2">护照</option>
+                                </select>
+                                <!--证件号 paperNum-->
+                                <label for="paperNum" class="col-sm-2 control-label" id="cardNumText">证件号</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" style="width: 500px;text-align: right" id="paperNum">
+                                </div>
+                                <!--姓名 memberName-->
+                                <label for="memberName" class="col-sm-2 control-label">姓名</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" style="width: 500px;text-align: right" id="memberName">
+                                </div>
+                                <!--性别 memberSex-->
+                                <label for="memberSex" class="col-sm-2 control-label" style="text-align: left">性别</label>
+                                <select id="memberSex" style="width: 510px; background-color: white">
+                                    <option style="display:none;" disabled selected >请选择您的性别</option>
+                                    <option value="1">男</option>
+                                    <option value="2">女</option>
+                                </select>
+                                <!--生日 memberBirth-->
+                                <label for="memberBirth" class="col-sm-2 control-label">生日</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" style="width: 500px;text-align: right" id="memberBirth">
+                                </div>
+                                <!--手机号 memberPhone-->
+                                <label for="memberPhone" class="col-sm-2 control-label">手机号</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" style="width: 500px;text-align: right" id="memberPhone">
+                                </div>
+                                <!--会员地址 memberAddress-->
+                                <label for="memberAddress" class="col-sm-2 control-label">会员地址</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" style="width: 500px;text-align: right" id="memberAddress">
+                                </div>
+                                <!--电子邮箱 memberEmail-->
+                                <label for="memberEmail" class="col-sm-2 control-label">电子邮箱</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" style="width: 500px;text-align: right" id="memberEmail">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <!--<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button> -->
+                        <button class="btn btn-primary" style="background-color: black">保存设置</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--“我的资料”遮罩窗体设置结束-->
+
+    <!--发送反馈-->
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <!--<a id="modal-625459" href=" " role="button" class="btn" data-toggle="modal">触发遮罩窗体</ a>-->
+                <div id="modal-container-feedback" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-header" style="background-color: black">
+                        <!--关闭按钮-->
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: white ;opacity: 1.0">×</button>
+                        <!--传入编辑的记录编号-->
+                        <h3 id="recordID" style="color: white">
+                            发送反馈
+                        </h3>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form" style="text-align: left">
+                            <div class="form-group">
+                                <!--意见feedback-->
+                                <label for="feedback" class="col-sm-2 control-label" style="text-align: left"></label>
+                                <div class='controls'>
+                                    <textarea class='input-block-level' id='feedback' placeholder='请输入您宝贵的建议' rows='3'></textarea>
+                                </div>
+                                <!--发送反馈设置结束-->
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <!--<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button> -->
+                        <button class="btn btn-primary" style="background-color: black">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--发送反馈设置结束-->
+
+<!--引入js文件-->
+
+<!-- / jquery -->
+
+<script src='../assets/javascripts/jquery/jquery.min.js' type='text/javascript'></script>
+<!-- / jquery mobile events (for touch and slide) -->
+<script src='../assets/javascripts/plugins/mobile_events/jquery.mobile-events.min.js' type='text/javascript'></script>
+<!-- / jquery migrate (for compatibility with new jquery) -->
+<script src='../assets/javascripts/jquery/jquery-migrate.min.js' type='text/javascript'></script>
+<!-- / jquery ui -->
+<script src='../assets/javascripts/jquery_ui/jquery-ui.min.js' type='text/javascript'></script>
+<!-- / bootstrap -->
+<script src='../assets/javascripts/bootstrap/bootstrap.min.js' type='text/javascript'></script>
+<script src='../assets/javascripts/plugins/flot/excanvas.js' type='text/javascript'></script>
+<!-- / sparklines -->
+<script src='../assets/javascripts/plugins/sparklines/jquery.sparkline.min.js' type='text/javascript'></script>
+<!-- / flot charts -->
+<script src='../assets/javascripts/plugins/flot/flot.min.js' type='text/javascript'></script>
+<script src='../assets/javascripts/plugins/flot/flot.resize.js' type='text/javascript'></script>
+<script src='../assets/javascripts/plugins/flot/flot.pie.js' type='text/javascript'></script>
+<!-- / bootstrap switch -->
+<script src='../assets/javascripts/plugins/bootstrap_switch/bootstrapSwitch.min.js' type='text/javascript'></script>
+<!-- / fullcalendar -->
+<script src='../assets/javascripts/plugins/fullcalendar/fullcalendar.min.js' type='text/javascript'></script>
+<!-- / datatables -->
+<script src='../assets/javascripts/plugins/datatables/jquery.dataTables.min.js' type='text/javascript'></script>
+<script src='../assets/javascripts/plugins/datatables/jquery.dataTables.columnFilter.js' type='text/javascript'></script>
+<!-- / wysihtml5 -->
+<script src='../assets/javascripts/plugins/common/wysihtml5.min.js' type='text/javascript'></script>
+<script src='../assets/javascripts/plugins/common/bootstrap-wysihtml5.js' type='text/javascript'></script>
+<!-- / select2 -->
+<script src='../assets/javascripts/plugins/select2/select2.js' type='text/javascript'></script>
+<!-- / color picker -->
+<script src='../assets/javascripts/plugins/bootstrap_colorpicker/bootstrap-colorpicker.min.js' type='text/javascript'></script>
+<!-- / mention -->
+<script src='../assets/javascripts/plugins/mention/mention.min.js' type='text/javascript'></script>
+<!-- / input mask -->
+<script src='../assets/javascripts/plugins/input_mask/bootstrap-inputmask.min.js' type='text/javascript'></script>
+<!-- / fileinput -->
+<script src='../assets/javascripts/plugins/fileinput/bootstrap-fileinput.js' type='text/javascript'></script>
+<!-- / modernizr -->
+<script src='../assets/javascripts/plugins/modernizr/modernizr.min.js' type='text/javascript'></script>
+<!-- / retina -->
+<script src='../assets/javascripts/plugins/retina/retina.js' type='text/javascript'></script>
+<!-- / fileupload -->
+<script src='../assets/javascripts/plugins/fileupload/tmpl.min.js' type='text/javascript'></script>
+<script src='../assets/javascripts/plugins/fileupload/load-image.min.js' type='text/javascript'></script>
+<script src='../assets/javascripts/plugins/fileupload/canvas-to-blob.min.js' type='text/javascript'></script>
+<script src='../assets/javascripts/plugins/fileupload/jquery.iframe-transport.min.js' type='text/javascript'></script>
+<script src='../assets/javascripts/plugins/fileupload/jquery.fileupload.min.js' type='text/javascript'></script>
+<script src='../assets/javascripts/plugins/fileupload/jquery.fileupload-fp.min.js' type='text/javascript'></script>
+<script src='../assets/javascripts/plugins/fileupload/jquery.fileupload-ui.min.js' type='text/javascript'></script>
+<script src='../assets/javascripts/plugins/fileupload/jquery.fileupload-init.js' type='text/javascript'></script>
+<!-- / timeago -->
+<script src='../assets/javascripts/plugins/timeago/jquery.timeago.js' type='text/javascript'></script>
+<!-- / slimscroll -->
+<script src='../assets/javascripts/plugins/slimscroll/jquery.slimscroll.min.js' type='text/javascript'></script>
+<!-- / autosize (for textareas) -->
+<script src='../assets/javascripts/plugins/autosize/jquery.autosize-min.js' type='text/javascript'></script>
+<!-- / charCount -->
+<script src='../assets/javascripts/plugins/charCount/charCount.js' type='text/javascript'></script>
+<!-- / validate -->
+<script src='../assets/javascripts/plugins/validate/jquery.validate.min.js' type='text/javascript'></script>
+<script src='../assets/javascripts/plugins/validate/additional-methods.js' type='text/javascript'></script>
+<!-- / naked password -->
+<script src='../assets/javascripts/plugins/naked_password/naked_password-0.2.4.min.js' type='text/javascript'></script>
+<!-- / nestable -->
+<script src='../assets/javascripts/plugins/nestable/jquery.nestable.js' type='text/javascript'></script>
+<!-- / tabdrop -->
+<script src='../assets/javascripts/plugins/tabdrop/bootstrap-tabdrop.js' type='text/javascript'></script>
+<!-- / jgrowl -->
+<script src='../assets/javascripts/plugins/jgrowl/jquery.jgrowl.min.js' type='text/javascript'></script>
+<!-- / bootbox -->
+<script src='../assets/javascripts/plugins/bootbox/bootbox.min.js' type='text/javascript'></script>
+<!-- / inplace editing -->
+<script src='../assets/javascripts/plugins/xeditable/bootstrap-editable.min.js' type='text/javascript'></script>
+<script src='../assets/javascripts/plugins/xeditable/wysihtml5.js' type='text/javascript'></script>
+<!-- / ckeditor -->
+<script src='../assets/javascripts/plugins/ckeditor/ckeditor.js' type='text/javascript'></script>
+<!-- / filetrees -->
+<script src='../assets/javascripts/plugins/dynatree/jquery.dynatree.min.js' type='text/javascript'></script>
+<!-- / datetime picker -->
+<script src='../assets/javascripts/plugins/bootstrap_datetimepicker/bootstrap-datetimepicker.js' type='text/javascript'></script>
+<!-- / daterange picker -->
+<script src='../assets/javascripts/plugins/bootstrap_daterangepicker/moment.min.js' type='text/javascript'></script>
+<script src='../assets/javascripts/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.js' type='text/javascript'></script>
+<!-- / max length -->
+<script src='../assets/javascripts/plugins/bootstrap_maxlength/bootstrap-maxlength.min.js' type='text/javascript'></script>
+<!-- / dropdown hover -->
+<script src='../assets/javascripts/plugins/bootstrap_hover_dropdown/twitter-bootstrap-hover-dropdown.min.js' type='text/javascript'></script>
+<!-- / slider nav (address book) -->
+<script src='../assets/javascripts/plugins/slider_nav/slidernav-min.js' type='text/javascript'></script>
+<!-- / fuelux -->
+<script src='../assets/javascripts/plugins/fuelux/wizard.js' type='text/javascript'></script>
+<!-- / flatty theme -->
+<script src='../assets/javascripts/nav.js' type='text/javascript'></script>
+<script src='../assets/javascripts/tables.js' type='text/javascript'></script>
+<script src='../assets/javascripts/theme.js' type='text/javascript'></script>
+<!-- / demo -->
+<script src='../assets/javascripts/demo/jquery.mockjax.js' type='text/javascript'></script>
+<script src='../assets/javascripts/demo/inplace_editing.js' type='text/javascript'></script>
+<script src='../assets/javascripts/demo/charts.js' type='text/javascript'></script>
+<script src='../assets/javascripts/demo/demo.js' type='text/javascript'></script>
+
+<!--<script src="../js/Member/pointShoppingMgr.js"></script>-->
+    <script src="../js/<Member>/MemberMgr.js"></script>
+</body>
+</html>

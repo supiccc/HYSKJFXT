@@ -66,7 +66,4 @@ public class MemberManagementController {
         List<Reissuedetail> reissuedetails = memberManagementService.findReissueByMemid(id);
         return new ResponseJSON(ResponseCode.SUCCESS,reissuedetails);
     }
-
-
-
 }
