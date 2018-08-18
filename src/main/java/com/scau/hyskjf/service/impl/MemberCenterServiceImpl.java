@@ -49,6 +49,8 @@ public class MemberCenterServiceImpl implements MemberCenterService {
     @Autowired
     MemberandcardMapper memberandcardMapper;
 
+    @Autowired
+    RechargehistoryMapper rechargehistoryMapper;
     @Override
     public String forgetPwd(String newPwd, String verficationCode) {
         try {
@@ -151,11 +153,7 @@ public class MemberCenterServiceImpl implements MemberCenterService {
             c.setMerid(tmp.getMerid());
             c.setMertype(tmp.getMertype());
             c.setMername(tmp.getMername());
-            c.setPduid(tmp.getPduid());
-            c.setPduimage(tmp.getPduimage());
-            c.setPduintro(tmp.getPduintro());
-            c.setPduname(tmp.getPduname());
-            c.setPduprice(tmp.getPduprice());
+            c.setEvabyN(memberaccountMapper.selectByPrimaryKey(tmp.getMemid()).getManame());
             result.add(c);
         }
         return result;
@@ -201,6 +199,7 @@ public class MemberCenterServiceImpl implements MemberCenterService {
         evaluation.setEvaip(getIpAddr(request));
         evaluation.setEvatime(new Date());
         evaluation.setEvaenable(true);
+        evaluation.setEvaby(m.getMemid());
 //        evaluation.setCumid(cumID);
         // 插入数据库
         evaluationMapper.insert(evaluation);
@@ -280,10 +279,33 @@ public class MemberCenterServiceImpl implements MemberCenterService {
     }
 
     @Override
-    public Memberandcard rechargeMemberCard(String cardId, float money) {
+    public Memberandcard rechargeMemberCard(String cardId, float money,Merchantaccount merchantaccount) {
         membercardMapper.updateMoneyByCarId(cardId,money);
+
+        //查找会员卡信息
+        Membercard membercard = membercardMapper.queryCardByMcid(cardId);
+        float balance = membercard.getMcbalance();
+        Rechargehistory rechargehistory = new Rechargehistory();
+        rechargehistory.setRechargemoney(money);
+        rechargehistory.setBalance(balance);
+        rechargehistory.setMerid(merchantaccount.getMerid());
+        rechargehistory.setMacid(merchantaccount.getMacid());
+        rechargehistory.setMcid(membercard.getMcid());
+        rechargehistory.setRechargetime(new Date());
+        rechargehistory.setMemid(membercard.getMemid());
+        rechargehistoryMapper.insertSelective(rechargehistory);
         return memberandcardMapper.selectByCarId(cardId);
     }
 
+    @Override
+    public List<Rechargehistory> findRechargeHistoryByCardId(String cardId) {
+
+        return rechargehistoryMapper.findRechargeHistoryByCardId(cardId);
+    }
+
+    @Override
+    public List<Rechargehistory> findAllRechargeHistory(Integer merid) {
+        return rechargehistoryMapper.findRechargeHistoryByMerId(merid);
+    }
 
 }
