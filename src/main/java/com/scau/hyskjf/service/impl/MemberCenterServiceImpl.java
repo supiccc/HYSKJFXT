@@ -51,6 +51,10 @@ public class MemberCenterServiceImpl implements MemberCenterService {
 
     @Autowired
     RechargehistoryMapper rechargehistoryMapper;
+
+    @Autowired
+    MemberinfochangeMapper memberinfochangeMapper;
+
     @Override
     public String forgetPwd(String newPwd, String verficationCode) {
         try {
@@ -68,6 +72,8 @@ public class MemberCenterServiceImpl implements MemberCenterService {
         }
     }
 
+
+    // 忘记消费密码
     @Override
     public String forgetDealPwd(String oldPwd, String newPwd) {
         try {
@@ -112,6 +118,10 @@ public class MemberCenterServiceImpl implements MemberCenterService {
     // 更新会员信息
     @Override
     public Map<String, Object> updateMember(Member member, String birth) throws ParseException {
+        Member old = memberMapper.selectByPrimaryKey(member.getMemid());
+        if (!insertMemberInfoChange(old)) {
+            return null;
+        }
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date date = format.parse(birth);
         member.setMembirth(date);
@@ -121,6 +131,23 @@ public class MemberCenterServiceImpl implements MemberCenterService {
         result.put("Object", member);
         result.put("Birth", birth);
         return result;
+    }
+
+    // 保存旧历史到会员信息变更表
+    public boolean insertMemberInfoChange(Member oldmember) {
+        Memberinfochange old = new Memberinfochange();
+        old.setMemid(oldmember.getMemid());
+        old.setMiccer(oldmember.getMemcer());
+        old.setMiccerid(oldmember.getMemcerid());
+        old.setMicname(oldmember.getMemname());
+        old.setMicsex(oldmember.getMemsex());
+        old.setMicphone(oldmember.getMemphone());
+        old.setMicbirth(oldmember.getMembirth());
+        old.setMicadredd(oldmember.getMemadress());
+        old.setMicemail(oldmember.getMememail());
+        old.setMictime(new Date());
+        memberinfochangeMapper.insert(old);
+        return true;
     }
 
     // 查询所有消费记录

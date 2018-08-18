@@ -8,7 +8,7 @@
     <result column="micCerID" jdbcType="VARCHAR" property="miccerid" />
     <result column="micName" jdbcType="VARCHAR" property="micname" />
     <result column="micSex" jdbcType="VARCHAR" property="micsex" />
-    <result column="micPhone" jdbcType="INTEGER" property="micphone" />
+    <result column="micPhone" jdbcType="VARCHAR" property="micphone" />
     <result column="micBirth" jdbcType="DATE" property="micbirth" />
     <result column="micAdredd" jdbcType="VARCHAR" property="micadredd" />
     <result column="micEmail" jdbcType="VARCHAR" property="micemail" />
@@ -37,7 +37,7 @@
       )
     values (#{micid,jdbcType=INTEGER}, #{memid,jdbcType=INTEGER}, #{miccer,jdbcType=VARCHAR}, 
       #{miccerid,jdbcType=VARCHAR}, #{micname,jdbcType=VARCHAR}, #{micsex,jdbcType=VARCHAR}, 
-      #{micphone,jdbcType=INTEGER}, #{micbirth,jdbcType=DATE}, #{micadredd,jdbcType=VARCHAR}, 
+      #{micphone,jdbcType=VARCHAR}, #{micbirth,jdbcType=DATE}, #{micadredd,jdbcType=VARCHAR}, 
       #{micemail,jdbcType=VARCHAR}, #{micreason,jdbcType=VARCHAR}, #{mictime,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -101,7 +101,7 @@
         #{micsex,jdbcType=VARCHAR},
       </if>
       <if test="micphone != null">
-        #{micphone,jdbcType=INTEGER},
+        #{micphone,jdbcType=VARCHAR},
       </if>
       <if test="micbirth != null">
         #{micbirth,jdbcType=DATE},
@@ -139,7 +139,7 @@
         micSex = #{micsex,jdbcType=VARCHAR},
       </if>
       <if test="micphone != null">
-        micPhone = #{micphone,jdbcType=INTEGER},
+        micPhone = #{micphone,jdbcType=VARCHAR},
       </if>
       <if test="micbirth != null">
         micBirth = #{micbirth,jdbcType=DATE},
@@ -166,7 +166,7 @@
       micCerID = #{miccerid,jdbcType=VARCHAR},
       micName = #{micname,jdbcType=VARCHAR},
       micSex = #{micsex,jdbcType=VARCHAR},
-      micPhone = #{micphone,jdbcType=INTEGER},
+      micPhone = #{micphone,jdbcType=VARCHAR},
       micBirth = #{micbirth,jdbcType=DATE},
       micAdredd = #{micadredd,jdbcType=VARCHAR},
       micEmail = #{micemail,jdbcType=VARCHAR},
@@ -179,7 +179,7 @@
         <include refid="Base_Column_List" />
         from MemberInfoChange
     </select>
-    <select id="selectchangesByMemid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    <select id="selectchangesByMemid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
         from MemberInfoChange
