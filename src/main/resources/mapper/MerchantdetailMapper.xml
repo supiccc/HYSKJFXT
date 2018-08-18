@@ -12,6 +12,7 @@
     <result column="merAppStat" property="merappstat" jdbcType="BIT" />
     <result column="merRecommend" property="merrecommend" jdbcType="BIT" />
     <result column="isIndex" property="isindex" jdbcType="BIT" />
+    <result column="oweCredit" property="owecredit" jdbcType="REAL"/>
     <result column="merImage" property="merimage" jdbcType="VARCHAR" />
     <result column="merMainImage" property="mermainimage" jdbcType="BIT" />
     <result column="merTelphone" property="mertelphone" jdbcType="VARCHAR" />
@@ -43,7 +44,7 @@
       merID, merSubID, merTopID,
       merType, merName, merCumPresent,
       merDicPresent, merAppStat, merRecommend,
-      isIndex, merImage, merMainImage,
+      isIndex,oweCredit, merImage, merMainImage,
       merTelphone, merFax, merURL,
       merEmail, merPrincipal, merAppellation,
       merDuty, merPhone, merLevel,
@@ -54,7 +55,7 @@
     insert into MerchantDetail (merID, merSubID, merTopID, 
       merType, merName, merCumPresent, 
       merDicPresent, merAppStat, merRecommend, 
-      isIndex, merImage, merMainImage, 
+      isIndex,oweCredit, merImage, merMainImage,
       merTelphone, merFax, merURL, 
       merEmail, merPrincipal, merAppellation, 
       merDuty, merPhone, merLevel, 

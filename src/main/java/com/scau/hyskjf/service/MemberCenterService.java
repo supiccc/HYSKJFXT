@@ -1,9 +1,6 @@
 package com.scau.hyskjf.service;
 
-import com.scau.hyskjf.pojo.Credithistoryview;
-import com.scau.hyskjf.pojo.Member;
-import com.scau.hyskjf.pojo.Memberandcard;
-import com.scau.hyskjf.pojo.Membercard;
+import com.scau.hyskjf.pojo.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
@@ -48,5 +45,9 @@ public interface MemberCenterService {
 
     Memberandcard findMemDetailByCarId(String cardId);
 
-    Memberandcard rechargeMemberCard(String cardId, float money);
+    Memberandcard rechargeMemberCard(String cardId, float money,Merchantaccount merchantaccount);
+
+    List<Rechargehistory> findRechargeHistoryByCardId(String cardId);
+
+    List<Rechargehistory> findAllRechargeHistory(Integer merid);
 }

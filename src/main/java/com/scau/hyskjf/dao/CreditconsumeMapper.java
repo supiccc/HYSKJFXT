@@ -2,9 +2,11 @@ package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Creditconsume;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface CreditconsumeMapper {
     int deleteByPrimaryKey(Integer creconid);
 

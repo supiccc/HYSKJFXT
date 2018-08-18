@@ -30,6 +30,9 @@ public class ConsumptionServiceImpl implements ConsumptionService {
     @Autowired
     CredithistoryMapper credithistoryMapper;
 
+    @Autowired
+    CreditconsumeMapper creditconsumeMapper;
+
     @Override
     public CreditConsumption creditConsumptionCheck(String mcID , Float money, String pwd){
         CreditConsumption record = new CreditConsumption();
@@ -88,6 +91,14 @@ public class ConsumptionServiceImpl implements ConsumptionService {
         credithistory.setChcredit(-1*creditConsumption.getChangeCredit());
         credithistory.setChremain(creditConsumption.getMemcredit());
         credithistory.setChtype("积分消费");
+        /************************插入到积分消费统计表*******************************/
+        Creditconsume creditconsume = new Creditconsume();
+        creditconsume.setMemid(creditConsumption.getMemid());
+        creditconsume.setMerid(creditConsumption.getMerid());
+        creditconsume.setCredits(creditConsumption.getChangeCredit());
+        creditconsume.setValue(creditConsumption.getMoney());
+        creditconsume.setHandletime(new java.util.Date());
+        creditconsumeMapper.insert(creditconsume);
         /************************返回用户剩余积分***********************************/
         return creditConsumption.getMemcredit();
     }

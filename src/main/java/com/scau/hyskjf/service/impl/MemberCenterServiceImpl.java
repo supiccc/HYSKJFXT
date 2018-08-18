@@ -49,6 +49,8 @@ public class MemberCenterServiceImpl implements MemberCenterService {
     @Autowired
     MemberandcardMapper memberandcardMapper;
 
+    @Autowired
+    RechargehistoryMapper rechargehistoryMapper;
     @Override
     public String forgetPwd(String newPwd, String verficationCode) {
         try {
@@ -240,8 +242,8 @@ public class MemberCenterServiceImpl implements MemberCenterService {
         memberaccount.setMemid(id);
         memberaccount.setMaid(member.getMemphone());//登陆账号为手机号
         memberaccount.setManame(member.getMemname());//账户名为姓名
-        String pwdMd5 = new Md5Hash(pwd,memberaccount.getMemid(),3).toString();//对账户的密码进行MD5加密
-        String shopPwdMd5 = new Md5Hash(shopPwd,memberaccount.getMemid(),3).toString();//对账户的支付密码进行MD5加密
+        String pwdMd5 = new Md5Hash(pwd,memberaccount.getMemid().toString(),3).toString();//对账户的密码进行MD5加密
+        String shopPwdMd5 = new Md5Hash(shopPwd,memberaccount.getMemid().toString(),3).toString();//对账户的支付密码进行MD5加密
         memberaccount.setMaenable(true);
         return memberaccountMapper.insert(memberaccount);
     }
@@ -277,10 +279,33 @@ public class MemberCenterServiceImpl implements MemberCenterService {
     }
 
     @Override
-    public Memberandcard rechargeMemberCard(String cardId, float money) {
+    public Memberandcard rechargeMemberCard(String cardId, float money,Merchantaccount merchantaccount) {
         membercardMapper.updateMoneyByCarId(cardId,money);
+
+        //查找会员卡信息
+        Membercard membercard = membercardMapper.queryCardByMcid(cardId);
+        float balance = membercard.getMcbalance();
+        Rechargehistory rechargehistory = new Rechargehistory();
+        rechargehistory.setRechargemoney(money);
+        rechargehistory.setBalance(balance);
+        rechargehistory.setMerid(merchantaccount.getMerid());
+        rechargehistory.setMacid(merchantaccount.getMacid());
+        rechargehistory.setMcid(membercard.getMcid());
+        rechargehistory.setRechargetime(new Date());
+        rechargehistory.setMemid(membercard.getMemid());
+        rechargehistoryMapper.insertSelective(rechargehistory);
         return memberandcardMapper.selectByCarId(cardId);
     }
 
+    @Override
+    public List<Rechargehistory> findRechargeHistoryByCardId(String cardId) {
+
+        return rechargehistoryMapper.findRechargeHistoryByCardId(cardId);
+    }
+
+    @Override
+    public List<Rechargehistory> findAllRechargeHistory(Integer merid) {
+        return rechargehistoryMapper.findRechargeHistoryByMerId(merid);
+    }
 
 }

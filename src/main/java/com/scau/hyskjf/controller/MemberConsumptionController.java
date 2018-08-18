@@ -2,13 +2,11 @@ package com.scau.hyskjf.controller;
 
 import com.scau.hyskjf.pojo.CashConsumption;
 import com.scau.hyskjf.pojo.CreditConsumption;
-import com.scau.hyskjf.pojo.Member;
 import com.scau.hyskjf.pojo.StoreConsumption;
 import com.scau.hyskjf.service.ConsumptionService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
