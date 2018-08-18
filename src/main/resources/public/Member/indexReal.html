@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>七彩云会员积分平台</title>
+       <!--编码方式-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <!--引入bootstrap框架-->
+            <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!--JQurey文件-->
+        <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+        <!--Bootstrap核心JavaScript文件-->
+        <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!--引入mock.js-->
+        <script src="http://mockjs.com/dist/mock.js"></script>
+
+        <script src="../js/Member/MemberMgr.js"></script>
+        <!--<script src="../js/Member/MainPage.js"></script>-->
+        <!--改变页面字体-->
+        <link rel="stylesheet" href="C:/Users/Danny/Desktop/七彩云页面/main.css">
+        <style type="text/css" media="screen">
+           /*改变页面底部样式样式*/
+            .foot-wrap{
+             background-color: #373f48;
+            }
+            .row-content{
+            >h3{
+                     color:#DDD;
+                     font-size:16px;
+                    font-weight: 300;
+                     line-height: 16px;
+                     margin:40px 0 30px 34px;
+             }
+            >ul{
+                      font-size:13px;
+                      line-height:24px;
+              >li{
+                    list-style:none;
+                >a{
+                    color:#878B91;
+                    &:hover{
+                 text-decoration:none;
+                    color:#c1ba62;
+             }
+                }
+            }
+             }
+            }
+ ul.social{
+margin:0;
+padding:0;
+width:100%;
+text-align:center;
+> li{
+    display:inline-block;
+    > a{
+        display:inline-block;
+        font-size:18px;
+        line-height:30px;
+        .square(30px);
+        border-radius:36px;
+        background-color:@gray-light;
+        color:#fff;
+        margin:0 3px 3px 0;
+        &:hover{
+        text-decoration:none;
+        background-color:@link-hover-color;
+        }
+        }
+    }
+}
+/*设置导航栏样式*/
+  .my-navbar {padding:30px 0;transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;}
+        .my-navbar a{background:transparent !important;color:#fff !important}
+        .my-navbar a:hover {color:#45bcf9 !important;background:transparent;outline:0}
+        .my-navbar a {transition: color 0.5s ease-in-out;}/*-webkit-transition ;-moz-transition*/
+        .top-nav {padding:0;background:#000;}
+        button.navbar-toggle {background-color:#fbfbfb;}/*整个背景都是transparent透明的，会看不到，所以再次覆盖一下*/
+        button.navbar-toggle > span.icon-bar {background-color:#dedede}
+       /*设置底色为透明*/
+       .inBack{
+       background:rgba(0, 0, 0, 0);
+       }
+
+       /*设置模态框样式*/
+  /*内容层*/
+  .blur_box{
+  z-index: 0;/* 为不影响内容显示必须为最高层 */
+  position: relative;
+  overflow: hidden;
+  }
+/*模糊层*/
+.blur_box:before{
+  content: "";/* 必须包括 */
+  position: absolute;/* 固定模糊层位置 */
+  width:300%;
+  height:300%;
+  left: -100%;/* 回调模糊层位置 */
+  top: -100%;/* 回调模糊层位置 */
+  background:url(1.jpg) no-repeat center center fixed;/* 与上面的bg中的background设置一样 */
+  filter: blur(80px);/* 值越大越模糊 */
+  z-index: -2;/* 模糊层在最下面 */
+}
+/*中间层*/
+.rgba{
+  background-color: rgba(0, 0, 0, 0.6);/* 为文字更好显示，将背景颜色加深 */
+  position: absolute;/* 固定半透明色层位置 */
+  width:100%;
+  height:100%;
+  z-index: -1;/* 中间是rgba半透明色层 */
+}
+.content_text{
+  color: rgba(255, 255, 255, 0.8);
+  padding: 10px 20px;
+  line-height: 18px;
+}
+       /*设置模态框居中*/
+       #loginModal{
+        left:50%;
+        top:50%;
+        transform:translate(-50%, -50%);
+        BACKGROUND-COLOR: transparent;
+       }
+        </style>
+</head>
+
+<body>
+ <!--导航栏-->
+
+    <nav class="navbar navbar-fixed-top my-navbar" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#example-navbar-collapse">
+                    <span class="sr-only">切换导航</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">七彩云会员积分平台</a>
+            </div>
+            <div class="collapse navbar-collapse" id="example-navbar-collapse">
+
+                <ul class="nav navbar-nav navbar-right">
+                <!--点击登录后弹出登录模态框-->
+                 <!--<li><a id="mainPageBtn">首页</a></li>-->
+                    <li>
+                        <a id="shopPageBtn">平台商家</a>
+                    </li>
+                       <li class="active" id="accountStateDiv"><a id="LoginPageBtn">登录</a></li>
+                    <li>
+                        <a id="RegisPageBtn">商家入盟申请</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+<!--登录Modal 模态框-->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog blur_box">
+    <div class="modal-content ">
+    <div class="rgba"></div>
+    <div class="content_text">
+      <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">登录</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                账号：<input type="text" name="Id">
+                <br/>
+                密码：<input type="password" name="password">
+                <br/>
+                请选择您的身份：
+                <br/>
+                <!--这里记得规定必须选-->
+                <input type="radio" name="identityType" value="members" checked>会员
+                <input type="radio" name="identityType" value="frontDesk" checked>前台
+                <input type="radio" name="identityType" value="departManager" checked>部门经理
+                <input type="radio" name="identityType" value="customerManager" checked>客户经理
+                <input type="radio" name="identityType" value="smallAdmin" checked>商家管理员
+                <input type="radio" name="identityType" value="BigAdmin" checked>系统管理员
+                <br/>
+                <a href="#">忘记密码</a>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">登录</button>
+                <button type="button" class="btn btn-primary">退出</button>
+            </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<!--轮播-->
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+<!--轮播指标-->
+<!--定义滚博的图片数量-->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+  </ol>
+
+<!--轮播项目-->
+<!--放入图片，并为图片添加跳转链接-->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <a href="http://www.win4000.com/wallpaper_detail_143597.html">
+      <img src="http://pic1.win4000.com/wallpaper/2018-04-28/5ae3e6249383c.jpg" alt="First slide">
+        <!--在幻灯片中放入标题-->
+        <div class="carousel-caption">
+<!--设置为左对齐格式-->
+<!--改变字体-->
+<h1 class="text-left" style="font-family:Microsoft YaHei">这是刘昊然</h1>
+<p class="text-left" style="font-family:Microsoft YaHei">丹萍很喜欢他！</p>
+        </div>
+      </a>
+    </div>
+    <div class="item">
+      <img src="http://pic1.win4000.com/wallpaper/2018-04-28/5ae3e627959c4.jpg" alt="Second slide">
+           <div class="carousel-caption">我超级喜欢刘昊然的啊！</div>
+    </div>
+        <div class="item">
+      <img src="http://pic1.win4000.com/wallpaper/2018-04-28/5ae3e6294ac3d.jpg" alt="Third slide">
+    </div>
+        <div class="item">
+      <img src="http://pic1.win4000.com/wallpaper/2018-04-28/5ae3e62aac739.jpg" alt="Forth slide">
+    </div>
+        <div class="item">
+      <img src="http://pic1.win4000.com/wallpaper/2018-04-28/5ae3e626157cb.jpg" alt="Fifth slide">
+    </div>
+  </div>
+
+  <!--轮播导航-->
+  <!--就是左滚右滚-->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+<!--缩略图，放6种行业的推荐商家-->
+<div class="row">
+    <div class="col-sm-12 col-md-6">
+        <a href="#" class="thumbnail">
+            <img src="http://pic1.win4000.com/wallpaper/2018-06-22/5b2c8e4c5e4aa.jpg"
+                 alt="通用的占位符缩略图">
+        </a>
+    </div>
+    <div class="col-sm-12 col-md-6">
+        <a href="#" class="thumbnail">
+            <img src="http://pic1.win4000.com/wallpaper/2018-06-22/5b2c8e4d53a37.jpg"
+                 alt="通用的占位符缩略图">
+        </a>
+    </div>
+    <div class="col-sm-12 col-md-6">
+        <a href="#" class="thumbnail">
+            <img src="http://pic1.win4000.com/wallpaper/2018-06-22/5b2c8e4e4e09a.jpg"
+                 alt="通用的占位符缩略图">
+        </a>
+    </div>
+    <div class="col-sm-12 col-md-6">
+        <a href="#" class="thumbnail">
+            <img src="http://pic1.win4000.com/wallpaper/2018-06-22/5b2c8e4f581db.jpg"
+                 alt="通用的占位符缩略图">
+        </a>
+    </div>
+        <div class="col-sm-12 col-md-6">
+        <a href="#" class="thumbnail">
+            <img src="http://pic1.win4000.com/wallpaper/2018-06-22/5b2c8e50ce7df.jpg"
+                 alt="通用的占位符缩略图">
+        </a>
+    </div>
+        <div class="col-sm-12 col-md-6">
+        <a href="#" class="thumbnail">
+            <img src="http://pic1.win4000.com/wallpaper/2018-06-22/5b2c8e51e1091.jpg"
+                 alt="通用的占位符缩略图">
+        </a>
+    </div>
+</div>
+<!--页面底部-->
+<!--采用container-fluid，使得整个页尾的宽度为100%，并设置它的背景色-->
+<footer class="container-fluid foot-wrap">
+    <!--采用container，使得页尾内容居中 -->
+        <div class="container">
+            <div class="row">
+                <div class="row-content col-lg-2 col-sm-4 col-xs-6">
+                    <h3>美食餐厅</h3>
+                    <ul>
+                        <li><a href="#">Newsletter</a></li>
+                        <li><a href="#">RSS feed</a></li>
+                        <li><a href="#">RSS to Email</a></li>
+                        <li><a href="#">Product Hunt</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Pinterest</a></li>
+                        <li><a href="#">Google+</a></li>
+                    </ul>
+                </div>
+                <div class="row-content col-lg-2 col-sm-4 col-xs-6">
+                    <h3>酒店民宿</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Gallery</a></li>
+                        <li><a href="#">Templates</a></li>
+                        <li><a href="#">Resources</a></li>
+                        <li><a href="#">OPL Themes</a></li>
+                    </ul>
+                </div>
+                <div class="row-content col-lg-2 col-sm-4 col-xs-6">
+                    <h3>出行自驾</h3>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Why One Page?</a></li>
+                        <li><a href="#">OPL Blog</a></li>
+                        <li><a href="#">Product Hunt</a></li>
+                        <li><a href="#">Advertise</a></li>
+                        <li><a href="#">Submit</a></li>
+                        <li><a href="#">Award Ribbons</a></li>
+                        <li><a href="#">Roadmap</a></li>
+                    </ul>
+                </div>
+
+                <div class="row-content col-lg-2 col-sm-4 col-xs-6">
+                    <h3>游乐园风景区</h3>
+                    <ul>
+                        <li><a href="#">Browse All</a></li>
+                        <li><a href="#">Design</a></li>
+                        <li><a href="#">Development</a></li>
+                        <li><a href="#">Hosting</a></li>
+                        <li><a href="#">Round Ups</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                    </ul>
+
+                </div>
+                <div class="row-content col-lg-2 col-sm-4 col-xs-6">
+                    <h3>购物消费</h3>
+                    <ul>
+                        <li><a href="#">Big Typography</a></li>
+                        <li><a href="#">Free Templates</a></li>
+                        <li><a href="#">Most Loved</a></li>
+                        <li><a href="#">Centrally Divided</a></li>
+                        <li><a href="#">Skrollr.js</a></li>
+                        <li><a href="#">Parallax Scrolling</a></li>
+                        <li><a href="#">Off-Canvas Menu</a></li>
+                        <li><a href="#">Molecules</a></li>
+                    </ul>
+                </div>
+                <div class="row-content col-lg-2 col-sm-4 col-xs-6">
+                    <h3>娱乐电玩</h3>
+                    <ul>
+                        <li><a href="#">Browse All</a></li>
+                        <li><a href="#">East Java</a></li>
+                        <li><a href="#">Clutterless</a></li>
+                        <li><a href="#">Mapped</a></li>
+                    </ul>
+                </div>
+
+            </div><!--/.row -->
+        </div><!--/.container-->
+
+        <
+        <p align="center" style="margin-top: 20px;color:#878B91;">
+            Copyright &copy;2018 七彩云会员刷卡积分管理
+        </p>
+
+</footer>
+<script>
+        $(window).scroll(function () {
+            if ($(".navbar").offset().top > 50) {$(".navbar-fixed-top").addClass("top-nav");
+            }else {$(".navbar-fixed-top").removeClass("top-nav");}
+        })</script>
+        </body>
+        </html>
