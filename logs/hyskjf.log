@@ -1,4 +1,4 @@
-[ERROR] [2018-08-11 19:00:46][druid.sql.Statement]{conn-10001, pstmt-20000} execute error. select
+﻿[ERROR] [2018-08-11 19:00:46][druid.sql.Statement]{conn-10001, pstmt-20000} execute error. select
    
     acaID, acaMerchant, acaStat, acaReallo, acaReaTime, acaaMerchant
    
@@ -1248,6 +1248,7 @@ com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'mcBan
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.lang.Thread.run(Thread.java:745)
+
 [ERROR] [2018-08-16 15:59:24][druid.sql.Statement]{conn-10001, pstmt-20005} execute error. insert into RechargeHistory
      ( merID,
       

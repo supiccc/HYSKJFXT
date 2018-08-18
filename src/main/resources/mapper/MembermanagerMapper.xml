@@ -90,4 +90,10 @@
       mmanagerID = #{mmanagerid,jdbcType=INTEGER}
     where mmaID = #{mmaid,jdbcType=INTEGER}
   </update>
+  <insert id="insertmmList">
+    insert into MemberManager(memID,mmanagerID,mmaTime) values
+    <foreach collection="mmList" item="mm"  separator="," >
+      (#{mm.memid},#{mm.mmanagerid},#{mm.mmatime})
+    </foreach>
+  </insert>
 </mapper>

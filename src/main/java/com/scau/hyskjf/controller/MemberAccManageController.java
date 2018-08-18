@@ -3,6 +3,7 @@ package com.scau.hyskjf.controller;
 import com.scau.hyskjf.dao.MemberMapper;
 import com.scau.hyskjf.pojo.*;
 import com.scau.hyskjf.service.MemberCenterService;
+import com.scau.hyskjf.service.MerchantAccManageService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,9 @@ public class MemberAccManageController {
 
     @Autowired
     MemberMapper memberMapper;
+
     /*
-    * 添加会员账户
+    * 添加会员账户(已测试)
     * 输入：
     * 会员信息Member member：（ 证件类型 String memcer;+ 证件号 String memcerid;+ 姓名 String memname（必填）;
     * +性别 String memsex;+ 生日 Date membirth;+ 手机号 String memphone（必填）;+ 邮箱 String mememail;+ 地址 String memadress; ）
@@ -49,6 +51,7 @@ public class MemberAccManageController {
             return new ResponseJSON(ResponseCode.SUCCESS);
         }
         catch (Exception e){
+            e.printStackTrace();
             return new ResponseJSON(ResponseCode.WARN);
         }
     }

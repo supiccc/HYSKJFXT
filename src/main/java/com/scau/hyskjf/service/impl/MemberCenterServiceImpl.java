@@ -44,6 +44,9 @@ public class MemberCenterServiceImpl implements MemberCenterService {
     MembercardMapper membercardMapper;
 
     @Autowired
+    MembercarddetailMapper membercarddetailMapper;
+
+    @Autowired
     MemberandcardMapper memberandcardMapper;
 
     @Autowired
@@ -150,11 +153,7 @@ public class MemberCenterServiceImpl implements MemberCenterService {
             c.setMerid(tmp.getMerid());
             c.setMertype(tmp.getMertype());
             c.setMername(tmp.getMername());
-            c.setPduid(tmp.getPduid());
-            c.setPduimage(tmp.getPduimage());
-            c.setPduintro(tmp.getPduintro());
-            c.setPduname(tmp.getPduname());
-            c.setPduprice(tmp.getPduprice());
+            c.setEvabyN(memberaccountMapper.selectByPrimaryKey(tmp.getMemid()).getManame());
             result.add(c);
         }
         return result;
@@ -200,6 +199,7 @@ public class MemberCenterServiceImpl implements MemberCenterService {
         evaluation.setEvaip(getIpAddr(request));
         evaluation.setEvatime(new Date());
         evaluation.setEvaenable(true);
+        evaluation.setEvaby(m.getMemid());
 //        evaluation.setCumid(cumID);
         // 插入数据库
         evaluationMapper.insert(evaluation);
@@ -226,11 +226,12 @@ public class MemberCenterServiceImpl implements MemberCenterService {
         return ip;
     }
 
+    // 查看会员卡
     @Override
     public List showMemberCardInfo() {
         Memberaccount m = (Memberaccount) SecurityUtils.getSubject().getSession().getAttribute("user");
         if(m == null) return null;
-        List<Memberaccount> result = membercardMapper.selectByMember(m.getMemid());
+        List<Memberaccount> result = membercarddetailMapper.selectByMemID(m.getMemid());
         return result;
     }
 
@@ -241,8 +242,8 @@ public class MemberCenterServiceImpl implements MemberCenterService {
         memberaccount.setMemid(id);
         memberaccount.setMaid(member.getMemphone());//登陆账号为手机号
         memberaccount.setManame(member.getMemname());//账户名为姓名
-        String pwdMd5 = new Md5Hash(pwd,memberaccount.getMemid(),3).toString();//对账户的密码进行MD5加密
-        String shopPwdMd5 = new Md5Hash(shopPwd,memberaccount.getMemid(),3).toString();//对账户的支付密码进行MD5加密
+        String pwdMd5 = new Md5Hash(pwd,memberaccount.getMemid().toString(),3).toString();//对账户的密码进行MD5加密
+        String shopPwdMd5 = new Md5Hash(shopPwd,memberaccount.getMemid().toString(),3).toString();//对账户的支付密码进行MD5加密
         memberaccount.setMaenable(true);
         return memberaccountMapper.insert(memberaccount);
     }

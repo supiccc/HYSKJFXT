@@ -1,6 +1,7 @@
 package com.scau.hyskjf.service;
 
-import com.scau.hyskjf.pojo.Merchantaccount;
+import com.scau.hyskjf.pojo.*;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -14,4 +15,10 @@ public interface MerchantAccManageService {
     int updateMerchantAccount(Merchantaccount merchantaccount);
 
     Merchantaccount queryMerchantAccountByMacAcc(String macAcc);
+
+    int setMemberManager(List<Membermanager> mmList);
+
+    List<MemberMShow> queryMemberByMerID(Integer merID);
+
+    List<MManager> queryMemberManagerByMerID(Integer merID);
 }
