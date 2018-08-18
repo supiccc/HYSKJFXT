@@ -1,15 +1,157 @@
-var qiantaiCount = 0;
-var kehujingliCount = 0;
-var bumenjingliCount = 0;
-
-
 $(function () {
     InitPage.init();
     InitPage.action();
+    Basic.initMyMenu();
 });
 
-var InitPage={
+var InitPage = {
     init:function () {
+        AccMgr.getInfo();
+    },
+    action:function () {
+        //账户管理
+        $('#AccountMrgBtn').on('click',function () {
+            var username = Basic.getPassingStr("username");
+            var role = Basic.getPassingStr("role");
+            alert(username+" "+role);
+            window.location.href = "./shopAdminAccountManagement.html?username="+username+"&role="+role+"";
+        });
+
+        //展示信息
+        $('#InfoMrgBtn').on('click',function () {
+            var username = Basic.getPassingStr("username");
+            var role = Basic.getPassingStr("role");
+            window.location.href = "./shopAdminShowInfo.html?username="+username+"&role="+role+"";
+        });
+
+        //同盟管理
+        $('#AllianceBtn').on('click',function(){
+            var username = Basic.getPassingStr("username");
+            var role = Basic.getPassingStr("role");
+            window.location.href = "./shopAdminAlliance.html?username="+username+"&role="+role+"";
+        });
+
+        //侧边栏
+        //展示信息
+            //商家信息维护
+            $('#showInfoMgrBtn').on('click', function () {
+                var username = Basic.getPassingStr("username");
+                var role = Basic.getPassingStr("role");
+                window.location.href = "./shopAdminShowInfo.html?username="+username+"&role="+role+"";
+            });
+            //产品维护
+            $('#productInfoMgrBtn').on('click', function () {
+                var username = Basic.getPassingStr("username");
+                var role = Basic.getPassingStr("role");
+                window.location.href = "./shopAdminShowInfoProduct.html?username="+username+"&role="+role+"";
+            });
+    },
+};
+
+var Basic = {
+    //获取url传过来到参数
+    getPassingStr:function (name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);  //获取url中"?"符后的字符串并正则匹配
+        var context = "";
+        if (r != null)
+            context = r[2];
+        reg = null;
+        r = null;
+        return context == null || context == "" || context == "undefined" ? "" : context;
+    },
+
+    //根据账户信息初始化《我的》按钮
+    initMyMenu:function(){
+        alert("进来啦西兰");
+        var username = Basic.getPassingStr("username");
+        var role = Basic.getPassingStr("role");
+        //这里需要补充账户类型
+        //会员
+        $("#myMenu").empty();
+        $('#myMenu').append(
+          "<a class='dropdown-toggle' data-toggle='dropdown' href='#'>\n" +
+            "                            <!--身份或者名称 建议显示的是身份就可以了-->\n" +
+            "                            <span class='user-name hidden-phone'>"+username+"</span>\n" +
+            "                            <b class='caret'></b>\n" +
+            "                        </a>\n" +
+            "                        <!--点开菜单后弹出的内容-->\n" +
+            "                        <ul class='dropdown-menu'>\n" +
+            "                             <!--点击菜单项后跳转的页面或弹出模态框-->\n" +
+            "                            <!--总积分-->\n" +
+            "                              <li>\n" +
+            "                                <a id=\"pointsMgrBtn\">\n" +
+            "                                    <i class='icon-info'></i>\n" +
+            "                                    积分管理\n" +
+            "                                </a>\n" +
+            "                            </li>\n" +
+            "                            <!--配置管理-->\n" +
+            "                            <li>\n" +
+            "                                <a id=\"settingBtn\">\n" +
+            "                                    <i class='icon-puzzle-piece'></i>\n" +
+            "                                    <!--菜单项-->\n" +
+            "                                    配置管理\n" +
+            "                                </a>\n" +
+            "                            </li>\n" +
+            "                            <!--修改密码-->\n" +
+            "                            <li>\n" +
+            "                                <a id=\"updatePwdBtn\">\n" +
+            "                                    <i class='icon-cog'></i>\n" +
+            "                                    修改密码\n" +
+            "                                </a>\n" +
+            "                            </li>\n" +
+            "                            <!--反馈-->\n" +
+            "                            <li>\n" +
+            "                                <a id=\"adviceBtn\">\n" +
+            "                                    <i class='icon-frown'></i>\n" +
+            "                                    发送反馈\n" +
+            "                                </a>\n" +
+            "                            </li>\n" +
+            "                            <!--分隔线-->\n" +
+            "                            <li class='divider'></li>\n" +
+            "                            <li>\n" +
+            "                                <a id=\"cancelBtn\">\n" +
+            "                                    <i class='icon-signout'></i>\n" +
+            "                                    注销退出\n" +
+            "                                </a>\n" +
+            "                            </li>\n" +
+            "                        </ul> "
+        );
+        //积分管理
+        $('#pointsMgrBtn').on('click', function () {
+            var username = Basic.getPassingStr("username");
+            var role = Basic.getPassingStr("role");
+            window.location.href = "./shopAdminPointsMgr.html?username="+username+"&role="+role+"";
+        });
+
+        //配置管理
+        $('#settingBtn').on('click', function () {
+            var username = Basic.getPassingStr("username");
+            var role = Basic.getPassingStr("role");
+            // window.location.href = "./shopAdminPointsMgr.html?username="+username+"&role="+role+"";
+        });
+
+        $('#updatePwdBtn').attr("href","../<Login>/changePassword.html");
+
+        $('#adviceBtn').on('click', function () {
+            Basic.showFeedback();
+        })
+
+        $('#cancelBtn').attr("href", "../<Member>/indexReal.html");
+    },
+
+    //意见反馈:modal-container-feedback
+    showFeedback:function(){
+        $('#modal-container-feedback').modal('show');
+    },
+};
+
+//账户管理
+var AccMgr = {
+
+    //获取信息
+    getInfo:function(){
+        //拉取所有（端口错误）
         $.ajax({
             type : 'POST',
             //现在是查询所有账号，迟些界面连起来后要记得该成查询相关的子账号
@@ -18,7 +160,7 @@ var InitPage={
             success: function (result) {
                 if(result.code == 0){
                     // accountManagement.getAccountList(result);
-                    accountManagement.initList(result);
+                    AccMgr.initList(result);
                     alert("查询成功，找到"+result.data.length+"条记录,正在加载中");
                 }else{
                     alert("查询失败，后台故障");
@@ -29,73 +171,16 @@ var InitPage={
                 alert("查询失败，服务器异常");
                 return;
             }
-        })
-
+        });
     },
 
-    action:function () {
-      // $('#addBtn').on('click',function () {
-      //     //添加子账号的触发方法
-      //     accountManagement.addAccount();
-      // });
-            //商家管理员
-            //跳转《账户管理》
-            $('#AccountMrgBtn').on('click',function () {
-                window.location.href = "./shopAdminAccountManagement.html";
-            });
-            //跳转《展示信息》
-            $('#InfoMrgBtn').on('click',function () {
-                window.location.href = "./shopAdminShowInfo.html";
-            });
-            //跳转《同盟管理》
-            $('#AllianceBtn').on('click',function () {
-                window.location.href = "./shopAdminAlliance.html";
-            });
-
-            //我的
-            //跳转《积分管理》
-            $('#pointsMgrBtn').on('click',function () {
-                window.location.href = "./";
-            });
-            //弹出《配置管理》
-            $('#settingBtn').on('click',function () {
-
-            });
-            //修改密码
-            $('#updatePwdBtn').on('click',function () {
-
-            });
-            //弹出《发送反馈》
-            $('#adviceBtn').on('click',function () {
-
-            });
-
-
-            //跳转《所有站内消息》
-            $('#InfoBtn').on('click',function () {
-
-            });
-    }
-};
-
-var accountManagement = {
-    // getAccountList:function(result){
-    //     $.ajax({
-    //        type: "POST",
-    //        url: "testJson/accountManagement.json",
-    //        dataType: "json",
-    //        success: function (result) {
-    //            accountManagement.initList(result);
-    //        }
-    //     });
-    // },
-
+    //初始化列表
     initList:function(result){
-        $('#content-wrapper').empty();
+        $('#content-wrapper-acc-list').empty();
         qiantaiCount = 0;
         kehujingliCount = 0;
         bumenjingliCount = 0;
-        $('#content-wrapper').append(
+        $('#content-wrapper-acc-list').append(
             "<br/>\n" +
             "            <!--添加子账号设置开始-->\n" +
             "                <div class='row-fluid'>\n" +
@@ -150,7 +235,7 @@ var accountManagement = {
             "                <!--选择子账号启用状态结束-->\n" +
             "                <div class='form-actions' style=\"text-align: right\">\n" +
             "                <!--点击保存后应该还要弹出信息框提示保存成功-->\n" +
-            "                    <button class='btn' id=\"addBtn\" onclick='accountManagement.addAccount()'>\n" +
+            "                    <button class='btn' id=\"addBtn\" onclick=AccMgr.addAccount()'>\n" +
             "                        <i class='icon-save'></i>\n" +
             "                        确认添加\n" +
             "                    </button>\n" +
@@ -165,7 +250,7 @@ var accountManagement = {
             // 启用的《前台》账号
             if ((result.data[i].macacctype == 2 || result.data[i].macacctype == 12) && result.data[i].macenable == 1) {
                 qiantaiCount++;
-                $('#content-wrapper').append(
+                $('#content-wrapper-acc-list').append(
                     "<br/>\n" +
                     "                <!--添加子账号设置开始-->\n" +
                     "                <div class='row-fluid'>\n" +
@@ -240,7 +325,7 @@ var accountManagement = {
                     "                            <div class='form-actions' style=\"text-align: right\">\n" +
                     "                                <!--点击保存后应该还要弹出信息框提示保存成功-->\n" +
                     //onclick='accountManagement.updateInfo(info)'
-                    "                                <button class='btn' onclick='accountManagement.updateInfo(this)' >\n" +
+                    "                                <button class='btn' onclick='AccMgr.updateInfo(this)' >\n" +
                     "                                    <i class='icon-save''></i>\n" +
                     "                                    确认修改\n" +
                     "                                </button>\n" +
@@ -256,7 +341,7 @@ var accountManagement = {
             else if ((result.data[i].macacctype == 2 || result.data[i].macacctype == 12) && result.data[i].macenable != 1) {
                 qiantaiCount++;
                 info = "qiantaiClose_"+qiantaiCount;
-                $('#content-wrapper').append(
+                $('#content-wrapper-acc-list').append(
                     "<br/>\n" +
                     "                <!--添加子账号设置开始-->\n" +
                     "                <div class='row-fluid'>\n" +
@@ -331,7 +416,7 @@ var accountManagement = {
                     "                            <div class='form-actions' style=\"text-align: right\">\n" +
                     "                                <!--点击保存后应该还要弹出信息框提示保存成功-->\n" +
                     //onclick='accountManagement.updateInfo(info)'
-                    "                                <button class='btn' onclick='accountManagement.updateInfo(this)' >\n" +
+                    "                                <button class='btn' onclick='AccMgr.updateInfo(this)' >\n" +
                     "                                    <i class='icon-save''></i>\n" +
                     "                                    确认修改\n" +
                     "                                </button>\n" +
@@ -347,7 +432,7 @@ var accountManagement = {
             else if ((result.data[i].macacctype == 3 || result.data[i].macacctype == 13 )&& result.data[i].macenable == 1) {
                 kehujingliCount++;
                 info = "kehujingliOpen_"+kehujingliCount;
-                $('#content-wrapper').append(
+                $('#content-wrapper-acc-list').append(
                     "<br/>\n" +
                     "                <!--添加子账号设置开始-->\n" +
                     "                <div class='row-fluid'>\n" +
@@ -422,7 +507,7 @@ var accountManagement = {
                     "                            <div class='form-actions' style=\"text-align: right\">\n" +
                     "                                <!--点击保存后应该还要弹出信息框提示保存成功-->\n" +
                     //onclick='accountManagement.updateInfo(info)'
-                    "                                <button class='btn' onclick='accountManagement.updateInfo(this)' >\n" +
+                    "                                <button class='btn' onclick='AccMgr.updateInfo(this)' >\n" +
                     "                                    <i class='icon-save''></i>\n" +
                     "                                    确认修改\n" +
                     "                                </button>\n" +
@@ -432,13 +517,13 @@ var accountManagement = {
                     "                        </div>\n" +
                     "                    </div>\n" +
                     "                </div>"
-                    );
+                );
             }
             // 未启用的《客户经理》账号
             else if ((result.data[i].macacctype == 3 || result.data[i].macacctype == 13 )&& result.data[i].macenable != 1) {
                 kehujingliCount++;
                 info = "kehujingliClose_"+kehujingliCount;
-                $('#content-wrapper').append(
+                $('#content-wrapper-acc-list').append(
                     "<br/>\n" +
                     "                <!--添加子账号设置开始-->\n" +
                     "                <div class='row-fluid'>\n" +
@@ -513,7 +598,7 @@ var accountManagement = {
                     "                            <div class='form-actions' style=\"text-align: right\">\n" +
                     "                                <!--点击保存后应该还要弹出信息框提示保存成功-->\n" +
                     //onclick='accountManagement.updateInfo(info)'
-                    "                                <button class='btn' onclick='accountManagement.updateInfo(this)' >\n" +
+                    "                                <button class='btn' onclick='AccMgr.updateInfo(this)' >\n" +
                     "                                    <i class='icon-save''></i>\n" +
                     "                                    确认修改\n" +
                     "                                </button>\n" +
@@ -529,7 +614,7 @@ var accountManagement = {
             else if (result.data[i].macacctype == 4 && result.data[i].macenable == 1) {
                 bumenjingliCount++;
                 info = "bumenjingliOpen_"+bumenjingliCount;
-                $('#content-wrapper').append(
+                $('#content-wrapper-acc-list').append(
                     "<br/>\n" +
                     "                <!--添加子账号设置开始-->\n" +
                     "                <div class='row-fluid'>\n" +
@@ -604,7 +689,7 @@ var accountManagement = {
                     "                            <div class='form-actions' style=\"text-align: right\">\n" +
                     "                                <!--点击保存后应该还要弹出信息框提示保存成功-->\n" +
                     //onclick='accountManagement.updateInfo(info)'
-                    "                                <button class='btn' onclick='accountManagement.updateInfo(this)' >\n" +
+                    "                                <button class='btn' onclick='AccMgr.updateInfo(this)' >\n" +
                     "                                    <i class='icon-save''></i>\n" +
                     "                                    确认修改\n" +
                     "                                </button>\n" +
@@ -620,7 +705,7 @@ var accountManagement = {
             else if (result.data[i].macacctype == 4 && result.data[i].macenable != 1) {
                 bumenjingliCount++;
                 info = "bumenjingliClose_"+bumenjingliCount;
-                $('#content-wrapper').append(
+                $('#content-wrapper-acc-list').append(
                     "<br/>\n" +
                     "                <!--添加子账号设置开始-->\n" +
                     "                <div class='row-fluid'>\n" +
@@ -695,7 +780,7 @@ var accountManagement = {
                     "                            <div class='form-actions' style=\"text-align: right\">\n" +
                     "                                <!--点击保存后应该还要弹出信息框提示保存成功-->\n" +
                     //onclick='accountManagement.updateInfo(info)'
-                    "                                <button class='btn' onclick='accountManagement.updateInfo(this)' >\n" +
+                    "                                <button class='btn' onclick='AccMgr.updateInfo(this)' >\n" +
                     "                                    <i class='icon-save''></i>\n" +
                     "                                    确认修改\n" +
                     "                                </button>\n" +
@@ -712,7 +797,8 @@ var accountManagement = {
             }
         }
     },
-    
+
+    //更新信息
     updateInfo:function(btn) {
         //获取填写信息
         var phoneNumberText = $(btn).parents().prev().prev().prev().prev().prev().children().eq(1).children().eq(0).val();
@@ -742,6 +828,7 @@ var accountManagement = {
         alert("修改内容为: [账号]"+phoneNumberText+"[密码]"+pwdText+"[再次输入密码]"+pwdTextAgain+"[账户类型]"+userTypeText+"[启用状态]"+isOn);
     },
 
+    //添加子账号
     addAccount:function () {
         var isQiantai = $('#addUserType').children().eq(0).children().eq(0).attr("checked");
         var isKehujingli = $('#addUserType').children().eq(1).children().eq(0).attr("checked");
@@ -788,10 +875,28 @@ var accountManagement = {
 
         })
     },
+};
 
-    deleteAccount:function (abtn) {
-        alert("别删俺");
-        //删除json操作
-        InitPage.init();
-    }
+//入盟申请
+var AllianceMgr = {
+    //只有申请加盟：shopAdminAlliance.html
+};
+//信息维护
+var infoMgr = {
+    //商家信息维护：shopAdminShowInfo.html
+    //产品信息维护：shopAdminShowInfoProduct.html
+        //产品信息查询接口（根据商家编号/产品编号）？
+        //产品信息展示接口？
+        //产品信息删除接口？
+};
+//积分管理
+var pointsMgr = {
+    //shopAdminPointsMgr.html（补充按钮：全部提交）
+        //查询接口
+        //提交接口
+};
+
+//配置管理
+var settingMgr = {
+    //缺失页面
 };
