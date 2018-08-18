@@ -31,4 +31,8 @@ public interface MerchantaccountMapper {
     int forbidBymerId(Merchantaccount merchantaccount);
 
     List<MManager> queryManager(@Param("merID") Integer merID);
+
+    int addPermission(@Param("macAcc") String macAcc,@Param("merId") Integer merId);
+
+    Integer queryType(@Param("macAcc") String macAcc,@Param("merId") Integer merId);
 }

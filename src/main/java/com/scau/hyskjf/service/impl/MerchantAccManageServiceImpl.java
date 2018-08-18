@@ -60,4 +60,12 @@ public class MerchantAccManageServiceImpl implements MerchantAccManageService {
         List<MManager> list = merchantaccountMapper.queryManager(merID);
         return list;
     }
+
+    public int addPermissionByMacAcc(String macacc,Integer merid){
+        Integer type  = merchantaccountMapper.queryType(macacc,merid);
+        if(type>=10){
+            return -1;
+        }
+        return merchantaccountMapper.addPermission(macacc,merid);
+    }
 }

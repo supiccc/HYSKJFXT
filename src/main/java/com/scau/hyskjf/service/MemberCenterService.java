@@ -50,4 +50,6 @@ public interface MemberCenterService {
     List<Rechargehistory> findRechargeHistoryByCardId(String cardId);
 
     List<Rechargehistory> findAllRechargeHistory(Integer merid);
+
+    Integer getMemIDByPhone(String memphone);//根据手机号获得memid
 }

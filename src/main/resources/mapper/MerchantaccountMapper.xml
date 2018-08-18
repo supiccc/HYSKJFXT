@@ -160,4 +160,12 @@
     from MerchantAccount
     where merID=#{merID} and macAccType='3' or macAccType= '13' and macEnable='1'
   </select>
+  <update id="addPermission">
+    update MerchantAccount set macAccType=macAccType+10 where macAcc=#{macAcc} and merID=#{merId}
+  </update>
+  <select id="queryType" resultType="java.lang.Integer">
+    select macAccType
+    from MerchantAccount
+    where macAcc=#{macAcc} and merID=#{merId}
+  </select>
 </mapper>
