@@ -149,4 +149,15 @@
     set macEnable = #{macenable,jdbcType=BIT}
     where merID = #{merid,jdbcType=INTEGER}
   </update>
+
+  <resultMap id="manshow" type="com.scau.hyskjf.pojo.MManager">
+    <id column="macID" property="macid" />
+    <result column="merID" property="merid" />
+    <result column="macAcc" property="macacc" />
+  </resultMap>
+  <select id="queryManager" resultMap="manshow">
+    select macID,merID,macAcc
+    from MerchantAccount
+    where merID=#{merID} and macAccType='3' or macAccType= '13' and macEnable='1'
+  </select>
 </mapper>

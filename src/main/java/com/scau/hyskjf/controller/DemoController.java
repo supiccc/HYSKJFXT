@@ -1,13 +1,11 @@
 package com.scau.hyskjf.controller;
 
 import com.scau.hyskjf.dao.AdminMapper;
-
+import com.scau.hyskjf.util.json.ResponseCode;
+import com.scau.hyskjf.util.json.ResponseJSON;
 import com.scau.hyskjf.util.sms.AuditSMS;
 import com.scau.hyskjf.util.sms.IndustrySMS;
 import com.scau.hyskjf.util.sms.PassSMS;
-
-import com.scau.hyskjf.util.json.ResponseCode;
-import com.scau.hyskjf.util.json.ResponseJSON;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +39,8 @@ public class DemoController {
     @RequestMapping(value = "/adminCreate")
     public ResponseJSON hello() {
         try {
-            System.err.println(new Md5Hash("password", "13811223344", 3));
+            System.err.println(new Md5Hash("password", "12312312345", 3));
+            System.err.println(new Md5Hash("password", "13602798934", 3));
         } catch (Exception e) {
             return new ResponseJSON(ResponseCode.WARN);
         }
@@ -61,6 +60,8 @@ public class DemoController {
         String verficationCode = (String) result.get("verficationCode");
         String msg = (String) result.get("result");
         SecurityUtils.getSubject().getSession().setAttribute("verficationCode", verficationCode);
+    //    String verficationCode = com.scau.hyskjf.util.sms.IndustrySMS.execute("13602800453");
+   //     SecurityUtils.getSubject().getSession().setAttribute("verficationCode", verficationCode);
         return new ResponseJSON(ResponseCode.SUCCESS);
     }
 

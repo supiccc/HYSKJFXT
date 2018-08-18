@@ -1,15 +1,16 @@
 package com.scau.hyskjf.controller;
 
 import com.scau.hyskjf.dao.MemberMapper;
-import com.scau.hyskjf.pojo.Member;
-import com.scau.hyskjf.pojo.Memberandcard;
-import com.scau.hyskjf.pojo.Membercard;
+import com.scau.hyskjf.pojo.*;
 import com.scau.hyskjf.service.MemberCenterService;
+import com.scau.hyskjf.service.MerchantAccManageService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ import java.util.List;
 * （2）会员基本信息变更：当会员基本信息有变化时，发卡商家可以对该会员的基本信息进行维护和变更。
 * （3）为会员账户添加会员卡
 * */
+@SessionAttributes("user")
 @RestController
 @RequestMapping("/memberAcc")
 public class MemberAccManageController {
@@ -31,8 +33,9 @@ public class MemberAccManageController {
 
     @Autowired
     MemberMapper memberMapper;
+
     /*
-    * 添加会员账户
+    * 添加会员账户(已测试)
     * 输入：
     * 会员信息Member member：（ 证件类型 String memcer;+ 证件号 String memcerid;+ 姓名 String memname（必填）;
     * +性别 String memsex;+ 生日 Date membirth;+ 手机号 String memphone（必填）;+ 邮箱 String mememail;+ 地址 String memadress; ）
@@ -48,6 +51,7 @@ public class MemberAccManageController {
             return new ResponseJSON(ResponseCode.SUCCESS);
         }
         catch (Exception e){
+            e.printStackTrace();
             return new ResponseJSON(ResponseCode.WARN);
         }
     }
@@ -144,10 +148,24 @@ public class MemberAccManageController {
 
     //会员充值
     @RequestMapping("/recharge")
-    public ResponseJSON rechargeMemberCard(String cardId,Float money){
-        Memberandcard memberandcard = memberCenterService.rechargeMemberCard(cardId,money);
+    public ResponseJSON rechargeMemberCard(@ModelAttribute("user") Merchantaccount merchantaccount, String cardId, Float money){
+        Memberandcard memberandcard = memberCenterService.rechargeMemberCard(cardId,money,merchantaccount);
         return new ResponseJSON(ResponseCode.SUCCESS,memberandcard);
     }
 
     //会员充值历史查询
+    //按会员卡，由于一个会员的充值次数不会很多，就显示全部信息，按时间倒序排序
+    @RequestMapping("/queryRecharge")
+    public ResponseJSON queryRechargeHistory(String cardId){
+        List<Rechargehistory> rechargehistories = memberCenterService.findRechargeHistoryByCardId(cardId);
+        return new ResponseJSON(ResponseCode.SUCCESS,rechargehistories);
+    }
+
+
+    //查询本商家的所有充值记录、 按一天内、一星期内、一个月内、全部
+    @RequestMapping("/queryAllRecharge")
+    public ResponseJSON queryAllRechargeHistory(@ModelAttribute("user") Merchantaccount merchantaccount){
+        List<Rechargehistory> rechargehistories = memberCenterService.findAllRechargeHistory(merchantaccount.getMerid());
+        return new ResponseJSON(ResponseCode.SUCCESS,rechargehistories);
+    }
 }
