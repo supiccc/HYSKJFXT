@@ -289,10 +289,10 @@ public class MerchantInfoController {
      * Productinfo类
      * */
     @RequestMapping(value = "/queryLabelProduct", method = RequestMethod.POST)
-    public ResponseJSON queryLabelProduct(Integer merID,Integer labelID) {
+    public ResponseJSON queryLabelProduct(Integer merID, Integer labelID) {
         try {
-            List<Productinfo> labelProductList =productInfoService.queryLabelProduct(merID,labelID);
-            return new ResponseJSON(ResponseCode.SUCCESS,labelProductList);
+            List<Productinfo> labelProductList = productInfoService.queryLabelProduct(merID, labelID);
+            return new ResponseJSON(ResponseCode.SUCCESS, labelProductList);
         } catch (Exception e) {
             return new ResponseJSON(ResponseCode.WARN);
         }
@@ -310,7 +310,26 @@ public class MerchantInfoController {
     @RequestMapping(value = "/feedbackEmail", method = RequestMethod.POST)
     public ResponseJSON feedbackEmail(String content) {
         try {
-            emailService.sendSimpleEmail("1961534631@qq.com","意见反馈",content);//to为收件人，subject为主题，content为内容
+            emailService.sendSimpleEmail("1961534631@qq.com", "意见反馈", content);//to为收件人，subject为主题，content为内容
+            return new ResponseJSON(ResponseCode.SUCCESS);
+        } catch (Exception e) {
+            return new ResponseJSON(ResponseCode.WARN);
+        }
+    }
+
+
+    //查询商家详细信息
+    @RequestMapping("/submitdetail")
+    public ResponseJSON browseSubmitDetail(Integer merid) {
+        MerchantdetailWithBLOBs merchantdetail = merchantInfoService.findMerchantDetail(merid);
+        return new ResponseJSON(ResponseCode.SUCCESS, merchantdetail);
+    }
+
+    //积分上缴
+    @RequestMapping("/creditsubmit")
+    public ResponseJSON creaditSubmit(Integer merid, Float credit, Float money) {
+        try {
+            merchantInfoService.insertCreditSubmit(merid, credit, money);
             return new ResponseJSON(ResponseCode.SUCCESS);
         } catch (Exception e) {
             return new ResponseJSON(ResponseCode.WARN);
