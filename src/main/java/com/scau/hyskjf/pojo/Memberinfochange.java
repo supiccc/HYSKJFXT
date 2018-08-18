@@ -15,7 +15,7 @@ public class Memberinfochange {
 
     private String micsex;
 
-    private Integer micphone;
+    private String micphone;
 
     private Date micbirth;
 
@@ -75,11 +75,11 @@ public class Memberinfochange {
         this.micsex = micsex;
     }
 
-    public Integer getMicphone() {
+    public String getMicphone() {
         return micphone;
     }
 
-    public void setMicphone(Integer micphone) {
+    public void setMicphone(String micphone) {
         this.micphone = micphone;
     }
 

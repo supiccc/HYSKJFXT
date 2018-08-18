@@ -1,7 +1,7 @@
 package com.scau.hyskjf.controller;
 
 import com.scau.hyskjf.pojo.Admin;
-import com.scau.hyskjf.pojo.Creditsubmit;
+import com.scau.hyskjf.pojo.CreditsubmitdetailWithBLOBs;
 import com.scau.hyskjf.service.ConsumeCreditService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
@@ -24,23 +24,30 @@ public class ConsumeCreditController {
     @RequestMapping("/submit/list")
     public ResponseJSON browseCsInfo(){
 
-        List<Creditsubmit> creditsubmits = consumeCreditService.findAllSubmit(null);
+        List<CreditsubmitdetailWithBLOBs> creditsubmitdetails = consumeCreditService.findAllSubmit(null);
 
-        return new ResponseJSON(ResponseCode.SUCCESS,creditsubmits);
+        return new ResponseJSON(ResponseCode.SUCCESS,creditsubmitdetails);
     }
 
     //已上缴情况浏览
     @RequestMapping("/submited/list")
     public ResponseJSON browseSubmited(){
-        List<Creditsubmit> creditsubmits = consumeCreditService.findAllSubmit(true);
-        return new ResponseJSON(ResponseCode.SUCCESS,creditsubmits);
+        List<CreditsubmitdetailWithBLOBs> creditsubmitdetails = consumeCreditService.findAllSubmitWithState(true);
+        return new ResponseJSON(ResponseCode.SUCCESS,creditsubmitdetails);
     }
 
     //未上缴情况浏览
     @RequestMapping("/unsubmited/list")
     public ResponseJSON browseUnsubmit(){
-        List<Creditsubmit> creditsubmits = consumeCreditService.findAllSubmit(false);
-        return new ResponseJSON(ResponseCode.SUCCESS,creditsubmits);
+        List<CreditsubmitdetailWithBLOBs> creditsubmitdetails = consumeCreditService.findAllSubmitWithState(false);
+        return new ResponseJSON(ResponseCode.SUCCESS,creditsubmitdetails);
+    }
+
+    //未处理的上缴情况浏览
+    @RequestMapping("/unhandle/list")
+    public ResponseJSON browseUnhandle(){
+        List<CreditsubmitdetailWithBLOBs> creditsubmitdetails = consumeCreditService.findAllUnhandleSubmit(false);
+        return new ResponseJSON(ResponseCode.SUCCESS,creditsubmitdetails);
     }
 
     //上缴情况修改
