@@ -1,7 +1,9 @@
 package com.scau.hyskjf.service.impl;
 
 import com.scau.hyskjf.dao.CreditconsumeMapper;
+import com.scau.hyskjf.dao.CreditconsumedetailMapper;
 import com.scau.hyskjf.pojo.Creditconsume;
+import com.scau.hyskjf.pojo.Creditconsumedetail;
 import com.scau.hyskjf.service.CreditsumptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,9 @@ import java.util.List;
 public class CreditsumptionServiceImpl implements CreditsumptionService {
     @Autowired
     private CreditconsumeMapper creditconsumeMapper;
+
+    @Autowired
+    private CreditconsumedetailMapper creditconsumedetailMapper;
 
     @Override
     public List<Creditconsume> findAllCreditsoncumeOrderByTime(int type) {
@@ -55,5 +60,30 @@ public class CreditsumptionServiceImpl implements CreditsumptionService {
     @Override
     public List<Creditconsume> findAllCreditsoncume() {
         return creditconsumeMapper.findAllCreditsoncume();
+    }
+
+    @Override
+    public List<Creditconsumedetail> findAllCreditsoncumeDetailOrderByTime(Integer timeType) {
+        return creditconsumedetailMapper.findAllCreditsoncumeOrderByTime(timeType);
+    }
+
+    @Override
+    public List<Creditconsumedetail> findAllCreditsoncumeDetailOrderByStateAndTime(Integer timeType, Integer stateType) {
+        return creditconsumedetailMapper.findAllCreditsoncumeOrderByStateAndTime(timeType,stateType);
+    }
+
+    @Override
+    public List<Creditconsumedetail> findAllCreditsoncumeDetailOrderByState(Integer stateType) {
+        return creditconsumedetailMapper.findAllCreditsoncumeOrderByState(stateType);
+    }
+
+    @Override
+    public List<Creditconsumedetail> findAllCreditsoncumeDetail() {
+        return creditconsumedetailMapper.findAllCreditsoncume();
+    }
+
+    @Override
+    public Creditconsumedetail findCreditconsumeDetail(int id) {
+        return creditconsumedetailMapper.selectByPrimaryKey(id);
     }
 }

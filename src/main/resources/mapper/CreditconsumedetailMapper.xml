@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scau.hyskjf.dao.CreditconsumedetailMapper">
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Creditconsumedetail">
+    <result column="merID" jdbcType="INTEGER" property="merid" />
+    <result column="memID" jdbcType="INTEGER" property="memid" />
+    <result column="creconId" jdbcType="INTEGER" property="creconid" />
+    <result column="AdminID" jdbcType="INTEGER" property="adminid" />
+    <result column="credits" jdbcType="REAL" property="credits" />
+    <result column="value" jdbcType="REAL" property="value" />
+    <result column="handleState" jdbcType="BIT" property="handlestate" />
+    <result column="recordTime" jdbcType="TIMESTAMP" property="recordtime" />
+    <result column="transferState" jdbcType="BIT" property="transferstate" />
+    <result column="handleTime" jdbcType="TIMESTAMP" property="handletime" />
+    <result column="memCredit" jdbcType="REAL" property="memcredit" />
+    <result column="memCer" jdbcType="VARCHAR" property="memcer" />
+    <result column="memCerID" jdbcType="VARCHAR" property="memcerid" />
+    <result column="memName" jdbcType="VARCHAR" property="memname" />
+    <result column="memSex" jdbcType="VARCHAR" property="memsex" />
+    <result column="memBirth" jdbcType="DATE" property="membirth" />
+    <result column="memPhone" jdbcType="VARCHAR" property="memphone" />
+    <result column="memEmail" jdbcType="VARCHAR" property="mememail" />
+    <result column="merSubID" jdbcType="INTEGER" property="mersubid" />
+    <result column="merTopID" jdbcType="INTEGER" property="mertopid" />
+    <result column="merType" jdbcType="VARCHAR" property="mertype" />
+    <result column="merName" jdbcType="VARCHAR" property="mername" />
+    <result column="merCumPresent" jdbcType="REAL" property="mercumpresent" />
+    <result column="merDicPresent" jdbcType="REAL" property="merdicpresent" />
+    <result column="merAppStat" jdbcType="BIT" property="merappstat" />
+    <result column="merRecommend" jdbcType="BIT" property="merrecommend" />
+    <result column="isIndex" jdbcType="BIT" property="isindex" />
+    <result column="oweCredit" jdbcType="REAL" property="owecredit" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.Creditconsumedetail">
+    <result column="memAdress" jdbcType="LONGVARCHAR" property="memadress" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    AdminID, credits, value,
+      handleState, recordTime, transferState,
+      handleTime, memCredit, memCer,
+      memCerID, memName, memSex,
+      memBirth, memPhone, memEmail,
+      merSubID, merTopID, merType,
+      merName, merCumPresent, merDicPresent,
+      merAppStat, merRecommend, isIndex,
+      oweCredit
+  </sql>
+  <sql id="Blob_Column_List">
+    memAdress
+  </sql>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Creditconsumedetail">
+    insert into CreditConsumeDetail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="merid != null">
+        merID,
+      </if>
+      <if test="memid != null">
+        memID,
+      </if>
+      <if test="creconid != null">
+        creconId,
+      </if>
+      <if test="adminid != null">
+        AdminID,
+      </if>
+      <if test="credits != null">
+        credits,
+      </if>
+      <if test="value != null">
+        value,
+      </if>
+      <if test="handlestate != null">
+        handleState,
+      </if>
+      <if test="recordtime != null">
+        recordTime,
+      </if>
+      <if test="transferstate != null">
+        transferState,
+      </if>
+      <if test="handletime != null">
+        handleTime,
+      </if>
+      <if test="memcredit != null">
+        memCredit,
+      </if>
+      <if test="memcer != null">
+        memCer,
+      </if>
+      <if test="memcerid != null">
+        memCerID,
+      </if>
+      <if test="memname != null">
+        memName,
+      </if>
+      <if test="memsex != null">
+        memSex,
+      </if>
+      <if test="membirth != null">
+        memBirth,
+      </if>
+      <if test="memphone != null">
+        memPhone,
+      </if>
+      <if test="mememail != null">
+        memEmail,
+      </if>
+      <if test="mersubid != null">
+        merSubID,
+      </if>
+      <if test="mertopid != null">
+        merTopID,
+      </if>
+      <if test="mertype != null">
+        merType,
+      </if>
+      <if test="mername != null">
+        merName,
+      </if>
+      <if test="mercumpresent != null">
+        merCumPresent,
+      </if>
+      <if test="merdicpresent != null">
+        merDicPresent,
+      </if>
+      <if test="merappstat != null">
+        merAppStat,
+      </if>
+      <if test="merrecommend != null">
+        merRecommend,
+      </if>
+      <if test="isindex != null">
+        isIndex,
+      </if>
+      <if test="owecredit != null">
+        oweCredit,
+      </if>
+      <if test="memadress != null">
+        memAdress,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="merid != null">
+        #{merid,jdbcType=INTEGER},
+      </if>
+      <if test="memid != null">
+        #{memid,jdbcType=INTEGER},
+      </if>
+      <if test="creconid != null">
+        #{creconid,jdbcType=INTEGER},
+      </if>
+      <if test="adminid != null">
+        #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="credits != null">
+        #{credits,jdbcType=REAL},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=REAL},
+      </if>
+      <if test="handlestate != null">
+        #{handlestate,jdbcType=BIT},
+      </if>
+      <if test="recordtime != null">
+        #{recordtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transferstate != null">
+        #{transferstate,jdbcType=BIT},
+      </if>
+      <if test="handletime != null">
+        #{handletime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memcredit != null">
+        #{memcredit,jdbcType=REAL},
+      </if>
+      <if test="memcer != null">
+        #{memcer,jdbcType=VARCHAR},
+      </if>
+      <if test="memcerid != null">
+        #{memcerid,jdbcType=VARCHAR},
+      </if>
+      <if test="memname != null">
+        #{memname,jdbcType=VARCHAR},
+      </if>
+      <if test="memsex != null">
+        #{memsex,jdbcType=VARCHAR},
+      </if>
+      <if test="membirth != null">
+        #{membirth,jdbcType=DATE},
+      </if>
+      <if test="memphone != null">
+        #{memphone,jdbcType=VARCHAR},
+      </if>
+      <if test="mememail != null">
+        #{mememail,jdbcType=VARCHAR},
+      </if>
+      <if test="mersubid != null">
+        #{mersubid,jdbcType=INTEGER},
+      </if>
+      <if test="mertopid != null">
+        #{mertopid,jdbcType=INTEGER},
+      </if>
+      <if test="mertype != null">
+        #{mertype,jdbcType=VARCHAR},
+      </if>
+      <if test="mername != null">
+        #{mername,jdbcType=VARCHAR},
+      </if>
+      <if test="mercumpresent != null">
+        #{mercumpresent,jdbcType=REAL},
+      </if>
+      <if test="merdicpresent != null">
+        #{merdicpresent,jdbcType=REAL},
+      </if>
+      <if test="merappstat != null">
+        #{merappstat,jdbcType=BIT},
+      </if>
+      <if test="merrecommend != null">
+        #{merrecommend,jdbcType=BIT},
+      </if>
+      <if test="isindex != null">
+        #{isindex,jdbcType=BIT},
+      </if>
+      <if test="owecredit != null">
+        #{owecredit,jdbcType=REAL},
+      </if>
+      <if test="memadress != null">
+        #{memadress,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Creditconsumedetail">
+    insert into CreditConsumeDetail (merID, memID, creconId, 
+      AdminID, credits, value, 
+      handleState, recordTime, transferState, 
+      handleTime, memCredit, memCer, 
+      memCerID, memName, memSex, 
+      memBirth, memPhone, memEmail, 
+      merSubID, merTopID, merType, 
+      merName, merCumPresent, merDicPresent, 
+      merAppStat, merRecommend, isIndex, 
+      oweCredit, memAdress)
+    values (#{merid,jdbcType=INTEGER}, #{memid,jdbcType=INTEGER}, #{creconid,jdbcType=INTEGER}, 
+      #{adminid,jdbcType=INTEGER}, #{credits,jdbcType=REAL}, #{value,jdbcType=REAL}, 
+      #{handlestate,jdbcType=BIT}, #{recordtime,jdbcType=TIMESTAMP}, #{transferstate,jdbcType=BIT}, 
+      #{handletime,jdbcType=TIMESTAMP}, #{memcredit,jdbcType=REAL}, #{memcer,jdbcType=VARCHAR}, 
+      #{memcerid,jdbcType=VARCHAR}, #{memname,jdbcType=VARCHAR}, #{memsex,jdbcType=VARCHAR}, 
+      #{membirth,jdbcType=DATE}, #{memphone,jdbcType=VARCHAR}, #{mememail,jdbcType=VARCHAR}, 
+      #{mersubid,jdbcType=INTEGER}, #{mertopid,jdbcType=INTEGER}, #{mertype,jdbcType=VARCHAR}, 
+      #{mername,jdbcType=VARCHAR}, #{mercumpresent,jdbcType=REAL}, #{merdicpresent,jdbcType=REAL}, 
+      #{merappstat,jdbcType=BIT}, #{merrecommend,jdbcType=BIT}, #{isindex,jdbcType=BIT}, 
+      #{owecredit,jdbcType=REAL}, #{memadress,jdbcType=LONGVARCHAR})
+  </insert>
+
+
+  <select id="findAllCreditsoncumeOrderByStateAndTime" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CreditConsumeDetail
+    order by transferState
+    <if test=" stateType == 1">
+      desc
+    </if>
+    ,recordTime
+    <if test=" timeType == 1">
+      desc
+    </if>
+  </select>
+  <select id="findAllCreditsoncumeOrderByTime" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CreditConsumeDetail
+    order by recordTime
+    <if test=" timeType == 1">
+      desc
+    </if>
+  </select>
+
+  <select id="findAllCreditsoncumeOrderByState" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CreditConsumeDetail
+    order by transferState
+    <if test=" stateType == 1">
+      desc
+    </if>
+  </select>
+
+  <select id="findAllCreditsoncume" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CreditConsumeDetail
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from Consume
+    where cumID = #{cumid,jdbcType=INTEGER}
+  </select>
+
+</mapper>

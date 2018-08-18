@@ -55,13 +55,14 @@ public class MessageManagementController {
     @RequestMapping("/sendMessage")
     public ResponseJSON sendMessage(Message message){
         messageManagementService.sendMessage(message);
-        return null;
+        return new ResponseJSON(ResponseCode.SUCCESS);
     }
 
 
     //回复消息
     @RequestMapping("/replyMessage")
     public ResponseJSON replyMessage(Message message){
-        return null;
+        messageManagementService.sendMessage(message);
+        return new ResponseJSON(ResponseCode.SUCCESS);
     }
 }

@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scau.hyskjf.dao.CreditsubmitdetailMapper">
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Creditsubmitdetail">
+    <result column="merID" jdbcType="INTEGER" property="merid" />
+    <result column="csID" jdbcType="INTEGER" property="csid" />
+    <result column="csStat" jdbcType="BIT" property="csstat" />
+    <result column="csMoney" jdbcType="REAL" property="csmoney" />
+    <result column="csCredit" jdbcType="REAL" property="cscredit" />
+    <result column="merSubID" jdbcType="INTEGER" property="mersubid" />
+    <result column="merTopID" jdbcType="INTEGER" property="mertopid" />
+    <result column="merType" jdbcType="VARCHAR" property="mertype" />
+    <result column="merName" jdbcType="VARCHAR" property="mername" />
+    <result column="merCumPresent" jdbcType="REAL" property="mercumpresent" />
+    <result column="merDicPresent" jdbcType="REAL" property="merdicpresent" />
+    <result column="merAppStat" jdbcType="BIT" property="merappstat" />
+    <result column="merRecommend" jdbcType="BIT" property="merrecommend" />
+    <result column="isIndex" jdbcType="BIT" property="isindex" />
+    <result column="oweCredit" jdbcType="REAL" property="owecredit" />
+    <result column="merImage" jdbcType="VARCHAR" property="merimage" />
+    <result column="merMainImage" jdbcType="BIT" property="mermainimage" />
+    <result column="merTelphone" jdbcType="VARCHAR" property="mertelphone" />
+    <result column="merFax" jdbcType="VARCHAR" property="merfax" />
+    <result column="merURL" jdbcType="VARCHAR" property="merurl" />
+    <result column="merEmail" jdbcType="VARCHAR" property="meremail" />
+    <result column="merPrincipal" jdbcType="VARCHAR" property="merprincipal" />
+    <result column="merAppellation" jdbcType="VARCHAR" property="merappellation" />
+    <result column="merDuty" jdbcType="VARCHAR" property="merduty" />
+    <result column="merPhone" jdbcType="VARCHAR" property="merphone" />
+    <result column="merLevel" jdbcType="INTEGER" property="merlevel" />
+    <result column="merPostNum" jdbcType="VARCHAR" property="merpostnum" />
+    <result column="merProvince" jdbcType="VARCHAR" property="merprovince" />
+    <result column="merCity" jdbcType="VARCHAR" property="mercity" />
+    <result column="merArea" jdbcType="VARCHAR" property="merarea" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.CreditsubmitdetailWithBLOBs">
+    <result column="merIntroduce" jdbcType="LONGVARCHAR" property="merintroduce" />
+    <result column="merAdress" jdbcType="LONGVARCHAR" property="meradress" />
+    <result column="merLandmark" jdbcType="LONGVARCHAR" property="merlandmark" />
+    <result column="merDiscount" jdbcType="LONGVARCHAR" property="merdiscount" />
+    <result column="merDiscountEvent" jdbcType="LONGVARCHAR" property="merdiscountevent" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    csMoney, csCredit, merSubID,
+      merTopID, merType, merName,
+      merCumPresent, merDicPresent, merAppStat,
+      merRecommend, isIndex, oweCredit,
+      merImage, merMainImage, merTelphone,
+      merFax, merURL, merEmail,
+      merPrincipal, merAppellation, merDuty,
+      merPhone, merLevel, merPostNum,
+      merProvince, merCity, merArea
+  </sql>
+  <sql id="Blob_Column_List">
+    merIntroduce, merAdress, merLandmark, merDiscount, merDiscountEvent
+  </sql>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.CreditsubmitdetailWithBLOBs">
+    insert into CreditSubmitDetail (merID, csID, csStat, 
+      csMoney, csCredit, merSubID, 
+      merTopID, merType, merName, 
+      merCumPresent, merDicPresent, merAppStat, 
+      merRecommend, isIndex, oweCredit, 
+      merImage, merMainImage, merTelphone, 
+      merFax, merURL, merEmail, 
+      merPrincipal, merAppellation, merDuty, 
+      merPhone, merLevel, merPostNum, 
+      merProvince, merCity, merArea, 
+      merIntroduce, merAdress, merLandmark, 
+      merDiscount, merDiscountEvent)
+    values (#{merid,jdbcType=INTEGER}, #{csid,jdbcType=INTEGER}, #{csstat,jdbcType=BIT}, 
+      #{csmoney,jdbcType=REAL}, #{cscredit,jdbcType=REAL}, #{mersubid,jdbcType=INTEGER}, 
+      #{mertopid,jdbcType=INTEGER}, #{mertype,jdbcType=VARCHAR}, #{mername,jdbcType=VARCHAR}, 
+      #{mercumpresent,jdbcType=REAL}, #{merdicpresent,jdbcType=REAL}, #{merappstat,jdbcType=BIT}, 
+      #{merrecommend,jdbcType=BIT}, #{isindex,jdbcType=BIT}, #{owecredit,jdbcType=REAL}, 
+      #{merimage,jdbcType=VARCHAR}, #{mermainimage,jdbcType=BIT}, #{mertelphone,jdbcType=VARCHAR}, 
+      #{merfax,jdbcType=VARCHAR}, #{merurl,jdbcType=VARCHAR}, #{meremail,jdbcType=VARCHAR}, 
+      #{merprincipal,jdbcType=VARCHAR}, #{merappellation,jdbcType=VARCHAR}, #{merduty,jdbcType=VARCHAR}, 
+      #{merphone,jdbcType=VARCHAR}, #{merlevel,jdbcType=INTEGER}, #{merpostnum,jdbcType=VARCHAR}, 
+      #{merprovince,jdbcType=VARCHAR}, #{mercity,jdbcType=VARCHAR}, #{merarea,jdbcType=VARCHAR}, 
+      #{merintroduce,jdbcType=LONGVARCHAR}, #{meradress,jdbcType=LONGVARCHAR}, #{merlandmark,jdbcType=LONGVARCHAR}, 
+      #{merdiscount,jdbcType=LONGVARCHAR}, #{merdiscountevent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.CreditsubmitdetailWithBLOBs">
+    insert into CreditSubmitDetail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="merid != null">
+        merID,
+      </if>
+      <if test="csid != null">
+        csID,
+      </if>
+      <if test="csstat != null">
+        csStat,
+      </if>
+      <if test="csmoney != null">
+        csMoney,
+      </if>
+      <if test="cscredit != null">
+        csCredit,
+      </if>
+      <if test="mersubid != null">
+        merSubID,
+      </if>
+      <if test="mertopid != null">
+        merTopID,
+      </if>
+      <if test="mertype != null">
+        merType,
+      </if>
+      <if test="mername != null">
+        merName,
+      </if>
+      <if test="mercumpresent != null">
+        merCumPresent,
+      </if>
+      <if test="merdicpresent != null">
+        merDicPresent,
+      </if>
+      <if test="merappstat != null">
+        merAppStat,
+      </if>
+      <if test="merrecommend != null">
+        merRecommend,
+      </if>
+      <if test="isindex != null">
+        isIndex,
+      </if>
+      <if test="owecredit != null">
+        oweCredit,
+      </if>
+      <if test="merimage != null">
+        merImage,
+      </if>
+      <if test="mermainimage != null">
+        merMainImage,
+      </if>
+      <if test="mertelphone != null">
+        merTelphone,
+      </if>
+      <if test="merfax != null">
+        merFax,
+      </if>
+      <if test="merurl != null">
+        merURL,
+      </if>
+      <if test="meremail != null">
+        merEmail,
+      </if>
+      <if test="merprincipal != null">
+        merPrincipal,
+      </if>
+      <if test="merappellation != null">
+        merAppellation,
+      </if>
+      <if test="merduty != null">
+        merDuty,
+      </if>
+      <if test="merphone != null">
+        merPhone,
+      </if>
+      <if test="merlevel != null">
+        merLevel,
+      </if>
+      <if test="merpostnum != null">
+        merPostNum,
+      </if>
+      <if test="merprovince != null">
+        merProvince,
+      </if>
+      <if test="mercity != null">
+        merCity,
+      </if>
+      <if test="merarea != null">
+        merArea,
+      </if>
+      <if test="merintroduce != null">
+        merIntroduce,
+      </if>
+      <if test="meradress != null">
+        merAdress,
+      </if>
+      <if test="merlandmark != null">
+        merLandmark,
+      </if>
+      <if test="merdiscount != null">
+        merDiscount,
+      </if>
+      <if test="merdiscountevent != null">
+        merDiscountEvent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="merid != null">
+        #{merid,jdbcType=INTEGER},
+      </if>
+      <if test="csid != null">
+        #{csid,jdbcType=INTEGER},
+      </if>
+      <if test="csstat != null">
+        #{csstat,jdbcType=BIT},
+      </if>
+      <if test="csmoney != null">
+        #{csmoney,jdbcType=REAL},
+      </if>
+      <if test="cscredit != null">
+        #{cscredit,jdbcType=REAL},
+      </if>
+      <if test="mersubid != null">
+        #{mersubid,jdbcType=INTEGER},
+      </if>
+      <if test="mertopid != null">
+        #{mertopid,jdbcType=INTEGER},
+      </if>
+      <if test="mertype != null">
+        #{mertype,jdbcType=VARCHAR},
+      </if>
+      <if test="mername != null">
+        #{mername,jdbcType=VARCHAR},
+      </if>
+      <if test="mercumpresent != null">
+        #{mercumpresent,jdbcType=REAL},
+      </if>
+      <if test="merdicpresent != null">
+        #{merdicpresent,jdbcType=REAL},
+      </if>
+      <if test="merappstat != null">
+        #{merappstat,jdbcType=BIT},
+      </if>
+      <if test="merrecommend != null">
+        #{merrecommend,jdbcType=BIT},
+      </if>
+      <if test="isindex != null">
+        #{isindex,jdbcType=BIT},
+      </if>
+      <if test="owecredit != null">
+        #{owecredit,jdbcType=REAL},
+      </if>
+      <if test="merimage != null">
+        #{merimage,jdbcType=VARCHAR},
+      </if>
+      <if test="mermainimage != null">
+        #{mermainimage,jdbcType=BIT},
+      </if>
+      <if test="mertelphone != null">
+        #{mertelphone,jdbcType=VARCHAR},
+      </if>
+      <if test="merfax != null">
+        #{merfax,jdbcType=VARCHAR},
+      </if>
+      <if test="merurl != null">
+        #{merurl,jdbcType=VARCHAR},
+      </if>
+      <if test="meremail != null">
+        #{meremail,jdbcType=VARCHAR},
+      </if>
+      <if test="merprincipal != null">
+        #{merprincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="merappellation != null">
+        #{merappellation,jdbcType=VARCHAR},
+      </if>
+      <if test="merduty != null">
+        #{merduty,jdbcType=VARCHAR},
+      </if>
+      <if test="merphone != null">
+        #{merphone,jdbcType=VARCHAR},
+      </if>
+      <if test="merlevel != null">
+        #{merlevel,jdbcType=INTEGER},
+      </if>
+      <if test="merpostnum != null">
+        #{merpostnum,jdbcType=VARCHAR},
+      </if>
+      <if test="merprovince != null">
+        #{merprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="mercity != null">
+        #{mercity,jdbcType=VARCHAR},
+      </if>
+      <if test="merarea != null">
+        #{merarea,jdbcType=VARCHAR},
+      </if>
+      <if test="merintroduce != null">
+        #{merintroduce,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="meradress != null">
+        #{meradress,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="merlandmark != null">
+        #{merlandmark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="merdiscount != null">
+        #{merdiscount,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="merdiscountevent != null">
+        #{merdiscountevent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="findAllSubmit" parameterType="java.lang.Object" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List"/>
+    from CreditSubmitDetail
+  </select>
+
+  <select id="findAllSubmitWithState" parameterType="java.lang.Boolean" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List"/>
+    from CreditSubmitDetail
+    where csStat = #{csstat,jdbcType=BIT}
+  </select>
+
+  <select id="findAllUnhandleSubmit" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List"/>
+    from CreditSubmitDetail
+    where csStat is null
+  </select>
+</mapper>
