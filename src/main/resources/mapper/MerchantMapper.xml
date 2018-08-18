@@ -163,7 +163,7 @@
   </update>
 
   <select id="getMerID" resultType="java.lang.Integer">
-    select max(merID) as mmerID
+    select max(merID)+1 as mmerID
     from Merchant
   </select>
 
@@ -183,7 +183,7 @@
     from Merchant a left join MemberCard b on a.merID=b.merID
     left join Member c on b.memID=c.memID
     left join MemberManager d on d.memID=c.memID
-    where a.merID=#{merID} and d.mmanagerID=null
+    where a.merID=#{merID} and d.mmanagerID is null
   </select>
 
 

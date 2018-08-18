@@ -72,7 +72,12 @@ public class MemberManagementController {
         return new ResponseJSON(ResponseCode.SUCCESS,reissuedetails);
     }
 
-    @RequestMapping("getMemidByPhone")
+    /*（已测试）
+    * 根据手机号获取会员号
+    * 输入：
+    * 手机号String memphone
+    * */
+    @RequestMapping("/getMemidByPhone")
     public ResponseJSON getMemidByPhone(String memphone){
         try{
             Integer memid = memberCenterService.getMemIDByPhone(memphone);

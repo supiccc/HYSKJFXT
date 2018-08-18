@@ -1,9 +1,6 @@
 package com.scau.hyskjf.controller;
 
-import com.scau.hyskjf.pojo.MManager;
-import com.scau.hyskjf.pojo.MemberMShow;
-import com.scau.hyskjf.pojo.Membermanager;
-import com.scau.hyskjf.pojo.Merchantaccount;
+import com.scau.hyskjf.pojo.*;
 import com.scau.hyskjf.service.MerchantAccManageService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
@@ -186,7 +183,7 @@ public class MerchantAccManageController {
     /*（已测试）
     * 修改子账号的账号类型、启用状态
     * 输入：
-    * Merchantaccount类：必须有账户编号macid+修改的项
+    * Merchantaccount类：必须有账户编号macid+修改的项(登陆账号 String macacc;+结算账户（废弃） Integer maccumacc;+密码 String macpasswd;+账户类型 Integer macacctype;+上次登陆时间 Date maclastlogin;+是否启动 Boolean macenable;)
     * 返回：
     * 成功或失败码
     * */
@@ -204,7 +201,7 @@ public class MerchantAccManageController {
     /*（已测试）
      * 删除子账号（实际操作只是把启用状态改为false）
      * 输入：
-     * Merchantaccount类：必须有账户编号macid,其他项为null
+     * 账户编号macid
      * 返回：
      * 成功或失败码
      * */
@@ -249,7 +246,7 @@ public class MerchantAccManageController {
     //
     //}
 
-    /*
+    /*（已测试）
      * 查询商家的没有分配客户经理的会员：
      * 输入：
      * 商家编号 Integer merid
@@ -267,41 +264,42 @@ public class MerchantAccManageController {
         }
     }
 
-    /*
+    /*（已测试）
      * 查询商家的客户经理：
      * 输入：
-     * 商家编号 Integer merID
+     * 商家编号 Integer merid
      *
      * 输出：
      * 商家的客户经理 List<MManager> list（包含属性：客户经理账号id Integer macid;+商家编号id Integer merid;+ 客户经理账户登陆名（为手机号） String macacc;）
      * */
     @RequestMapping(value = "/queryMManager", method = RequestMethod.POST)
-    public ResponseJSON queryMManager(Integer merID){
+    public ResponseJSON queryMManager(Integer merid){
         try{
-            List<MManager> list = merchantAccManageService.queryMemberManagerByMerID(merID);
+            List<MManager> list = merchantAccManageService.queryMemberManagerByMerID(merid);
             return new ResponseJSON(ResponseCode.SUCCESS,list);
         }catch(Exception e){
             return new ResponseJSON(ResponseCode.WARN);
         }
     }
 
-    /*
+    /*（已测试）
     * 指派客户经理：
     * 输入：
-    * 会员编号 List<Integer> memIDList ,客户经理的商家账户编号 Integer macID
+    * 会员编号 List<Integer> memberIDs ,客户经理的商家账户编号 Integer macid()
     *
     * 输出：
     * 正确码或错误码
     * */
     @RequestMapping(value = "/setMemberManager", method = RequestMethod.POST)
-    public ResponseJSON setMemberManager(List<Integer> memIDList ,Integer macID){
+    public ResponseJSON setMemberManager(MemberModel memIDList , Integer macid){
         try{
+            List<Integer> list = memIDList.getMemberIDs();
             List<Membermanager> mmList =new ArrayList<>();
             Membermanager membermanager = new Membermanager();
             membermanager.setMmatime(new Date());
-            membermanager.setMmanagerid(macID);
-            for(int i=0;i<memIDList.size();i++){
-                membermanager.setMemid(memIDList.get(i));
+            membermanager.setMmanagerid(macid);
+            for(int i=0;i<list.size();i++){
+                membermanager.setMemid(list.get(i));
                 mmList.add(membermanager);
             }
             merchantAccManageService.setMemberManager(mmList);

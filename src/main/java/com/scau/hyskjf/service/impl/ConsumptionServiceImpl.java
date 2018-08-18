@@ -91,6 +91,7 @@ public class ConsumptionServiceImpl implements ConsumptionService {
         credithistory.setChcredit(-1*creditConsumption.getChangeCredit());
         credithistory.setChremain(creditConsumption.getMemcredit());
         credithistory.setChtype("积分消费");
+        credithistoryMapper.insert(credithistory);
         /************************插入到积分消费统计表*******************************/
         Creditconsume creditconsume = new Creditconsume();
         creditconsume.setMemid(creditConsumption.getMemid());
@@ -144,11 +145,16 @@ public class ConsumptionServiceImpl implements ConsumptionService {
 
     @Override
     public Float storeCompute(StoreConsumption storeConsumption,Integer macID){
-        /************************修改会员的剩余储值字段******************************/
+        /************************修改会员卡表的剩余储值字段******************************/
         Membercard membercard = new Membercard();
         membercard.setMcpkid(storeConsumption.getMcpkid());
         membercard.setMcbalance(storeConsumption.getMemStore());//修改为划扣后的储值
         membercardMapper.updateByPrimaryKeySelective(membercard);//修改会员卡表
+        /************************添加积分到会员表***********************************/
+        Member member = new Member();
+        member.setMemid(storeConsumption.getMemid());
+        member.setMemcredit(storeConsumption.getRemainCredit());
+        memberMapper.updateByPrimaryKeySelective(member);
         /************************插入消费记录到消费历史表****************************/
         Consume consume = new Consume();
         consume.setMcpkid(storeConsumption.getMcpkid());
@@ -164,6 +170,7 @@ public class ConsumptionServiceImpl implements ConsumptionService {
         credithistory.setChcredit(storeConsumption.getChangeCredit());
         credithistory.setChremain(storeConsumption.getRemainCredit());
         credithistory.setChtype("储值消费");
+        credithistoryMapper.insert(credithistory);
         /************************修改商家所欠积分字段*******************************/
         merchantMapper.updateAddCredit(storeConsumption.getMerid(),storeConsumption.getChangeCredit());//在原有的oweCredit字段加上支出积分
         /************************返回用户剩余储值***********************************/
@@ -180,7 +187,10 @@ public class ConsumptionServiceImpl implements ConsumptionService {
         }
         Merchant merchant = merchantMapper.selectByPrimaryKey(card.getMerid());
         Float getCredit = money * merchant.getMercumpresent();
+        //System.out.print(card.getMemid());
         Member member = memberMapper.selectByPrimaryKey(card.getMemid());
+        //System.out.print(member.getMemcredit());
+        //System.out.print(getCredit);
         Float remainCredit = member.getMemcredit()+getCredit;//计算获得了积分后的剩余积分
         record.setRemainCredit(remainCredit);
         record.setMcpkid(card.getMcpkid());
@@ -204,12 +214,18 @@ public class ConsumptionServiceImpl implements ConsumptionService {
         consume.setMacid(macID);
         consume.setCumtime(new java.util.Date());
         consumeMapper.insert(consume);
+        /************************添加积分到会员表***********************************/
+        Member member = new Member();
+        member.setMemid(cashConsumption.getMemid());
+        member.setMemcredit(cashConsumption.getRemainCredit());
+        memberMapper.updateByPrimaryKeySelective(member);
         /************************插入积分变动加到积分历史表**************************/
         Credithistory credithistory = new Credithistory();
         credithistory.setMcpkid(cashConsumption.getMcpkid());
         credithistory.setChcredit(cashConsumption.getChangeCredit());
         credithistory.setChremain(cashConsumption.getRemainCredit());
         credithistory.setChtype("现金消费");
+        credithistoryMapper.insert(credithistory);
         /************************修改商家所欠积分字段*******************************/
         merchantMapper.updateAddCredit(cashConsumption.getMerid(),cashConsumption.getChangeCredit());//在原有的oweCredit字段加上支出积分
         /************************返回用户获得的积分***********************************/

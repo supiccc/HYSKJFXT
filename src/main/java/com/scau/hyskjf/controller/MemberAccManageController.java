@@ -45,9 +45,9 @@ public class MemberAccManageController {
     * 成功码或失败码
     * */
     @RequestMapping("/addAcc")
-    public ResponseJSON addAcc(Member member,String pwd,String shopPwd){
+    public ResponseJSON addAcc(Member member,String pwd,String shoppwd){
         try{
-            memberCenterService.addMemberAccount(member,pwd,shopPwd);//往memberMapper添加信息再往memberAccountMapper添加信息
+            memberCenterService.addMemberAccount(member,pwd,shoppwd);//往memberMapper添加信息再往memberAccountMapper添加信息
             return new ResponseJSON(ResponseCode.SUCCESS);
         }
         catch (Exception e){

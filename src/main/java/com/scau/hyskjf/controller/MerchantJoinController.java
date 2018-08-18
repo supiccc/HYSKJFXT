@@ -65,6 +65,7 @@ public class MerchantJoinController {
             //merchantAccManageService.addMerchantAccount(merchantaccount);//自动为入盟商家分配一个根管理员账户
             return new ResponseJSON(ResponseCode.SUCCESS);
         }catch(Exception e){
+            e.printStackTrace();
             return new ResponseJSON(ResponseCode.WARN);
         }
     }

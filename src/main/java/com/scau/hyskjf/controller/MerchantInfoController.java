@@ -38,12 +38,16 @@ public class MerchantInfoController {
     @Autowired
     EmailService emailService;
 
-    /*
+    /*（已测试）
      * 根据商家编号merID查询商家资料：
      * 输入：
      * merID商家编号 Integer
      * 返回：
      * 商家资料merchantinfo或失败码
+     * （商家编号 merid;+图片 String merimage;+是否为主图 Boolean mermainimage;+联系电话 String mertelphone;+传真 String merfax;+网址 String merurl;+邮箱 String meremail;+联系人 String merprincipal;
++称谓 String merappellation;+职务 String merduty;+手机（必填） String merphone;+星级 Integer merlevel;+邮编 String merpostnum;
++省（已废弃） String merprovince;+市（已废弃） String mercity;+地区（表达地址包括省市） String merarea;+商家介绍String merintroduce;+联系地址 String meradress;
++附件地标 String merlandmark;+会员特惠 String merdiscount;+促销活动 String merdiscountevent;）
      * */
     @RequestMapping(value = "/queryMerInfoByMerID", method = RequestMethod.POST)
     public ResponseJSON queryMerInfoByMerID(Integer merID) {
@@ -55,7 +59,7 @@ public class MerchantInfoController {
         }
     }
 
-    /*
+    /*（已测试）
      * 根据商家名称merName查询商家资料：
      * 输入：
      * merName商家名称 String
@@ -72,10 +76,10 @@ public class MerchantInfoController {
         }
     }
 
-    /*
+    /*（已测试）
      * 根据商家编号merId更新商家资料(实际是插入修改内容到商家资料变更表merchantInfoModified，系统管理员审核通过后再更新到商家资料表)：
      * 输入：
-     * 商家资料类MerchantinfomodifiedWithBLOBs：merName商家编号 Integer+修改项
+     * 商家资料类MerchantinfomodifiedWithBLOBs：merid商家编号 Integer+修改项
      * 返回：
      * 成功码或失败码
      * */
@@ -90,27 +94,27 @@ public class MerchantInfoController {
         }
     }
 
-    /*
+    /*（已测试）
      * 根据商家编号merID查询商家拥有的产品：
      * 输入：
      * 商家编号merID
      * 返回：
-     * 商家拥有的所有产品List<>
+     * 商家拥有的所有产品List<Productinfo>
      * */
     @RequestMapping(value = "/queryAllProductByMerID", method = RequestMethod.POST)
-    public ResponseJSON queryAllProductByMerID(Integer merID) {
+    public ResponseJSON queryAllProductByMerID(Integer merid) {
         try {
-            List<Productinfo> productinfoList = productInfoService.findMerAllProduct(merID);
+            List<Productinfo> productinfoList = productInfoService.findMerAllProduct(merid);
             return new ResponseJSON(ResponseCode.SUCCESS, productinfoList);
         } catch (Exception e) {
             return new ResponseJSON(ResponseCode.WARN);
         }
     }
 
-    /*
+    /*（已测试）
      * 添加产品：
      * 输入：
-     * 产品类ProductInfo:商家编号merID必须有
+     * 产品类ProductInfo:商家编号merid必须有
      * 返回：
      * 成功码或失败码
      * */
@@ -124,10 +128,10 @@ public class MerchantInfoController {
         }
     }
 
-    /*
+    /*（已测试）
      * 修改产品信息：
      * 输入：
-     * 产品类ProductInfo:产品编号pduID必须有+任意要修改的内容(除产品编号pduID和商家编号merID)
+     * 产品类ProductInfo:产品编号pduid必须有+任意要修改的内容(除产品编号pduid和商家编号merid)
      * 返回：
      * 成功码或失败码
      * */
@@ -141,7 +145,7 @@ public class MerchantInfoController {
         }
     }
 
-    /*
+    /*（已测试）
      * 删除产品信息：
      * 输入：
      * 产品类ProductInfo:产品编号pduID必须有
@@ -149,16 +153,16 @@ public class MerchantInfoController {
      * 成功码或失败码
      * */
     @RequestMapping(value = "/deleteProduct", method = RequestMethod.POST)
-    public ResponseJSON deleteProduct(Integer pduID) {
+    public ResponseJSON deleteProduct(Integer pduid) {
         try {
-            productInfoService.deleteProduct(pduID);//先删除有外键关系的标签-产品关系表的信息，再删除产品表的信息
+            productInfoService.deleteProduct(pduid);//先删除有外键关系的标签-产品关系表的信息，再删除产品表的信息
             return new ResponseJSON(ResponseCode.SUCCESS);
         } catch (Exception e) {
             return new ResponseJSON(ResponseCode.WARN);
         }
     }
 
-    /*****************************************下面是标签的增删查改*****************************************/
+    /*****************************************下面是标签的增删查改（全部废除）*****************************************/
 
     /*
      * 查询所有标签信息：
@@ -166,7 +170,7 @@ public class MerchantInfoController {
      *
      * 返回：
      * 标签列表 List<Brandlabel>
-     * */
+     *
     @RequestMapping(value = "/queryLabel", method = RequestMethod.POST)
     public ResponseJSON queryLabel() {
         try {
@@ -183,7 +187,7 @@ public class MerchantInfoController {
      * 标签类型labelType String
      * 返回：
      * 标签列表 List<Brandlabel>
-     * */
+     *
     @RequestMapping(value = "/queryLabelByType", method = RequestMethod.POST)
     public ResponseJSON queryLabelByType(String labelType) {
         try {
@@ -194,13 +198,13 @@ public class MerchantInfoController {
         }
     }
 
-    /*
+    *
      * 添加标签信息：
      * 输入：
      * 标签类labelType String
      * 返回：
      * 标签列表 List<Brandlabel>
-     * */
+     *
     @RequestMapping(value = "/insertLabel", method = RequestMethod.POST)
     public ResponseJSON insertLabel(Brandlabel brandlabel) {
         try {
@@ -211,13 +215,13 @@ public class MerchantInfoController {
         }
     }
 
-    /*
+    *
      * 删除标签：
      * 输入：
      * 标签编号labelID Integer
      * 返回：
      * 成功码或失败码
-     * */
+     *
     @RequestMapping(value = "/deleteLabel", method = RequestMethod.POST)
     public ResponseJSON deleteLabel(Integer labelID) {
         try {
@@ -228,13 +232,13 @@ public class MerchantInfoController {
         }
     }
 
-    /*
+    *
      * 修改标签：
      * 输入：
      * 标签类Brandlabel : 必须有labelID Integer + 修改内容
      * 返回：
      * 成功码或失败码
-     * */
+     *
     @RequestMapping(value = "/updateLabel", method = RequestMethod.POST)
     public ResponseJSON updateLabel(Brandlabel brandlabel) {
         try {
@@ -243,7 +247,7 @@ public class MerchantInfoController {
         } catch (Exception e) {
             return new ResponseJSON(ResponseCode.WARN);
         }
-    }
+    }*/
 
     /*********************************下面是标签与产品关系表的增删查(没有改的功能)*********************************/
 
@@ -253,7 +257,7 @@ public class MerchantInfoController {
      * 标签产品关系类Brandlabel : 必须有labelID Integer + 修改内容
      * 返回：
      * 成功码或失败码
-     * */
+     * *
     @RequestMapping(value = "/insertProductLabel", method = RequestMethod.POST)
     public ResponseJSON insertProductLabel(Labelhaveproduct labelhaveproduct) {
         try {
@@ -270,7 +274,7 @@ public class MerchantInfoController {
      * 标签编号labelID Integer
      * 返回：
      * 成功码或失败码
-     * */
+     * *
     @RequestMapping(value = "/deleteProductLabel", method = RequestMethod.POST)
     public ResponseJSON deleteProductLabel(Labelhaveproduct labelhaveproduct) {
         try {
@@ -287,7 +291,7 @@ public class MerchantInfoController {
      * 商家编号merID Integer + 标签编号labelID  Integer
      * 返回：
      * Productinfo类
-     * */
+     * *
     @RequestMapping(value = "/queryLabelProduct", method = RequestMethod.POST)
     public ResponseJSON queryLabelProduct(Integer merID, Integer labelID) {
         try {
@@ -297,7 +301,7 @@ public class MerchantInfoController {
             return new ResponseJSON(ResponseCode.WARN);
         }
     }
-
+    */
     /*****************************************下面是意见反馈发邮箱*****************************************/
 
     /*
