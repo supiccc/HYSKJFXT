@@ -4,6 +4,7 @@ import com.scau.hyskjf.pojo.Merchant;
 import com.scau.hyskjf.pojo.Merchantaccount;
 import com.scau.hyskjf.pojo.Merchantinfo;
 import com.scau.hyskjf.pojo.MerchantinfoWithBLOBs;
+import com.scau.hyskjf.service.MerchantAccManageService;
 import com.scau.hyskjf.service.MerchantJoinService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
@@ -29,13 +30,16 @@ public class MerchantJoinController {
     @Autowired
     MerchantJoinService merchantJoinService;
 
+    @Autowired
+    MerchantAccManageService merchantAccManageService;
+
     /*
-     * 独立商家加盟（没有上级）：
+     * 独立商家加盟（没有上级）：已测试
      * 输入：
      * 商家资料MerchantInfo类：
      * （ 商家头像图片String merimage + 是否为主图片 Boolean mermainimage + 联系电话 String mertelphone; +
      * 传真 String merfax; + 网址 String merurl; + 电子邮箱 String meremail; + 联系人 String merprincipal; +
-     * 称谓 String merappellation; + 职务 String merduty; + 手机 String merphone; + 星级 Integer merlevel; +
+     * 称谓 String merappellation; + 职务 String merduty; + 手机 String merphone（必填！！）; + 星级 Integer merlevel; +
      * 邮编 String merpostnum; + 所在省份 String merprovince; + 所在城市 String mercity; + 所在区县 String merarea +
      * 商家介绍 String merintroduce + 联系地址 String meradress + 附件地标 String merlandmark + 会员特惠 String merdiscount +
      * 促销活动 String merdiscountevent;。 ）
@@ -43,13 +47,24 @@ public class MerchantJoinController {
      * （ 父编号 Integer mersubid(不用填，为null) + 顶级编号 Integer mertopid(已废弃)+ 商家类型 String mertype + 商家名称 String mername
      * +消费积分比例 Float mercumpresent + 会员折扣比例 Float merdicpresent + 入盟申请状态 Boolean merappstat+
      * 是否推荐商家 Boolean merrecommend + 是否显示在首页 Boolean isindex + 所欠积分Boolean isindex）
+     *
      * 返回：
-     * 成功码或失败码
+     * 自动创建的商家根管理员账号Merchantaccount merchantaccount（拥有属性：账户编号 Integer macid;+ 所属商家编号 Integer merid;+ 登录名（为加密申请时的手机号merphone）
+     * String macacc;+ 结账账户（目前没用） Integer maccumacc;+ 密码（初始化为111111） String macpasswd;+ 账户类型（值为11，意为根管理员） Integer macacctype;
+     * + 上次登陆时间 Date maclastlogin;+ 是否启用（设为true） Boolean macenable;）
+     *
      * */
     @RequestMapping(value = "/independentJoin", method = RequestMethod.POST)
     public ResponseJSON independentJoin(MerchantinfoWithBLOBs merchantinfoWithBLOBs, Merchant merchant){
         try{
-            merchantJoinService.independentJoin(merchantinfoWithBLOBs,merchant);
+            Integer merID =merchantJoinService.independentJoin(merchantinfoWithBLOBs,merchant);
+            Merchantaccount merchantaccount = new Merchantaccount();
+            merchantaccount.setMacacc(merchantinfoWithBLOBs.getMerphone());//设置登陆账号为手机号
+            merchantaccount.setMacpasswd("111111");//初始化密码为111111
+            merchantaccount.setMacacctype(11);//设置账户类型为商家管理员
+            merchantaccount.setMacenable(true);//设置启用
+            merchantaccount.setMerid(merID);
+            merchantAccManageService.addMerchantAccount(merchantaccount);//自动为入盟商家分配一个根管理员账户
             return new ResponseJSON(ResponseCode.SUCCESS);
         }catch(Exception e){
             return new ResponseJSON(ResponseCode.WARN);
@@ -57,12 +72,12 @@ public class MerchantJoinController {
     }
 
     /*
-     * 发展商家加盟（有上级）：
+     * 发展商家加盟（有上级）：已测试
      * 输入：
      * 商家资料MerchantInfo类：
      * （ 商家头像图片String merimage + 是否为主图片 Boolean mermainimage + 联系电话 String mertelphone; +
      * 传真 String merfax; + 网址 String merurl; + 电子邮箱 String meremail; + 联系人 String merprincipal; +
-     * 称谓 String merappellation; + 职务 String merduty; + 手机 String merphone; + 星级 Integer merlevel; +
+     * 称谓 String merappellation; + 职务 String merduty; + 手机 String merphone（必填！！）; + 星级 Integer merlevel; +
      * 邮编 String merpostnum; + 所在省份 String merprovince; + 所在城市 String mercity; + 所在区县 String merarea +
      * 商家介绍 String merintroduce + 联系地址 String meradress + 附件地标 String merlandmark + 会员特惠 String merdiscount +
      * 促销活动 String merdiscountevent;。 ）
@@ -76,7 +91,14 @@ public class MerchantJoinController {
     @RequestMapping(value = "/developJoin", method = RequestMethod.POST)
     public ResponseJSON developJoin(MerchantinfoWithBLOBs merchantinfoWithBLOBs, Merchant merchant){
         try{
-            merchantJoinService.developJoin(merchantinfoWithBLOBs,merchant);
+            Integer merID = merchantJoinService.developJoin(merchantinfoWithBLOBs,merchant);
+            Merchantaccount merchantaccount = new Merchantaccount();
+            merchantaccount.setMacacc(merchantinfoWithBLOBs.getMerphone());//设置登陆账号为手机号
+            merchantaccount.setMacpasswd("111111");//初始化密码为111111
+            merchantaccount.setMacacctype(11);//设置账户类型为商家管理员
+            merchantaccount.setMacenable(true);//设置启用
+            merchantaccount.setMerid(merID);
+            merchantAccManageService.addMerchantAccount(merchantaccount);//自动为入盟商家分配一个根管理员账户
             return new ResponseJSON(ResponseCode.SUCCESS);
         }catch(Exception e){
             return new ResponseJSON(ResponseCode.WARN);

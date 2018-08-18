@@ -1,6 +1,8 @@
 package com.scau.hyskjf.dao;
 
+import com.scau.hyskjf.pojo.MManager;
 import com.scau.hyskjf.pojo.Merchantaccount;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -27,4 +29,6 @@ public interface MerchantaccountMapper {
     Merchantaccount selectByMacAcc(String macAcc);
 
     int forbidBymerId(Merchantaccount merchantaccount);
+
+    List<MManager> queryManager(@Param("merID") Integer merID);
 }

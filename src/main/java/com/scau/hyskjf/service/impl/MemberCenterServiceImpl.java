@@ -242,8 +242,8 @@ public class MemberCenterServiceImpl implements MemberCenterService {
         memberaccount.setMemid(id);
         memberaccount.setMaid(member.getMemphone());//登陆账号为手机号
         memberaccount.setManame(member.getMemname());//账户名为姓名
-        String pwdMd5 = new Md5Hash(pwd,memberaccount.getMemid(),3).toString();//对账户的密码进行MD5加密
-        String shopPwdMd5 = new Md5Hash(shopPwd,memberaccount.getMemid(),3).toString();//对账户的支付密码进行MD5加密
+        String pwdMd5 = new Md5Hash(pwd,memberaccount.getMemid().toString(),3).toString();//对账户的密码进行MD5加密
+        String shopPwdMd5 = new Md5Hash(shopPwd,memberaccount.getMemid().toString(),3).toString();//对账户的支付密码进行MD5加密
         memberaccount.setMaenable(true);
         return memberaccountMapper.insert(memberaccount);
     }
