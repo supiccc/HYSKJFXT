@@ -4,10 +4,12 @@ package com.scau.hyskjf.controller;
 import com.scau.hyskjf.pojo.Member;
 import com.scau.hyskjf.pojo.Memberinfochange;
 import com.scau.hyskjf.pojo.Reissuedetail;
+import com.scau.hyskjf.service.MemberCenterService;
 import com.scau.hyskjf.service.MemberManagementService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +24,9 @@ public class MemberManagementController {
 
     @Autowired
     private MemberManagementService memberManagementService;
+
+    @Autowired
+    MemberCenterService memberCenterService;
 
     //查询单个会员基本信息
     @RequestMapping("/meminfo/{id}")
@@ -65,5 +70,21 @@ public class MemberManagementController {
     public ResponseJSON findReissueHistory(@PathVariable int id){
         List<Reissuedetail> reissuedetails = memberManagementService.findReissueByMemid(id);
         return new ResponseJSON(ResponseCode.SUCCESS,reissuedetails);
+    }
+
+    /*（已测试）
+    * 根据手机号获取会员号
+    * 输入：
+    * 手机号String memphone
+    * */
+    @RequestMapping("/getMemidByPhone")
+    public ResponseJSON getMemidByPhone(String memphone){
+        try{
+            Integer memid = memberCenterService.getMemIDByPhone(memphone);
+            return new ResponseJSON(ResponseCode.SUCCESS,memid);
+        }
+        catch(Exception e){
+            return new ResponseJSON(ResponseCode.WARN);
+        }
     }
 }

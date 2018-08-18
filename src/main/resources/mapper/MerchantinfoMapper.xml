@@ -315,9 +315,8 @@
   </select>
   <select id="findByMerName" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String">
     select
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
+    b.merID, b.merImage, b.merMainImage, b.merTelphone, b.merFax, b.merURL, b.merEmail, b.merPrincipal,
+    b.merAppellation, b.merDuty, b.merPhone, b.merLevel, b.merPostNum, b.merProvince, b.merCity, b.merArea,b.merIntroduce, b.merAdress, b.merLandmark, b.merDiscount, b.merDiscountEvent
     from Merchant a left join MerchantInfo b on a.merID=b.merID
     where a.merName= #{mName}
   </select>

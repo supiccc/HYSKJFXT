@@ -1,6 +1,7 @@
 package com.scau.hyskjf.dao;
 
 import com.scau.hyskjf.pojo.Member;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -20,4 +21,6 @@ public interface MemberMapper {
     int updateByPrimaryKey(Member record);
 
     Integer getMemID();
+
+    Integer queryMemIDByMemphone(@Param("memphone") String memphone);
 }

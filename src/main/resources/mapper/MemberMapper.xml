@@ -172,4 +172,10 @@
     select max(memID) as mmemID
     from Member
   </select>
+
+  <select id="queryMemIDByMemphone" resultType="java.lang.Integer">
+    select memID
+    from Member
+    where memPhone=#{memphone}
+  </select>
 </mapper>

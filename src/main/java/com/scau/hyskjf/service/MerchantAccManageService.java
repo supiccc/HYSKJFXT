@@ -21,4 +21,6 @@ public interface MerchantAccManageService {
     List<MemberMShow> queryMemberByMerID(Integer merID);
 
     List<MManager> queryMemberManagerByMerID(Integer merID);
+
+    int addPermissionByMacAcc(String macacc,Integer merid);
 }
