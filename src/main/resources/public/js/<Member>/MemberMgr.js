@@ -206,10 +206,10 @@ var Basic = {
                 window.location.href = "./memberCardHistoryList.html?username="+username+"&role="+role+"";
             })
             //跳转《修改密码》
-            $('#updatePwdBtn').attr("href","../<Login>/changePassword.html");
+            $('#updatePwdBtn').attr("href","../Login/changePassword.html");
 
             //跳转《修改交易密码》
-            $('#updatePayPwdBtn').attr("href","../<Login>/changePayPassword.html");
+            $('#updatePayPwdBtn').attr("href","../Login/changePayPassword.html");
 
             //跳转《注销》
             $('#shopListBtn').on('click',function () {
@@ -254,7 +254,7 @@ var Basic = {
                 "                        </ul>"
             );
             $('#mgrSystemBtn').on('click',function () {
-                window.location.href = "../<Manager>/AdminAccept.html?username="+username+"&role="+role+"";
+                window.location.href = "../Manager/AdminAccept.html?username="+username+"&role="+role+"";
             });
             $('#adviceBtn2').on('click',function () {
                 Basic.showFeedback();
@@ -299,7 +299,7 @@ var Basic = {
                 "                        </ul>"
             );
             $('#mgrSystemBtn2').on('click',function () {
-                window.location.href = "../<Business-Admin>/shopAdminAccountManagement.html?username="+username+"&role="+role+"";
+                window.location.href = "../Business-Admin/shopAdminAccountManagement.html?username="+username+"&role="+role+"";
             });
             $('#adviceBtn3').on('click',function () {
                 Basic.showFeedback();
@@ -344,7 +344,7 @@ var Basic = {
                 "                        </ul>"
             );
             $('#mgrSystemBtn3').on('click',function () {
-                window.location.href = "../<Business-FrontDesk>/frontDeskConsume.html?username="+username+"&role="+role+"";
+                window.location.href = "../Business-FrontDesk/frontDeskConsume.html?username="+username+"&role="+role+"";
             });
             $('#adviceBtn4').on('click',function () {
                 Basic.showFeedback();
@@ -389,7 +389,7 @@ var Basic = {
                 "                        </ul>"
             );
             $('#mgrSystemBtn4').on('click',function () {
-                window.location.href = "../<Business-CManager>/customerManagerMemberInfoAdd.html?username="+username+"&role="+role+"";
+                window.location.href = "../Business-CManager/customerManagerMemberInfoAdd.html?username="+username+"&role="+role+"";
             });
             $('#adviceBtn5').on('click',function () {
                 Basic.showFeedback();
@@ -434,7 +434,7 @@ var Basic = {
                 "                        </ul>"
             );
             $('#mgrSystemBtn5').on('click',function () {
-                window.location.href = "../<Business-DManager>/departManagerAlliance.html?username="+username+"&role="+role+"";
+                window.location.href = "../Business-DManager/departManagerAlliance.html?username="+username+"&role="+role+"";
             });
             $('#adviceBtn6').on('click',function () {
                 Basic.showFeedback();
@@ -446,7 +446,7 @@ var Basic = {
         //未登录
         else{
             $('#myMenu').append(
-                "<a class='dropdown-toggle' data-toggle='dropdown' href='../<Login>/sign_in.html'>\n" +
+                "<a class='dropdown-toggle' data-toggle='dropdown' href='../Login/sign_in.html'>\n" +
                 "                            <!--身份或者名称 建议显示的是身份就可以了-->\n" +
                 "                            <span class='user-name hidden-phone'>登录</span>\n" +
                 "                            <b class='caret'></b>\n" +

@@ -94,7 +94,7 @@ var accountMgr={
                             }
                         });
                         alert("登录成功，欢迎"+roleName+"用户 : "+username);
-                        window.location.href = "../<Member>/indexReal.html?username="+username+"&role="+roleName+"";
+                        window.location.href = "../Member/indexReal.html?username="+username+"&role="+roleName+"";
                     } else {
                         alert(res.msg);
                         return;

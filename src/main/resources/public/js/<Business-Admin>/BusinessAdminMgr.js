@@ -131,13 +131,13 @@ var Basic = {
             // window.location.href = "./shopAdminPointsMgr.html?username="+username+"&role="+role+"";
         });
 
-        $('#updatePwdBtn').attr("href","../<Login>/changePassword.html");
+        $('#updatePwdBtn').attr("href","../Login/changePassword.html");
 
         $('#adviceBtn').on('click', function () {
             Basic.showFeedback();
         })
 
-        $('#cancelBtn').attr("href", "../<Member>/indexReal.html");
+        $('#cancelBtn').attr("href", "../Member/indexReal.html");
     },
 
     //意见反馈:modal-container-feedback
