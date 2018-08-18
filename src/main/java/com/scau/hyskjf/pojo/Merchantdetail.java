@@ -21,6 +21,8 @@ public class Merchantdetail {
 
     private Boolean isindex;
 
+    private Float owecredit;
+
     private String merimage;
 
     private Boolean mermainimage;
@@ -249,5 +251,13 @@ public class Merchantdetail {
 
     public void setMerarea(String merarea) {
         this.merarea = merarea;
+    }
+
+    public Float getOwecredit() {
+        return owecredit;
+    }
+
+    public void setOwecredit(Float owecredit) {
+        this.owecredit = owecredit;
     }
 }

@@ -149,4 +149,5 @@
     set mcBalance = mcBalance + #{money}
     where mcID = #{cardId}
   </update>
+
 </mapper>
