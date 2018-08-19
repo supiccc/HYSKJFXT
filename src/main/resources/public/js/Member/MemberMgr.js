@@ -7,9 +7,15 @@ var InitPage = {
     init:function () {
         Basic.initMyMenu();
         Basic.initMainPageMenuBtn();
+        if(window.location.href.indexOf("memberShopInfo")){
+            shopMgr.initList();
+        }
     },
     //注册按钮
     action:function () {
+            //debug
+            $('#shoppingListBtn').attr("onclick","");
+            $('#pointShoppingListBtn').attr("onclick","");
         //导航栏
             //跳转《首页》
             $('#indexBtn').on('click',function () {
@@ -28,12 +34,14 @@ var InitPage = {
         //侧边栏：消费记录
             //跳转《储值/现金消费记录》
             $('#shoppingListBtn').on('click', function () {
+                alert("点进来啦");
                 var username = Basic.getPassingStr("username");
                 var role = Basic.getPassingStr("role");
                 window.location.href = "./memberShoppingList.html?username="+username+"&role="+role+"";
             });
             //跳转《积分消费记录》
             $('#pointShoppingListBtn').on('click', function () {
+                alert("点进来啦又");
                 var username = Basic.getPassingStr("username");
                 var role = Basic.getPassingStr("role");
                 window.location.href = "./memberpointShoppingList.html?username="+username+"&role="+role+"";
@@ -67,45 +75,6 @@ var Basic = {
         reg = null;
         r = null;
         return context == null || context == "" || context == "undefined" ? "" : context;
-    },
-
-    //为什么修改无效？
-    initMainPageMenuBtn:function(){
-        var username = Basic.getPassingStr("username");
-        var role = Basic.getPassingStr("role");
-        $('#accountStateDiv').empty();
-        if(username == "member"){
-            $('#accountStateDiv').append(
-                "<a id=\"LoginPageBtn\">会员:"+username+"</a>"
-            );
-        }else if(username == "admin"){
-            $('#accountStateDiv').append(
-                "<a id=\"LoginPageBtn\">平台管理员:"+username+"</a>"
-            );
-        }else if(username == "merchantAdmin"){
-            $('#accountStateDiv').append(
-                "<a id=\"LoginPageBtn\">商家管理员:"+username+"</a>"
-            );
-        }else if(username == "merchantFrontDesk"){
-            $('#accountStateDiv').append(
-                "<a id=\"LoginPageBtn\">商家前台:"+username+"</a>"
-            );
-        }else if(username == "merchantCManager"){
-            $('#accountStateDiv').append(
-                "<a id=\"LoginPageBtn\">商家客户经理:"+username+"</a>"
-            );
-        }else if(username == "merchantDManager"){
-            $('#accountStateDiv').append(
-                "<a id=\"LoginPageBtn\">商家部门经理:"+username+"</a>"
-            );
-        }else{
-            $('#accountStateDiv').append(
-                "<a id=\"LoginPageBtn\">登录</a>"
-            );
-        }
-        $('#LoginPageBtn').on('click',function () {
-            window.location.href = "./memberShopInfo.html?username="+username+"&role="+role+"";
-        });
     },
 
     //根据账户信息初始化《我的》按钮
@@ -186,7 +155,6 @@ var Basic = {
             //我的菜单
             //弹出《我的积分》
             $('#totalPointBtn').on('click',function () {
-                alert('click');
                 Basic.showIntegral();
             });
             //弹出《我的资料》
@@ -206,10 +174,10 @@ var Basic = {
                 window.location.href = "./memberCardHistoryList.html?username="+username+"&role="+role+"";
             })
             //跳转《修改密码》
-            $('#updatePwdBtn').attr("href","../Login/changePassword.html");
+            $('#updatePwdBtn').attr("href","../<Login>/changePassword.html");
 
             //跳转《修改交易密码》
-            $('#updatePayPwdBtn').attr("href","../Login/changePayPassword.html");
+            $('#updatePayPwdBtn').attr("href","../<Login>/changePayPassword.html");
 
             //跳转《注销》
             $('#shopListBtn').on('click',function () {
@@ -276,7 +244,7 @@ var Basic = {
                 "                            <!--点击菜单项后跳转的页面或弹出模态框-->\n" +
                 "                            <!--管理系统-->\n" +
                 "                            <li>\n" +
-                "                                <a id=\"mgrSystemBtn4\">\n" +
+                "                                <a id=\"mgrSystemBtn2\">\n" +
                 "                                    <i class='icon-key'></i>\n" +
                 "                                    管理系统\n" +
                 "                                </a>\n" +
@@ -366,14 +334,14 @@ var Basic = {
                 "                            <!--点击菜单项后跳转的页面或弹出模态框-->\n" +
                 "                            <!--管理系统-->\n" +
                 "                            <li>\n" +
-                "                                <a id=\"mgrSystemBtn3\">\n" +
+                "                                <a id=\"mgrSystemBtn4\">\n" +
                 "                                    <i class='icon-key'></i>\n" +
                 "                                    管理系统\n" +
                 "                                </a>\n" +
                 "                            </li>\n" +
                 "                            <!--反馈-->\n" +
                 "                            <li>\n" +
-                "                                <a id=\"adviceBtn4\">\n" +
+                "                                <a id=\"adviceBtn5\">\n" +
                 "                                    <i class='icon-frown'></i>\n" +
                 "                                    发送反馈\n" +
                 "                                </a>\n" +
@@ -381,7 +349,7 @@ var Basic = {
                 "                            <!--分隔线-->\n" +
                 "                            <li class='divider'></li>\n" +
                 "                            <li>\n" +
-                "                                <a btn=\"cancelBtn4\">\n" +
+                "                                <a btn=\"cancelBtn5\">\n" +
                 "                                    <i class='icon-signout'></i>\n" +
                 "                                    注销退出\n" +
                 "                                </a>\n" +
@@ -411,14 +379,14 @@ var Basic = {
                 "                            <!--点击菜单项后跳转的页面或弹出模态框-->\n" +
                 "                            <!--管理系统-->\n" +
                 "                            <li>\n" +
-                "                                <a id=\"mgrSystemBtn3\">\n" +
+                "                                <a id=\"mgrSystemBtn5\">\n" +
                 "                                    <i class='icon-key'></i>\n" +
                 "                                    管理系统\n" +
                 "                                </a>\n" +
                 "                            </li>\n" +
                 "                            <!--反馈-->\n" +
                 "                            <li>\n" +
-                "                                <a id=\"adviceBtn4\">\n" +
+                "                                <a id=\"adviceBtn6\">\n" +
                 "                                    <i class='icon-frown'></i>\n" +
                 "                                    发送反馈\n" +
                 "                                </a>\n" +
@@ -426,7 +394,7 @@ var Basic = {
                 "                            <!--分隔线-->\n" +
                 "                            <li class='divider'></li>\n" +
                 "                            <li>\n" +
-                "                                <a btn=\"cancelBtn4\">\n" +
+                "                                <a btn=\"cancelBtn6\">\n" +
                 "                                    <i class='icon-signout'></i>\n" +
                 "                                    注销退出\n" +
                 "                                </a>\n" +
@@ -446,7 +414,7 @@ var Basic = {
         //未登录
         else{
             $('#myMenu').append(
-                "<a class='dropdown-toggle' data-toggle='dropdown' href='../Login/sign_in.html'>\n" +
+                "<a class='dropdown-toggle' data-toggle='dropdown' href='../<Login>/sign_in.html'>\n" +
                 "                            <!--身份或者名称 建议显示的是身份就可以了-->\n" +
                 "                            <span class='user-name hidden-phone'>登录</span>\n" +
                 "                            <b class='caret'></b>\n" +
@@ -489,6 +457,86 @@ var shopMgr = {
     // 缺少一个跳转链接
     //缺少一个商家详情页面
     //缺少一个产品详情页面
+
+    initList:function () {
+        $.ajax({
+            type : "POST",
+            url : "http://localhost:8080/merchantAccManage/queryAll",
+            dataType : "json",
+            success : function (res) {
+                if(res.code == 0){
+                    alert("找到"+res.data.length+"家店呢");
+                    $.each(result, function(index, obj){
+                        var infoHref = "./memberShopInfoDetail.html?macid="+obj.macid;
+                       $('#shopListAll').append(
+                         "<div class='row-fluid'>\n" +
+                           "    <div>\n" +
+                           "        <div class='span12 box' id=\"shopList>\n" +
+                           "            <div class='box-header dark-background'\">\n" +
+                           "            <div class='title'>\n" +
+                           "                <!--根据拉取到商家名称修改-->\n" +
+                           "                <h4 id=\"mername\" style=\"color:#FFFFFF \">"+obj.macid+"</h4>\n" +
+                           "            </div>\n" +
+                           "        </div>\n" +
+                           "        <div class='box-content' >\n" +
+                           "            <table>\n" +
+                           "                    <tr align=\"center\">\n" +
+                           "                    <td style=\"width:120px\" class=\"text-left\">商家介绍</td>\n" +
+                           "                    <td colspan=\"4\">\n" +
+                           "                        <label for=\"merintroduce\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
+                           "                        <!--商家介绍-->\n" +
+                           "                        <h5 id=\"merintroduce\" style=\"text-align: left\">"+obj.maccumacc+"</h5>\n" +
+                           "                    </td>\n" +
+                           "                    <td   style=\"margin:auto; text-align:right\" rowspan=\"3\" >\n" +
+                           "                         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;\n" +
+                           "                        <img height=\"200\" width=\"200\" src=\"http://pic1.win4000.com/wallpaper/2018-06-27/5b3326ce30f43.jpg\"  alt=\"Liu\"  />\n" +
+                           "                    </td>\n" +
+                           "                    </tr>\n" +
+                           "                    <!--商家电话-->\n" +
+                           "                    <tr align=\"center\">\n" +
+                           "                        <td style=\"width:120px\" class=\"text-left\">商家电话</td>\n" +
+                           "                        <td colspan=\"4\">\n" +
+                           "                            <label for=\"mertelphone\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
+                           "                            <!--商家电话-->\n" +
+                           "                            <h5 id=\"mertelphone\" style=\"text-align: left\">"+obj.macacc+"</h5>\n" +
+                           "                        </td>\n" +
+                           "                    </tr>\n" +
+                           "                    <!--商家地址-->\n" +
+                           "                    <tr align=\"center\">\n" +
+                           "                    <td style=\"width:120px\" class=\"text-left\">商家地址</td>\n" +
+                           "                        <td colspan=\"4\">\n" +
+                           "                            <label for=\"merearea\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
+                           "                             <!--商家地址-->\n" +
+                           "                            <h5 id=\"merearea\" style=\"text-align: left\">接口没有提供</h5>\n" +
+                           "                           </td>\n" +
+                           "                    </tr>\n" +
+                           "                    <!--商家详情-->\n" +
+                           "                    <tr align=\"center\">\n" +
+                           "                        <td style=\"width:120px\" class=\"text-left\">商家详情</td>\n" +
+                           "                        <td colspan=\"4\">\n" +
+                           "                            <label for=\"infohref\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
+                           "                            <!--超链接-->\n" +
+                           "                            <h5 id=\"infohref\" style=\"text-align: left\" href='"+infoHref+"'>点击查看更多</h5>\n" +
+                           "                        </td>\n" +
+                           "                    </tr>\n" +
+                           "            </table>\n" +
+                           "        </div>\n" +
+                           "    </div>\n" +
+                           "</div>"
+                       );
+                    });
+                }
+                else{
+                    alert("后台故障，查询失败");
+                }
+            },
+            error : function () {
+                alert("服务器故障，查询失败");
+            }
+        });
+    }
+    //2018.8.18 Hwalv
+    //产品详情遮罩在我发给你的微信文件里 memberSearch.html中
 };
 
 //消费记录页

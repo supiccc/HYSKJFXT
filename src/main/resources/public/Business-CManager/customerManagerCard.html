@@ -54,19 +54,32 @@
     <link href='../assets/stylesheets/light-theme.css' id='color-settings-body-color' media='all' rel='stylesheet' type='text/css' />
     <!-- / demo -->
     <link href='../assets/stylesheets/demo.css' media='all' rel='stylesheet' type='text/css' />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--2018.8.18 Hwalv 弹出遮罩函数-->
+    <script>
+    function showGetCardSuccess() {
+        $('#modal-container-getCardSuccess').modal('show');
+    }
+    function showGetCardFail() {
+        $('#modal-container-getCardFail').modal('show');
+    }
+    function showRecoverCardUnopenInfo() {
+        $('#modal-container-recoverCardUnopen').modal('show');
+    }
+</script>
+</head>
 <body class='contrast-dark'>
 <header>
-<!--导航栏-->
+    <!--导航栏-->
     <div class='navbar'>
         <div class='navbar-inner'>
-        <!--容器设置-->
+            <!--容器设置-->
             <div class='container-fluid'>
-            <!--导航栏左边-->
+                <!--导航栏左边-->
                 <a class='brand'>
-                <!--这里可以考虑要不要放logo-->
+                    <!--这里可以考虑要不要放logo-->
                     <i class='icon-heart-empty'></i>
-                <!--放平台的名称-->
+                    <!--放平台的名称-->
                     <span class='hidden-phone'>七彩云会员积分平台</span>
                 </a>
                 <!--点击七彩云平台后面的按钮后可实现左边侧边栏弹出或收起-->
@@ -93,12 +106,12 @@
                                 <a href='#'>
                                     <div class='widget-body'>
                                         <div class='pull-left icon'>
-                                        <!--含有user图标的都是站内信息-->
+                                            <!--含有user图标的都是站内信息-->
                                             <i class='icon-user text-success'></i>
                                         </div>
                                         <!--显示的是信息的标题-->
                                         <div class='pull-left text'>
-                                           麦当劳七夕薯条买一送一
+                                            麦当劳七夕薯条买一送一
                                             <!--显示的是多久之前收到信息，时间差-->
                                             <small class='muted'>刚刚</small>
                                         </div>
@@ -112,11 +125,11 @@
                                 <a href='#'>
                                     <div class='widget-body'>
                                         <div class='pull-left icon'>
-                                        <!--点评信息图标-->
+                                            <!--点评信息图标-->
                                             <i class='icon-comment text-warning'></i>
                                         </div>
                                         <div class='pull-left text'>
-                                          麦当劳的辣翅真的好好味啊！
+                                            麦当劳的辣翅真的好好味啊！
                                             <!--显示的是多久之前收到信息，时间差-->
                                             <small class='muted'>1h前</small>
                                         </div>
@@ -126,9 +139,9 @@
                             <li class='divider'></li>
 
                             <li class='widget-footer'>
-                            <a href='#'>所有点评信息</a>
-                    </li>
-                    </ul>
+                                <a href='#'>所有点评信息</a>
+                            </li>
+                        </ul>
                     </li>
                     <!--导航栏最右边 就是"我的"-->
                     <li class='dropdown dark user-menu' id="myMenu">
@@ -139,24 +152,24 @@
                         </a>
                         <!--点开菜单后弹出的内容-->
                         <ul class='dropdown-menu'>
-                             <!--点击菜单项后跳转的页面或弹出模态框-->
+                            <!--点击菜单项后跳转的页面或弹出模态框-->
                             <!--总积分-->
-                              <li>
-                                <a href=''>
+                            <li>
+                                <a id="pointMgrBtn">
                                     <i class='icon-info'></i>
                                     积分管理
                                 </a>
                             </li>
                             <!--修改密码-->
                             <li>
-                                <a href='user_profile.html'>
+                                <a id="updatePwdBtn">
                                     <i class='icon-cog'></i>
                                     修改密码
                                 </a>
                             </li>
                             <!--反馈-->
                             <li>
-                                <a href='user_profile.html'>
+                                <a id="adviceBtn">
                                     <i class='icon-frown'></i>
                                     发送反馈
                                 </a>
@@ -164,7 +177,7 @@
                             <!--分隔线-->
                             <li class='divider'></li>
                             <li>
-                                <a href='../%3CLogin%3E/sign_in.html'>
+                                <a id="cancelBtn">
                                     <i class='icon-signout'></i>
                                     注销退出
                                 </a>
@@ -176,11 +189,11 @@
                 <form accept-charset="UTF-8" action="search_results.html" class="navbar-search pull-right hidden-phone" method="get" />
                 <!--设置搜索框样式-->
                 <div style="margin:0;padding:0;display:inline">
-                <input name="utf8" type="hidden" value="&#x2713;" />
+                    <input name="utf8" type="hidden" value="&#x2713;" />
                 </div>
                 <!--在搜索框内插入放大镜的按钮-->
-                    <button class="btn btn-link icon-search" name="button" type="submit"></button>
-                    <input autocomplete="off" class="search-query span2" id="q_header" name="q" placeholder="搜索" type="text" value="" />
+                <button class="btn btn-link icon-search" name="button" type="submit"></button>
+                <input autocomplete="off" class="search-query span2" id="q_header" name="q" placeholder="搜索" type="text" value="" />
                 </form>
             </div>
         </div>
@@ -189,90 +202,91 @@
 <!--至此 顶部导航栏设置结束-->
 <!--接下来开始设置侧边栏-->
 <div id='wrapper'>
-<div id='main-nav-bg'></div>
-<nav class='' id='main-nav'>
-<div class='navigation'>
-<div class='search'>
-    <form accept-charset="UTF-8" action="search_results.html" method="get" />
-    <div style="margin:0;padding:0;display:inline">
-    <input name="utf8" type="hidden" value="&#x2713;" />
-    </div>
-        <div class='search-wrapper'>
-            <input autocomplete="off" class="search-query" id="q" name="q" placeholder="Search..." type="text" value="" />
-            <button class="btn btn-link icon-search" name="button" type="submit"></button>
-        </div>
-    </form>
-</div>
-<!--垂直导航栏设置-->
-<!--如果需要再添加或修改以li为单位修改-->
-<ul class='nav nav-stacked'>
+    <div id='main-nav-bg'></div>
+    <nav class='' id='main-nav'>
+        <div class='navigation'>
+            <div class='search'>
+                <form accept-charset="UTF-8" action="search_results.html" method="get" />
+                <div style="margin:0;padding:0;display:inline">
+                    <input name="utf8" type="hidden" value="&#x2713;" />
+                </div>
+                <div class='search-wrapper'>
+                    <input autocomplete="off" class="search-query" id="q" name="q" placeholder="Search..." type="text" value="" />
+                    <button class="btn btn-link icon-search" name="button" type="submit"></button>
+                </div>
+                </form>
+            </div>
+            <!--垂直导航栏设置-->
+            <!--如果需要再添加或修改以li为单位修改-->
+            <ul class='nav nav-stacked'>
 
-<!--一级目录-->
-<!--会员信息管理-->
-<li class=''>
-<!--下拉菜单设置-->
-    <a class='dropdown-collapse' href='#'>
-        <i class='icon-edit'></i>
-        <span>会员信息管理</span>
-        <i class='icon-angle-down angle-down'></i>
-    </a>
-    <!--二级目录-->
-    <ul class='nav nav-stacked'>
-            <li class=''>
-            <a href='customerManagerMemberInfoAdd.html'>
-                <i class='icon-caret-right'></i>
-                <span>登记会员信息</span>
-            </a>
-        </li>
-        <li class=''>
-            <a href='form_styles.html'>
-                <i class='icon-caret-right'></i>
-                <span>会员信息变更</span>
-            </a>
-        </li>
-        <li class=''>
-            <a href='form_components.html'>
-                <i class='icon-caret-right'></i>
-                <span>变更历史查询</span>
-            </a>
-        </li>
-    </ul>
-</li>
-<!--会员变更查询结束-->
-<!--发放会员卡 即包括会员信息登记-->
-<!--一级目录-->
-<!--会员卡发放-->
-    <li class=''>
-<!--设置点击文字后跳转的链接-->
-    <a href='customerManagerCard.html'>
-    <!--需要设置图标在这里修改\|/-->
-        <i class='icon-plus'></i>
-        <!--需要设置文字就在这里修改-->
-        <span>会员卡发放</span>
-    </a>
-</li>
-    <li class=''>
-<!--设置点击文字后跳转的链接-->
-    <a href='index.html'>
-    <!--需要设置图标在这里修改\|/-->
-        <i class='icon-credit-card'></i>
-        <!--需要设置文字就在这里修改-->
-        <span>会员卡补卡</span>
-    </a>
-</li>
-<!--会员卡变更历史查询-->
-    <li class=''>
-<!--设置点击文字后跳转的链接-->
-    <a href='index.html'>
-    <!--需要设置图标在这里修改\|/-->
-        <i class='icon-search'></i>
-        <!--需要设置文字就在这里修改-->
-        <span>会员卡补卡历史查询</span>
-    </a>
-</li>
-</ul>
-</div>
-</nav>
+                <!--一级目录-->
+                <!--会员信息管理-->
+                <li class=''>
+                    <!--下拉菜单设置-->
+                    <a class='dropdown-collapse' href='#'>
+                        <i class='icon-edit'></i>
+                        <span>会员信息管理</span>
+                        <i class='icon-angle-down angle-down'></i>
+                    </a>
+                    <!--二级目录-->
+                    <ul class='nav nav-stacked'>
+                        <li class=''>
+                            <a id="regisMemBtn">
+                                <i class='icon-caret-right'></i>
+                                <span>登记会员信息</span>
+                            </a>
+                        </li>
+                        <li class=''>
+                            <a id="updateMemInfoBtn">
+                                <i class='icon-caret-right'></i>
+                                <span>会员信息变更</span>
+                            </a>
+                        </li>
+                        <li class=''>
+                            <a id="updateHistoryBtn">
+                                <i class='icon-caret-right'></i>
+                                <span>变更历史查询</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!--会员卡变更历史查询结束-->
+                <!--发放会员卡-->
+                <!--一级目录-->
+                <!--会员卡发放-->
+                <li class=''>
+                    <!--设置点击文字后跳转的链接-->
+                    <!--href='customerManagerCard.html'-->
+                    <a id="regisMemCardBtn">
+                        <!--需要设置图标在这里修改\|/-->
+                        <i class='icon-plus'></i>
+                        <!--需要设置文字就在这里修改-->
+                        <span>会员卡发放</span>
+                    </a>
+                </li>
+                <li class=''>
+                    <!--设置点击文字后跳转的链接-->
+                    <a id="changeMemCardBtn">
+                        <!--需要设置图标在这里修改\|/-->
+                        <i class='icon-credit-card'></i>
+                        <!--需要设置文字就在这里修改-->
+                        <span>会员卡补卡</span>
+                    </a>
+                </li>
+                <!--会员卡变更历史查询-->
+                <li class=''>
+                    <!--设置点击文字后跳转的链接-->
+                    <a id="changeHistoryBtn">
+                        <!--需要设置图标在这里修改\|/-->
+                        <i class='icon-search'></i>
+                        <!--需要设置文字就在这里修改-->
+                        <span>会员卡补卡历史查询</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 <!--容器设置-->
 <section id='content'>
     <div class='container-fluid'>
@@ -297,31 +311,31 @@
                     <tr align="center">
                         <td style="width:120px" class="text-left">会员号</td>
                         <td colspan="4">
-                            <label for="memberId" class="col-sm-2 control-label" style="text-align: left"></label>
+                            <label for="memphone" class="col-sm-2 control-label" style="text-align: left"></label>
                             <!--改默认显示-->
-                            <input id="memberId" type="text" placeholder="请输入会员号" style="width: 1050px" required="required"></td>
+                            <input id="memphone" type="text" placeholder="请输入会员号" style="width: 1050px" required="required"></td>
                     </tr>
-                    <!--消费密码-->
-                      <tr align="center">
-                    <td style="width:120px" class="text-left">消费密码</td>
-                        <td colspan="4">
-                            <label for="password" class="col-sm-2 control-label" style="text-align: left" ></label>
-                            <input id="password" type="password" placeholder="请输入会员的消费密码" style="width: 1050px" required="required"></td>
-                    </tr>
-                    <!--确认密码-->
-                     <tr align="center">
-                    <td style="width:120px" class="text-left">确认密码</td>
-                        <td colspan="4">
-                            <label for="realPassword" class="col-sm-2 control-label" style="text-align: left" ></label>
-                            <input id="realPassword" type="password" placeholder="请再次输入消费密码" style="width: 1050px" required="required"></td>
-                    </tr>
+                    <!--&lt;!&ndash;消费密码&ndash;&gt;-->
+                      <!--<tr align="center">-->
+                    <!--<td style="width:120px" class="text-left">消费密码</td>-->
+                        <!--<td colspan="4">-->
+                            <!--<label for="password" class="col-sm-2 control-label" style="text-align: left" ></label>-->
+                            <!--<input id="password" type="password" placeholder="请输入会员的消费密码" style="width: 1050px" required="required"></td>-->
+                    <!--</tr>-->
+                    <!--&lt;!&ndash;确认密码&ndash;&gt;-->
+                     <!--<tr align="center">-->
+                    <!--<td style="width:120px" class="text-left">确认密码</td>-->
+                        <!--<td colspan="4">-->
+                            <!--<label for="realPassword" class="col-sm-2 control-label" style="text-align: left" ></label>-->
+                            <!--<input id="realPassword" type="password" placeholder="请再次输入消费密码" style="width: 1050px" required="required"></td>-->
+                    <!--</tr>-->
                         <!--启用状态-->
                   <tr align="center">
                    <td style="width:120px" class="text-left">启用状态</td>
                         <td colspan="4" class="text-left">
                             <div class="checkbox">
                                 <label>
-                                     <input id="ifWork" type="checkbox">启用
+                                     <input id="mcenable" type="checkbox" checked>启用
                                 </label>
                             </div></td></tr>
                      <!--保存提示按钮+提示保存-->
@@ -329,7 +343,8 @@
                         <td colspan="12" >
                     <h6 class='text-right'>点击申请按钮后系统会自动生成会员卡号</h6>
                     <!--点击申请按钮后弹出模态框 需要提示会员申请成功 并显示会员卡号-->
-                    <button class='btn pull-right' type='submit'>
+                            <!--申请成功的情况下，onclick="showGetCardSuccess()；失败的情况下，onclick="showGetCardFail()"-->
+                    <button class='btn pull-right' type='submit' onclick="showGetCardFail()">
                         <i class='icon-plus'></i>
                        申请
                     </button>
@@ -340,6 +355,93 @@
         </div>
     </div>
 <!--至此发放会员卡设置结束-->
+                <!-- 2018.8.18 Hwalv 补充发放会员卡成功后弹出的遮罩窗-->
+                <!--“发放会员卡成功”遮罩窗体-->
+                <div id="getCardSuccessModal" class="container-fluid">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div id="modal-container-getCardSuccess" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-header" style="background-color: black">
+                                    <!--关闭按钮-->
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: white ;opacity: 1.0">×</button>
+                                    <!--传入编辑的记录编号-->
+                                    <h3 id="successCardInfo" style="color: white">
+                                        申请成功
+                                    </h3>
+                                </div>
+                                <div class="modal-body">
+                                    <form role="form" style="text-align: left">
+                                        <div class="form-group">
+                                            <!--注册成功提示 sInfo-->
+                                            <label for="mcID" class="col-sm-2 control-label" style="text-align:left">您的会员卡为：</label>
+                                            <!--这里返回会员卡号的值 我在这里先写死-->
+                                            <h3 id="mcID" style="text-align:center">123456789</h3>
+                                            <!--申请成功获得会员号设置结束-->
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--“发放会员卡成功”遮罩窗体设置结束-->
+                <!-- 2018.8.18 Hwalv 发放会员卡失败后弹出的遮罩窗-->
+                <!--“发放会员卡失败”遮罩窗体-->
+                <div id="getCardFailModal" class="container-fluid">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div id="modal-container-getCardFail" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-header" style="background-color: black">
+                                    <!--关闭按钮-->
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: white ;opacity: 1.0">×</button>
+                                    <h3 id="failCardInfo" style="color: white">
+                                        申请失败
+                                    </h3>
+                                </div>
+                                <div class="modal-body">
+                                    <form role="form" style="text-align: left">
+                                        <div class="form-group">
+                                            <!--注册失败提示 fInfo-->
+                                            <label for="fCardInfo" class="col-sm-2 control-label" style="text-align:center"></label>
+                                            <!--这里返回错误提示信息-->
+                                            <h4 id="fCardInfo" style="text-align:center">抱歉，发放会员卡失败，请重新操作。</h4>
+                                            <!--发放会员号失败设置结束-->
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--“发放会员卡失败”遮罩窗体设置结束-->
+                <!--会员补卡未开放提示遮罩窗体-->
+                <div id="recoverCardUnopen" class="container-fluid">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div id="modal-container-recoverCardUnopen" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-header" style="background-color: black">
+                                    <!--关闭按钮-->
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: white ;opacity: 1.0">×</button>
+                                    <h3 id="unOpenInfo" style="color: white">
+                                        会员补卡
+                                    </h3>
+                                </div>
+                                <div class="modal-body">
+                                    <form role="form" style="text-align: left">
+                                        <div class="form-group">
+                                            <!--会员卡补卡功能未开放提示 recoverCardUnopenInfo-->
+                                            <label for="recoverCardUnopenInfo" class="col-sm-2 control-label" style="text-align:center"></label>
+                                            <!--这里提示信息-->
+                                            <h4 id="recoverCardUnopenInfo" style="text-align:center">抱歉，此功能未开放</h4>
+                                            <!--未开放设置结束-->
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--会员补卡未开放提示遮罩窗体结束-->
             </div>
         </div>
     </div>

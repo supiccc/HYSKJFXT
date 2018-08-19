@@ -1,33 +1,33 @@
 $(function () {
     InitPage.init();
     InitPage.action();
-    Basic.initMyMenu();
 });
 
 var InitPage = {
     init:function () {
-        AccMgr.getInfo();
+        Basic.initMyMenu();
+        // AccMgr.initList();
+        // AccMgr.getInfo();
+        var thisLocation = window.location.href;
+        if(thisLocation.indexOf("AccountManagement") != -1){
+            AccMgr.getInfo();
+        }
     },
     action:function () {
+        var username = Basic.getPassingStr("username");
+        var role = Basic.getPassingStr("role");
         //账户管理
         $('#AccountMrgBtn').on('click',function () {
-            var username = Basic.getPassingStr("username");
-            var role = Basic.getPassingStr("role");
-            alert(username+" "+role);
             window.location.href = "./shopAdminAccountManagement.html?username="+username+"&role="+role+"";
         });
 
         //展示信息
         $('#InfoMrgBtn').on('click',function () {
-            var username = Basic.getPassingStr("username");
-            var role = Basic.getPassingStr("role");
             window.location.href = "./shopAdminShowInfo.html?username="+username+"&role="+role+"";
         });
 
         //同盟管理
         $('#AllianceBtn').on('click',function(){
-            var username = Basic.getPassingStr("username");
-            var role = Basic.getPassingStr("role");
             window.location.href = "./shopAdminAlliance.html?username="+username+"&role="+role+"";
         });
 
@@ -35,15 +35,25 @@ var InitPage = {
         //展示信息
             //商家信息维护
             $('#showInfoMgrBtn').on('click', function () {
-                var username = Basic.getPassingStr("username");
-                var role = Basic.getPassingStr("role");
                 window.location.href = "./shopAdminShowInfo.html?username="+username+"&role="+role+"";
             });
             //产品维护
             $('#productInfoMgrBtn').on('click', function () {
-                var username = Basic.getPassingStr("username");
-                var role = Basic.getPassingStr("role");
                 window.location.href = "./shopAdminShowInfoProduct.html?username="+username+"&role="+role+"";
+            });
+
+        //同盟管理
+            //申请入盟
+            $('#joinBtn').on('click',function(){
+                window.location.href = "./shopAdminAlliance.html?username="+username+"&role="+role+"";
+            });
+            //报表
+            $('#diagramBtn').on('click',function(){
+                alert("报表功能没开放啊！");
+            });
+            //统计
+            $('#countBtn').on('click',function(){
+                alert("统计也没开放，不要急！");
             });
     },
 };
@@ -63,7 +73,6 @@ var Basic = {
 
     //根据账户信息初始化《我的》按钮
     initMyMenu:function(){
-        alert("进来啦西兰");
         var username = Basic.getPassingStr("username");
         var role = Basic.getPassingStr("role");
         //这里需要补充账户类型
@@ -128,6 +137,7 @@ var Basic = {
         $('#settingBtn').on('click', function () {
             var username = Basic.getPassingStr("username");
             var role = Basic.getPassingStr("role");
+            alert("还没做配置管理页面呢");
             // window.location.href = "./shopAdminPointsMgr.html?username="+username+"&role="+role+"";
         });
 
@@ -142,6 +152,7 @@ var Basic = {
 
     //意见反馈:modal-container-feedback
     showFeedback:function(){
+        alert("我好像还没放modal代码进到html");
         $('#modal-container-feedback').modal('show');
     },
 };
@@ -149,18 +160,21 @@ var Basic = {
 //账户管理
 var AccMgr = {
 
-    //获取信息
+    //获取信息#废弃
     getInfo:function(){
         //拉取所有（端口错误）
         $.ajax({
             type : 'POST',
             //现在是查询所有账号，迟些界面连起来后要记得该成查询相关的子账号
-            url: "http://localhost:8080/merchantAccManage/queryAll",
+            url: "http://localhost:8080/merchantAccManage/queryByMerID",
+            data : {
+                merid : Basic.getPassingStr("username");
+            }
             dataType: 'json',
             success: function (result) {
                 if(result.code == 0){
-                    // accountManagement.getAccountList(result);
                     AccMgr.initList(result);
+                    // return result;
                     alert("查询成功，找到"+result.data.length+"条记录,正在加载中");
                 }else{
                     alert("查询失败，后台故障");
@@ -176,6 +190,27 @@ var AccMgr = {
 
     //初始化列表
     initList:function(result){
+        // $.ajax({
+        //     type : 'POST',
+        //     //现在是查询所有账号，迟些界面连起来后要记得该成查询相关的子账号
+        //     url: "http://localhost:8080/merchantAccManage/queryAll",
+        //     dataType: 'json',
+        //     success: function (res) {
+        //         if(res.code == 0){
+        //             // accountManagement.getAccountList(result);
+        //             result = res;
+        //             alert("查询成功，找到"+result.data.length+"条记录,正在加载中");
+        //         }else{
+        //             alert("查询失败，后台故障");
+        //             return;
+        //         }
+        //     },
+        //     error: function () {
+        //         alert("查询失败，服务器异常");
+        //         return;
+        //     }
+        // });
+
         $('#content-wrapper-acc-list').empty();
         qiantaiCount = 0;
         kehujingliCount = 0;

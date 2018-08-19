@@ -3,8 +3,8 @@
 <head>
     <title>七彩云会员积分平台</title>
        <!--编码方式-->
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <!--引入bootstrap框架-->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <!--引入bootstrap框架-->
             <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
         <!--JQurey文件-->
         <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -13,8 +13,9 @@
         <!--引入mock.js-->
         <script src="http://mockjs.com/dist/mock.js"></script>
 
-        <script src="../js/Member/MemberMgr.js"></script>
+        <!--<script src="../js/Member/MemberMgr.js"></script> -->
         <!--<script src="../js/Member/MainPage.js"></script>-->
+        <script src="../js/Member/indexMgr.js"></script>
         <!--改变页面字体-->
         <link rel="stylesheet" href="C:/Users/Danny/Desktop/七彩云页面/main.css">
         <style type="text/css" media="screen">
@@ -124,8 +125,7 @@ text-align:center;
 </head>
 
 <body>
- <!--导航栏-->
-
+    <!--导航栏-->
     <nav class="navbar navbar-fixed-top my-navbar" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -143,57 +143,64 @@ text-align:center;
                 <ul class="nav navbar-nav navbar-right">
                 <!--点击登录后弹出登录模态框-->
                  <!--<li><a id="mainPageBtn">首页</a></li>-->
-                    <li>
-                        <a id="shopPageBtn">平台商家</a>
+                    <!--<li>-->
+                        <!--<a id="shopPageBtn">平台商家</a>-->
+                    <!--</li>-->
+                    <li class="active" id="accountStateDiv">
+                        <a id="LoginPageBtn">登录</a>
                     </li>
-                       <li class="active" id="accountStateDiv"><a id="LoginPageBtn">登录</a></li>
                     <li>
                         <a id="RegisPageBtn">商家入盟申请</a>
+                    </li>
+                    <li>
+                        <a id="cancelPageBtn">注销</a>
                     </li>
 
                 </ul>
             </div>
         </div>
     </nav>
-<!--登录Modal 模态框-->
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog blur_box">
-    <div class="modal-content ">
-    <div class="rgba"></div>
-    <div class="content_text">
-      <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">登录</h4>
-            </div>
-            <div class="modal-body">
-                <form>
-                账号：<input type="text" name="Id">
-                <br/>
-                密码：<input type="password" name="password">
-                <br/>
-                请选择您的身份：
-                <br/>
-                <!--这里记得规定必须选-->
-                <input type="radio" name="identityType" value="members" checked>会员
-                <input type="radio" name="identityType" value="frontDesk" checked>前台
-                <input type="radio" name="identityType" value="departManager" checked>部门经理
-                <input type="radio" name="identityType" value="customerManager" checked>客户经理
-                <input type="radio" name="identityType" value="smallAdmin" checked>商家管理员
-                <input type="radio" name="identityType" value="BigAdmin" checked>系统管理员
-                <br/>
-                <a href="#">忘记密码</a>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">登录</button>
-                <button type="button" class="btn btn-primary">退出</button>
-            </div>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
-</div>
-<!--轮播-->
-            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+    <!--登录Modal 模态框-->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog blur_box">
+        <div class="modal-content ">
+        <div class="rgba"></div>
+        <div class="content_text">
+          <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">登录</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                    账号：<input type="text" name="Id">
+                    <br/>
+                    密码：<input type="password" name="password">
+                    <br/>
+                    请选择您的身份：
+                    <br/>
+                    <!--这里记得规定必须选-->
+                    <input type="radio" name="identityType" value="members" checked>会员
+                    <input type="radio" name="identityType" value="frontDesk" checked>前台
+                    <input type="radio" name="identityType" value="departManager" checked>部门经理
+                    <input type="radio" name="identityType" value="customerManager" checked>客户经理
+                    <input type="radio" name="identityType" value="smallAdmin" checked>商家管理员
+                    <input type="radio" name="identityType" value="BigAdmin" checked>系统管理员
+                    <br/>
+                    <a href="#">忘记密码</a>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">登录</button>
+                    <button type="button" class="btn btn-primary">退出</button>
+                </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <!--轮播-->
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 <!--轮播指标-->
 <!--定义滚博的图片数量-->
   <ol class="carousel-indicators">

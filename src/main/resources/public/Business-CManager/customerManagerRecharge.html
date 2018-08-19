@@ -3,7 +3,7 @@
 <html>
 <head>
 <!--设置网页标题-->
-    <title>七彩云会员积分平台</title>
+    <title>会员充值</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport' />
 
     <!--[if lt IE 9]>
@@ -142,21 +142,21 @@
                             <!--点击菜单项后跳转的页面或弹出模态框-->
                             <!--总积分-->
                             <li>
-                                <a href=''>
+                                <a id="pointMgrBtn">
                                     <i class='icon-info'></i>
                                     积分管理
                                 </a>
                             </li>
                             <!--修改密码-->
                             <li>
-                                <a href='user_profile.html'>
+                                <a id="updatePwdBtn">
                                     <i class='icon-cog'></i>
                                     修改密码
                                 </a>
                             </li>
                             <!--反馈-->
                             <li>
-                                <a href='user_profile.html'>
+                                <a id="adviceBtn">
                                     <i class='icon-frown'></i>
                                     发送反馈
                                 </a>
@@ -164,7 +164,7 @@
                             <!--分隔线-->
                             <li class='divider'></li>
                             <li>
-                                <a href='../%3CLogin%3E/sign_in.html'>
+                                <a id="cancelBtn">
                                     <i class='icon-signout'></i>
                                     注销退出
                                 </a>
@@ -189,82 +189,83 @@
 <!--至此 顶部导航栏设置结束-->
 <!--接下来开始设置侧边栏-->
 <div id='wrapper'>
-<div id='main-nav-bg'></div>
-<nav class='' id='main-nav'>
-<div class='navigation'>
-<div class='search'>
-    <form accept-charset="UTF-8" action="search_results.html" method="get" />
-    <div style="margin:0;padding:0;display:inline">
-    <input name="utf8" type="hidden" value="&#x2713;" />
-    </div>
-        <div class='search-wrapper'>
-            <input autocomplete="off" class="search-query" id="q" name="q" placeholder="Search..." type="text" value="" />
-            <button class="btn btn-link icon-search" name="button" type="submit"></button>
+    <div id='main-nav-bg'></div>
+    <nav class='' id='main-nav'>
+        <div class='navigation'>
+            <div class='search'>
+                <form accept-charset="UTF-8" action="search_results.html" method="get" />
+                <div style="margin:0;padding:0;display:inline">
+                    <input name="utf8" type="hidden" value="&#x2713;" />
+                </div>
+                <div class='search-wrapper'>
+                    <input autocomplete="off" class="search-query" id="q" name="q" placeholder="Search..." type="text" value="" />
+                    <button class="btn btn-link icon-search" name="button" type="submit"></button>
+                </div>
+                </form>
+            </div>
+            <!--垂直导航栏设置-->
+            <!--如果需要再添加或修改以li为单位修改-->
+            <ul class='nav nav-stacked'>
+                <!--一级目录-->
+                <!--消费登记-->
+                <li class=''>
+                    <!--href='customerManagerConsume.html'-->
+                    <a id="regisConsumeBtn">
+                        <i class='icon-check-sign'></i>
+                        <span>消费登记</span>
+                    </a>
+                </li>
+                <!--充值管理-->
+                <li class=''>
+                    <!--下拉菜单设置-->
+                    <a class='dropdown-collapse' href='#'>
+                        <i class='icon-download-alt'></i>
+                        <span>充值管理</span>
+                        <i class='icon-angle-down angle-down'></i>
+                    </a>
+                    <!--二级目录-->
+                    <ul class='nav nav-stacked'>
+                        <li class=''>
+                            <a id="rechargeBtn">
+                                <i class='icon-caret-right'></i>
+                                <span>充值</span>
+                            </a>
+                        </li>
+                        <li class=''>
+                            <a id="rechargeHistoryBtn">
+                                <i class='icon-caret-right'></i>
+                                <span>充值记录查询</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!--积分管理-->
+                <li class=''>
+                    <!--下拉菜单设置-->
+                    <a class='dropdown-collapse' href='#'>
+                        <i class='icon-bar-chart'></i>
+                        <span>积分管理</span>
+                        <i class='icon-angle-down angle-down'></i>
+                    </a>
+                    <!--二级目录-->
+                    <ul class='nav nav-stacked'>
+                        <li class=''>
+                            <a id="memPointDealBtn">
+                                <i class='icon-caret-right'></i>
+                                <span>会员积分结算</span>
+                            </a>
+                        </li>
+                        <li class=''>
+                            <a id="memPointcountBtn">
+                                <i class='icon-caret-right'></i>
+                                <span>会员积分统计</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-    </form>
-</div>
-<!--垂直导航栏设置-->
-<!--如果需要再添加或修改以li为单位修改-->
-<ul class='nav nav-stacked'>
-<!--一级目录-->
-<!--消费登记-->
-<li class=''>
-    <a href='customerManagerConsume.html'>
-        <i class='icon-check-sign'></i>
-        <span>消费登记</span>
-    </a>
-</li>
-<!--充值管理-->
-<li class=''>
-<!--下拉菜单设置-->
-    <a class='dropdown-collapse' href='#'>
-        <i class='icon-download-alt'></i>
-        <span>充值管理</span>
-        <i class='icon-angle-down angle-down'></i>
-    </a>
-    <!--二级目录-->
-    <ul class='nav nav-stacked'>
-        <li class=''>
-            <a href='customerManagerRecharge.html'>
-                <i class='icon-caret-right'></i>
-                <span>充值</span>
-            </a>
-        </li>
-        <li class=''>
-            <a href='form_components.html'>
-                <i class='icon-caret-right'></i>
-                <span>充值记录查询</span>
-            </a>
-        </li>
-    </ul>
-</li>
-<!--积分管理-->
-<li class=''>
-<!--下拉菜单设置-->
-    <a class='dropdown-collapse' href='#'>
-        <i class='icon-bar-chart'></i>
-        <span>积分管理</span>
-        <i class='icon-angle-down angle-down'></i>
-    </a>
-    <!--二级目录-->
-    <ul class='nav nav-stacked'>
-        <li class=''>
-            <a href='form_styles.html'>
-                <i class='icon-caret-right'></i>
-                <span>会员积分结算</span>
-            </a>
-        </li>
-        <li class=''>
-            <a href='form_components.html'>
-                <i class='icon-caret-right'></i>
-                <span>会员积分统计</span>
-            </a>
-        </li>
-    </ul>
-</li>
-</ul>
-</div>
-</nav>
+    </nav>
 <!--容器设置-->
 <section id='content'>
     <div class='container-fluid'>
