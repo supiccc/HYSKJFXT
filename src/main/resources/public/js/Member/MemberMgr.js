@@ -66,7 +66,7 @@ var Basic = {
         // alert("积分信息初始化");
         $.ajax({
             type : 'GET',
-            url : 'http://localhost:8080/memberCenter/showMember',
+            url : '/memberCenter/showMember',
             dataType : 'json',
             success: function(res) {
                 // result = res;
@@ -218,7 +218,7 @@ var Basic = {
             $('#cancelBtn').on('click',function () {
                 $.ajax({
                     type : 'GET',
-                    url : 'http://localhost:8080/logout',
+                    url : '/logout',
                     dataType : 'json',
                     success: function(res) {
                         // result = res;
@@ -512,7 +512,7 @@ var shopMgr = {
     initList:function () {
         $.ajax({
             type : "POST",
-            url : "http://localhost:8080/merchantAccManage/queryAll",
+            url : "/merchantAccManage/queryAll",
             dataType : "json",
             success : function (res) {
                 if(res.code == 0){
@@ -624,7 +624,7 @@ $('#savenewinfo').on('click',function () {
    // alert("正在保存资料");
     $.ajax({
         type : 'POST',
-        url : 'http://localhost:8080/memberCenter/updateMember',
+        url : '/memberCenter/updateMember',
         dataType : 'json',
         data:{
             memcer: $('#paperType').find("option:selected").text(),

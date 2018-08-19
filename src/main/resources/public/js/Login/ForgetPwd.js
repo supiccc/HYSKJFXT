@@ -9,12 +9,19 @@ var InitPage={
     },
 
     action:function () {
+        $('#sendLoginSMS').on('click',function () {
+            foget.sendLoginPwdSMS();
+        });
         $('#sendSMS').on('click',function () {
             foget.send();
-        })
+        });
         $('#update').on('click',function(){
             foget.update();
-        })
+        });
+        $('#updateloginpwd').on('click',function(){
+            foget.updateloginpwd();
+        });
+
     }
 };
 
@@ -81,6 +88,62 @@ var foget = {
             },
             error:function () {
                 alert('服务器错误');
+            }
+        })
+    },
+    updateloginpwd:function () {
+        password1 = $('#newPassword').val();
+        password2 = $('#checkPassword').val();
+        checknum = $('#vertificationcode').val();
+        if (password1 !== password2) {
+            alert("两次输入的密码不一致");
+            return;
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/memberCenter/forgetLoginPassword',
+            data: {
+                newPassword: password1,
+                verficationCode: checknum,
+            },
+            dataType: 'json',
+            success:function(res){
+                if (res.code == 0) {
+                    alert('密码修改成功，请重新登录');
+                    window.location.href = "../Login/sign_in.html"
+                } else {
+                    alert(res.data);
+                }
+            },
+            error:function () {
+                alert('服务器错误');
+            }
+        })
+    },
+    sendLoginPwdSMS:function () {
+        alert("Hello");
+        $.ajax({
+            type: 'GET',
+            url: '/memberCenter/sendSMS',
+            dataType: 'json',
+            success: function (re) {
+                if (re.code == 0) {
+                    alert('发送验证码成功');
+                    // var time = 20;
+                    // $('#sendSMS').setAttribute("disabled");
+                    // var timer = setInterval(function(){
+                    //     var tmp = time;
+                    //     if (tmp <= 0) {
+                    //         $('#sendSMS').removeAttribute("disabled");
+                    //         clearInterval(timer);
+                    //     }
+                    // }, 1000);
+                } else {
+                    alert('发送失败')
+                }
+            },
+            error: function () {
+                alert('服务器异常')
             }
         })
     }
