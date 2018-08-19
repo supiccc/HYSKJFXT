@@ -174,15 +174,15 @@
       micTime = #{mictime,jdbcType=TIMESTAMP}
     where micID = #{micid,jdbcType=INTEGER}
   </update>
-    <select id="findAllMemberinfochange" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from MemberInfoChange
-    </select>
-    <select id="selectchangesByMemid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-        select
-        <include refid="Base_Column_List" />
-        from MemberInfoChange
-        where memID = #{memid}
-    </select>
+  <select id="findAllMemberinfochange" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from MemberInfoChange
+  </select>
+  <select id="selectchangesByMemid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from MemberInfoChange
+    where memID = #{memid}
+  </select>
 </mapper>

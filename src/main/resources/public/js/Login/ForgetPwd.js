@@ -21,6 +21,9 @@ var InitPage={
         $('#updateloginpwd').on('click',function(){
             foget.updateloginpwd();
         });
+        $('#updatePayPwd').on('click', function () {
+            foget.updatePayPwd();
+        });
 
     }
 };
@@ -144,6 +147,35 @@ var foget = {
             },
             error: function () {
                 alert('服务器异常')
+            }
+        })
+    },
+    updatePayPwd:function () {
+        oldpassword = $('#oldPassword').val();
+        password1 = $('#newPassword').val();
+        password2 = $('#checkPassword').val();
+        if (password1 !== password2) {
+            alert("两次输入的密码不一致");
+            return;
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/memberCenter/forgetCumPassword',
+            data: {
+                oldPassword: oldpassword,
+                newPassword: password1
+            },
+            dataType: 'json',
+            success:function(res){
+                if (res.code == 0) {
+                    alert('密码修改成功');
+                    window.location.href = "sign_in.html"
+                } else {
+                    alert(res.data);
+                }
+            },
+            error:function () {
+                alert('服务器错误');
             }
         })
     }
