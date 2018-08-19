@@ -3,6 +3,7 @@ package com.scau.hyskjf.controller;
 
 import com.scau.hyskjf.pojo.Admin;
 import com.scau.hyskjf.pojo.Creditconsume;
+import com.scau.hyskjf.pojo.Creditconsumedetail;
 import com.scau.hyskjf.service.CreditsumptionService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
@@ -32,26 +33,32 @@ public class CreditConsumptionController {
     @RequestMapping("/record/list")
     public ResponseJSON findAllCreditsoncumeOrderByStateAndTime(Integer timeType,Integer stateType){
         List<Creditconsume> creditconsumes;
+        List<Creditconsumedetail> creditconsumedetails;
         if(stateType == null && timeType != null){
-            creditconsumes = creditsumptionService.findAllCreditsoncumeOrderByTime(timeType);
+          //  creditconsumes = creditsumptionService.findAllCreditsoncumeOrderByTime(timeType);
+            creditconsumedetails = creditsumptionService.findAllCreditsoncumeDetailOrderByTime(timeType);
         }
          else if(stateType != null && timeType != null){
-            creditconsumes = creditsumptionService.findAllCreditsoncumeOrderByStateAndTime(timeType, stateType);
+           // creditconsumes = creditsumptionService.findAllCreditsoncumeOrderByStateAndTime(timeType, stateType);
+            creditconsumedetails = creditsumptionService.findAllCreditsoncumeDetailOrderByStateAndTime(timeType, stateType);
         }
         else if(stateType != null && timeType == null){
-            creditconsumes = creditsumptionService.findAllCreditsoncumeOrderByState(stateType);
+           // creditconsumes = creditsumptionService.findAllCreditsoncumeOrderByState(stateType);
+            creditconsumedetails = creditsumptionService.findAllCreditsoncumeDetailOrderByState(stateType);
         }
         else
-            creditconsumes = creditsumptionService.findAllCreditsoncume();
-        return new ResponseJSON(ResponseCode.SUCCESS,creditconsumes);
+            //creditconsumes = creditsumptionService.findAllCreditsoncume();
+            creditconsumedetails = creditsumptionService.findAllCreditsoncumeDetail();
+        return new ResponseJSON(ResponseCode.SUCCESS,creditconsumedetails);
     }
 
 
     //查看单个会员积分消费记录
     @RequestMapping("/record/{id}")
     public ResponseJSON findCreaditconsume(int id){
-        Creditconsume creditconsume = creditsumptionService.findCreditconsume(id);
-        return new ResponseJSON(ResponseCode.SUCCESS,creditconsume);
+       // Creditconsume creditconsume = creditsumptionService.findCreditconsume(id);
+        Creditconsumedetail creditconsumedetail = creditsumptionService.findCreditconsumeDetail(id);
+        return new ResponseJSON(ResponseCode.SUCCESS,creditconsumedetail);
     }
 
 

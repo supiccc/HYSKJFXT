@@ -54,7 +54,17 @@
     <link href='../assets/stylesheets/light-theme.css' id='color-settings-body-color' media='all' rel='stylesheet' type='text/css' />
     <!-- / demo -->
     <link href='../assets/stylesheets/demo.css' media='all' rel='stylesheet' type='text/css' />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script>
+    function showJoinSuccess() {
+        $('#modal-container-joinSuccess').modal('show');
+    }
+    function showJoinFail() {
+        $('#modal-container-joinFail').modal('show');
+    }
+</script>
+
+</head>
 <body class='contrast-dark'>
 <header>
     <!--导航栏-->
@@ -142,21 +152,21 @@
                             <!--点击菜单项后跳转的页面或弹出模态框-->
                             <!--总积分-->
                             <li>
-                                <a href=''>
+                                <a id="pointMgrBtn">
                                     <i class='icon-info'></i>
                                     积分管理
                                 </a>
                             </li>
                             <!--修改密码-->
                             <li>
-                                <a href='user_profile.html'>
+                                <a id="updatePwdBtn">
                                     <i class='icon-cog'></i>
                                     修改密码
                                 </a>
                             </li>
                             <!--反馈-->
                             <li>
-                                <a href='user_profile.html'>
+                                <a id="adviceBtn">
                                     <i class='icon-frown'></i>
                                     发送反馈
                                 </a>
@@ -164,7 +174,7 @@
                             <!--分隔线-->
                             <li class='divider'></li>
                             <li>
-                                <a href='../%3CLogin%3E/sign_in.html'>
+                                <a id="cancelBtn">
                                     <i class='icon-signout'></i>
                                     注销退出
                                 </a>
@@ -189,90 +199,91 @@
 <!--至此 顶部导航栏设置结束-->
 <!--接下来开始设置侧边栏-->
 <div id='wrapper'>
-<div id='main-nav-bg'></div>
-<nav class='' id='main-nav'>
-<div class='navigation'>
-<div class='search'>
-    <form accept-charset="UTF-8" action="search_results.html" method="get" />
-    <div style="margin:0;padding:0;display:inline">
-    <input name="utf8" type="hidden" value="&#x2713;" />
-    </div>
-        <div class='search-wrapper'>
-            <input autocomplete="off" class="search-query" id="q" name="q" placeholder="Search..." type="text" value="" />
-            <button class="btn btn-link icon-search" name="button" type="submit"></button>
-        </div>
-    </form>
-</div>
-<!--垂直导航栏设置-->
-<!--如果需要再添加或修改以li为单位修改-->
-<ul class='nav nav-stacked'>
+    <div id='main-nav-bg'></div>
+    <nav class='' id='main-nav'>
+        <div class='navigation'>
+            <div class='search'>
+                <form accept-charset="UTF-8" action="search_results.html" method="get" />
+                <div style="margin:0;padding:0;display:inline">
+                    <input name="utf8" type="hidden" value="&#x2713;" />
+                </div>
+                <div class='search-wrapper'>
+                    <input autocomplete="off" class="search-query" id="q" name="q" placeholder="Search..." type="text" value="" />
+                    <button class="btn btn-link icon-search" name="button" type="submit"></button>
+                </div>
+                </form>
+            </div>
+            <!--垂直导航栏设置-->
+            <!--如果需要再添加或修改以li为单位修改-->
+            <ul class='nav nav-stacked'>
 
-<!--一级目录-->
-<!--会员信息管理-->
-<li class=''>
-<!--下拉菜单设置-->
-    <a class='dropdown-collapse' href='#'>
-        <i class='icon-edit'></i>
-        <span>会员信息管理</span>
-        <i class='icon-angle-down angle-down'></i>
-    </a>
-    <!--二级目录-->
-    <ul class='nav nav-stacked'>
-            <li class=''>
-            <a href='customerManagerMemberInfoAdd.html'>
-                <i class='icon-caret-right'></i>
-                <span>登记会员信息</span>
-            </a>
-        </li>
-        <li class=''>
-            <a href='form_styles.html'>
-                <i class='icon-caret-right'></i>
-                <span>会员信息变更</span>
-            </a>
-        </li>
-        <li class=''>
-            <a href='form_components.html'>
-                <i class='icon-caret-right'></i>
-                <span>变更历史查询</span>
-            </a>
-        </li>
-    </ul>
-</li>
-<!--会员卡变更历史查询结束-->
-<!--发放会员卡-->
-<!--一级目录-->
-<!--会员卡发放-->
-    <li class=''>
-<!--设置点击文字后跳转的链接-->
-    <a href='customerManagerCard.html'>
-    <!--需要设置图标在这里修改\|/-->
-        <i class='icon-plus'></i>
-        <!--需要设置文字就在这里修改-->
-        <span>会员卡发放</span>
-    </a>
-</li>
-    <li class=''>
-<!--设置点击文字后跳转的链接-->
-    <a href='index.html'>
-    <!--需要设置图标在这里修改\|/-->
-        <i class='icon-credit-card'></i>
-        <!--需要设置文字就在这里修改-->
-        <span>会员卡补卡</span>
-    </a>
-</li>
-<!--会员卡变更历史查询-->
-    <li class=''>
-<!--设置点击文字后跳转的链接-->
-    <a href='index.html'>
-    <!--需要设置图标在这里修改\|/-->
-        <i class='icon-search'></i>
-        <!--需要设置文字就在这里修改-->
-        <span>会员卡补卡历史查询</span>
-    </a>
-</li>
-</ul>
-</div>
-</nav>
+                <!--一级目录-->
+                <!--会员信息管理-->
+                <li class=''>
+                    <!--下拉菜单设置-->
+                    <a class='dropdown-collapse' href='#'>
+                        <i class='icon-edit'></i>
+                        <span>会员信息管理</span>
+                        <i class='icon-angle-down angle-down'></i>
+                    </a>
+                    <!--二级目录-->
+                    <ul class='nav nav-stacked'>
+                        <li class=''>
+                            <a id="regisMemBtn">
+                                <i class='icon-caret-right'></i>
+                                <span>登记会员信息</span>
+                            </a>
+                        </li>
+                        <li class=''>
+                            <a id="updateMemInfoBtn">
+                                <i class='icon-caret-right'></i>
+                                <span>会员信息变更</span>
+                            </a>
+                        </li>
+                        <li class=''>
+                            <a id="updateHistoryBtn">
+                                <i class='icon-caret-right'></i>
+                                <span>变更历史查询</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!--会员卡变更历史查询结束-->
+                <!--发放会员卡-->
+                <!--一级目录-->
+                <!--会员卡发放-->
+                <li class=''>
+                    <!--设置点击文字后跳转的链接-->
+                    <!--href='customerManagerCard.html'-->
+                    <a id="regisMemCardBtn">
+                        <!--需要设置图标在这里修改\|/-->
+                        <i class='icon-plus'></i>
+                        <!--需要设置文字就在这里修改-->
+                        <span>会员卡发放</span>
+                    </a>
+                </li>
+                <li class=''>
+                    <!--设置点击文字后跳转的链接-->
+                    <a id="changeMemCardBtn">
+                        <!--需要设置图标在这里修改\|/-->
+                        <i class='icon-credit-card'></i>
+                        <!--需要设置文字就在这里修改-->
+                        <span>会员卡补卡</span>
+                    </a>
+                </li>
+                <!--会员卡变更历史查询-->
+                <li class=''>
+                    <!--设置点击文字后跳转的链接-->
+                    <a id="changeHistoryBtn">
+                        <!--需要设置图标在这里修改\|/-->
+                        <i class='icon-search'></i>
+                        <!--需要设置文字就在这里修改-->
+                        <span>会员卡补卡历史查询</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 <!--容器设置-->
 <section id='content'>
     <div class='container-fluid'>
@@ -296,88 +307,89 @@
                     <tr align="center">
                         <td class="text-left span2">证件类型</td>
                         <td  class=colspan="4">
-                            <label for="shopType" class="col-sm-2 control-label" style="text-align: left"></label>
-                            <select id="shopType" style="width: 1060px; background-color: white">
+                            <label for="memcer" class="col-sm-2 control-label" style="text-align: left"></label>
+                            <select id="memcer" style="width: 1060px; background-color: white">
                            <!--选择证件类型-->
-                            <option style="display:none;" disabled selected>证件类型</option>
-                            <option value="1">身份证</option>
-                            <option value="2">护照</option>
-                        </select></td>
+                                <option style="display:none;" disabled selected>证件类型</option>
+                                <option value="1" value="idCard">身份证</option>
+                                <option value="2" value="passport">护照</option>
+                            </select></td>
                     </tr>
                     <!--证件号-->
                     <tr align="center">
                         <td style="width:120px" class="text-left">证件号</td>
                         <td colspan="4">
-                            <label for="paperNum" class="col-sm-2 control-label" style="text-align: left"></label>
+                            <label for="memcerid" class="col-sm-2 control-label" style="text-align: left"></label>
                             <!--改默认显示-->
-                            <input id="paperNum" type="text" placeholder="请输入会员的证件号" style="width: 1050px" required="required"></td>
+                            <input id="memcerid" type="text" placeholder="请输入会员的证件号" style="width: 1050px" required="required"></td>
                     </tr>
                     <!--会员名-->
                     <tr align="center">
                     <td style="width:120px" class="text-left">姓名</td>
                         <td colspan="4">
-                            <label for="memberName" class="col-sm-2 control-label" style="text-align: left"></label>
-                            <input id="memberName" type="text" placeholder="请输入会员的姓名" style="width: 1050px" required="required"></td>
+                            <label for="memname" class="col-sm-2 control-label" style="text-align: left"></label>
+                            <input id="memname" type="text" placeholder="请输入会员的姓名" style="width: 1050px" required="required"></td>
                     </tr>
                     <!--性别-->
                      <tr align="center">
                       <td style="width:120px" class="text-left">性别</td>
                         <td colspan="4">
-                            <label for="sex" class="col-sm-2 control-label" style="text-align: left" ></label>
-                            <select id="sex" style="width: 1060px; background-color: white">
+                            <label for="memsex" class="col-sm-2 control-label" style="text-align: left" ></label>
+                            <select id="memsex" style="width: 1060px; background-color: white">
                             <option style="display:none;" disabled selected>请选择性别</option>
-                            <option value="1">男士</option>
-                            <option value="2">女士</option>
+                            <option value="1" value="male">男士</option>
+                            <option value="2" value="female">女士</option>
                         </select></td>
                     </tr>
                     <!--生日-->
                      <tr align="center">
                     <td style="width:120px" class="text-left">生日</td>
                         <td colspan="4">
-                            <label for="memberBirth" class="col-sm-2 control-label" style="text-align: left"></label>
-                            <input id="memberBirth" type="text" placeholder="请输入会员的生日" style="width: 1050px" required="required"></td>
+                            <label for="membirth" class="col-sm-2 control-label" style="text-align: left"></label>
+                            <input id="membirth" type="text" placeholder="请输入会员的生日" style="width: 1050px" required="required"></td>
                     </tr>
                     <!--手机号-->
                     <tr align="center">
                     <td style="width:120px" class="text-left">手机号</td>
                         <td colspan="4">
-                            <label for="phoneNumber" class="col-sm-2 control-label" style="text-align: left" ></label>
-                            <input id="phoneNumber" type="text" placeholder="请填写会员的的手机号码，会员的手机号会作为会员的登录号" style="width: 1050px"required="required"></td>
+                            <label for="memphone" class="col-sm-2 control-label" style="text-align: left" ></label>
+                            <input id="memphone" type="text" placeholder="请填写会员的的手机号码，会员的手机号会作为会员的登录号" style="width: 1050px"required="required"></td>
+                    </tr>
+                    <!--邮箱-->
+                    <tr align="center">
+                        <td style="width:120px" class="text-left">邮箱</td>
+                        <td colspan="4">
+                            <label for="mememail" class="col-sm-2 control-label" style="text-align: left" ></label>
+                            <input id="mememail" type="text" placeholder="请填写会员手机邮箱" style="width: 1050px"required="required"></td>
                     </tr>
                     <!--密码-->
                       <tr align="center">
                     <td style="width:120px" class="text-left">密码</td>
                         <td colspan="4">
-                            <label for="password" class="col-sm-2 control-label" style="text-align: left" ></label>
-                            <input id="password" type="password" placeholder="请输入会员的密码" style="width: 1050px" required="required"></td>
+                            <label for="pwd" class="col-sm-2 control-label" style="text-align: left" ></label>
+                            <input id="pwd" type="password" placeholder="请输入会员的密码" style="width: 1050px" required="required"></td>
                     </tr>
                     <!--确认密码-->
                      <tr align="center">
                     <td style="width:120px" class="text-left">确认密码</td>
                         <td colspan="4">
-                            <label for="realPassword" class="col-sm-2 control-label" style="text-align: left" ></label>
-                            <input id="realPassword" type="password" placeholder="请再次输入密码" style="width: 1050px" required="required"></td>
+                            <label for="pwdAgain" class="col-sm-2 control-label" style="text-align: left" ></label>
+                            <input id="pwdAgain" type="password" placeholder="请再次输入密码" style="width: 1050px" required="required"></td>
                     </tr>
                     <!--会员地址-->
                     <tr align="center">
                     <td style="width:120px" class="text-left">会员地址</td>
                         <td colspan="4">
-                            <label for="address" class="col-sm-2 control-label" style="text-align: left" required="required"></label>
-                            <input id="address" type="text" placeholder="请按:xx省 xx市 xx区 具体地址填写" style="width: 1050px" required="required"></td>
+                            <label for="memadress" class="col-sm-2 control-label" style="text-align: left" required="required"></label>
+                            <input id="memadress" type="text" placeholder="请按:xx省 xx市 xx区 具体地址填写" style="width: 1050px" required="required"></td>
                     </tr>
-                    <!--电邮地址-->
-                        <tr align="center">
-                          <td style="width:120px" class="text-left">电子邮箱</td>
-                        <td colspan="4">
-                            <label for="Email" class="col-sm-2 control-label" style="text-align: left"></label>
-                            <input id="Email" type="text" placeholder="请输入会员的电子邮箱，注意后缀，如 @qq.com" style="width: 1050px" required="required"></td>
-                        </tr>
                      <!--保存提示按钮+提示保存-->
                      <tr >
                         <td colspan="12" >
                     <h6 class='text-right'>点击申请按钮后会员注册成功</h6>
-                    <!--点击申请按钮后弹出模态框 需要提示会员申请成功-->
-                    <button class='btn pull-right' type='submit'>
+                    <!--点击申请按钮后弹出模态框 需要提示是否申请注册成功-->
+                            <!--成功，onclick="showJoinSuccess()"；失败，onclick="showJoinFail()"-->
+                    <button class='btn pull-right'  id="regisCustomerBtn">
                         <i class='icon-plus'></i>
                        申请
                     </button>
@@ -389,6 +401,72 @@
         </div>
     </div>
 <!--至此发放会员卡设置结束-->
+                <!-- 2018.8.18 Hwalv 补充申请成功后弹出的遮罩窗-->
+                <!--“申请成功”遮罩窗体-->
+                <div id="joinSuccessModal" class="container-fluid">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div id="modal-container-joinSuccess" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-header" style="background-color: black">
+                                    <!--关闭按钮-->
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: white ;opacity: 1.0">×</button>
+                                    <!--传入编辑的记录编号-->
+                                    <h3 id="successInfo" style="color: white">
+                                        申请成功
+                                    </h3>
+                                </div>
+                                <div class="modal-body">
+                                    <form role="form" style="text-align: left">
+                                        <div class="form-group">
+                                            <!--注册成功提示 sInfo-->
+                                            <label for="sInfo" class="col-sm-2 control-label" style="text-align:center"></label>
+                                            <!--这里要不会返回会员号的值 我在这里先写死-->
+                                           <h3 id="sInfo" style="text-align:center">您已注册成功</h3>
+                                            <!--申请成功获得会员号设置结束-->
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <!--<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button> -->
+                                    <button class="btn btn-primary" style="background-color: black">确定</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--“申请成功”遮罩窗体设置结束-->
+                <!-- 2018.8.18 Hwalv 补充申请失败后弹出的遮罩窗-->
+                <!--“申请失败”遮罩窗体-->
+                <div id="joinFailModal" class="container-fluid">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div id="modal-container-joinFail" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-header" style="background-color: black">
+                                    <!--关闭按钮-->
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: white ;opacity: 1.0">×</button>
+                                    <h3 id="failInfo" style="color: white">
+                                        申请失败
+                                    </h3>
+                                </div>
+                                <div class="modal-body">
+                                    <form role="form" style="text-align: left">
+                                        <div class="form-group">
+                                            <!--注册失败提示 fInfo-->
+                                            <label for="fInfo" class="col-sm-2 control-label" style="text-align:center"></label>
+                                            <!--这里不会返回会员号的值 我在这里先写死-->
+                                            <h3 id="fInfo" style="text-align:center">抱歉，您注册失败，请重新操作。</h3>
+                                            <!--申请成功获得会员号设置结束-->
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" style="background-color: black">确定</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--“申请失败”遮罩窗体设置结束-->
             </div>
         </div>
     </div>

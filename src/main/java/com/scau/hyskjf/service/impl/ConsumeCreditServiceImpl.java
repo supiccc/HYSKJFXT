@@ -1,8 +1,10 @@
 package com.scau.hyskjf.service.impl;
 
 import com.scau.hyskjf.dao.CreditsubmitMapper;
+import com.scau.hyskjf.dao.CreditsubmitdetailMapper;
 import com.scau.hyskjf.dao.MerchantMapper;
 import com.scau.hyskjf.pojo.Creditsubmit;
+import com.scau.hyskjf.pojo.CreditsubmitdetailWithBLOBs;
 import com.scau.hyskjf.pojo.Merchant;
 import com.scau.hyskjf.service.ConsumeCreditService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +21,13 @@ public class ConsumeCreditServiceImpl implements ConsumeCreditService {
     @Autowired
     private MerchantMapper merchantMapper;
 
+    @Autowired
+    private CreditsubmitdetailMapper creditsubmitdetailMapper;
+
     @Override
-    public List<Creditsubmit> findAllSubmit(Object csstat) {
-        return creditsubmitMapper.findAllSubmit(csstat);
+    public List<CreditsubmitdetailWithBLOBs> findAllSubmit(Object csstat) {
+       // return creditsubmitMapper.findAllSubmit(csstat);
+        return creditsubmitdetailMapper.findAllSubmit(csstat);
     }
 
     @Override
@@ -50,5 +56,15 @@ public class ConsumeCreditServiceImpl implements ConsumeCreditService {
             return false;
         }
 
+    }
+
+    @Override
+    public List<CreditsubmitdetailWithBLOBs> findAllSubmitWithState(boolean b) {
+        return creditsubmitdetailMapper.findAllSubmitWithState(b);
+    }
+
+    @Override
+    public List<CreditsubmitdetailWithBLOBs> findAllUnhandleSubmit(boolean b) {
+        return creditsubmitdetailMapper.findAllUnhandleSubmit();
     }
 }

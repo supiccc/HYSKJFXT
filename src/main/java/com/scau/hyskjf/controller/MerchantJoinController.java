@@ -49,24 +49,23 @@ public class MerchantJoinController {
      * 是否推荐商家 Boolean merrecommend + 是否显示在首页 Boolean isindex + 所欠积分Boolean isindex）
      *
      * 返回：
-     * 自动创建的商家根管理员账号Merchantaccount merchantaccount（拥有属性：账户编号 Integer macid;+ 所属商家编号 Integer merid;+ 登录名（为加密申请时的手机号merphone）
-     * String macacc;+ 结账账户（目前没用） Integer maccumacc;+ 密码（初始化为111111） String macpasswd;+ 账户类型（值为11，意为根管理员） Integer macacctype;
-     * + 上次登陆时间 Date maclastlogin;+ 是否启用（设为true） Boolean macenable;）
+     * 成功码或失败码
      *
      * */
     @RequestMapping(value = "/independentJoin", method = RequestMethod.POST)
     public ResponseJSON independentJoin(MerchantinfoWithBLOBs merchantinfoWithBLOBs, Merchant merchant){
         try{
             Integer merID =merchantJoinService.independentJoin(merchantinfoWithBLOBs,merchant);
-            Merchantaccount merchantaccount = new Merchantaccount();
-            merchantaccount.setMacacc(merchantinfoWithBLOBs.getMerphone());//设置登陆账号为手机号
-            merchantaccount.setMacpasswd("111111");//初始化密码为111111
-            merchantaccount.setMacacctype(11);//设置账户类型为商家管理员
-            merchantaccount.setMacenable(true);//设置启用
-            merchantaccount.setMerid(merID);
-            merchantAccManageService.addMerchantAccount(merchantaccount);//自动为入盟商家分配一个根管理员账户
+            //Merchantaccount merchantaccount = new Merchantaccount();
+            //merchantaccount.setMacacc(merchantinfoWithBLOBs.getMerphone());//设置登陆账号为手机号
+            //merchantaccount.setMacpasswd("111111");//初始化密码为111111
+            //merchantaccount.setMacacctype(11);//设置账户类型为商家管理员
+            //merchantaccount.setMacenable(true);//设置启用
+            //merchantaccount.setMerid(merID);
+            //merchantAccManageService.addMerchantAccount(merchantaccount);//自动为入盟商家分配一个根管理员账户
             return new ResponseJSON(ResponseCode.SUCCESS);
         }catch(Exception e){
+            e.printStackTrace();
             return new ResponseJSON(ResponseCode.WARN);
         }
     }
@@ -92,13 +91,13 @@ public class MerchantJoinController {
     public ResponseJSON developJoin(MerchantinfoWithBLOBs merchantinfoWithBLOBs, Merchant merchant){
         try{
             Integer merID = merchantJoinService.developJoin(merchantinfoWithBLOBs,merchant);
-            Merchantaccount merchantaccount = new Merchantaccount();
-            merchantaccount.setMacacc(merchantinfoWithBLOBs.getMerphone());//设置登陆账号为手机号
-            merchantaccount.setMacpasswd("111111");//初始化密码为111111
-            merchantaccount.setMacacctype(11);//设置账户类型为商家管理员
-            merchantaccount.setMacenable(true);//设置启用
-            merchantaccount.setMerid(merID);
-            merchantAccManageService.addMerchantAccount(merchantaccount);//自动为入盟商家分配一个根管理员账户
+            //Merchantaccount merchantaccount = new Merchantaccount();
+            //merchantaccount.setMacacc(merchantinfoWithBLOBs.getMerphone());//设置登陆账号为手机号
+            //merchantaccount.setMacpasswd("111111");//初始化密码为111111
+            //merchantaccount.setMacacctype(11);//设置账户类型为商家管理员
+            //merchantaccount.setMacenable(true);//设置启用
+            //merchantaccount.setMerid(merID);
+            //merchantAccManageService.addMerchantAccount(merchantaccount);//自动为入盟商家分配一个根管理员账户
             return new ResponseJSON(ResponseCode.SUCCESS);
         }catch(Exception e){
             return new ResponseJSON(ResponseCode.WARN);

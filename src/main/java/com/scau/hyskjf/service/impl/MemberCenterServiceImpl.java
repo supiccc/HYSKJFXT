@@ -335,4 +335,8 @@ public class MemberCenterServiceImpl implements MemberCenterService {
         return rechargehistoryMapper.findRechargeHistoryByMerId(merid);
     }
 
+    @Override
+    public Integer getMemIDByPhone(String memphone){
+        return memberMapper.queryMemIDByMemphone(memphone);
+    }
 }

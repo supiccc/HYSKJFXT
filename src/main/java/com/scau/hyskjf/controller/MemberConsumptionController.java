@@ -26,20 +26,20 @@ public class MemberConsumptionController {
     @Autowired
     ConsumptionService consumptionService;
 
-    /*
+    /*(已测试)
     * 现金消费：
-    * 输入：会员卡号String mcID + 消费金额 Float money + 商家账号编号 macID
+    * 输入：会员卡号String mcid + 消费金额 Float money + 商家账号编号 macid
     *
     * 输出:
     * 成功时：code=0，同时返回获得的积分Float getCredit
     * 失败结果：code=-2时表示 "会员卡号错误"。code=-1, "其他错误";
     * */
     @RequestMapping("/cashConsumption")
-    public ResponseJSON cashConsumption(String mcID ,Float money,Integer macID){
+    public ResponseJSON cashConsumption(String mcid ,Float money,Integer macid){
         try {
-            CashConsumption cashConsumption = consumptionService.cashConsumptionCheck(mcID , money);
+            CashConsumption cashConsumption = consumptionService.cashConsumptionCheck(mcid , money);
             if(cashConsumption.getCheckResult().equals(0)){
-                Float getCredit =consumptionService.cashCompute(cashConsumption,macID);//积分添加、消费历史添加等操作
+                Float getCredit =consumptionService.cashCompute(cashConsumption,macid);//积分添加、消费历史添加等操作
                 return new ResponseJSON(ResponseCode.SUCCESS,getCredit);//返回获得的积分
             }
             else if(cashConsumption.getCheckResult().equals(-2)){//会员卡号错误
@@ -50,24 +50,25 @@ public class MemberConsumptionController {
             }
         }
         catch (Exception e){
+            //e.printStackTrace();
             return new ResponseJSON((ResponseCode.WARN));
         }
     }
 
-    /*
+    /* （已测试）
      * 储值消费：
-     * 输入：会员卡号String mcID + 消费金额 Float money + 消费密码 String pwd + 商家账号编号 macID
+     * 输入：会员卡号String mcid + 消费金额 Float money + 消费密码 String pwd + 商家账号编号 macid
      *
      * 输出:
      * 成功时：code=0，同时返回剩余储值Float leftStore
      * 失败结果：code=-2时表示 "会员卡号错误"。code=-3, "消费密码错误"。code=-5, "储值余额不足";code=-1, "其他错误";
      * */
     @RequestMapping("/storeConsumption")
-    public ResponseJSON storeConsumption(String mcID ,Float money, String pwd,Integer macID){
+    public ResponseJSON storeConsumption(String mcid ,Float money, String pwd,Integer macid){
         try {
-            StoreConsumption storeConsumption = consumptionService.storeConsumptionCheck(mcID , money, pwd);
+            StoreConsumption storeConsumption = consumptionService.storeConsumptionCheck(mcid , money, pwd);
             if(storeConsumption.getCheckResult().equals(0)){
-                Float leftStore =consumptionService.storeCompute(storeConsumption,macID);//执行储值扣除、消费历史添加等操作
+                Float leftStore =consumptionService.storeCompute(storeConsumption,macid);//执行储值扣除、消费历史添加等操作
                 return new ResponseJSON(ResponseCode.SUCCESS,leftStore);//返回会员剩余储值
             }
             else if(storeConsumption.getCheckResult().equals(-2)){//会员卡号错误
@@ -84,24 +85,25 @@ public class MemberConsumptionController {
             }
         }
         catch (Exception e){
+            e.printStackTrace();
             return new ResponseJSON((ResponseCode.WARN));
         }
     }
 
-    /*
+    /*（已测试）
      * 积分消费：
-     * 输入：会员卡号String mcID + 消费金额 Float money + 消费密码 String pwd + 商家账号编号 macID
+     * 输入：会员卡号String mcid + 消费金额 Float money + 消费密码 String pwd + 商家账号编号 macid
      *
      * 输出:
      * 成功时：code=0，同时返回剩余积分Float leftCredit
      * 失败结果：code=-2时表示 "会员卡号错误"。code=-3, "消费密码错误"。code=-4, "积分不足"。 code=-5, "储值余额不足";code=-1, "其他错误";
      * */
     @RequestMapping("/creditConsumption")
-    public ResponseJSON creditConsumption(String mcID ,Float money, String pwd,Integer macID){
+    public ResponseJSON creditConsumption(String mcid ,Float money, String pwd,Integer macid){
         try {
-            CreditConsumption creditConsumption = consumptionService.creditConsumptionCheck(mcID , money, pwd);
+            CreditConsumption creditConsumption = consumptionService.creditConsumptionCheck(mcid , money, pwd);
             if(creditConsumption.getCheckResult().equals(0)){
-                Float leftCredit =consumptionService.creditCompute(creditConsumption,macID);//执行积分扣除、消费历史添加等操作
+                Float leftCredit =consumptionService.creditCompute(creditConsumption,macid);//执行积分扣除、消费历史添加等操作
                 return new ResponseJSON(ResponseCode.SUCCESS,leftCredit);//返回会员剩余积分
             }
             else if(creditConsumption.getCheckResult().equals(-2)){//会员卡号错误
@@ -118,6 +120,7 @@ public class MemberConsumptionController {
             }
         }
         catch (Exception e){
+            e.printStackTrace();
             return new ResponseJSON((ResponseCode.WARN));
         }
     }

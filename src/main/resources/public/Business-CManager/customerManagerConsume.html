@@ -142,21 +142,21 @@
                             <!--点击菜单项后跳转的页面或弹出模态框-->
                             <!--总积分-->
                             <li>
-                                <a href=''>
+                                <a id="pointMgrBtn">
                                     <i class='icon-info'></i>
                                     积分管理
                                 </a>
                             </li>
                             <!--修改密码-->
                             <li>
-                                <a href='user_profile.html'>
+                                <a id="updatePwdBtn">
                                     <i class='icon-cog'></i>
                                     修改密码
                                 </a>
                             </li>
                             <!--反馈-->
                             <li>
-                                <a href='user_profile.html'>
+                                <a id="adviceBtn">
                                     <i class='icon-frown'></i>
                                     发送反馈
                                 </a>
@@ -164,7 +164,7 @@
                             <!--分隔线-->
                             <li class='divider'></li>
                             <li>
-                                <a href='../%3CLogin%3E/sign_in.html'>
+                                <a id="cancelBtn">
                                     <i class='icon-signout'></i>
                                     注销退出
                                 </a>
@@ -209,7 +209,8 @@
 <!--一级目录-->
 <!--消费登记-->
 <li class=''>
-    <a href='customerManagerConsume.html'>
+    <!--href='customerManagerConsume.html'-->
+    <a id="regisConsumeBtn">
         <i class='icon-check-sign'></i>
         <span>消费登记</span>
     </a>
@@ -225,13 +226,13 @@
     <!--二级目录-->
     <ul class='nav nav-stacked'>
         <li class=''>
-            <a href='form_styles.html'>
+            <a id="rechargeBtn">
                 <i class='icon-caret-right'></i>
                 <span>充值</span>
             </a>
         </li>
         <li class=''>
-            <a href='form_components.html'>
+            <a id="rechargeHistoryBtn">
                 <i class='icon-caret-right'></i>
                 <span>充值记录查询</span>
             </a>
@@ -249,13 +250,13 @@
     <!--二级目录-->
     <ul class='nav nav-stacked'>
         <li class=''>
-            <a href='form_styles.html'>
+            <a id="memPointDealBtn">
                 <i class='icon-caret-right'></i>
                 <span>会员积分结算</span>
             </a>
         </li>
         <li class=''>
-            <a href='form_components.html'>
+            <a id="memPointcountBtn">
                 <i class='icon-caret-right'></i>
                 <span>会员积分统计</span>
             </a>
@@ -290,29 +291,29 @@
                     <tr align="center">
                         <td style="width:120px" class="text-left">消费金额</td>
                         <td colspan="4">
-                            <label for="consumeMoney" class="col-sm-2 control-label" style="text-align: left"></label>
+                            <label for="zhuzhiMoney" class="col-sm-2 control-label" style="text-align: left"></label>
                             <!--改默认显示-->
-                            <input id="consumeMoney" type="text" placeholder="请输入消费金额" style="width: 1050px" required="required"></td>
+                            <input id="zhuzhiMoney" type="text" placeholder="请输入消费金额" style="width: 1050px" required="required"></td>
                     </tr>
                     <!--会员卡号-->
                     <tr align="center">
                     <td style="width:120px" class="text-left">会员卡号</td>
                         <td colspan="4">
-                            <label for="CardNum" class="col-sm-2 control-label" style="text-align: left"></label>
-                            <input id="CardNum" type="text" placeholder="请输入会员卡号" style="width: 1050px" required="required"></td>
+                            <label for="zhuzhiCardNum" class="col-sm-2 control-label" style="text-align: left"></label>
+                            <input id="zhuzhiCardNum" type="text" placeholder="请输入会员卡号" style="width: 1050px" required="required"></td>
                     </tr>
                     <!--消费密码-->
                     <tr align="center">
                     <td style="width:120px" class="text-left">消费密码</td>
                         <td colspan="4">
-                            <label for="consumePass" class="col-sm-2 control-label" style="text-align: left"></label>
-                            <input id="consumePass" type="password" placeholder="请填写消费密码" style="width: 1050px" required="required"></td>
+                            <label for="zhuzhiPass" class="col-sm-2 control-label" style="text-align: left"></label>
+                            <input id="zhuzhiPass" type="password" placeholder="请填写消费密码" style="width: 1050px" required="required"></td>
                     </tr>
                      <!--保存提示按钮+提示保存-->
                      <tr >
                         <td colspan="12" >
                     <h6 class='text-right'>需点击确定按钮后方可生效</h6>
-                    <button class='btn pull-right' type='submit'>
+                    <button class='btn pull-right' id="zhuzhiBtn">
                         <i class='icon-save'></i>
                         确定
                     </button>
@@ -342,9 +343,9 @@
                     <tr align="center">
                         <td style="width:120px" class="text-left">消费金额</td>
                         <td colspan="4">
-                            <label for="consumeMoney" class="col-sm-2 control-label" style="text-align: left"></label>
+                            <label for="xianjinMoney" class="col-sm-2 control-label" style="text-align: left"></label>
                             <!--改默认显示-->
-                            <input id="consumeMoney" type="text" placeholder="请输入消费金额" style="width: 1050px" required="required"></td>
+                            <input id="xianjinMoney" type="text" placeholder="请输入消费金额" style="width: 1050px" required="required"></td>
                     </tr>
                     <!--选择是否有会员卡-->
                        <tr align="center">
@@ -360,21 +361,21 @@
                     <tr align="center">
                     <td style="width:120px" class="text-left">会员卡号</td>
                         <td colspan="4">
-                            <label for="CardNum" class="col-sm-2 control-label" style="text-align: left"></label>
-                            <input id="CardNum" type="text" placeholder="请输入会员卡号" style="width: 1050px"></td>
+                            <label for="xianjinCardNum" class="col-sm-2 control-label" style="text-align: left"></label>
+                            <input id="xianjinCardNum" type="text" placeholder="请输入会员卡号" style="width: 1050px"></td>
                     </tr>
                     <!--实收金额-->
                     <tr align="center">
                     <td style="width:120px" class="text-left">实收金额</td>
                         <td colspan="4">
-                            <label for="realMoney" class="col-sm-2 control-label" style="text-align: left"></label>
-                            <input id="realMoney" type="password" placeholder="请填写实收金额" style="width: 1050px" required="required"></td>
+                            <label for="xianjinRealMoney" class="col-sm-2 control-label" style="text-align: left"></label>
+                            <input id="xianjinRealMoney" type="password" placeholder="请填写实收金额" style="width: 1050px" required="required"></td>
                     </tr>
                      <!--保存提示按钮+提示保存-->
                      <tr >
                         <td colspan="12" >
                     <h6 class='text-right'>需点击确定按钮后方可生效</h6>
-                    <button class='btn pull-right' type='submit'>
+                    <button class='btn pull-right' id="xianjinBtn">
                         <i class='icon-save'></i>
                         确定
                     </button>
@@ -404,9 +405,9 @@
                     <tr align="center">
                         <td style="width:120px" class="text-left">消费金额</td>
                         <td colspan="4">
-                            <label for="consumeMoney" class="col-sm-2 control-label" style="text-align: left"></label>
+                            <label for="pointconsumeMoney" class="col-sm-2 control-label" style="text-align: left"></label>
                             <!--改默认显示 需显示为对应所需的积分-->
-                            <input id="consumeMoney" type="text" placeholder="请输入消费金额" style="width: 1050px" required="required"></td>
+                            <input id="pointconsumeMoney" type="text" placeholder="请输入消费金额" style="width: 1050px" required="required"></td>
 
                     </tr>
                     <!--会员卡号-->
@@ -427,7 +428,7 @@
                      <tr >
                         <td colspan="12" >
                     <h6 class='text-right'>需点击确定按钮后方可生效</h6>
-                    <button class='btn pull-right' type='submit'>
+                    <button class='btn pull-right' id="pointBtn">
                         <i class='icon-save'></i>
                         确定
                     </button>

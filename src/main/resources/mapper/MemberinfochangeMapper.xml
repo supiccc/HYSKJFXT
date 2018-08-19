@@ -37,7 +37,7 @@
       )
     values (#{micid,jdbcType=INTEGER}, #{memid,jdbcType=INTEGER}, #{miccer,jdbcType=VARCHAR}, 
       #{miccerid,jdbcType=VARCHAR}, #{micname,jdbcType=VARCHAR}, #{micsex,jdbcType=VARCHAR}, 
-      #{micphone,jdbcType=VARCHAR}, #{micbirth,jdbcType=DATE}, #{micadredd,jdbcType=VARCHAR}, 
+      #{micphone,jdbcType=VARCHAR}, #{micbirth,jdbcType=DATE}, #{micadredd,jdbcType=VARCHAR},
       #{micemail,jdbcType=VARCHAR}, #{micreason,jdbcType=VARCHAR}, #{mictime,jdbcType=TIMESTAMP}
       )
   </insert>

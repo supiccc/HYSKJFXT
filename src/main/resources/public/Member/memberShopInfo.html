@@ -66,7 +66,7 @@
             <!--容器设置-->
             <div class='container-fluid'>
                 <!--导航栏左边-->
-                <a class='brand' href='index.html'>
+                <a class='brand' href="#" id="toshopinfo">
                     <!--这里可以考虑要不要放logo-->
                     <i class='icon-heart-empty'></i>
                     <!--放平台的名称-->
@@ -80,9 +80,9 @@
                 <!--注意商家客户经理的顶部导航栏是全部一样的-->
                 <ul class='nav pull-right'>
                     <!--平台商家 会员登录后的默认页面-->
-                    <li><a href="#" id="indexBtn">首页</a></li>
+                    <li><a href="javascript:void(0)" id="indexBtn">首页</a></li>
                     <!--记录查询-->
-                    <li><a href="#" id="shopListBtn">平台商家</a></li></li>
+                    <li><a href="javascript:void(0)" id="shopListBtn">平台商家</a></li>
                     <!--消息提醒-->
                     <!--默认显示最新五条未处理的消息-->
                     <li class='dropdown medium only-icon widget'>
@@ -194,7 +194,7 @@
                             <!--分隔线-->
                             <li class='divider'></li>
                             <li>
-                                <a btn="cancelBtn">
+                                <a btn="cancelBtn" id="cancelBtn">
                                     <i class='icon-signout'></i>
                                     注销退出
                                 </a>
@@ -388,40 +388,43 @@
 <section id='content'>
     <div class='container-fluid'>
         <div class='row-fluid' id='content-wrapper'>
-            <div class='span12'>
+            <div class='span12' id="shopListAll">
             <br/>
             <!--列表样例-->
          <!--商家列表-->
 <div class='row-fluid'>
-    <div class='span12 box'>
-        <div class='box-header dark-background' >
+    <div>
+        <div class='span12 box' id="shopList>
+            <div class='box-header dark-background'">
             <div class='title'>
-            <!--根据拉取到商家名称修改-->
-            <h4 id="mername" style="color:#FFFFFF ">一碗面</h4>
+                <!--根据拉取到商家名称修改-->
+                <h4 id="mername" style="color:#FFFFFF ">一碗面</h4>
             </div>
         </div>
         <div class='box-content' >
-<table>
+            <table>
                     <tr align="center">
-                        <td style="width:120px" class="text-left">商家介绍</td>
-                        <td colspan="4">
-                            <label for="merintroduce" class="col-sm-2 control-label" style="text-align: left"></label>
-                            <!--商家介绍-->
-                            <h5 id="merintroduce" style="text-align: left">这里的番茄鸡蛋面很清淡哦~</h5>
-                            </td>
-                         <td   style="margin:auto; text-align:right" rowspan="3" >
+                    <td style="width:120px" class="text-left">商家介绍</td>
+                    <td colspan="4">
+                        <label for="merintroduce" class="col-sm-2 control-label" style="text-align: left"></label>
+                        <!--商家介绍-->
+                        <h5 id="merintroduce" style="text-align: left">这里的番茄鸡蛋面很清淡哦~</h5>
+                    </td>
+                    <td   style="margin:auto; text-align:right" rowspan="3" >
                          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                      <img height="200" width="200" src="http://pic1.win4000.com/wallpaper/2018-06-27/5b3326ce30f43.jpg"  alt="Liu"  />
-                         </td>
+                        <img height="200" width="200" src="http://pic1.win4000.com/wallpaper/2018-06-27/5b3326ce30f43.jpg"  alt="Liu"  />
+                    </td>
                     </tr>
+                    <!--商家电话-->
                     <tr align="center">
                         <td style="width:120px" class="text-left">商家电话</td>
                         <td colspan="4">
                             <label for="mertelphone" class="col-sm-2 control-label" style="text-align: left"></label>
                             <!--商家电话-->
                             <h5 id="mertelphone" style="text-align: left">13602798434</h5>
-                            </td>
+                        </td>
                     </tr>
+                    <!--商家地址-->
                     <tr align="center">
                     <td style="width:120px" class="text-left">商家地址</td>
                         <td colspan="4">
@@ -430,10 +433,19 @@
                             <h5 id="merearea" style="text-align: left">潮南区</h5>
                            </td>
                     </tr>
-</table>
-                </div>
+                    <!--商家详情-->
+                    <tr align="center">
+                        <td style="width:120px" class="text-left">商家详情</td>
+                        <td colspan="4">
+                            <label for="infohref" class="col-sm-2 control-label" style="text-align: left"></label>
+                            <!--超链接-->
+                            <h5 id="infohref" style="text-align: left"></h5>
+                        </td>
+                    </tr>
+            </table>
         </div>
     </div>
+</div>
             <!--列表样例结束-->
             </div>
         </div>
@@ -463,14 +475,14 @@
                             <!--总积分 Integral-->
                             <label  class="col-sm-2 control-label" style="text-align: left">您当前的积分有:</label>
                             <!--这里要改总积分的值 我在这里先写死-->
-                            <h2 style="text-align:center">3423</h2>
+                            <h2 style="text-align:center" id="integral" ></h2>
                             <!--总积分设置结束-->
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <!--<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button> -->
-                    <button class="btn btn-primary" style="background-color: black">确定</button>
+                    <button class="btn btn-primary" style="background-color: black" data-dismiss="modal">确定</button>
                 </div>
             </div>
         </div>
@@ -544,7 +556,7 @@
                 </div>
                 <div class="modal-footer">
                     <!--<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button> -->
-                    <button class="btn btn-primary" style="background-color: black">保存设置</button>
+                    <button class="btn btn-primary" style="background-color: black" id="savenewinfo">保存设置</button>
                 </div>
             </div>
         </div>

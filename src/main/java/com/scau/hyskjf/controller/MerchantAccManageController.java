@@ -1,9 +1,6 @@
 package com.scau.hyskjf.controller;
 
-import com.scau.hyskjf.pojo.MManager;
-import com.scau.hyskjf.pojo.MemberMShow;
-import com.scau.hyskjf.pojo.Membermanager;
-import com.scau.hyskjf.pojo.Merchantaccount;
+import com.scau.hyskjf.pojo.*;
 import com.scau.hyskjf.service.MerchantAccManageService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
@@ -33,13 +30,14 @@ public class MerchantAccManageController {
 
     @Autowired
     MerchantAccManageService merchantAccManageService;
-    /*
+    /*（已测试）
     * 添加子账号：
     * 输入：
     * Merchantaccount类：
-    * 商家编号Integer、登陆名（手机号码）String、密码String、
-    * 账号类型（11为管理员，2为前台账户，3为客户经理，14为部门经理,大于10的拥有为用户充值权限，管理员可为前台和客户经理添加充值权限，加权后数值为前台12和客户经理13）int、
-    * 启用状态Boolean、结账账户Integer
+    * 商家编号Integer merid、登陆名（手机号码）String macacc、密码String macpasswd、
+    * 账号类型Integer macacctype（11为管理员，2为前台账户，3为客户经理，14为部门经理,大于10的拥有为用户充值权限，管理员可为前台和客户经理添加充值权限，加权后数值为前台12和客户经理13）int、
+    * 启用状态Boolean macenable、结账账户Integer maccumacc(一般不填)
+    *
     * 返回：
     * 成功码或失败码
     * */
@@ -53,7 +51,7 @@ public class MerchantAccManageController {
         }
     }
 
-    /*
+    /*（已测试）
      * (吕浩泰要求的接口)添加子账号：
      * 输入：
      * Merchantaccount类：
@@ -75,7 +73,7 @@ public class MerchantAccManageController {
         }
     }
 
-    /*
+    /*（已测试）
     * 查询整个系统所有商家账户：
     * 输入：
     * 无
@@ -92,53 +90,53 @@ public class MerchantAccManageController {
         }
     }
 
-    /*
+    /*（已测试）
      * 查询某一商家所有账户（根据商家编号id查询）：
      * 输入：
-     * 商家编号
+     * 商家编号 Integer merid
      * 返回：
      * 商家编号对应商家的所有商家账户表的信息
      * */
     @RequestMapping(value = "/queryByMerID", method = RequestMethod.POST)
-    public ResponseJSON queryByMerID(Integer merID){
+    public ResponseJSON queryByMerID(Integer merid){
         try{
-            List<Merchantaccount> accList =merchantAccManageService.queryMerchantAccountByMerID(merID);
+            List<Merchantaccount> accList =merchantAccManageService.queryMerchantAccountByMerID(merid);
             return new ResponseJSON(ResponseCode.SUCCESS,accList);
         }catch(Exception e){
             return new ResponseJSON(ResponseCode.WARN);
         }
     }
 
-    /*
+    /*（已测试）
      * 根据登陆名查询账户（用户手机号）：
      * 输入：
-     * 账户登陆名
+     * 账户登陆名String macacc
      * 返回：
      * 账户登陆名对应账户信息
      * */
     @RequestMapping(value = "/queryByMacAcc", method = RequestMethod.POST)
-    public ResponseJSON queryByMacAcc(String macAcc){
+    public ResponseJSON queryByMacAcc(String macacc){
         try{
-            Merchantaccount acc =merchantAccManageService.queryMerchantAccountByMacAcc(macAcc);
+            Merchantaccount acc =merchantAccManageService.queryMerchantAccountByMacAcc(macacc);
             return new ResponseJSON(ResponseCode.SUCCESS,acc);
         }catch(Exception e){
             return new ResponseJSON(ResponseCode.WARN);
         }
     }
 
-    /*
+    /*（已测试）
      * 修改子账号密码(普通商家账号接口)
      * 输入：
-     * 1、Merchantaccount类：必须有账户登录名macAcc+原密码macPasswd
-     * 2、String 新密码
+     * 1、Merchantaccount类：必须有账户登录名macacc+原密码macpasswd
+     * 2、新密码String newpwd
      * 返回：
      * 成功或失败码
      * */
     @RequestMapping(value = "/updatePwdByMacAcc", method = RequestMethod.POST)
-    public ResponseJSON updatePwdByMacAcc(Merchantaccount merchantaccount,String newPwd){
+    public ResponseJSON updatePwdByMacAcc(Merchantaccount merchantaccount,String newpwd){
         try{
             String uncheckedPwd = new Md5Hash(merchantaccount.getMacpasswd(),merchantaccount.getMacacc(),3).toString();//对用户输入账户的原密码进行MD5加密
-            String newPwdMD5 = new Md5Hash(newPwd,merchantaccount.getMacacc(),3).toString();
+            String newPwdMD5 = new Md5Hash(newpwd,merchantaccount.getMacacc(),3).toString();
             Merchantaccount acc =merchantAccManageService.queryMerchantAccountByMacAcc(merchantaccount.getMacacc());//从数据库获取登录名对应的账户实例
             String truePwd = acc.getMacpasswd();//获取正确的MD5密码
             if(truePwd.equals(uncheckedPwd)){//正确的MD5密码与输入的原密码MD5匹配，正确则执行更改密码
@@ -154,7 +152,7 @@ public class MerchantAccManageController {
         }
     }
 
-    /*
+    /*（已测试）
      * 修改子账号密码(商家管理员账号接口)
      * 输入：
      * 1、Merchantaccount类：必须有账户登录名macAcc(原密码不需要)
@@ -163,11 +161,11 @@ public class MerchantAccManageController {
      * 成功或失败码
      * */
     @RequestMapping(value = "/updateManagerPwdByMacAcc", method = RequestMethod.POST)
-    public ResponseJSON updateManagerPwdByMacAcc(Merchantaccount merchantaccount,String newPwd){
+    public ResponseJSON updateManagerPwdByMacAcc(Merchantaccount merchantaccount,String newpwd){
         try{
             //String uncheckedPwd = new Md5Hash(merchantaccount.getMacpasswd(),merchantaccount.getMacacc(),3).toString();//对用户输入账户的原密码进行MD5加密
             Merchantaccount acc =merchantAccManageService.queryMerchantAccountByMacAcc(merchantaccount.getMacacc());//从数据库获取登录名对应的账户实例
-            String newPwdMD5 = new Md5Hash(newPwd,merchantaccount.getMacacc(),3).toString();
+            String newPwdMD5 = new Md5Hash(newpwd,merchantaccount.getMacacc(),3).toString();
             //String truePwd = acc.getMacpasswd();//获取正确的MD5密码
             //if(truePwd.equals(uncheckedPwd)){//正确的MD5密码与输入的原密码MD5匹配，正确则执行更改密码
             acc.setMacpasswd(newPwdMD5);
@@ -182,10 +180,10 @@ public class MerchantAccManageController {
         }
     }
 
-    /*
-    * 修改子账号的账号类型、密码、启用状态
+    /*（已测试）
+    * 修改子账号的账号类型、启用状态
     * 输入：
-    * Merchantaccount类：必须有账户编号macID+修改的项
+    * Merchantaccount类：必须有账户编号macid+修改的项(登陆账号 String macacc;+结算账户（废弃） Integer maccumacc;+密码 String macpasswd;+账户类型 Integer macacctype;+上次登陆时间 Date maclastlogin;+是否启动 Boolean macenable;)
     * 返回：
     * 成功或失败码
     * */
@@ -200,10 +198,10 @@ public class MerchantAccManageController {
         }
     }
 
-    /*
+    /*（已测试）
      * 删除子账号（实际操作只是把启用状态改为false）
      * 输入：
-     * Merchantaccount类：必须有账户编号macID,其他项为null
+     * 账户编号macid
      * 返回：
      * 成功或失败码
      * */
@@ -218,24 +216,21 @@ public class MerchantAccManageController {
         }
     }
 
-    /*
+    /*（已测试）
      * 为前台或客户经理添加充值权限（实际操作只是把账户类型+10）（只有macAccType==11的管理员账户才能操作）
      * 输入：
-     * Merchantaccount类：必须有账户编号macID,账户类型macAccType为2或3，其他项为null
+     * 账户登陆号（手机号）String macacc ,商家编号Integer merid
      * 返回：
      * 成功或失败码
      * */
-    @RequestMapping(value = "/addPermissionByMacID", method = RequestMethod.POST)
-    public ResponseJSON addPermissionByMacID(Merchantaccount merchantaccount){
+    @RequestMapping(value = "/addPermission", method = RequestMethod.POST)
+    public ResponseJSON addPermission(String macacc ,Integer merid){
         try{
-            if(merchantaccount.getMacacctype()!=null&&merchantaccount.getMacacctype()<10){
-                merchantaccount.setMacacctype(merchantaccount.getMacacctype()+10);
-                merchantAccManageService.updateMerchantAccount(merchantaccount);
+                int i = merchantAccManageService.addPermissionByMacAcc(macacc ,merid);
+                if(i==-1){
+                    return new ResponseJSON(ResponseCode.WARN);
+                }
                 return new ResponseJSON(ResponseCode.SUCCESS);
-            }
-            else{
-                return new ResponseJSON(ResponseCode.WARN);
-            }
         }catch(Exception e){
             return new ResponseJSON(ResponseCode.WARN);
         }
@@ -251,59 +246,60 @@ public class MerchantAccManageController {
     //
     //}
 
-    /*
+    /*（已测试）
      * 查询商家的没有分配客户经理的会员：
      * 输入：
-     * 商家编号 Integer merID
+     * 商家编号 Integer merid
      *
      * 输出：
      * 没有分配客户经理的会员 List<MemberMShow> list（包含属性：会员id Integer memid;+会员名字 String memname;+会员手机号 String memphone;）
      * */
     @RequestMapping(value = "/queryMember", method = RequestMethod.POST)
-    public ResponseJSON queryMember(Integer merID){
+    public ResponseJSON queryMember(Integer merid){
         try{
-            List<MemberMShow> list = merchantAccManageService.queryMemberByMerID(merID);
+            List<MemberMShow> list = merchantAccManageService.queryMemberByMerID(merid);
             return new ResponseJSON(ResponseCode.SUCCESS,list);
         }catch(Exception e){
             return new ResponseJSON(ResponseCode.WARN);
         }
     }
 
-    /*
+    /*（已测试）
      * 查询商家的客户经理：
      * 输入：
-     * 商家编号 Integer merID
+     * 商家编号 Integer merid
      *
      * 输出：
      * 商家的客户经理 List<MManager> list（包含属性：客户经理账号id Integer macid;+商家编号id Integer merid;+ 客户经理账户登陆名（为手机号） String macacc;）
      * */
     @RequestMapping(value = "/queryMManager", method = RequestMethod.POST)
-    public ResponseJSON queryMManager(Integer merID){
+    public ResponseJSON queryMManager(Integer merid){
         try{
-            List<MManager> list = merchantAccManageService.queryMemberManagerByMerID(merID);
+            List<MManager> list = merchantAccManageService.queryMemberManagerByMerID(merid);
             return new ResponseJSON(ResponseCode.SUCCESS,list);
         }catch(Exception e){
             return new ResponseJSON(ResponseCode.WARN);
         }
     }
 
-    /*
+    /*（已测试）
     * 指派客户经理：
     * 输入：
-    * 会员编号 List<Integer> memIDList ,客户经理的商家账户编号 Integer macID
+    * 会员编号 List<Integer> memberIDs ,客户经理的商家账户编号 Integer macid()
     *
     * 输出：
     * 正确码或错误码
     * */
     @RequestMapping(value = "/setMemberManager", method = RequestMethod.POST)
-    public ResponseJSON setMemberManager(List<Integer> memIDList ,Integer macID){
+    public ResponseJSON setMemberManager(MemberModel memIDList , Integer macid){
         try{
+            List<Integer> list = memIDList.getMemberIDs();
             List<Membermanager> mmList =new ArrayList<>();
             Membermanager membermanager = new Membermanager();
             membermanager.setMmatime(new Date());
-            membermanager.setMmanagerid(macID);
-            for(int i=0;i<memIDList.size();i++){
-                membermanager.setMemid(memIDList.get(i));
+            membermanager.setMmanagerid(macid);
+            for(int i=0;i<list.size();i++){
+                membermanager.setMemid(list.get(i));
                 mmList.add(membermanager);
             }
             merchantAccManageService.setMemberManager(mmList);
