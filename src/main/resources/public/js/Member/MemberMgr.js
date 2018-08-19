@@ -3,35 +3,31 @@ $(function () {
     InitPage.action();
 });
 
+//用户信息
+var username;
+var role;
+var credit;
+var result;
 var InitPage = {
     init:function () {
+        username = Basic.getPassingStr("username");
+        role = Basic.getPassingStr("role");
+        Basic.initMemberinfo();
         Basic.initMyMenu();
         Basic.initMainPageMenuBtn();
         if(window.location.href.indexOf("memberShopInfo")){
             shopMgr.initList();
-        }
+        };
     },
     //注册按钮
     action:function () {
             //debug
-            $('#shoppingListBtn').attr("onclick","");
+            // $('#shoppingListBtn').attr("onclick","");
             $('#pointShoppingListBtn').attr("onclick","");
-        //导航栏
-            //跳转《首页》
-            $('#indexBtn').on('click',function () {
-                var username = Basic.getPassingStr("username");
-                var role = Basic.getPassingStr("role");
-                window.location.href = "./indexReal.html?username="+username+"&role="+role+"";
-            });
-            //跳转《平台商家》
-            $('#shopListBtn').on('click',function () {
-                var username = Basic.getPassingStr("username");
-                var role = Basic.getPassingStr("role");
-                window.location.href = "./memberShopInfo.html?username="+username+"&role="+role+"";
-            })
+
             //跳转《我的信息》
 
-        //侧边栏：消费记录
+            //侧边栏：消费记录
             //跳转《储值/现金消费记录》
             $('#shoppingListBtn').on('click', function () {
                 alert("点进来啦");
@@ -47,7 +43,7 @@ var InitPage = {
                 window.location.href = "./memberpointShoppingList.html?username="+username+"&role="+role+"";
             });
 
-        //侧边栏：我的卡包
+            //侧边栏：我的卡包
             //跳转《我的会员卡》
             $('#myCardsBtn').on('click',function () {
                 var username = Basic.getPassingStr("username");
@@ -65,6 +61,43 @@ var InitPage = {
 
 //其他方法
 var Basic = {
+    //获取用户资料
+    initMemberinfo:function() {
+        // alert("积分信息初始化");
+        $.ajax({
+            type : 'GET',
+            url : 'http://localhost:8080/memberCenter/showMember',
+            dataType : 'json',
+            success: function(res) {
+                // result = res;
+                if (res.code == 0) {
+                    // alert("获取成功");
+                    $('#integral').text(res.data.Object.memcredit);
+                    credit = res.data.Object.memcredit;
+                    if (res.data.Object.memcer == "身份证") {
+                        $('#paperType').val("1");
+                    } else {
+                        $('#paperType').val("2");
+                    }
+                    $('#paperNum').val(res.data.Object.memcerid);
+                    $('#memberName').val(res.data.Object.memname);
+                    if (res.data.Object.memsex == "男") {
+                        $("#memberSex").val("1");
+                    } else {
+                        $("#memberSex").val("2");
+                    }
+                    $('#memberBirth').val(res.data.birth);
+                    $('#memberPhone').val(res.data.Object.memphone);
+                    $('#memberAddress').val(res.data.Object.memadress);
+                    $('#memberEmail').val(res.data.Object.mememail);
+                }
+            },
+            error:function () {
+                alert("服务器繁忙，请稍后再试");
+            }
+        });
+    },
+
     //获取url传过来到参数
     getPassingStr:function (name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
@@ -79,8 +112,9 @@ var Basic = {
 
     //根据账户信息初始化《我的》按钮
     initMyMenu:function(){
-        var username = Basic.getPassingStr("username");
-        var role = Basic.getPassingStr("role");
+        // alert("按钮初始化")
+        // var username = Basic.getPassingStr("username");
+        // var role = Basic.getPassingStr("role");
         //这里需要补充账户类型
         //会员
         $("#myMenu").empty();
@@ -145,7 +179,7 @@ var Basic = {
                 "                            <!--分隔线-->\n" +
                 "                            <li class='divider'></li>\n" +
                 "                            <li>\n" +
-                "                                <a btn=\"cancelBtn\">\n" +
+                "                                <a btn=\"cancelBtn\" id=\"cancelBtn\">\n" +
                 "                                    <i class='icon-signout'></i>\n" +
                 "                                    注销退出\n" +
                 "                                </a>\n" +
@@ -155,6 +189,7 @@ var Basic = {
             //我的菜单
             //弹出《我的积分》
             $('#totalPointBtn').on('click',function () {
+                // alert("我的积分");
                 Basic.showIntegral();
             });
             //弹出《我的资料》
@@ -164,7 +199,7 @@ var Basic = {
             //弹出《意见反馈》
             $('#adviceBtn').on('click',function () {
                 Basic.showFeedback();
-            })
+            });
             //跳转《我的记录》
             $('#memberSearchBtn').on('click',function () {
                 window.location.href = "./memberShoppingList.html?username="+username+"&role="+role+"";
@@ -172,17 +207,33 @@ var Basic = {
             //跳转《我的卡包》
             $('#cardListBtn').on('click',function () {
                 window.location.href = "./memberCardHistoryList.html?username="+username+"&role="+role+"";
-            })
+            });
             //跳转《修改密码》
-            $('#updatePwdBtn').attr("href","../<Login>/changePassword.html");
+            $('#updatePwdBtn').attr("href","../Login/changePassword.html");
 
             //跳转《修改交易密码》
-            $('#updatePayPwdBtn').attr("href","../<Login>/changePayPassword.html");
+            $('#updatePayPwdBtn').attr("href","../Login/changePayPassword.html");
 
             //跳转《注销》
-            $('#shopListBtn').on('click',function () {
+            $('#cancelBtn').on('click',function () {
+                $.ajax({
+                    type : 'GET',
+                    url : 'http://localhost:8080/logout',
+                    dataType : 'json',
+                    success: function(res) {
+                        // result = res;
+                        if (res.code == 0) {
+                            // alert("获取成功");
+                        } else {
+                            alert("服务器繁忙，请稍后再试");
+                        }
+                    },
+                    error:function () {
+                        alert("服务器繁忙，请稍后再试");
+                    }
+                });
                 window.location.href = "./indexReal.html";
-            })
+            });
 
 
         }
@@ -554,3 +605,47 @@ var cardMgr = {
     //补卡记录：memberCardHistoryList.html（列表项是什么）
     //我的会员卡：memberCardList.html（列表项是什么）
 };
+
+//导航栏
+//跳转《首页》
+$('#indexBtn').click(function () {
+    username = Basic.getPassingStr("username");
+    role = Basic.getPassingStr("role");
+    window.location.href = "./indexReal.html?username="+username+"&role="+role+"";
+});
+
+//跳转《平台商家》
+$('#shopListBtn').on('click',function () {
+    // alert("hrllo" + username + role);
+    window.location.href = "./memberShopInfo.html?username="+username+"&role="+role+"";
+});
+
+$('#savenewinfo').on('click',function () {
+   // alert("正在保存资料");
+    $.ajax({
+        type : 'POST',
+        url : 'http://localhost:8080/memberCenter/updateMember',
+        dataType : 'json',
+        data:{
+            memcer: $('#paperType').find("option:selected").text(),
+            memcerid: $('#paperNum').val(),
+            memname: $('#memberName').val(),
+            memsex: $('#memberSex').find("option:selected").text(),
+            birth: $('#memberBirth').val(),
+            memphone: $('#memberPhone').val(),
+            mememail: $('#memberEmail').val(),
+            memadress: $('#memberAddress').val(),
+            memcredit: credit
+        },
+        success: function(res) {
+            result = res;
+            if (res.code == 0) {
+                alert("保存成功");
+            }
+        },
+        error:function () {
+            alert("服务器繁忙，请稍后再试");
+        }
+    });
+    $('#savenewinfo').attr("data-dismiss", "modal");
+});

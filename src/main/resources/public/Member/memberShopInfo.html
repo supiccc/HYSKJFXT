@@ -66,7 +66,7 @@
             <!--容器设置-->
             <div class='container-fluid'>
                 <!--导航栏左边-->
-                <a class='brand' href='index.html'>
+                <a class='brand' href="#" id="toshopinfo">
                     <!--这里可以考虑要不要放logo-->
                     <i class='icon-heart-empty'></i>
                     <!--放平台的名称-->
@@ -80,9 +80,9 @@
                 <!--注意商家客户经理的顶部导航栏是全部一样的-->
                 <ul class='nav pull-right'>
                     <!--平台商家 会员登录后的默认页面-->
-                    <li><a id="indexBtn">首页</a></li>
+                    <li><a href="javascript:void(0)" id="indexBtn">首页</a></li>
                     <!--记录查询-->
-                    <li><a id="shopListBtn">平台商家</a></li></li>
+                    <li><a href="javascript:void(0)" id="shopListBtn">平台商家</a></li>
                     <!--消息提醒-->
                     <!--默认显示最新五条未处理的消息-->
                     <li class='dropdown medium only-icon widget'>
@@ -194,7 +194,7 @@
                             <!--分隔线-->
                             <li class='divider'></li>
                             <li>
-                                <a btn="cancelBtn">
+                                <a btn="cancelBtn" id="cancelBtn">
                                     <i class='icon-signout'></i>
                                     注销退出
                                 </a>
@@ -475,14 +475,14 @@
                             <!--总积分 Integral-->
                             <label  class="col-sm-2 control-label" style="text-align: left">您当前的积分有:</label>
                             <!--这里要改总积分的值 我在这里先写死-->
-                            <h2 style="text-align:center">3423</h2>
+                            <h2 style="text-align:center" id="integral" ></h2>
                             <!--总积分设置结束-->
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <!--<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button> -->
-                    <button class="btn btn-primary" style="background-color: black">确定</button>
+                    <button class="btn btn-primary" style="background-color: black" data-dismiss="modal">确定</button>
                 </div>
             </div>
         </div>
@@ -556,7 +556,7 @@
                 </div>
                 <div class="modal-footer">
                     <!--<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button> -->
-                    <button class="btn btn-primary" style="background-color: black">保存设置</button>
+                    <button class="btn btn-primary" style="background-color: black" id="savenewinfo">保存设置</button>
                 </div>
             </div>
         </div>

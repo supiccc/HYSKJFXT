@@ -72,7 +72,7 @@ var accountMgr={
                 success : function(res) {
                     if (res.code == 0) {
                         // 登录成功
-                        alert("登陆成功，欢迎用户"+username);
+                        // alert("登陆成功，欢迎用户"+username);
                         var roleName = "";
                         $.each(res, function(index, obj){
                             if(roleString == "merchant"){
