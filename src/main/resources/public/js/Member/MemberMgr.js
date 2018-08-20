@@ -8,8 +8,12 @@ var username;
 var role;
 var credit;
 var result;
+var row;
 var InitPage = {
     init:function () {
+        if (window.location.href.indexOf("memberShoppingList") > 0) {
+            shoppingRecordMgr.add();
+        }
         username = Basic.getPassingStr("username");
         role = Basic.getPassingStr("role");
         Basic.initMemberinfo();
@@ -17,7 +21,7 @@ var InitPage = {
         Basic.initMainPageMenuBtn();
         if(window.location.href.indexOf("memberShopInfo")){
             shopMgr.initList();
-        };
+        }
     },
     //注册按钮
     action:function () {
@@ -224,6 +228,7 @@ var Basic = {
                         // result = res;
                         if (res.code == 0) {
                             // alert("获取成功");
+                            window.location.href = "../Login/sign_in.html";
                         } else {
                             alert("服务器繁忙，请稍后再试");
                         }
@@ -232,7 +237,6 @@ var Basic = {
                         alert("服务器繁忙，请稍后再试");
                     }
                 });
-                window.location.href = "./indexReal.html";
             });
 
 
@@ -593,6 +597,48 @@ var shopMgr = {
 //消费记录页
 var shoppingRecordMgr = {
     //memberpointShoppingList.html
+    add:function () {
+        // alert("Hello");
+        $.ajax({
+            type: "GET",
+            url: "/memberCenter/showConsume",
+            dataType: "json",
+            success: function (res) {
+                result = res;
+                shoppingRecordMgr.addbox(res.data, 1);
+            },
+            error: function () {
+
+            }
+        })
+    },
+    addbox:function (res, num) {
+        // alert( "进来了");
+        $('#tbody').empty();
+        for (var i = 0; i < res.length; i++) {
+            // alert( "循环开始了");
+            $('#tbody:last').append(
+            "<tr>" +
+                '<td style="text-align: center" >' + res[i].cumid+"</td>"+
+                '<td style="text-align: center" >'+res[i].merid+"</td>"+
+                '<td style="text-align: center">'+res[i].memid+"</td>"+
+                '<td style="text-align: center" id="state">'+
+                '<span class="label label-success">'+res[i].cumway+"</span>"+
+                "</td>"+
+                '<td style="text-align: center">'+res[i].cummoney+"</td>"+
+                '<td style="text-align: center">'+res[i].date+"</td>"+
+                "<td>"+
+                '<div value =""></div>'+
+                "<div class='text-right'>"+
+                "<a class='btn btn-success btn-mini' href='#' onclick='PointsMgr.showInfo(this)'>"+
+                // "<i class='icon-pencil'></i>"+
+                "</a>"+
+                "</div>"+
+                "</td>"+
+                "</tr>"
+            );
+        }
+    }
 };
 
 //我的资料模态框

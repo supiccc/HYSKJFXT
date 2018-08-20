@@ -43,11 +43,19 @@ public class shiroConfiguration {
         ShiroFilterFactoryBean bean=new ShiroFilterFactoryBean();
         bean.setSecurityManager(manager);
         //配置登录的url和登录成功的url
-        //bean.setLoginUrl("/sign_in.html");
+        bean.setLoginUrl("/Login/sign_in.html");
 //        bean.setSuccessUrl("/home");
         //配置访问权限
         LinkedHashMap<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
-//        filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/Login/*", "anon");
+        filterChainDefinitionMap.put("/js/*", "anon");
+        filterChainDefinitionMap.put("/img/*", "anon");
+        filterChainDefinitionMap.put("/Member/indexReal.html", "anon");
+        filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/sendSMS", "anon");
+        filterChainDefinitionMap.put("/forget", "anon");
+
+        filterChainDefinitionMap.put("/**", "user");
 //        filterChainDefinitionMap.put("/sign*.html", "anon");
 //        filterChainDefinitionMap.put("/forget_password.html", "anon");
 //        filterChainDefinitionMap.put("/jsp/login.jsp*", "anon"); //表示可以匿名访问
