@@ -12,16 +12,16 @@ var InitPage={
         //登陆
         $('#loginBtn').on('click',function () {
             accountMgr.login();
-        })
+        });
         $('#submitBtn').on('click',function () {
             accountMgr.register();
-        })
+        });
         //入盟
 
         //忘记密码
         $('#sendSMS').on('click',function () {
             foget.send();
-        })
+        });
         $('#update').on('click',function(){
             foget.update();
         })

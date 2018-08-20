@@ -8,16 +8,25 @@ var username;
 var role;
 var credit;
 var result;
+var row;
 var InitPage = {
     init:function () {
+        if (window.location.href.indexOf("memberShoppingList") > 0) {
+            shoppingRecordMgr.add();
+        }
+        if (window.location.href.indexOf("memberCardHistoryList") > 0) {
+            alert("此功能尚未开放");
+        }
         username = Basic.getPassingStr("username");
         role = Basic.getPassingStr("role");
-        Basic.initMemberinfo();
+        if (role == "member") {
+            Basic.initMemberinfo();
+        }
         Basic.initMyMenu();
         Basic.initMainPageMenuBtn();
-        if(window.location.href.indexOf("memberShopInfo")){
+        if(window.location.href.indexOf("memberShopInfo") > 0){
             shopMgr.initList();
-        };
+        }
     },
     //注册按钮
     action:function () {
@@ -224,6 +233,7 @@ var Basic = {
                         // result = res;
                         if (res.code == 0) {
                             // alert("获取成功");
+                            window.location.href = "../Login/sign_in.html";
                         } else {
                             alert("服务器繁忙，请稍后再试");
                         }
@@ -232,7 +242,6 @@ var Basic = {
                         alert("服务器繁忙，请稍后再试");
                     }
                 });
-                window.location.href = "./indexReal.html";
             });
 
 
@@ -279,7 +288,23 @@ var Basic = {
                 Basic.showFeedback();
             });
             $('#cancelBtn2').on('click',function () {
-                window.location.href = "./indexReal.html";
+                $.ajax({
+                    type : 'GET',
+                    url : '/logout',
+                    dataType : 'json',
+                    success: function(res) {
+                        // result = res;
+                        if (res.code == 0) {
+                            // alert("获取成功");
+                            window.location.href = "../Login/sign_in.html";
+                        } else {
+                            alert("服务器繁忙，请稍后再试");
+                        }
+                    },
+                    error:function () {
+                        alert("服务器繁忙，请稍后再试");
+                    }
+                });
             });
         }
         //商家-管理员
@@ -324,7 +349,23 @@ var Basic = {
                 Basic.showFeedback();
             });
             $('#cancelBtn3').on('click',function () {
-                window.location.href = "./indexReal.html";
+                $.ajax({
+                    type : 'GET',
+                    url : '/logout',
+                    dataType : 'json',
+                    success: function(res) {
+                        // result = res;
+                        if (res.code == 0) {
+                            // alert("获取成功");
+                            window.location.href = "../Login/sign_in.html";
+                        } else {
+                            alert("服务器繁忙，请稍后再试");
+                        }
+                    },
+                    error:function () {
+                        alert("服务器繁忙，请稍后再试");
+                    }
+                });
             });
         }
         //商家-前台
@@ -369,7 +410,23 @@ var Basic = {
                 Basic.showFeedback();
             });
             $('#cancelBtn4').on('click',function () {
-                window.location.href = "./indexReal.html";
+                $.ajax({
+                    type : 'GET',
+                    url : '/logout',
+                    dataType : 'json',
+                    success: function(res) {
+                        // result = res;
+                        if (res.code == 0) {
+                            // alert("获取成功");
+                            window.location.href = "../Login/sign_in.html";
+                        } else {
+                            alert("服务器繁忙，请稍后再试");
+                        }
+                    },
+                    error:function () {
+                        alert("服务器繁忙，请稍后再试");
+                    }
+                });
             });
         }
         //商家-客户经理
@@ -414,7 +471,23 @@ var Basic = {
                 Basic.showFeedback();
             });
             $('#cancelBtn5').on('click',function () {
-                window.location.href = "./indexReal.html";
+                $.ajax({
+                    type : 'GET',
+                    url : '/logout',
+                    dataType : 'json',
+                    success: function(res) {
+                        // result = res;
+                        if (res.code == 0) {
+                            // alert("获取成功");
+                            window.location.href = "../Login/sign_in.html";
+                        } else {
+                            alert("服务器繁忙，请稍后再试");
+                        }
+                    },
+                    error:function () {
+                        alert("服务器繁忙，请稍后再试");
+                    }
+                });
             });
         }
         //商家-部门经理
@@ -459,7 +532,23 @@ var Basic = {
                 Basic.showFeedback();
             });
             $('#cancelBtn6').on('click',function () {
-                window.location.href = "./indexReal.html";
+                $.ajax({
+                    type : 'GET',
+                    url : '/logout',
+                    dataType : 'json',
+                    success: function(res) {
+                        // result = res;
+                        if (res.code == 0) {
+                            // alert("获取成功");
+                            window.location.href = "../Login/sign_in.html";
+                        } else {
+                            alert("服务器繁忙，请稍后再试");
+                        }
+                    },
+                    error:function () {
+                        alert("服务器繁忙，请稍后再试");
+                    }
+                });
             });
         }
         //未登录
@@ -593,6 +682,48 @@ var shopMgr = {
 //消费记录页
 var shoppingRecordMgr = {
     //memberpointShoppingList.html
+    add:function () {
+        // alert("Hello");
+        $.ajax({
+            type: "GET",
+            url: "/memberCenter/showConsume",
+            dataType: "json",
+            success: function (res) {
+                result = res;
+                shoppingRecordMgr.addbox(res.data, 1);
+            },
+            error: function () {
+
+            }
+        })
+    },
+    addbox:function (res, num) {
+        // alert( "进来了");
+        $('#tbody').empty();
+        for (var i = 0; i < res.length; i++) {
+            // alert( "循环开始了");
+            $('#tbody:last').append(
+            "<tr>" +
+                '<td style="text-align: center" >' + res[i].cumid+"</td>"+
+                '<td style="text-align: center" >'+res[i].merid+"</td>"+
+                '<td style="text-align: center">'+res[i].memid+"</td>"+
+                '<td style="text-align: center" id="state">'+
+                '<span class="label label-success">'+res[i].cumway+"</span>"+
+                "</td>"+
+                '<td style="text-align: center">'+res[i].cummoney+"</td>"+
+                '<td style="text-align: center">'+res[i].date+"</td>"+
+                "<td>"+
+                '<div value =""></div>'+
+                "<div class='text-right'>"+
+                "<a class='btn btn-success btn-mini' href='#' onclick='PointsMgr.showInfo(this)'>"+
+                // "<i class='icon-pencil'></i>"+
+                "</a>"+
+                "</div>"+
+                "</td>"+
+                "</tr>"
+            );
+        }
+    }
 };
 
 //我的资料模态框
@@ -618,6 +749,28 @@ $('#indexBtn').click(function () {
 $('#shopListBtn').on('click',function () {
     // alert("hrllo" + username + role);
     window.location.href = "./memberShopInfo.html?username="+username+"&role="+role+"";
+});
+
+// 发送反馈
+$('#sendFeedback').on('click', function(){
+    // alert("反馈啦");
+    $.ajax({
+        type: "POST",
+        url: "/merchantInfo/feedbackEmail",
+        dataType: "json",
+        data:{
+            content: $('#feedback').val()
+        },
+        success:function(res) {
+            if (res.code == 0) {
+                alert("反馈成功，我们会认真聆听您的意见！");
+                $('#modal-container-feedback').attr("data-dismiss", "modal");
+            }
+        },
+        error:function () {
+            alert("服务器繁忙");
+        }
+    })
 });
 
 $('#savenewinfo').on('click',function () {

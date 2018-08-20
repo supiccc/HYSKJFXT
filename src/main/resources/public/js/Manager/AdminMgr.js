@@ -6,6 +6,9 @@ $(function () {
 var InitPage = {
     init:function(){
         Basic.initMyMenu();
+        if (window.location.href.indexOf("shopInfoMgr") > 0) {
+            memMgr.initList();
+        }
     },
     action:function () {
         var username = Basic.getPassingStr("username");
@@ -143,26 +146,26 @@ var memMgr = {
     //有可变数量的标签的列表更新
     initList: function () {
         $.ajax({
-            type: '',
-            url: '',
+            type: 'GET',
+            url: '/getallmerchant',
             dataType: 'json',
             success: function (result) {
                 var count = 0;
-                $.each(result, function (index, obj) {
+                $.each(result.data, function (index, obj) {
                     $('#tbody').append(
                         "<tr>\n" +
-                        "                                            <td style=\"text-align: center\">2131212</td>\n" +
+                        "                                            <td style=\"text-align: center\"> "+ obj.merid + "</td>\n" +
                         // 这个id要动态给
+                        "                                            <td style=\"text-align: center\"> " + obj.mertype + "</td>\n" +
                         "                                            <td style=\"text-align: center\" id='label+" + count + "'>\n" +
                         "                                                <span class=\"label label-inverse\">火锅</span>\n" +
                         "                                                <span class=\"label label-inverse\">快餐</span>\n" +
                         "                                                <span class=\"label label-inverse\">火锅</span>\n" +
                         "                                                <span class=\"label label-inverse\">快餐</span>\n" +
                         "                                            </td>\n" +
-                        "                                            <td style=\"text-align: center\">西兰</td>\n" +
-                        "                                            <td style=\"text-align: center\">女</td>\n" +
-                        "                                            <td style=\"text-align: center\">2010年10月1日</td>\n" +
-                        "                                            <td style=\"text-align: center\">214436522@qq.com</td>\n" +
+                        "                                            <td style=\"text-align: center\">"+ obj.merprovince + obj.mercity + obj.merarea + obj.merAddress + "</td>\n" +
+                        "                                            <td style=\"text-align: center\">"+ obj.merprincipal + "</td>\n" +
+                        "                                            <td style=\"text-align: center\">"+ obj.mertelphone + "</td>\n" +
                         "                                            <td>\n" +
                         "                                                <div class='text-right'>\n" +
                         "                                                    <a class='btn btn-success btn-mini' href='#' onclick='ShopInfoMgr.showInfo(this)'>\n" +
@@ -229,7 +232,7 @@ var ShopMgr = {
         );
         $.ajax({
             type : 'POST',
-            url : 'http://localhost:8080/examine/application/list',
+            url : '/application/list',
             datatype : 'json',
             success : function (result) {
                 $.each(result.data,function(index, obj){
@@ -383,7 +386,7 @@ var PointsMgr = {
     showInfo:function (btn) {
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/creditconsume/record/list",
+            url: "/creditconsume/record/list",
             dataType: "json",
             success: function (result) {
                 $.each(result.data, function (index, obj) {
