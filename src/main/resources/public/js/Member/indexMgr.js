@@ -11,7 +11,7 @@ var InitPage = {
         $('#RegisPageBtn').on('click',function(){
             window.location.href = "../Login/sign_up.html";
         });
-    },
+    }
 };
 
 var Basic = {
@@ -32,7 +32,23 @@ var Basic = {
             //     window.location.href = "./memberShopInfo.html?username="+username+"&role="+role+"";
             // });
             $('#cancelPageBtn').on('click', function () {
-                window.location.href = "../Login/sign_up.html";
+                $.ajax({
+                    type : 'GET',
+                    url : '/logout',
+                    dataType : 'json',
+                    success: function(res) {
+                        // result = res;
+                        if (res.code == 0) {
+                            // alert("获取成功");
+                            window.location.href = "../Login/sign_in.html";
+                        } else {
+                            alert("服务器繁忙，请稍后再试");
+                        }
+                    },
+                    error:function () {
+                        alert("服务器繁忙，请稍后再试");
+                    }
+                });
             });
         }else if(role == "admin"){
             $('#accountStateDiv').append(
@@ -45,7 +61,23 @@ var Basic = {
             //     window.location.href = "./memberShopInfo.html?username="+username+"&role="+role+"";
             // });
             $('#cancelPageBtn').on('click', function () {
-                window.location.href = "../Login/sign_up.html";
+                $.ajax({
+                    type : 'GET',
+                    url : '/logout',
+                    dataType : 'json',
+                    success: function(res) {
+                        // result = res;
+                        if (res.code == 0) {
+                            // alert("获取成功");
+                            window.location.href = "../Login/sign_in.html";
+                        } else {
+                            alert("服务器繁忙，请稍后再试");
+                        }
+                    },
+                    error:function () {
+                        alert("服务器繁忙，请稍后再试");
+                    }
+                });
             });
         }else if(role == "merchantAdmin"){
             $('#accountStateDiv').append(
@@ -58,7 +90,23 @@ var Basic = {
             //     window.location.href = "./memberShopInfo.html?username="+username+"&role="+role+"";
             // });
             $('#cancelPageBtn').on('click', function () {
-                window.location.href = "../Login/sign_up.html";
+                $.ajax({
+                    type : 'GET',
+                    url : '/logout',
+                    dataType : 'json',
+                    success: function(res) {
+                        // result = res;
+                        if (res.code == 0) {
+                            // alert("获取成功");
+                            window.location.href = "../Login/sign_in.html";
+                        } else {
+                            alert("服务器繁忙，请稍后再试");
+                        }
+                    },
+                    error:function () {
+                        alert("服务器繁忙，请稍后再试");
+                    }
+                });
             });
         }else if(role == "merchantFrontDesk"){
             $('#accountStateDiv').append(
@@ -71,7 +119,23 @@ var Basic = {
             //     window.location.href = "./memberShopInfo.html?username="+username+"&role="+role+"";
             // });
             $('#cancelPageBtn').on('click', function () {
-                window.location.href = "../Login/sign_up.html";
+                $.ajax({
+                    type : 'GET',
+                    url : '/logout',
+                    dataType : 'json',
+                    success: function(res) {
+                        // result = res;
+                        if (res.code == 0) {
+                            // alert("获取成功");
+                            window.location.href = "../Login/sign_in.html";
+                        } else {
+                            alert("服务器繁忙，请稍后再试");
+                        }
+                    },
+                    error:function () {
+                        alert("服务器繁忙，请稍后再试");
+                    }
+                });
             });
         }else if(role == "merchantCManager"){
             alert("西兰");
@@ -85,7 +149,23 @@ var Basic = {
             //     window.location.href = "./memberShopInfo.html?username="+username+"&role="+role+"";
             // });
             $('#cancelPageBtn').on('click', function () {
-                window.location.href = "../Login/sign_up.html";
+                $.ajax({
+                    type : 'GET',
+                    url : '/logout',
+                    dataType : 'json',
+                    success: function(res) {
+                        // result = res;
+                        if (res.code == 0) {
+                            // alert("获取成功");
+                            window.location.href = "../Login/sign_in.html";
+                        } else {
+                            alert("服务器繁忙，请稍后再试");
+                        }
+                    },
+                    error:function () {
+                        alert("服务器繁忙，请稍后再试");
+                    }
+                });
             });
         }else if(role == "merchantDManager"){
             $('#accountStateDiv').append(
@@ -98,7 +178,23 @@ var Basic = {
             //     window.location.href = "./memberShopInfo.html?username="+username+"&role="+role+"";
             // });
             $('#cancelPageBtn').on('click', function () {
-                window.location.href = "../Login/sign_up.html";
+                $.ajax({
+                    type : 'GET',
+                    url : '/logout',
+                    dataType : 'json',
+                    success: function(res) {
+                        // result = res;
+                        if (res.code == 0) {
+                            // alert("获取成功");
+                            window.location.href = "../Login/sign_in.html";
+                        } else {
+                            alert("服务器繁忙，请稍后再试");
+                        }
+                    },
+                    error:function () {
+                        alert("服务器繁忙，请稍后再试");
+                    }
+                });
             });
         }else{
             $('#accountStateDiv').append(
