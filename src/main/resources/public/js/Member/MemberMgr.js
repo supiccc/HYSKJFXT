@@ -23,9 +23,11 @@ var InitPage = {
             Basic.initMemberinfo();
         }
         Basic.initMyMenu();
-        Basic.initMainPageMenuBtn();
+        // Basic.initMainPageMenuBtn();
         if(window.location.href.indexOf("memberShopInfo") > 0){
             shopMgr.initList();
+        }else if(window.location.href.indexOf("memberShopInfoDetail")>0){
+            shopMgr.initInfoListBymacid();
         }
     },
     //注册按钮
@@ -598,73 +600,83 @@ var shopMgr = {
     //缺少一个商家详情页面
     //缺少一个产品详情页面
 
+    //刷新当前商家列表页
     initList:function () {
         $.ajax({
-            type : "POST",
-            url : "/merchantAccManage/queryAll",
+            type : "GET",
+            url : "/getallmerchant",
             dataType : "json",
             success : function (res) {
                 if(res.code == 0){
                     alert("找到"+res.data.length+"家店呢");
-                    $.each(result, function(index, obj){
-                        var infoHref = "./memberShopInfoDetail.html?macid="+obj.macid;
-                       $('#shopListAll').append(
-                         "<div class='row-fluid'>\n" +
-                           "    <div>\n" +
-                           "        <div class='span12 box' id=\"shopList>\n" +
-                           "            <div class='box-header dark-background'\">\n" +
-                           "            <div class='title'>\n" +
-                           "                <!--根据拉取到商家名称修改-->\n" +
-                           "                <h4 id=\"mername\" style=\"color:#FFFFFF \">"+obj.macid+"</h4>\n" +
-                           "            </div>\n" +
-                           "        </div>\n" +
-                           "        <div class='box-content' >\n" +
-                           "            <table>\n" +
-                           "                    <tr align=\"center\">\n" +
-                           "                    <td style=\"width:120px\" class=\"text-left\">商家介绍</td>\n" +
-                           "                    <td colspan=\"4\">\n" +
-                           "                        <label for=\"merintroduce\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
-                           "                        <!--商家介绍-->\n" +
-                           "                        <h5 id=\"merintroduce\" style=\"text-align: left\">"+obj.maccumacc+"</h5>\n" +
-                           "                    </td>\n" +
-                           "                    <td   style=\"margin:auto; text-align:right\" rowspan=\"3\" >\n" +
-                           "                         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;\n" +
-                           "                        <img height=\"200\" width=\"200\" src=\"http://pic1.win4000.com/wallpaper/2018-06-27/5b3326ce30f43.jpg\"  alt=\"Liu\"  />\n" +
-                           "                    </td>\n" +
-                           "                    </tr>\n" +
-                           "                    <!--商家电话-->\n" +
-                           "                    <tr align=\"center\">\n" +
-                           "                        <td style=\"width:120px\" class=\"text-left\">商家电话</td>\n" +
-                           "                        <td colspan=\"4\">\n" +
-                           "                            <label for=\"mertelphone\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
-                           "                            <!--商家电话-->\n" +
-                           "                            <h5 id=\"mertelphone\" style=\"text-align: left\">"+obj.macacc+"</h5>\n" +
-                           "                        </td>\n" +
-                           "                    </tr>\n" +
-                           "                    <!--商家地址-->\n" +
-                           "                    <tr align=\"center\">\n" +
-                           "                    <td style=\"width:120px\" class=\"text-left\">商家地址</td>\n" +
-                           "                        <td colspan=\"4\">\n" +
-                           "                            <label for=\"merearea\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
-                           "                             <!--商家地址-->\n" +
-                           "                            <h5 id=\"merearea\" style=\"text-align: left\">接口没有提供</h5>\n" +
-                           "                           </td>\n" +
-                           "                    </tr>\n" +
-                           "                    <!--商家详情-->\n" +
-                           "                    <tr align=\"center\">\n" +
-                           "                        <td style=\"width:120px\" class=\"text-left\">商家详情</td>\n" +
-                           "                        <td colspan=\"4\">\n" +
-                           "                            <label for=\"infohref\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
-                           "                            <!--超链接-->\n" +
-                           "                            <h5 id=\"infohref\" style=\"text-align: left\" href='"+infoHref+"'>点击查看更多</h5>\n" +
-                           "                        </td>\n" +
-                           "                    </tr>\n" +
-                           "            </table>\n" +
-                           "        </div>\n" +
-                           "    </div>\n" +
-                           "</div>"
-                       );
-                    });
+                    $('#shopListAll').empty();
+                    // $.each(res, function(index, obj)
+                    for(var i=0;i<res.data.length;i++){
+                        // alert("!");
+                        var obj = res.data[i];
+                        var infoHref = "http://localhost:8080/Member/memberShopInfoDetail.html?macid=" + obj.macid;
+                        // alert(infoHref);
+                        $('#shopListAll').append(
+                            "<div class='row-fluid'>\n" +
+                            "        <div class='span12 box'>\n" +
+                            "            <div class='box-header dark-background'>\n" +
+                            "                <div class='title'>\n" +
+                            "                    <!--根据拉取到商家名称修改-->\n" +
+                            "                    <h4 id=\"mername\" style=\"color:white \">" + obj.mername + "</h4>\n" +
+                            "                </div>\n" +
+                            "            </div>\n" +
+                            "        <!--</div>-->\n" +
+                            "        <div class='box-content' >\n" +
+                            "            <table>\n" +
+                            "                    <tr align=\"center\">\n" +
+                            "                    <td style=\"width:120px\" class=\"text-left\">商家介绍</td>\n" +
+                            "                    <td colspan=\"4\">\n" +
+                            "                        <label for=\"merintroduce\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
+                            "                        <!--商家介绍-->\n" +
+                            "                        <h5 id=\"merintroduce\" style=\"text-align: left\">" + obj.merintroduce + "</h5>\n" +
+                            "                    </td>\n" +
+                            "                    <td   style=\"margin:auto; text-align:right\" rowspan=\"3\" >\n" +
+                            "                         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;\n" +
+                            "                        <img height=\"200\" width=\"200\" src=\"http://img1.gtimg.com/cq/pics/hv1/112/134/2188/142308982.jpg\"  alt=\"Liu\"  />\n" +
+                            "                    </td>\n" +
+                            "                    </tr>\n" +
+                            "                    <!--商家电话-->\n" +
+                            "                    <tr align=\"center\">\n" +
+                            "                        <td style=\"width:120px\" class=\"text-left\">商家电话</td>\n" +
+                            "                        <td colspan=\"4\">\n" +
+                            "                            <label for=\"mertelphone\" class=\"col-sm-2 control-label\" style=\"text-align: left;width: 250px;\"></label>\n" +
+                            "                            <!--商家电话-->\n" +
+                            "                            <h5 id=\"mertelphone\" style=\"text-align: left\">" + obj.mertelphone + "</h5>\n" +
+                            "                        </td>\n" +
+                            "                    </tr>\n" +
+                            "                    <!--商家地址-->\n" +
+                            "                    <tr align=\"center\">\n" +
+                            "                    <td style=\"width:120px\" class=\"text-left\">商家地址</td>\n" +
+                            "                        <td colspan=\"4\">\n" +
+                            "                            <label for=\"merearea\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
+                            "                             <!--商家地址-->\n" +
+                            "                            <h5 id=\"merearea\" style=\"text-align: left\">" + obj.merarea + "</h5>\n" +
+                            "                           </td>\n" +
+                            "                    </tr>\n" +
+                            "                    <!--商家详情-->\n" +
+                            "                    <tr align=\"center\">\n" +
+                            "                        <td style=\"width:120px\" class=\"text-left\">商家详情</td>\n" +
+                            "                        <td colspan=\"4\" href='\" + infoHref + \"'>\n" +
+                            "                            <label for=\"infohref\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
+                            "                            <!--超链接-->\n" +
+                            "                            <h5 id=\"infohref\" style=\"text-align: left\" href='\" + infoHref + \"'>查看更多信息</h5>\n" +
+                            "                        </td>\n" +
+                            "                    </tr>\n" +
+                            "            </table>\n" +
+                            "        </div>\n" +
+                            "        </div>\n" +
+                            "</div>\n" +
+                            "</div>\n" +
+                            "            <!--列表样例结束-->\n" +
+                            "            </div>\n" +
+                            "        </div>"
+                        );
+                    }
                 }
                 else{
                     alert("后台故障，查询失败");
@@ -674,7 +686,51 @@ var shopMgr = {
                 alert("服务器故障，查询失败");
             }
         });
-    }
+    },
+
+    //根据商家macid获取商家详细信息
+    initInfoListBymacid:function(){
+        var urlText = "http://localhost:8080/getmerchant/"+Basic.getPassingStr("macid");
+        $.ajax({
+            type : "GET",
+            url : urlText,
+            dataType : "json",
+            success : function (res) {
+                //加载商家信息
+                $('#mername').empty();
+                $('#mername').append(res.data.info.mername);
+                $('#merintroduce').empty();
+                $('#merintroduce').append(res.data.info.merintroduce);
+                $('#mertelphone').empty();
+                $('#mertelphone').append(res.data.info.mertelphone);
+                $('#merarea').empty();
+                $('#merarea').append(res.data.info.merarea);
+                //加载产品信息
+                //加载评论列表
+                $('#commentList').empty();
+                for(var i=0;i<res.data.evaluation.length;i++){
+                    var obj = res.data.evaluation[i];
+                    $('#commentList').append(
+                      "<li>\n" +
+                        "                                                                            <div class='avatar pull-left'>\n" +
+                        "                                                                                <div class='icon-user'></div>\n" +
+                        "                                                                            </div>\n" +
+                        "                                                                            <div class='body'>\n" +
+                        "                                                                                <div class='name'><a href=\"#\" class=\"text-contrast\">"+obj.evabyN+"</a></div>\n" +
+                        "                                                                                <div class='text'>"+obj.evainfo+"</div>\n" +
+                        "                                                                            </div>\n" +
+                        "                                                                            <div class='text-right'>\n" +
+                        "                                                                                <small class='date muted'>\n" +
+                        "                                                                                    <span class='timeago fade has-tooltip' data-placement='top' title='2013-05-30 23:55:41 +0200'>"+obj.evareptime+"</span>\n" +
+                        "                                                                                    <i class='icon-time'></i>\n" +
+                        "                                                                                </small>\n" +
+                        "                                                                            </div>\n" +
+                        "                                                                        </li>"
+                    );
+                }
+            }
+        })
+    },
     //2018.8.18 Hwalv
     //产品详情遮罩在我发给你的微信文件里 memberSearch.html中
 };

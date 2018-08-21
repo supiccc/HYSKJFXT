@@ -6,7 +6,7 @@
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport' />
 
     <!--[if lt IE 9]>
-    <script src='../assets/javascripts/html5shiv.js' type='text/javascript'></script>
+    <script src='../../../../../../../Desktop/public/assets/javascripts/html5shiv.js' type='text/javascript'></script>
     <![endif]-->
 
     <link href='../assets/stylesheets/bootstrap/bootstrap.css' media='all' rel='stylesheet' type='text/css' />
@@ -209,7 +209,7 @@
 <ul class='nav nav-stacked'>
 <!--审核入盟申请-->
 <li class=''>
-    <a href='./AdminAccept.html'>
+    <a>
         <i class='icon-check-sign'></i>
         <span>审核申请</span>
     </a>
@@ -236,118 +236,124 @@
                 </a>
             </div>
         </div>
-        <div class='box-content'>
-<table>
-                    <tr align="center">
-                        <td style="width:120px" class="text-left">商家类型</td>
-                        <td colspan="4">
-                            <label for="shopType" class="col-sm-2 control-label" style="text-align: left"></label>
-                            <select id="shopType" style="width: 710px; background-color: white">
-                            <!--这里应该默认显示已经选的经营类型-->
-                            <option style="display:none;" disabled selected>请选择经营范围</option>
-                            <option value="1">美食</option>
-                            <option value="2">出行</option>
-                            <option value="3">购物</option>
-                            <option value="3">住宿</option>
-                            <option value="3">游玩</option>
-                            <option value="3">娱乐</option>
-                        </select></td>
-                    </tr>
-                    <tr align="center">
-                        <td style="width:120px" class="text-left">商家名称</td>
-                        <td colspan="4">
-                            <label for="shopName" class="col-sm-2 control-label" style="text-align: left"></label>
-                            <!--改默认显示-->
-                            <input id="shopName" type="text" placeholder="请填写您的店家名字" style="width: 700px"></td>
-                    </tr>
-                    <tr align="center">
-                    <td style="width:120px" class="text-left">商家地址</td>
-                        <td colspan="4">
-                            <label for="shopAddress" class="col-sm-2 control-label" style="text-align: left"></label>
-                            <input id="shopAddress" type="text" placeholder="请按:xx省 xx市 xx区 具体地址填写" style="width: 700px"></td>
-                    </tr>
-                    <tr align="center">
-                    <td style="width:120px" class="text-left">联系电话</td>
-                        <td colspan="4">
-                            <label for="phoneNumber" class="col-sm-2 control-label" style="text-align: left"></label>
-                            <input id="phoneNumber" type="text" placeholder="请填写您的手机号码或座机号码" style="width: 700px"></td>
-                    </tr>
-                    <tr align="center">
-                    <td style="width:120px" class="text-left">消费积分比例</td>
-                        <td colspan="4">
-                            <label for="ratio" class="col-sm-2 control-label" style="text-align: left"></label>
-                            <input id="ratio" type="text" placeholder="默认单位为%，填数字即可" style="width: 700px"></td>
-                    </tr>
-                    <tr align="center">
-                    <td style="width:120px" class="text-left">会员折扣比例</td>
-                        <td colspan="4">
-                            <label for="disCount" class="col-sm-2 control-label" style="text-align: left"></label>
-                            <input  id="disCount" type="text" placeholder="默认单位为%，填数字即可" style="width: 700px"></td>
-                    </tr>
-                    <!--分隔线-->
-                                        <tr>
-                        <td>
-                            <div><hr class='hr-normal' /></div>
-                        </td>
-                                                <td>
-                            <div><hr class='hr-normal' /></div>
-                        </td>
-                    </tr>
-                        <tr align="center">
-                          <td style="width:100px" class="text-left">姓名</td>
-                        <td colspan="4">
-                            <label for="realName" class="col-sm-2 control-label" style="text-align: left"></label>
-                            <input id="realName" type="text" placeholder="请输入您的真实姓名" style="width: 700px"></td>
-             </tr>
-             <tr align="center">
-                      <td style="width:120px" class="text-left">称谓</td>
-                        <td colspan="4">
-                            <label for="sex" class="col-sm-2 control-label" style="text-align: left"></label>
-                            <select id="sex" style="width: 710px; background-color: white">
-                            <option style="display:none;" disabled selected>请选择称谓</option>
-                            <option value="1">男士</option>
-                            <option value="2">女士</option>
-                        </select></td>
-               </tr>
-                  <tr align="center">
-                   <td style="width:120px" class="text-left">职务</td>
-                        <td colspan="4">
-                            <label for="job" class="col-sm-2 control-label" style="text-align: left"></label>
-                            <input id="job" type="text" placeholder="请输入您的职务名称" style="width: 700px"></td>
-                </tr>
-            <tr align="center">
-                        <td style="width:120px" class="text-left">个人手机</td>
-                        <td colspan="4">
-                            <label for="personalPhoneNumber" class="col-sm-2 control-label" style="text-align: left"></label>
-                            <input id="personalPhoneNumber" type="text" placeholder="请输入您的个人手机号" style="width: 700px"></td>
-            </tr>
-            <tr align="center">
-                        <td style="width:120px" class="text-left">传真</td>
-                        <td colspan="4">
-                            <label for="fax" class="col-sm-2 control-label" style="text-align: left"></label>
-                            <input id="fax" type="text" placeholder="请输入您的传真号" style="width: 700px"></td>
-            </tr>
-             <tr align="center">
-             <td style="width:120px" class="text-left">电子邮箱</td>
-                        <td colspan="4">
-                            <label for="email" class="col-sm-2 control-label" style="text-align: left"></label>
-                            <input id="email" type="text" placeholder="请输入您的电子邮箱，注意后缀，如 @qq.com" style="width: 700px"></td></tr>
-                     <!--保存提示按钮+提示保存-->
-                     <tr >
-                        <td colspan="12" >
-                    <h6 class='text-right'>点击审核按钮后系统发送信息通知商家并分配账号，点击驳回后也会进行短信通知未通过</h6>
-                    <button class='btn pull-right' type='submit'>
-                        <i class='icon-remove'></i>
-                       驳回
-                    </button>
-                    <button class='btn pull-right' type='submit'>
-                        <i class='icon-ok'></i>
-                        同意
-                    </button>
-                    </td>
-                    </tr>
+        <div class='box-content' id="acceptShopList">
 
-</table>
+            <!--//审核信息列表项-->
+            <!--<table>-->
+                    <!--<tr align="center">-->
+                        <!--<td style="width:120px" class="text-left">商家类型</td>-->
+                        <!--<td colspan="4">-->
+                            <!--<label for="shopType" class="col-sm-2 control-label" style="text-align: left"></label>-->
+                            <!--&lt;!&ndash;<select id="shopType" style="width: 710px; background-color: white">&ndash;&gt;-->
+                            <!--&lt;!&ndash;&lt;!&ndash;这里应该默认显示已经选的经营类型&ndash;&gt;&ndash;&gt;-->
+                                <!--&lt;!&ndash;<option style="display:none;" disabled selected>请选择经营范围</option>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<option value="1" value="food">美食</option>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<option value="2" value="journary">出行</option>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<option value="3" value="shopping">购物</option>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<option value="3" value="hotel">住宿</option>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<option value="3" value="trip">游玩</option>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<option value="3" value="fun">娱乐</option>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</select>&ndash;&gt;-->
+                            <!--<input id="shopType" type="text" style="width: 700px">-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--<tr align="center">-->
+                        <!--<td style="width:120px" class="text-left">商家名称</td>-->
+                        <!--<td colspan="4">-->
+                            <!--<label for="shopName" class="col-sm-2 control-label" style="text-align: left"></label>-->
+                            <!--&lt;!&ndash;改默认显示&ndash;&gt;-->
+                            <!--<input id="shopName" type="text" placeholder="请填写您的店家名字" style="width: 700px"></td>-->
+                    <!--</tr>-->
+                    <!--<tr align="center">-->
+                    <!--<td style="width:120px" class="text-left">商家地址</td>-->
+                        <!--<td colspan="4">-->
+                            <!--<label for="shopAddress" class="col-sm-2 control-label" style="text-align: left"></label>-->
+                            <!--<input id="shopAddress" type="text" placeholder="请按:xx省 xx市 xx区 具体地址填写" style="width: 700px"></td>-->
+                    <!--</tr>-->
+                    <!--<tr align="center">-->
+                    <!--<td style="width:120px" class="text-left">联系电话</td>-->
+                        <!--<td colspan="4">-->
+                            <!--<label for="phoneNumber" class="col-sm-2 control-label" style="text-align: left"></label>-->
+                            <!--<input id="phoneNumber" type="text" placeholder="请填写您的手机号码或座机号码" style="width: 700px"></td>-->
+                    <!--</tr>-->
+                    <!--<tr align="center">-->
+                    <!--<td style="width:120px" class="text-left">消费积分比例</td>-->
+                        <!--<td colspan="4">-->
+                            <!--<label for="ratio" class="col-sm-2 control-label" style="text-align: left"></label>-->
+                            <!--<input id="ratio" type="text" placeholder="默认单位为%，填数字即可" style="width: 700px"></td>-->
+                    <!--</tr>-->
+                    <!--<tr align="center">-->
+                    <!--<td style="width:120px" class="text-left">会员折扣比例</td>-->
+                        <!--<td colspan="4">-->
+                            <!--<label for="disCount" class="col-sm-2 control-label" style="text-align: left"></label>-->
+                            <!--<input  id="disCount" type="text" placeholder="默认单位为%，填数字即可" style="width: 700px"></td>-->
+                    <!--</tr>-->
+                    <!--&lt;!&ndash;分隔线&ndash;&gt;-->
+                                        <!--<tr>-->
+                        <!--<td>-->
+                            <!--<div><hr class='hr-normal' /></div>-->
+                        <!--</td>-->
+                                                <!--<td>-->
+                            <!--<div><hr class='hr-normal' /></div>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                        <!--<tr align="center">-->
+                          <!--<td style="width:100px" class="text-left">姓名</td>-->
+                        <!--<td colspan="4">-->
+                            <!--<label for="realName" class="col-sm-2 control-label" style="text-align: left"></label>-->
+                            <!--<input id="realName" type="text" placeholder="请输入您的真实姓名" style="width: 700px"></td>-->
+             <!--</tr>-->
+             <!--<tr align="center">-->
+                      <!--<td style="width:120px" class="text-left">称谓</td>-->
+                        <!--<td colspan="4">-->
+                            <!--<label for="sex" class="col-sm-2 control-label" style="text-align: left"></label>-->
+                            <!--<input id="sex" type="text" style="width: 700px"></td>-->
+                            <!--&lt;!&ndash;<select id="sex" style="width: 710px; background-color: white">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<option style="display:none;" disabled selected>请选择称谓</option>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<option value="male">男士</option>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<option value="female">女士</option>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</select>&ndash;&gt;-->
+                        <!--</td>-->
+               <!--</tr>-->
+                  <!--<tr align="center">-->
+                   <!--<td style="width:120px" class="text-left">职务</td>-->
+                        <!--<td colspan="4">-->
+                            <!--<label for="job" class="col-sm-2 control-label" style="text-align: left"></label>-->
+                            <!--<input id="job" type="text" placeholder="请输入您的职务名称" style="width: 700px"></td>-->
+                <!--</tr>-->
+            <!--<tr align="center">-->
+                        <!--<td style="width:120px" class="text-left">个人手机</td>-->
+                        <!--<td colspan="4">-->
+                            <!--<label for="personalPhoneNumber" class="col-sm-2 control-label" style="text-align: left"></label>-->
+                            <!--<input id="personalPhoneNumber" type="text" placeholder="请输入您的个人手机号" style="width: 700px"></td>-->
+            <!--</tr>-->
+            <!--<tr align="center">-->
+                        <!--<td style="width:120px" class="text-left">传真</td>-->
+                        <!--<td colspan="4">-->
+                            <!--<label for="fax" class="col-sm-2 control-label" style="text-align: left"></label>-->
+                            <!--<input id="fax" type="text" placeholder="请输入您的传真号" style="width: 700px"></td>-->
+            <!--</tr>-->
+             <!--<tr align="center">-->
+             <!--<td style="width:120px" class="text-left">电子邮箱</td>-->
+                        <!--<td colspan="4">-->
+                            <!--<label for="email" class="col-sm-2 control-label" style="text-align: left"></label>-->
+                            <!--<input id="email" type="text" placeholder="请输入您的电子邮箱，注意后缀，如 @qq.com" style="width: 700px"></td></tr>-->
+                     <!--&lt;!&ndash;保存提示按钮+提示保存&ndash;&gt;-->
+                     <!--<tr >-->
+                        <!--<td colspan="12" >-->
+                    <!--<h6 class='text-right'>点击审核按钮后系统发送信息通知商家并分配账号，点击驳回后也会进行短信通知未通过</h6>-->
+                    <!--<button class='btn pull-right' type='submit'>-->
+                        <!--<i class='icon-remove'></i>-->
+                       <!--驳回-->
+                    <!--</button>-->
+                    <!--<button class='btn pull-right' type='submit'>-->
+                        <!--<i class='icon-ok'></i>-->
+                        <!--同意-->
+                    <!--</button>-->
+                    <!--</td>-->
+                    <!--</tr>-->
+
+            <!--</table>-->
                 </div>
         </div>
     </div>

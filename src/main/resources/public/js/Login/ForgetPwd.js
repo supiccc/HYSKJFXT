@@ -113,7 +113,7 @@ var foget = {
             success:function(res){
                 if (res.code == 0) {
                     alert('密码修改成功，请重新登录');
-                    window.location.href = "../Login/sign_in.html"
+                    window.location.href = "../../Login/sign_in.html"
                 } else {
                     alert(res.data);
                 }

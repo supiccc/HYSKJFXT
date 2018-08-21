@@ -47,6 +47,7 @@ public class MerchantExhibitionServiceImpl implements MerchantExhibitionService 
             r.setMerarea(m.getMerarea());
             r.setMerprincipal(m.getMerprincipal());
             r.setMerprovince(m.getMerprovince());
+            r.setMerintroduce(m.getMerintroduce());
             r.setMerAddress(m.getMeradress());
             result.add(r);
         }

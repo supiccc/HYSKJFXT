@@ -9,7 +9,7 @@ var InitPage = {
     },
     action:function f() {
         $('#RegisPageBtn').on('click',function(){
-            window.location.href = "../Login/sign_up.html";
+            window.location.href = "../../Login/sign_up.html";
         });
     }
 };
@@ -40,7 +40,7 @@ var Basic = {
                         // result = res;
                         if (res.code == 0) {
                             // alert("获取成功");
-                            window.location.href = "../Login/sign_in.html";
+                            window.location.href = "../../Login/sign_in.html";
                         } else {
                             alert("服务器繁忙，请稍后再试");
                         }
@@ -69,7 +69,7 @@ var Basic = {
                         // result = res;
                         if (res.code == 0) {
                             // alert("获取成功");
-                            window.location.href = "../Login/sign_in.html";
+                            window.location.href = "../../Login/sign_in.html";
                         } else {
                             alert("服务器繁忙，请稍后再试");
                         }
@@ -98,7 +98,7 @@ var Basic = {
                         // result = res;
                         if (res.code == 0) {
                             // alert("获取成功");
-                            window.location.href = "../Login/sign_in.html";
+                            window.location.href = "../../Login/sign_in.html";
                         } else {
                             alert("服务器繁忙，请稍后再试");
                         }
@@ -127,7 +127,7 @@ var Basic = {
                         // result = res;
                         if (res.code == 0) {
                             // alert("获取成功");
-                            window.location.href = "../Login/sign_in.html";
+                            window.location.href = "../../Login/sign_in.html";
                         } else {
                             alert("服务器繁忙，请稍后再试");
                         }
@@ -157,7 +157,7 @@ var Basic = {
                         // result = res;
                         if (res.code == 0) {
                             // alert("获取成功");
-                            window.location.href = "../Login/sign_in.html";
+                            window.location.href = "../../Login/sign_in.html";
                         } else {
                             alert("服务器繁忙，请稍后再试");
                         }
@@ -186,7 +186,7 @@ var Basic = {
                         // result = res;
                         if (res.code == 0) {
                             // alert("获取成功");
-                            window.location.href = "../Login/sign_in.html";
+                            window.location.href = "../../Login/sign_in.html";
                         } else {
                             alert("服务器繁忙，请稍后再试");
                         }
@@ -201,7 +201,7 @@ var Basic = {
                 "<a id=\"LoginPageBtn\">登录</a>"
             );
             $('#LoginPageBtn').on('click',function () {
-                window.location.href = "../Login/sign_in.html";
+                window.location.href = "../../Login/sign_in.html";
             });
             // $('#shopPageBtn').on('click',function () {
             //     window.location.href = "./memberShopInfo.html";
