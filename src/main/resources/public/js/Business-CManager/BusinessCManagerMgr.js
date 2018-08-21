@@ -17,7 +17,19 @@ var InitPage = {
             });
         } else if(window.location.href.indexOf("customerManagerMemberInfoChange") > 0) {
             alert("此功能尚未开放");
-        } else if (window.location.href.indexOf("customerManagerMemberInfoChangeHistory")) {
+        } else if (window.location.href.indexOf("customerManagerMemberInfoChangeHistory") > 0) {
+            alert("此功能尚未开放");
+        } else if (window.location.href.indexOf("customerManagerConsume") > 0) {
+            $("#zhuzhiBtn").on('click', function () {
+                checkIn.zhuzhiRegis();
+            });
+            $("#xianjinBtn").on('click', function () {
+                checkIn.xianjinRegis();
+            });
+            $("#pointBtn").on('click', function () {
+                checkIn.pointRegis();
+            });
+        } else if (window.location.href.indexOf("customerManagerRechargeHistory") > 0) {
             alert("此功能尚未开放");
         }
     },
@@ -102,9 +114,9 @@ var InitPage = {
             });
 
         //其他
-        $('#regisConsumeBtn').on('click',function(){
-           customerMgr.regisCustomer();
-        });
+        // $('#regisConsumeBtn').on('click',function(){
+        //    customerMgr.regisCustomer();
+        // });
     },
 };
 
@@ -287,47 +299,55 @@ var checkIn = {
         var mcid = $('#zhuzhiCardNum').val();
         var money = $('#zhuzhiMoney').val();//float不知道可不可以
         var pwd = $('#zhuzhiPass').val();
-        var macid = Basic.getPassingStr("username");
+        // var macid = Basic.getPassingStr("username");
 
         $.ajax({
            type : "POST",
-           url : "http://localhost:8080/memberConsumption/storeConsumption",
+           url : "/memberConsumption/storeConsumption",
            data : {
-               mcid : mcid,
-               money : money,
-               pwd : pwd,
-               macid : macid,
+               mcid: mcid,
+               money: money,
+               pwd: pwd
            },
             success : function(res){
-                if(res.code == 0){
-                    alert("登记成功");
-                }else{
-                    alert("后台故障，登记失败");
+                if(res.code === 0){
+                    alert("消费成功");
+                    window.location.reload();
+                } else if (res.code === -2) {
+                    alert("会员卡号错误");
+                } else if (res.code === -3) {
+                    alert("消费密码错误");
+                } else if (res.code == -5) {
+                    alert("储值不足");
+                } else {
+                    alert("服务器未知错误");
                 }
             },
             error : function () {
-                alert("服务器故障，登记失败");
+                alert("服务器繁忙");
             },
         });
     },
     //现金：customerManagerConsume.html
     xianjinRegis:function () {
-        var mcid = $('#xianjinCardNum').val();
+        var mcid = $("#xianjinCardNum").val();
         var money = $('#xianjinRealMoney').val();//float不知道可不可以
-        var macid = Basic.getPassingStr("username");
+        // var macid = Basic.getPassingStr("username");
 
         $.ajax({
             type : "POST",
-            url : "http://localhost:8080/memberConsumption/cashConsumption",
+            url : "/memberConsumption/cashConsumption",
             data : {
                 mcid : mcid,
-                money : money,
-                macid : macid,
+                money : money
             },
             success : function(res){
-                if(res.code == 0){
-                    alert("登记成功");
-                }else{
+                if(res.code === 0){
+                    alert("消费成功");
+                    window.location.reload();
+                } else if (res.code === -2) {
+                    alert("会员卡号错误");
+                } else {
                     alert("后台故障，登记失败");
                 }
             },
@@ -342,7 +362,7 @@ var checkIn = {
         var mcid = $('#CardNum').val();
         var money = $('#pointconsumeMoney').val();//float不知道可不可以
         var pwd = $('#consumePass').val();
-        var macid = Basic.getPassingStr("username");
+        // var macid = Basic.getPassingStr("username");
 
         $.ajax({
             type : "POST",
@@ -350,19 +370,25 @@ var checkIn = {
             data : {
                 mcid : mcid,
                 money : money,
-                pwd : pwd,
-                macid : macid,
+                pwd : pwd
             },
             success : function(res){
-                if(res.code == 0){
-                    alert("登记成功");
-                }else{
-                    alert("后台故障，登记失败");
+                if(res.code === 0){
+                    alert("消费成功");
+                    window.location.reload();
+                } else if (res.code === -2){
+                    alert("会员卡号错误");
+                } else if (res.code === -3){
+                    alert("消费密码错误");
+                } else if(res.code === -4){
+                    alert("积分不足");
+                } else{
+                    alert("未知错误");
                 }
             },
             error : function () {
-                alert("服务器故障，登记失败");
-            },
+                alert("服务器繁忙，登记失败");
+            }
         });
     }
 };

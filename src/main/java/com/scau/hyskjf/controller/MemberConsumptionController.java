@@ -2,10 +2,12 @@ package com.scau.hyskjf.controller;
 
 import com.scau.hyskjf.pojo.CashConsumption;
 import com.scau.hyskjf.pojo.CreditConsumption;
+import com.scau.hyskjf.pojo.Merchantaccount;
 import com.scau.hyskjf.pojo.StoreConsumption;
 import com.scau.hyskjf.service.ConsumptionService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,8 +37,9 @@ public class MemberConsumptionController {
     * 失败结果：code=-2时表示 "会员卡号错误"。code=-1, "其他错误";
     * */
     @RequestMapping("/cashConsumption")
-    public ResponseJSON cashConsumption(String mcid ,Float money,Integer macid){
+    public ResponseJSON cashConsumption(String mcid ,Float money){
         try {
+            Integer macid = ((Merchantaccount)SecurityUtils.getSubject().getSession().getAttribute("user")).getMacid();
             CashConsumption cashConsumption = consumptionService.cashConsumptionCheck(mcid , money);
             if(cashConsumption.getCheckResult().equals(0)){
                 Float getCredit =consumptionService.cashCompute(cashConsumption,macid);//积分添加、消费历史添加等操作
@@ -64,8 +67,9 @@ public class MemberConsumptionController {
      * 失败结果：code=-2时表示 "会员卡号错误"。code=-3, "消费密码错误"。code=-5, "储值余额不足";code=-1, "其他错误";
      * */
     @RequestMapping("/storeConsumption")
-    public ResponseJSON storeConsumption(String mcid ,Float money, String pwd,Integer macid){
+    public ResponseJSON storeConsumption(String mcid ,Float money, String pwd){
         try {
+            Integer macid = ((Merchantaccount)SecurityUtils.getSubject().getSession().getAttribute("user")).getMacid();
             StoreConsumption storeConsumption = consumptionService.storeConsumptionCheck(mcid , money, pwd);
             if(storeConsumption.getCheckResult().equals(0)){
                 Float leftStore =consumptionService.storeCompute(storeConsumption,macid);//执行储值扣除、消费历史添加等操作
@@ -99,8 +103,9 @@ public class MemberConsumptionController {
      * 失败结果：code=-2时表示 "会员卡号错误"。code=-3, "消费密码错误"。code=-4, "积分不足"。 code=-5, "储值余额不足";code=-1, "其他错误";
      * */
     @RequestMapping("/creditConsumption")
-    public ResponseJSON creditConsumption(String mcid ,Float money, String pwd,Integer macid){
+    public ResponseJSON creditConsumption(String mcid ,Float money, String pwd){
         try {
+            Integer macid = ((Merchantaccount)SecurityUtils.getSubject().getSession().getAttribute("user")).getMacid();
             CreditConsumption creditConsumption = consumptionService.creditConsumptionCheck(mcid , money, pwd);
             if(creditConsumption.getCheckResult().equals(0)){
                 Float leftCredit =consumptionService.creditCompute(creditConsumption,macid);//执行积分扣除、消费历史添加等操作

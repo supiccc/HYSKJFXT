@@ -159,8 +159,14 @@ public class MemberAccManageController {
     //会员充值
     @RequestMapping("/recharge")
     public ResponseJSON rechargeMemberCard(@ModelAttribute("user") Merchantaccount merchantaccount, String cardId, Float money){
-        Memberandcard memberandcard = memberCenterService.rechargeMemberCard(cardId,money,merchantaccount);
-        return new ResponseJSON(ResponseCode.SUCCESS,memberandcard);
+        CreditConsumption record = memberCenterService.rechargeMemberCard(cardId,money,merchantaccount);
+        if(record.getCheckResult().equals(0)){
+            return new ResponseJSON(ResponseCode.SUCCESS);
+        }else if(record.getCheckResult().equals(-2)){
+            return new ResponseJSON(ResponseCode.ERRORCARD);
+        } else{
+            return new ResponseJSON(ResponseCode.WARN);
+        }
     }
 
     //会员充值历史查询

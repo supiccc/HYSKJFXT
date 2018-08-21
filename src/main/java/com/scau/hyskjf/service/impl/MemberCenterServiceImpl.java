@@ -271,6 +271,8 @@ public class MemberCenterServiceImpl implements MemberCenterService {
         memberaccount.setManame(member.getMemname());//账户名为姓名
         String pwdMd5 = new Md5Hash(pwd,memberaccount.getMemid().toString(),3).toString();//对账户的密码进行MD5加密
         String shopPwdMd5 = new Md5Hash(shopPwd,memberaccount.getMemid().toString(),3).toString();//对账户的支付密码进行MD5加密
+        memberaccount.setMapwd(pwdMd5);
+        memberaccount.setMacumpwd(shopPwdMd5);
         memberaccount.setMaenable(true);
         return memberaccountMapper.insert(memberaccount);
     }
@@ -306,7 +308,14 @@ public class MemberCenterServiceImpl implements MemberCenterService {
     }
 
     @Override
-    public Memberandcard rechargeMemberCard(String cardId, float money,Merchantaccount merchantaccount) {
+        public CreditConsumption rechargeMemberCard(String cardId, float money,Merchantaccount merchantaccount) {
+
+        CreditConsumption record = new CreditConsumption();
+        Membercard card =membercardMapper.queryCardByMcid(cardId);
+        if(card==null||!card.getMcenable()){//检查卡号是否正常
+            record.setCheckResult(-2);
+            return record;
+        }
         membercardMapper.updateMoneyByCarId(cardId,money);
 
         //查找会员卡信息
@@ -321,7 +330,9 @@ public class MemberCenterServiceImpl implements MemberCenterService {
         rechargehistory.setRechargetime(new Date());
         rechargehistory.setMemid(membercard.getMemid());
         rechargehistoryMapper.insertSelective(rechargehistory);
-        return memberandcardMapper.selectByCarId(cardId);
+       // return memberandcardMapper.selectByCarId(cardId);
+        record.setCheckResult(0);
+        return record;
     }
 
     @Override

@@ -45,7 +45,7 @@ public interface MemberCenterService {
 
     Memberandcard findMemDetailByCarId(String cardId);
 
-    Memberandcard rechargeMemberCard(String cardId, float money,Merchantaccount merchantaccount);
+    CreditConsumption rechargeMemberCard(String cardId, float money,Merchantaccount merchantaccount);
 
     List<Rechargehistory> findRechargeHistoryByCardId(String cardId);
 
