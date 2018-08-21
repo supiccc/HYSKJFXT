@@ -23,7 +23,7 @@ function join() {
         url : '/merchantJoin/independentJoin',
         data : {
             mertype: $("#shopType").find("option:selected").text(),
-            merprincipal: $("#shopName").val(),
+            mername: $("#shopName").val(),
             merarea: $("#shopAddress").val(),
             mertelphone: $("#phoneNumber").val(),
             mercumpresent: $("#ratio").val(),
