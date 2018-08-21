@@ -608,7 +608,7 @@ var shopMgr = {
             dataType : "json",
             success : function (res) {
                 if(res.code == 0){
-                    alert("找到"+res.data.length+"家店呢");
+                    // alert("找到"+res.data.length+"家店呢");
                     $('#shopListAll').empty();
                     // $.each(res, function(index, obj)
                     for(var i=0;i<res.data.length;i++){
@@ -617,6 +617,7 @@ var shopMgr = {
                         var infoHref = "http://localhost:8080/Member/memberShopInfoDetail.html?macid=" + obj.macid;
                         // alert(infoHref);
                         $('#shopListAll').append(
+                            "<br>" +
                             "<div class='row-fluid'>\n" +
                             "        <div class='span12 box'>\n" +
                             "            <div class='box-header dark-background'>\n" +
