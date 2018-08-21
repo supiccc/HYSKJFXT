@@ -665,7 +665,7 @@ var shopMgr = {
                             "                        <td colspan=\"4\" href='\" + infoHref + \"'>\n" +
                             "                            <label for=\"infohref\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
                             "                            <!--超链接-->\n" +
-                            "                            <h5 id=\"infohref\" style=\"text-align: left\" href='\" + infoHref + \"'>查看更多信息</h5>\n" +
+                            "                            <a id=\"infohref\" style=\"text-align: left\" href='#' onclick='getmerchant("+ obj.macid +")'>查看更多信息</a>\n" +
                             "                        </td>\n" +
                             "                    </tr>\n" +
                             "            </table>\n" +
@@ -859,3 +859,8 @@ $('#savenewinfo').on('click',function () {
     });
     $('#savenewinfo').attr("data-dismiss", "modal");
 });
+
+//获取商家详细信息
+var getmerchant =function (me) {
+    alert("页面正在来的路上");
+}

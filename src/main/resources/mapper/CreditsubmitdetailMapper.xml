@@ -42,6 +42,7 @@
   </resultMap>
 
   <sql id="Base_Column_List">
+    merID, csID, csStat,
     csMoney, csCredit, merSubID,
       merTopID, merType, merName,
       merCumPresent, merDicPresent, merAppStat,

@@ -35,9 +35,10 @@ public class ConsumeCreditServiceImpl implements ConsumeCreditService {
         Creditsubmit creditsubmit = new Creditsubmit();
         creditsubmit.setCsid(id);
         //如果状态为true，则不能被修改
-        if(creditsubmitMapper.selectByPrimaryKey(id).getCsstat() == true){
+//        creditsubmit = creditsubmitMapper.selectByPrimaryKey(id);
+        if(null != creditsubmitMapper.selectByPrimaryKey(id).getCsstat()){
             return false;
-        }else if(state == true){  //若果状态不为true且修改状态为true
+        }else if(state){  //若果状态不为true且修改状态为true
 
             //通过审核
             creditsubmit.setCsstat(state);
@@ -53,7 +54,7 @@ public class ConsumeCreditServiceImpl implements ConsumeCreditService {
         }else {
             creditsubmit.setCsstat(state);
             creditsubmitMapper.updateByPrimaryKeySelective(creditsubmit);
-            return false;
+            return true;
         }
 
     }

@@ -11,6 +11,10 @@ var InitPage = {
             memMgr.initList();
         }else if(window.location.href.indexOf("AdminAccept") > 0){
             ShopMgr.showAcceptList();
+        }else if (window.location.href.indexOf("customerInfoMgr") > 0) {
+            alert("功能尚未开放");
+        }else if (window.location.href.indexOf("AdminManagePoints") > 0) {
+            PointsMgr.initList();
         }
     },
     action:function () {
@@ -24,6 +28,7 @@ var InitPage = {
             });
             //跳转《会员管理》
             $('#AdminMemberBtn').on('click',function () {
+                // alert("功能尚未开放");
                 window.location.href = "./customerInfoMgr.html?username="+username+"&role="+role+"";
             });
             //跳转《商家管理》
@@ -37,7 +42,7 @@ var InitPage = {
             });
             //跳转《积分管理》
             $('#AdminIntegralManagement').on('click',function () {
-                alert("功能还没开放");
+                // alert("功能还没开放");
                 window.location.href = "./AdminManagePoints.html?username="+username+"&role="+role+"";
             });
 
@@ -158,6 +163,7 @@ var memMgr = {
             dataType: 'json',
             success: function (result) {
                 var count = 0;
+                $('#tbody').empty();
                 $.each(result.data, function (index, obj) {
                     $('#tbody').append(
                         "<tr>\n" +
@@ -165,10 +171,7 @@ var memMgr = {
                         // 这个id要动态给
                         "                                            <td style=\"text-align: center\"> " + obj.mertype + "</td>\n" +
                         "                                            <td style=\"text-align: center\" id='label+" + count + "'>\n" +
-                        "                                                <span class=\"label label-inverse\">火锅</span>\n" +
-                        "                                                <span class=\"label label-inverse\">快餐</span>\n" +
-                        "                                                <span class=\"label label-inverse\">火锅</span>\n" +
-                        "                                                <span class=\"label label-inverse\">快餐</span>\n" +
+                        "                                                <span class=\"label label-inverse\">功能尚未开放</span>\n" +
                         "                                            </td>\n" +
                         "                                            <td style=\"text-align: center\">"+ obj.merarea + "</td>\n" +
                         "                                            <td style=\"text-align: center\">"+ obj.merprincipal + "</td>\n" +
@@ -294,12 +297,12 @@ var ShopMgr = {
     showAcceptList:function () {
         $.ajax({
             type : "POST",
-            url : "http://localhost:8080/examine/application/list",
+            url : "/examine/application/list",
             dataType : "json",
             success : function (res) {
                 $.each(res.data, function (index, obj) {
                     console.log(obj);
-                    var urlText = "http://localhost:8080/examine/application/"+obj.acamerchant;
+                    var urlText = "/examine/application/"+obj.acamerchant;
                     var acaid = obj.acaid;
                     $.ajax({
                         type : "POST",
@@ -341,13 +344,13 @@ var ShopMgr = {
                                 "                    <td style=\"width:120px\" class=\"text-left\">消费积分比例</td>\n" +
                                 "                        <td colspan=\"4\">\n" +
                                 "                            <label for=\"ratio\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
-                                "                            <input id=\"ratio\" type=\"text\" placeholder=\""+res2.data.merdiscount+"\" style=\"width: 700px\"></td>\n" +
+                                "                            <input id=\"ratio\" type=\"text\" placeholder=\""+res2.data.mercumpresent+"\" style=\"width: 700px\"></td>\n" +
                                 "                    </tr>\n" +
                                 "                    <tr align=\"center\">\n" +
-                                "                    <td style=\"width:120px\" class=\"text-left\">会员折扣比例</td>\n" +
+                                "                    <td style=\"width:120px\" class=\"text-left\">会员积分价值比例</td>\n" +
                                 "                        <td colspan=\"4\">\n" +
                                 "                            <label for=\"disCount\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
-                                "                            <input  id=\"disCount\" type=\"text\" placeholder=\""+res2.data.merdiscount+"\" style=\"width: 700px\"></td>\n" +
+                                "                            <input  id=\"disCount\" type=\"text\" placeholder=\""+res2.data.merdicpresent+"\" style=\"width: 700px\"></td>\n" +
                                 "                    </tr>\n" +
                                 "                    <!--分隔线-->\n" +
                                 "                                        <tr>\n" +
@@ -427,7 +430,7 @@ var ShopMgr = {
     },
 
     acceptIt:function (getPrev) {
-        var urlText = "http://localhost:8080/examine/application/"+getPrev+"/agree";
+        var urlText = "/examine/application/"+getPrev+"/agree";
         console.log(getPrev);
         $.ajax({
             type : "POST",
@@ -448,7 +451,7 @@ var ShopMgr = {
     },
 
     rejectIt:function (getPrev) {
-        var urlText = "http://localhost:8080/examine/application/"+getPrev+"/disagree";
+        var urlText = "/application/"+getPrev+"/disagree";
         $.ajax({
             type : "POST",
             url : urlText,
@@ -471,34 +474,34 @@ var ShopMgr = {
 var PointsMgr = {
 
     initList:function () {
+        $('#tbody').empty();
         $.ajax({
-            type : "POST",
-            url : "/creditconsume/record/list",
+            type : "GET",
+            url : "../consumecredit/submit/list",
             dataType : "json",
             success : function (result) {
-                alert("查询成功");
+                // alert("查询成功");
                 $.each(result.data, function (index, obj) {
                     //未处理的记录
-                    if(obj.transferstate == null){
+                    if(obj.csstat == null){
                         $('#tbody').append(
                             "<tr>\n" +
-                            "                                            <td style=\"text-align: center\" >"+obj.creconid+"</td>\n" +
-                            "                                            <td style=\"text-align: center\" >"+obj.memid+"</td>\n" +
+                            "                                            <td style=\"text-align: center\" >"+obj.csid+"</td>\n" +
                             "                                            <td style=\"text-align: center\">"+obj.merid+"</td>\n" +
                             "                                            <td style=\"text-align: center\" id=\"state\">\n" +
                             // "                                                <span class=\"label label-success\">已完成</span>\n" +
                             // "                                                <!--<span class=\"label label-important\">已驳回</span>-->\n" +
                             "                                                <span class=\"label label-warning\">未处理</span>\n" +
                             "                                            </td>\n" +
-                            "                                            <td style=\"text-align: center\">"+obj.credits+"</td>\n" +
-                            "                                            <td style=\"text-align: center\">"+obj.recordtime+"</td>\n" +
+                            "                                            <td style=\"text-align: center\">"+obj.cscredit+"</td>\n" +
+                            // "                                            <td style=\"text-align: center\">"+obj.recordtime+"</td>\n" +
                             "                                            <td>\n" +
-                            "                                                <div value ='"+obj.creconid+"'></div>\n" +
+                            "                                                <div value ='"+obj.csid+"'></div>\n" +
                             "                                                <div class='text-right'>\n" +
-                            "                                                    <a class='btn btn-success btn-mini' href='#' onclick='PointsMgr.showInfo(this)'>\n" +
+                            "                                                    <a class='btn btn-success btn-mini' href='#' onclick='PointsMgr.pass(" + obj.csid + ")'>\n" +
                             "                                                        <i class='icon-pencil'></i>\n" +
                             "                                                    </a>\n" +
-                            "                                                    <a class='btn btn-danger btn-mini' href='#'>\n" +
+                            "                                                    <a class='btn btn-danger btn-mini' href='#' onclick='PointsMgr.reject(" + obj.csid + ")'>\n" +
                             "                                                        <i class='icon-remove'></i>\n" +
                             "                                                    </a>\n" +
                             "                                                </div>\n" +
@@ -507,26 +510,26 @@ var PointsMgr = {
                         );
                     }
                     //驳回的记录
-                    else if(obj.transferstate == 0){
+                    else if(obj.csstat == false){
                         $('#tbody').append(
                             "<tr>\n" +
-                            "                                            <td style=\"text-align: center\" >"+obj.creconid+"</td>\n" +
-                            "                                            <td style=\"text-align: center\" >"+obj.memid+"</td>\n" +
+                            "                                            <td style=\"text-align: center\" >"+obj.csid+"</td>\n" +
+
                             "                                            <td style=\"text-align: center\">"+obj.merid+"</td>\n" +
                             "                                            <td style=\"text-align: center\" id=\"state\">\n" +
                             // "                                                <span class=\"label label-success\">已完成</span>\n" +
                             "                                                <span class=\"label label-important\">已驳回</span>\n" +
                             "                                                <!--<span class=\"label label-warning\">未处理</span>-->\n" +
                             "                                            </td>\n" +
-                            "                                            <td style=\"text-align: center\">"+obj.credits+"</td>\n" +
-                            "                                            <td style=\"text-align: center\">"+obj.recordtime+"</td>\n" +
+                            "                                            <td style=\"text-align: center\">"+obj.cscredit+"</td>\n" +
+                            // "                                            <td style=\"text-align: center\">"+obj.recordtime+"</td>\n" +
                             "                                            <td>\n" +
-                            "                                                <div value ='"+obj.creconid+"'></div>\n" +
+                            "                                                <div value ='"+obj.csid+"'></div>\n" +
                             "                                                <div class='text-right'>\n" +
-                            "                                                    <a class='btn btn-success btn-mini' href='#' onclick='PointsMgr.showInfo(this)'>\n" +
+                            "                                                    <a class='btn btn-success btn-mini' href='#' onclick='alert(\"该记录已处理\")'>\n" +
                             "                                                        <i class='icon-pencil'></i>\n" +
                             "                                                    </a>\n" +
-                            "                                                    <a class='btn btn-danger btn-mini' href='#'>\n" +
+                            "                                                    <a class='btn btn-danger btn-mini' href='#' onclick='alert(\"该记录已处理\")'>\n" +
                             "                                                        <i class='icon-remove'></i>\n" +
                             "                                                    </a>\n" +
                             "                                                </div>\n" +
@@ -535,26 +538,26 @@ var PointsMgr = {
                         );
                     }
                     //完成的记录
-                    else if(obj.transferstate == 1){
+                    else if(obj.csstat == true){
                         $('#tbody').append(
                             "<tr>\n" +
-                            "                                            <td style=\"text-align: center\" >"+obj.creconid+"</td>\n" +
-                            "                                            <td style=\"text-align: center\" >"+obj.memid+"</td>\n" +
+                            "                                            <td style=\"text-align: center\" >"+obj.csid+"</td>\n" +
+
                             "                                            <td style=\"text-align: center\">"+obj.merid+"</td>\n" +
                             "                                            <td style=\"text-align: center\" id=\"state\">\n" +
                             "                                                <span class=\"label label-success\">已完成</span>\n" +
                             "                                                <!--<span class=\"label label-important\">已驳回</span>-->\n" +
                             "                                                <!--<span class=\"label label-warning\">未处理</span>-->\n" +
                             "                                            </td>\n" +
-                            "                                            <td style=\"text-align: center\">"+obj.credits+"</td>\n" +
-                            "                                            <td style=\"text-align: center\">"+obj.recordtime+"</td>\n" +
+                            "                                            <td style=\"text-align: center\">"+obj.cscredit+"</td>\n" +
+                            // "                                            <td style=\"text-align: center\">"+obj.recordtime+"</td>\n" +
                             "                                            <td>\n" +
-                            "                                                <div value ='"+obj.creconid+"'></div>\n" +
+                            "                                                <div value ='"+obj.csid+"'></div>\n" +
                             "                                                <div class='text-right'>\n" +
-                            "                                                    <a class='btn btn-success btn-mini' onclick='PointsMgr.showInfo(this)'>\n" +
+                            "                                                    <a class='btn btn-success btn-mini' href='#' onclick='alert(\"该记录已处理\");'>\n" +
                             "                                                        <i class='icon-pencil' ></i>\n" +
                             "                                                    </a>\n" +
-                            "                                                    <a class='btn btn-danger btn-mini' href='#'>\n" +
+                            "                                                    <a class='btn btn-danger btn-mini' href='#' onclick='alert(\"该记录已处理\");'>\n" +
                             "                                                        <i class='icon-remove'></i>\n" +
                             "                                                    </a>\n" +
                             "                                                </div>\n" +
@@ -573,14 +576,14 @@ var PointsMgr = {
     showInfo:function (btn) {
         $.ajax({
             type: "POST",
-            url: "/creditconsume/record/list",
+            url: "/record/list",
             dataType: "json",
             success: function (result) {
                 $.each(result.data, function (index, obj) {
-                    var thisCreconid = $(btn).parents().prev().attr('value');
+                    var thiscsid = $(btn).parents().prev().attr('value');
                     var state = "";
 
-                    if(obj.creconid == thisCreconid){
+                    if(obj.csid == thiscsid){
                         if(obj.transferstate == null){
                             state = "未处理"
                         }else if(obj.transferstate == 0){
@@ -589,11 +592,11 @@ var PointsMgr = {
                             state = "已处理"
                         }
 
-                        $('#creconidText').attr('placeholder',thisCreconid);
+                        $('#csidText').attr('placeholder',thiscsid);
                         $('#memidText').attr('placeholder',obj.memid);
                         $('#meridText').attr('placeholder',obj.merid);
                         $('#adminidText').attr('placeholder',obj.adminid);
-                        $('#creditsText').attr('placeholder',obj.credits);
+                        $('#cscreditText').attr('placeholder',obj.cscredit);
                         $('#valueText').attr('placeholder',obj.value);
                         $('#recordtimeText').attr('placeholder',obj.recordtime);
                         $('#transferstateText').attr('placeholder',state);
@@ -606,11 +609,49 @@ var PointsMgr = {
         });
     },
 
-    reject:function () {
-
+    reject:function (acid) {
+        $.ajax({
+            type: "POST",
+            url: "/consumecredit/submit/update/" + acid,
+            dataType: "json",
+            data: {
+                state: "false"
+            },
+            success:function(res) {
+                if (res.code == 0) {
+                    alert("驳回请求成功");
+                    window.location.reload();
+                } else {
+                    alert("服务器错误");
+                }
+            },
+            error: function () {
+                alert("服务器繁忙");
+            }
+        });
     },
 
-    pass:function () {
+    pass:function (acid) {
+        // alert("上缴");
+        $.ajax({
+            type: "POST",
+            url: "/consumecredit/submit/update/" + acid,
+            dataType: "json",
+            data: {
+                state: "true"
+            },
+            success:function(res) {
+                if (res.code == 0) {
+                    alert("通过审核成功");
+                    window.location.reload();
+                } else {
+                    alert("服务器错误");
+                }
+            },
+            error: function () {
+                alert("服务器繁忙");
+            }
+        });
 
     }
 };
