@@ -150,4 +150,10 @@
     where mcID = #{cardId}
   </update>
 
+  <select id="queryCardByMcidAndMerId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from MemberCard
+    where mcID = #{mcid} and merID = #{merid}
+  </select>
 </mapper>

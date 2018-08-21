@@ -11,6 +11,10 @@ var InitPage = {
                 // alert("点击注册");
                 customerMgr.regisCustomer();
             })
+        } else if (window.location.href.indexOf("customerManagerRecharge") > 0){
+            $("#recharge").on('click', function () {
+                rechargeMgr.recharge();
+            })
         } else if (window.location.href.indexOf("customerManagerCard") > 0){
             $("#addCard").on('click', function () {
                 customerMgr.regisCustomerCard();
@@ -366,7 +370,7 @@ var checkIn = {
 
         $.ajax({
             type : "POST",
-            url : "http://localhost:8080/memberConsumption/creditConsumption",
+            url : "/memberConsumption/creditConsumption",
             data : {
                 mcid : mcid,
                 money : money,
@@ -396,7 +400,30 @@ var checkIn = {
 // 消费管理-充值管理
 var rechargeMgr = {
     //充值：customerManagerRecharge.html
-
+    recharge: function () {
+        $.ajax({
+            type : "POST",
+            url : "/memberAcc/recharge",
+            data : {
+                cardId : $("#CardNum").val(),
+                money : $("#rechargeMoney").val()
+            },
+            datatype: "json",
+            success: function (res) {
+                if (res.code === 0) {
+                    alert("充值成功");
+                    window.location.reload();
+                } else if (res.code === -2) {
+                    alert("会员卡号错误");
+                } else {
+                    alert("服务器内部错误，充值失败");
+                }
+            },
+            error: function () {
+                alert("服务器繁忙");
+            }
+        })
+    }
     //充值记录查询：缺页面，列表有啥内容？
 }
 

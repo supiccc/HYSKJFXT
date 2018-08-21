@@ -31,4 +31,6 @@ public interface MembercardMapper {
     void updateMoneyByCarId(@Param("cardId") String cardId,@Param("money") float money);
 
     Membercard selectByCardId(String cardId);
+
+    Membercard queryCardByMcidAndMerId(@Param("mcid") String mcid, @Param("merid") Integer merid);
 }

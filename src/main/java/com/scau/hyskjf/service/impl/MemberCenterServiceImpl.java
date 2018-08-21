@@ -311,7 +311,7 @@ public class MemberCenterServiceImpl implements MemberCenterService {
         public CreditConsumption rechargeMemberCard(String cardId, float money,Merchantaccount merchantaccount) {
 
         CreditConsumption record = new CreditConsumption();
-        Membercard card =membercardMapper.queryCardByMcid(cardId);
+        Membercard card =membercardMapper.queryCardByMcidAndMerId(cardId,merchantaccount.getMerid());
         if(card==null||!card.getMcenable()){//检查卡号是否正常
             record.setCheckResult(-2);
             return record;
