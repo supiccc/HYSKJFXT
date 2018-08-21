@@ -8,8 +8,7 @@ var InitPage = {
         Basic.initMyMenu();
         // AccMgr.initList();
         // AccMgr.getInfo();
-        var thisLocation = window.location.href;
-        if(thisLocation.indexOf("AccountManagement") != -1){
+        if(window.location.href.indexOf("AccountManagement") > 0){
             AccMgr.getInfo();
         }
     },
@@ -23,11 +22,13 @@ var InitPage = {
 
         //展示信息
         $('#InfoMrgBtn').on('click',function () {
+            alert("功能尚未开放！");
             window.location.href = "./shopAdminShowInfo.html?username="+username+"&role="+role+"";
         });
 
         //同盟管理
         $('#AllianceBtn').on('click',function(){
+            alert("功能尚未开放！");
             window.location.href = "./shopAdminAlliance.html?username="+username+"&role="+role+"";
         });
 
@@ -73,6 +74,7 @@ var Basic = {
 
     //根据账户信息初始化《我的》按钮
     initMyMenu:function(){
+        // alert("正在初始化");
         var username = Basic.getPassingStr("username");
         var role = Basic.getPassingStr("role");
         //这里需要补充账户类型
@@ -164,14 +166,11 @@ var AccMgr = {
     getInfo:function(){
         //拉取所有（端口错误）
         $.ajax({
-            type : 'POST',
+            type : 'GET',
             //现在是查询所有账号，迟些界面连起来后要记得该成查询相关的子账号
             url: "http://localhost:8080/merchantAccManage/queryByMerID",
-            data : {
-                merid : Basic.getPassingStr("username");
-            }
             dataType: 'json',
-            success: function (result) {
+            success : function(result) {
                 if(result.code == 0){
                     AccMgr.initList(result);
                     // return result;
@@ -828,7 +827,8 @@ var AccMgr = {
                 );
             }
             else {
-                alert("无法识别数据源 : "+result.data[i].macid);
+                // alert("无法识别数据源 : "+result.data[i].macid);
+                continue;
             }
         }
     },

@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class RestfulController {
-//    @RequestMapping(value = "/")
-//    public String signin() {
-//        return null;
-//    }
+    @RequestMapping(value = "/")
+    public String signin() {
+        return "redirect:/Member/indexReal.html";
+    }
 }

@@ -4,6 +4,7 @@ import com.scau.hyskjf.pojo.*;
 import com.scau.hyskjf.service.MerchantAccManageService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -97,9 +98,10 @@ public class MerchantAccManageController {
      * 返回：
      * 商家编号对应商家的所有商家账户表的信息
      * */
-    @RequestMapping(value = "/queryByMerID", method = RequestMethod.POST)
-    public ResponseJSON queryByMerID(Integer merid){
+    @RequestMapping(value = "/queryByMerID", method = RequestMethod.GET)
+    public ResponseJSON queryByMerID(){
         try{
+            Integer merid = ((Merchantaccount)SecurityUtils.getSubject().getSession().getAttribute("user")).getMerid();
             List<Merchantaccount> accList =merchantAccManageService.queryMerchantAccountByMerID(merid);
             return new ResponseJSON(ResponseCode.SUCCESS,accList);
         }catch(Exception e){
