@@ -32,10 +32,12 @@ var InitPage = {
             });
             //跳转《发布管理》
             $('#AdminReleaseManagementBtn').on('click',function () {
+                alert("功能还没开放");
                 window.location.href = "./AdminReleaseManagement.html?username="+username+"&role="+role+"";
             });
             //跳转《积分管理》
             $('#AdminIntegralManagement').on('click',function () {
+                alert("功能还没开放");
                 window.location.href = "./AdminManagePoints.html?username="+username+"&role="+role+"";
             });
 
@@ -43,6 +45,7 @@ var InitPage = {
             //商家账号管理
             $('#shopAccMgrBtn').on('click',function(){
                 //还没有这个页面
+                alert("功能还没开放");
             });
             //商家统计信息
             $('#shopCountBtn').on('click',function () {
@@ -294,10 +297,10 @@ var ShopMgr = {
             url : "http://localhost:8080/examine/application/list",
             dataType : "json",
             success : function (res) {
-                alert("Hello");
                 $.each(res.data, function (index, obj) {
                     console.log(obj);
                     var urlText = "http://localhost:8080/examine/application/"+obj.acamerchant;
+                    var acaid = obj.acaid;
                     $.ajax({
                         type : "POST",
                         url : urlText,
@@ -305,7 +308,7 @@ var ShopMgr = {
                         success : function (res2) {
                           // $.each(res2.date, function (index2, res2.data) {
                               // $('#shopType').find("option:selected").attr("value");
-                            alert("Hello");
+                            // console.log(this);
                             $('#acceptShopList').append(
                                 "<table>\n" +
                                 "                    <tr align=\"center\">\n" +
@@ -400,12 +403,12 @@ var ShopMgr = {
                                 "                     <tr >\n" +
                                 "             <td colspan=\"12\" >\n" +
                                 "                    <h6 class='text-right'>点击审核按钮后系统发送信息通知商家并分配账号，点击驳回后也会进行短信通知未通过</h6>\n" +
-                                "                    <button class='btn pull-right' onclick='acceptIt(this)'>\n" +
+                                "                    <button class='btn pull-right' onclick='ShopMgr.rejectIt("+acaid+")'>\n" +
                                 "                        <i class='icon-remove'></i>\n" +
                                 "                       驳回\n" +
                                 "                    </button>\n" +
                                 "                        <div value='"+res2.data.merid+"'></div>"+
-                                "                    <button class='btn pull-right' onclick='rejectIt(this)'>\n" +
+                                "                    <button class='btn pull-right' onclick='ShopMgr.acceptIt("+acaid+")'>\n" +
                                 "                        <i class='icon-ok'></i>\n" +
                                 "                        同意\n" +
                                 "                    </button>\n" +
@@ -424,15 +427,16 @@ var ShopMgr = {
     },
 
     acceptIt:function (getPrev) {
-        var urlText = "http://localhost:8080/examine/application/"+$(getPrev).prev().val()+"/agree";
-        alert("Hello");
+        var urlText = "http://localhost:8080/examine/application/"+getPrev+"/agree";
+        console.log(getPrev);
         $.ajax({
             type : "POST",
             url : urlText,
             dataType : "json",
             success : function (res) {
                 if(res.code == 0){
-                    alert("成功");
+                    alert("审核通过");
+                    window.location.reload(); // 刷新页面
                 }else(
                     alert("后台错误，添加失败")
                 )
@@ -443,15 +447,16 @@ var ShopMgr = {
         });
     },
 
-    rejectIt:function () {
-        var urlText = "http://localhost:8080/examine/application/"+$(getPrev).prev().val()+"/disagree";
+    rejectIt:function (getPrev) {
+        var urlText = "http://localhost:8080/examine/application/"+getPrev+"/disagree";
         $.ajax({
             type : "POST",
             url : urlText,
             dataType : "json",
             success : function (res) {
                 if(res.code == 0){
-                    alert("失败");
+                    alert("驳回成功");
+                    window.location.reload(); // 刷新页面
                 }else(
                     alert("后台错误，添加失败")
                 )
