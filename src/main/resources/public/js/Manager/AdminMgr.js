@@ -3,12 +3,13 @@ $(function () {
     InitPage.action();
 });
 
+var result;
 var InitPage = {
     init:function(){
         Basic.initMyMenu();
         if (window.location.href.indexOf("shopInfoMgr") > 0) {
             memMgr.initList();
-        }else if(window.location.href.indexOf("AdminAccep") > 0){
+        }else if(window.location.href.indexOf("AdminAccept") > 0){
             ShopMgr.showAcceptList();
         }
     },
@@ -293,133 +294,138 @@ var ShopMgr = {
             url : "http://localhost:8080/examine/application/list",
             dataType : "json",
             success : function (res) {
-                $.each(res, function (index, obj) {
+                alert("Hello");
+                $.each(res.data, function (index, obj) {
+                    console.log(obj);
                     var urlText = "http://localhost:8080/examine/application/"+obj.acamerchant;
                     $.ajax({
                         type : "POST",
                         url : urlText,
                         dataType : "json",
-                        success : function () {
-                          $.each(res2, function (index2, obj2) {
+                        success : function (res2) {
+                          // $.each(res2.date, function (index2, res2.data) {
                               // $('#shopType').find("option:selected").attr("value");
-                              $('#acceptShopList').append(
+                            alert("Hello");
+                            $('#acceptShopList').append(
                                 "<table>\n" +
-                                  "                    <tr align=\"center\">\n" +
-                                  "                        <td style=\"width:120px\" class=\"text-left\">商家类型</td>\n" +
-                                  "                        <td colspan=\"4\">\n" +
-                                  "                            <label for=\"shopType\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
-                                  "                            <input id=\"shopType\" type=\"text\" style=\"width: 700px\" placeholder='"+obj2.mertype+"'>\n" +
-                                  "                        </td>\n" +
-                                  "                    </tr>\n" +
-                                  "                    <tr align=\"center\">\n" +
-                                  "                        <td style=\"width:120px\" class=\"text-left\">商家名称</td>\n" +
-                                  "                        <td colspan=\"4\">\n" +
-                                  "                            <label for=\"shopName\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
-                                  "                            <!--改默认显示-->\n" +
-                                  "                            <input id=\"shopName\" type=\"text\" placeholder=\""+obj2.mername+"\" style=\"width: 700px\"></td>\n" +
-                                  "                    </tr>\n" +
-                                  "                    <tr align=\"center\">\n" +
-                                  "                    <td style=\"width:120px\" class=\"text-left\">商家地址</td>\n" +
-                                  "                        <td colspan=\"4\">\n" +
-                                  "                            <label for=\"shopAddress\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
-                                  "                            <input id=\"shopAddress\" type=\"text\" placeholder=\""+obj2.merarea+"\" style=\"width: 700px\"></td>\n" +
-                                  "                    </tr>\n" +
-                                  "                    <tr align=\"center\">\n" +
-                                  "                    <td style=\"width:120px\" class=\"text-left\">联系电话</td>\n" +
-                                  "                        <td colspan=\"4\">\n" +
-                                  "                            <label for=\"phoneNumber\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
-                                  "                            <input id=\"phoneNumber\" type=\"text\" placeholder=\""+obj2.mertelphone+"\" style=\"width: 700px\"></td>\n" +
-                                  "                    </tr>\n" +
-                                  "                    <tr align=\"center\">\n" +
-                                  "                    <td style=\"width:120px\" class=\"text-left\">消费积分比例</td>\n" +
-                                  "                        <td colspan=\"4\">\n" +
-                                  "                            <label for=\"ratio\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
-                                  "                            <input id=\"ratio\" type=\"text\" placeholder=\""+obj2.merdiscount+"\" style=\"width: 700px\"></td>\n" +
-                                  "                    </tr>\n" +
-                                  "                    <tr align=\"center\">\n" +
-                                  "                    <td style=\"width:120px\" class=\"text-left\">会员折扣比例</td>\n" +
-                                  "                        <td colspan=\"4\">\n" +
-                                  "                            <label for=\"disCount\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
-                                  "                            <input  id=\"disCount\" type=\"text\" placeholder=\""+obj2.merdiscount+"\" style=\"width: 700px\"></td>\n" +
-                                  "                    </tr>\n" +
-                                  "                    <!--分隔线-->\n" +
-                                  "                                        <tr>\n" +
-                                  "                        <td>\n" +
-                                  "                            <div><hr class='hr-normal' /></div>\n" +
-                                  "                        </td>\n" +
-                                  "                                                <td>\n" +
-                                  "                            <div><hr class='hr-normal' /></div>\n" +
-                                  "                        </td>\n" +
-                                  "                    </tr>\n" +
-                                  "                        <tr align=\"center\">\n" +
-                                  "                          <td style=\"width:100px\" class=\"text-left\">姓名</td>\n" +
-                                  "                        <td colspan=\"4\">\n" +
-                                  "                            <label for=\"realName\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
-                                  "                            <input id=\"realName\" type=\"text\" placeholder=\""+obj2.merprincipal+"\" style=\"width: 700px\"></td>\n" +
-                                  "             </tr>\n" +
-                                  "             <tr align=\"center\">\n" +
-                                  "                      <td style=\"width:120px\" class=\"text-left\">称谓</td>\n" +
-                                  "                        <td colspan=\"4\">\n" +
-                                  "                            <label for=\"sex\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
-                                  "                            <input id=\"sex\" type=\"text\" style=\"width: 700px\" placeholder='"+obj2.merappellation+"'></td>\n" +
-                                  "                            <!--<select id=\"sex\" style=\"width: 710px; background-color: white\">-->\n" +
-                                  "                                <!--<option style=\"display:none;\" disabled selected>请选择称谓</option>-->\n" +
-                                  "                                <!--<option value=\"male\">男士</option>-->\n" +
-                                  "                                <!--<option value=\"female\">女士</option>-->\n" +
-                                  "                            <!--</select>-->\n" +
-                                  "                        </td>\n" +
-                                  "               </tr>\n" +
-                                  "                  <tr align=\"center\">\n" +
-                                  "                   <td style=\"width:120px\" class=\"text-left\">职务</td>\n" +
-                                  "                        <td colspan=\"4\">\n" +
-                                  "                            <label for=\"job\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
-                                  "                            <input id=\"job\" type=\"text\" placeholder=\""+obj2.merduty+"\" style=\"width: 700px\"></td>\n" +
-                                  "                </tr>\n" +
-                                  "            <tr align=\"center\">\n" +
-                                  "                        <td style=\"width:120px\" class=\"text-left\">个人手机</td>\n" +
-                                  "                        <td colspan=\"4\">\n" +
-                                  "                            <label for=\"personalPhoneNumber\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
-                                  "                            <input id=\"personalPhoneNumber\" type=\"text\" placeholder=\""+obj2.merphone+"\" style=\"width: 700px\"></td>\n" +
-                                  "            </tr>\n" +
-                                  "            <tr align=\"center\">\n" +
-                                  "                        <td style=\"width:120px\" class=\"text-left\">传真</td>\n" +
-                                  "                        <td colspan=\"4\">\n" +
-                                  "                            <label for=\"fax\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
-                                  "                            <input id=\"fax\" type=\"text\" placeholder=\""+obj2.merfax+"\" style=\"width: 700px\"></td>\n" +
-                                  "            </tr>\n" +
-                                  "             <tr align=\"center\">\n" +
-                                  "             <td style=\"width:120px\" class=\"text-left\">电子邮箱</td>\n" +
-                                  "                        <td colspan=\"4\">\n" +
-                                  "                            <label for=\"email\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
-                                  "                            <input id=\"email\" type=\"text\" placeholder=\""+obj2.meremail+"\" style=\"width: 700px\"></td></tr>\n" +
-                                  "                     <!--保存提示按钮+提示保存-->\n" +
-                                  "                     <tr >\n" +
-                                  "             <td colspan=\"12\" >\n" +
-                                  "                    <h6 class='text-right'>点击审核按钮后系统发送信息通知商家并分配账号，点击驳回后也会进行短信通知未通过</h6>\n" +
-                                  "                    <button class='btn pull-right' onclick='acceptIt(this)'>\n" +
-                                  "                        <i class='icon-remove'></i>\n" +
-                                  "                       驳回\n" +
-                                  "                    </button>\n" +
-                                  "                        <div value='"+obj2.merid+"'></div>"+
-                                  "                    <button class='btn pull-right' onclick='rejectIt(this)'>\n" +
-                                  "                        <i class='icon-ok'></i>\n" +
-                                  "                        同意\n" +
-                                  "                    </button>\n" +
-                                  "                    </td>\n" +
-                                  "                    </tr>\n" +
-                                  "\n" +
-                                  "            </table>"
-                              );
-                          })  
+                                "                    <tr align=\"center\">\n" +
+                                "                        <td style=\"width:120px\" class=\"text-left\">商家类型</td>\n" +
+                                "                        <td colspan=\"4\">\n" +
+                                "                            <label for=\"shopType\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
+                                "                            <input id=\"shopType\" type=\"text\" style=\"width: 700px\" placeholder='"+res2.data.mertype+"'>\n" +
+                                "                        </td>\n" +
+                                "                    </tr>\n" +
+                                "                    <tr align=\"center\">\n" +
+                                "                        <td style=\"width:120px\" class=\"text-left\">商家名称</td>\n" +
+                                "                        <td colspan=\"4\">\n" +
+                                "                            <label for=\"shopName\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
+                                "                            <!--改默认显示-->\n" +
+                                "                            <input id=\"shopName\" type=\"text\" placeholder=\""+res2.data.mername+"\" style=\"width: 700px\"></td>\n" +
+                                "                    </tr>\n" +
+                                "                    <tr align=\"center\">\n" +
+                                "                    <td style=\"width:120px\" class=\"text-left\">商家地址</td>\n" +
+                                "                        <td colspan=\"4\">\n" +
+                                "                            <label for=\"shopAddress\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
+                                "                            <input id=\"shopAddress\" type=\"text\" placeholder=\""+res2.data.merarea+"\" style=\"width: 700px\"></td>\n" +
+                                "                    </tr>\n" +
+                                "                    <tr align=\"center\">\n" +
+                                "                    <td style=\"width:120px\" class=\"text-left\">联系电话</td>\n" +
+                                "                        <td colspan=\"4\">\n" +
+                                "                            <label for=\"phoneNumber\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
+                                "                            <input id=\"phoneNumber\" type=\"text\" placeholder=\""+res2.data.mertelphone+"\" style=\"width: 700px\"></td>\n" +
+                                "                    </tr>\n" +
+                                "                    <tr align=\"center\">\n" +
+                                "                    <td style=\"width:120px\" class=\"text-left\">消费积分比例</td>\n" +
+                                "                        <td colspan=\"4\">\n" +
+                                "                            <label for=\"ratio\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
+                                "                            <input id=\"ratio\" type=\"text\" placeholder=\""+res2.data.merdiscount+"\" style=\"width: 700px\"></td>\n" +
+                                "                    </tr>\n" +
+                                "                    <tr align=\"center\">\n" +
+                                "                    <td style=\"width:120px\" class=\"text-left\">会员折扣比例</td>\n" +
+                                "                        <td colspan=\"4\">\n" +
+                                "                            <label for=\"disCount\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
+                                "                            <input  id=\"disCount\" type=\"text\" placeholder=\""+res2.data.merdiscount+"\" style=\"width: 700px\"></td>\n" +
+                                "                    </tr>\n" +
+                                "                    <!--分隔线-->\n" +
+                                "                                        <tr>\n" +
+                                "                        <td>\n" +
+                                "                            <div><hr class='hr-normal' /></div>\n" +
+                                "                        </td>\n" +
+                                "                                                <td>\n" +
+                                "                            <div><hr class='hr-normal' /></div>\n" +
+                                "                        </td>\n" +
+                                "                    </tr>\n" +
+                                "                        <tr align=\"center\">\n" +
+                                "                          <td style=\"width:100px\" class=\"text-left\">姓名</td>\n" +
+                                "                        <td colspan=\"4\">\n" +
+                                "                            <label for=\"realName\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
+                                "                            <input id=\"realName\" type=\"text\" placeholder=\""+res2.data.merprincipal+"\" style=\"width: 700px\"></td>\n" +
+                                "             </tr>\n" +
+                                "             <tr align=\"center\">\n" +
+                                "                      <td style=\"width:120px\" class=\"text-left\">称谓</td>\n" +
+                                "                        <td colspan=\"4\">\n" +
+                                "                            <label for=\"sex\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
+                                "                            <input id=\"sex\" type=\"text\" style=\"width: 700px\" placeholder='"+res2.data.merappellation+"'></td>\n" +
+                                "                            <!--<select id=\"sex\" style=\"width: 710px; background-color: white\">-->\n" +
+                                "                                <!--<option style=\"display:none;\" disabled selected>请选择称谓</option>-->\n" +
+                                "                                <!--<option value=\"male\">男士</option>-->\n" +
+                                "                                <!--<option value=\"female\">女士</option>-->\n" +
+                                "                            <!--</select>-->\n" +
+                                "                        </td>\n" +
+                                "               </tr>\n" +
+                                "                  <tr align=\"center\">\n" +
+                                "                   <td style=\"width:120px\" class=\"text-left\">职务</td>\n" +
+                                "                        <td colspan=\"4\">\n" +
+                                "                            <label for=\"job\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
+                                "                            <input id=\"job\" type=\"text\" placeholder=\""+res2.data.merduty+"\" style=\"width: 700px\"></td>\n" +
+                                "                </tr>\n" +
+                                "            <tr align=\"center\">\n" +
+                                "                        <td style=\"width:120px\" class=\"text-left\">个人手机</td>\n" +
+                                "                        <td colspan=\"4\">\n" +
+                                "                            <label for=\"personalPhoneNumber\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
+                                "                            <input id=\"personalPhoneNumber\" type=\"text\" placeholder=\""+res2.data.merphone+"\" style=\"width: 700px\"></td>\n" +
+                                "            </tr>\n" +
+                                "            <tr align=\"center\">\n" +
+                                "                        <td style=\"width:120px\" class=\"text-left\">传真</td>\n" +
+                                "                        <td colspan=\"4\">\n" +
+                                "                            <label for=\"fax\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
+                                "                            <input id=\"fax\" type=\"text\" placeholder=\""+res2.data.merfax+"\" style=\"width: 700px\"></td>\n" +
+                                "            </tr>\n" +
+                                "             <tr align=\"center\">\n" +
+                                "             <td style=\"width:120px\" class=\"text-left\">电子邮箱</td>\n" +
+                                "                        <td colspan=\"4\">\n" +
+                                "                            <label for=\"email\" class=\"col-sm-2 control-label\" style=\"text-align: left\"></label>\n" +
+                                "                            <input id=\"email\" type=\"text\" placeholder=\""+res2.data.meremail+"\" style=\"width: 700px\"></td></tr>\n" +
+                                "                     <!--保存提示按钮+提示保存-->\n" +
+                                "                     <tr >\n" +
+                                "             <td colspan=\"12\" >\n" +
+                                "                    <h6 class='text-right'>点击审核按钮后系统发送信息通知商家并分配账号，点击驳回后也会进行短信通知未通过</h6>\n" +
+                                "                    <button class='btn pull-right' onclick='acceptIt(this)'>\n" +
+                                "                        <i class='icon-remove'></i>\n" +
+                                "                       驳回\n" +
+                                "                    </button>\n" +
+                                "                        <div value='"+res2.data.merid+"'></div>"+
+                                "                    <button class='btn pull-right' onclick='rejectIt(this)'>\n" +
+                                "                        <i class='icon-ok'></i>\n" +
+                                "                        同意\n" +
+                                "                    </button>\n" +
+                                "                    </td>\n" +
+                                "                    </tr>\n" +
+                                "\n" +
+                                "            </table>"
+                            );
+                          // })
                         },
                     });
-                })
+                }
+                )
             }
         });
     },
 
     acceptIt:function (getPrev) {
         var urlText = "http://localhost:8080/examine/application/"+$(getPrev).prev().val()+"/agree";
+        alert("Hello");
         $.ajax({
             type : "POST",
             url : urlText,
