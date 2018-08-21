@@ -6,6 +6,20 @@ $(function () {
 var InitPage = {
     init:function () {
         Basic.initMyMenu();
+        if (window.location.href.indexOf("customerManagerMemberInfoAdd") > 0) {
+            $("#regisCustomerBtn").on('click', function () {
+                // alert("点击注册");
+                customerMgr.regisCustomer();
+            })
+        } else if (window.location.href.indexOf("customerManagerCard") > 0){
+            $("#addCard").on('click', function () {
+                customerMgr.regisCustomerCard();
+            });
+        } else if(window.location.href.indexOf("customerManagerMemberInfoChange") > 0) {
+            alert("此功能尚未开放");
+        } else if (window.location.href.indexOf("customerManagerMemberInfoChangeHistory")) {
+            alert("此功能尚未开放");
+        }
     },
     action:function () {
         var username = Basic.getPassingStr("username");
@@ -172,12 +186,13 @@ var Basic = {
 var customerMgr = {
     //我的会员-登记会员信息
     regisCustomer:function () {
-        var memcer = $('#memcer').find("option:selected").attr("value");
+        // alert("注册会员");
+        var memcer = $('#memcer').find("option:selected").text();
         var memcerid = $('#memcerid').val();
         var memname = $('#memname').val();
 
-        var memsex = $('#memsex').find("option:selected").attr("value");
-        var membirth = $('#membirth').find("option:selected").attr("value");
+        var memsex = $('#memsex').find("option:selected").text();
+        var membirth = $('#membirth').val();
         var memphone = $('#memphone').val();
         var mememail = $('#mememail').val();
         var memadress = $('#memadress').val();
@@ -185,7 +200,7 @@ var customerMgr = {
         var pwd = $('#pwd').val();
         var pwdAgain = $('#pwdAgain').val();
 
-        var shopPwd = "123456";
+        var shopPwd = "111111";
         if(pwd != pwdAgain){
             alert("密码前后两次输入不一致");
         }else if(memcer == null || memcerid == null || memname == null){
@@ -204,14 +219,15 @@ var customerMgr = {
                     mememail : mememail,
                     memadress : memadress,
                     pwd : pwd,
-                    shopPwd : shopPwd
+                    shoppwd : shopPwd
                 },
                 dataType : "json",
                 success : function(res){
-                    if(res.code == 0){
+                    if(res.code === 0){
                         alert("注册成功");
+                        window.location.reload();
                     }else{
-                        alert("后台故障，注册失败");
+                        alert("请检查信息格式");
                     }
                 },
                 error : function () {
@@ -237,16 +253,12 @@ var customerMgr = {
     //会员卡发放
     regisCustomerCard:function () {
       var memphone = $('#memphone').val();
-      var merid = Basic.getPassingStr("username");
-      var mcenable = true;
-
       $.ajax({
           type : "POST",
-          url : "http://localhost:8080/memberAcc/addMemCard",
+          url : "/memberAcc/addMemCard",
           data : {
               memphone : memphone,
-              merid : merid,
-              mcenable : true,
+              mcenable : true
           },
           dataType : "json",
           success : function (res) {

@@ -6,6 +6,7 @@ import com.scau.hyskjf.service.MemberCenterService;
 import com.scau.hyskjf.service.MerchantAccManageService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -68,8 +69,9 @@ public class MemberAccManageController {
      * 会员未创建或手机号未填写返回失败码-1
      * */
     @RequestMapping("/addMemCard")
-    public ResponseJSON addMemCard(String memphone,Integer merid,Boolean mcenable){
+    public ResponseJSON addMemCard(String memphone,Boolean mcenable){
         try{
+            Integer merid = ((Merchantaccount)SecurityUtils.getSubject().getSession().getAttribute("user")).getMerid();
             Integer memID = memberMapper.queryMemIDByMemphone(memphone);//通过手机号查找memID
             if(memID==null){
                 throw new Exception();
