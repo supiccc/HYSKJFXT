@@ -16,7 +16,7 @@ var InitPage={
 };
 
 function join() {
-    alert("Hello");
+    // alert("Hello");
     // username = $('#phoneNum').val();
     $.ajax({
         type : 'POST',
