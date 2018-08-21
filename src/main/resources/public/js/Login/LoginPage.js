@@ -61,7 +61,7 @@ var accountMgr={
         }else{
             $.ajax({
                 type : 'POST',
-                url : 'http://localhost:8080/login',
+                url : '/login',
                 data : {
                     username : username,
                     pwd : password,

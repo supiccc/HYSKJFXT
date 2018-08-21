@@ -57,9 +57,9 @@ public class ConsumeCreditController {
 
         boolean flag = consumeCreditService.updateState(id,state);
         if(flag){
-            return new ResponseJSON(ResponseCode.WARN,false);
+            return new ResponseJSON(ResponseCode.SUCCESS,"true");
         }else {
-            return new ResponseJSON(ResponseCode.SUCCESS,true);
+            return new ResponseJSON(ResponseCode.WARN,"false");
         }
     }
 }
