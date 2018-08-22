@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -48,6 +50,9 @@ public class MemberAccManageController {
     @RequestMapping("/addAcc")
     public ResponseJSON addAcc(Member member,String pwd,String shoppwd){
         try{
+//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//            Date date = formatter.parse(birth);
+//            member.setMembirth(date);
             memberCenterService.addMemberAccount(member,pwd,shoppwd);//往memberMapper添加信息再往memberAccountMapper添加信息
             return new ResponseJSON(ResponseCode.SUCCESS);
         }
@@ -79,6 +84,7 @@ public class MemberAccManageController {
             Membercard membercard = new Membercard();
             membercard.setMemid(memID);
             membercard.setMerid(merid);
+            membercard.setMcbalance((float) 0);
             membercard.setMcenable(true);
             String  cardNum = memberCenterService.addMemberCard(membercard);
             return new ResponseJSON(ResponseCode.SUCCESS,cardNum);

@@ -271,20 +271,102 @@
     </nav>
     <!--容器设置-->
     <div id="content">
+        <div class='container-fluid'>
+            <div class='row-fluid' id='content-wrapper'>
+                <div class='span12'>
+                    <br/>
+                    <!--插入表格-->
+                    <div class='box-content box-no-padding'>
+                        <div class='responsive-table'>
+                            <div class='scrollable-area'>
+                                <!--删除了class属性的data-table-column-filter-->
+                                <table class=' table table-bordered table-striped table-hover' style='margin-bottom:0;'>
+                                    <thead id="thead">
+                                    <tr style="height: 45px">
+                                        <th style="text-align: center;width: 25%" >会员卡号</th>
+                                        <th style="text-align: center">商家店名</th>
+                                        <th style="text-align: center">余额</th>
+                                        <th style="text-align: center">是否启用</th>
+                                        <!--<th style="text-align: center">可用金额</th>-->
+                                        <!--<th style="text-align: center">充值时间</th>-->
+                                        <th style="text-align: center">操作</th>
+                                    </tr>
 
+                                    </thead>
+                                    <tbody id="tbody">
+                                    <!--<tr>-->
+                                        <!--<td style="text-align: center" >11231232</td>-->
+                                        <!--<td style="text-align: center" >2131232</td>-->
+                                        <!--<td style="text-align: center">1231241</td>-->
+                                        <!--&lt;!&ndash;<td style="text-align: center" id="state">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<span class="label label-success">储值</span>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;&lt;!&ndash;<span class="label label-important">已驳回</span>&ndash;&gt;&ndash;&gt;-->
+                                        <!--&lt;!&ndash;&lt;!&ndash;<span class="label label-warning">未处理</span>&ndash;&gt;&ndash;&gt;-->
+                                        <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                                        <!--<td style="text-align: center">520</td>-->
+                                        <!--<td style="text-align: center">2018-08-13T16:00:00.000+0000</td>-->
+                                        <!--<td>-->
+                                            <!--<div value =""></div>-->
+                                            <!--<div class='text-right'>-->
+                                                <!--<a class='btn btn-success btn-mini' href='#' onclick='PointsMgr.showInfo(this)'>-->
+                                                    <!--<i class='icon-pencil'></i>-->
+                                                <!--</a>-->
+                                                <!--<a class='btn btn-danger btn-mini' href='#'>-->
+                                                    <!--<i class='icon-remove'></i>-->
+                                                <!--</a>-->
+                                            <!--</div>-->
+                                        <!--</td>-->
+                                    <!--</tr>-->
+
+                                    <!--<tr>-->
+                                        <!--<td style="text-align: center" >11231232</td>-->
+                                        <!--<td style="text-align: center" >2131232</td>-->
+                                        <!--<td style="text-align: center">1231241</td>-->
+                                        <!--&lt;!&ndash;<td style="text-align: center" id="state2">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;&lt;!&ndash;<span class="label label-success">储值</span>&ndash;&gt;&ndash;&gt;-->
+                                        <!--&lt;!&ndash;&lt;!&ndash;<span class="label label-important">已驳回</span>&ndash;&gt;&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<span class="label label-warning">现金</span>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                                        <!--<td style="text-align: center">520</td>-->
+                                        <!--<td style="text-align: center">2018-08-13T16:00:00.000+0000</td>-->
+                                        <!--<td>-->
+                                            <!--<div value =""></div>-->
+                                            <!--<div class='text-right'>-->
+                                                <!--<a class='btn btn-success btn-mini' href='#' onclick='PointsMgr.showInfo(this)'>-->
+                                                    <!--<i class='icon-pencil'></i>-->
+                                                <!--</a>-->
+                                                <!--<a class='btn btn-danger btn-mini' href='#'>-->
+                                                    <!--<i class='icon-remove'></i>-->
+                                                <!--</a>-->
+                                            <!--</div>-->
+                                        <!--</td>-->
+                                    <!--</tr>-->
+                                    </tbody>
+
+                                    <tfoot id="tfoot">
+
+
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!--<section id='content'>-->
 
     <!--</section>-->
 </div>
 
-<div class='container-fluid'>
-    <div class='row-fluid' id='content-wrapper'>
-        <div class='span12'>
+<!--<div class='container-fluid'>-->
+    <!--<div class='row-fluid' id='content-wrapper'>-->
+        <!--<div class='span12'>-->
 
-        </div>
-    </div>
-</div>
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
 <!--至此侧边导航栏设置结束-->
 
 <!--触发模态框-->
@@ -389,7 +471,7 @@
                 </div>
                 <div class="modal-footer">
                     <!--<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button> -->
-                    <button class="btn btn-primary" style="background-color: black">保存设置</button>
+                    <button class="btn btn-primary" style="background-color: black" id="savenewinfo">保存设置</button>
                 </div>
             </div>
         </div>

@@ -235,7 +235,9 @@ var customerMgr = {
                     mememail : mememail,
                     memadress : memadress,
                     pwd : pwd,
-                    shoppwd : shopPwd
+                    shoppwd : shopPwd,
+                    membirth: membirth,
+                    memcredit: 0
                 },
                 dataType : "json",
                 success : function(res){

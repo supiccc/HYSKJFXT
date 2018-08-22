@@ -55,6 +55,7 @@ public class MerchantJoinController {
     @RequestMapping(value = "/independentJoin", method = RequestMethod.POST)
     public ResponseJSON independentJoin(MerchantinfoWithBLOBs merchantinfoWithBLOBs, Merchant merchant){
         try{
+            merchant.setOwecredit((float)0);
             Integer merID =merchantJoinService.independentJoin(merchantinfoWithBLOBs,merchant);
             //Merchantaccount merchantaccount = new Merchantaccount();
             //merchantaccount.setMacacc(merchantinfoWithBLOBs.getMerphone());//设置登陆账号为手机号
