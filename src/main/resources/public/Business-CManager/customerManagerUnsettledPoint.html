@@ -274,58 +274,72 @@
                 <div class='span12'>
                     <br/>
                     <!--插入表格-->
-                    <div class='box-content box-no-padding'>
-                        <div class='responsive-table'>
-                            <div class='scrollable-area'>
-                                <!--删除了class属性的data-table-column-filter-->
-                                <table class=' table table-bordered table-striped table-hover' style='margin-bottom:0;'>
-                                    <thead id="thead">
-                                    <tr style="height: 45px">
-                                        <th style="text-align: center;width: 5%" >上缴编号</th>
-                                        <th style="text-align: center">商家编号</th>
-                                        <th style="text-align: center">会员编号</th>
-                                        <th style="text-align: center">处理状态</th>
-                                        <th style="text-align: center">积分数量</th>
-                                        <th style="text-align: center">提交时间</th>
-                                        <!--<th style="text-align: center">可用金额</th>-->
-                                        <!--<th style="text-align: center">充值时间</th>-->
-                                        <th style="text-align: right">操作</th>
-                                    </tr>
+                    <!--<div class='box-content box-no-padding'>-->
+                        <!--<div class='responsive-table'>-->
+                            <!--<div class='scrollable-area'>-->
+                                <!--&lt;!&ndash;删除了class属性的data-table-column-filter&ndash;&gt;-->
+                                <!--<table class=' table table-bordered table-striped table-hover' style='margin-bottom:0;'>-->
+                                    <!--<thead id="thead">-->
+                                    <!--<tr style="height: 45px">-->
+                                        <!--<th style="text-align: center;width: 5%" >上缴编号</th>-->
+                                        <!--<th style="text-align: center">商家编号</th>-->
+                                        <!--<th style="text-align: center">会员编号</th>-->
+                                        <!--<th style="text-align: center">处理状态</th>-->
+                                        <!--<th style="text-align: center">积分数量</th>-->
+                                        <!--<th style="text-align: center">提交时间</th>-->
+                                        <!--&lt;!&ndash;<th style="text-align: center">可用金额</th>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<th style="text-align: center">充值时间</th>&ndash;&gt;-->
+                                        <!--<th style="text-align: right">操作</th>-->
+                                    <!--</tr>-->
 
-                                    </thead>
-                                    <tbody id="tbody">
-                                    <tr>
-                                        <td style="text-align: center" >11231232</td>
-                                        <td style="text-align: center" >2131232</td>
-                                        <td style="text-align: center">1231241</td>
-                                        <td style="text-align: center" id="state">
-                                            <span class="label label-success">已完成</span>
-                                            <!--<span class="label label-important">已驳回</span>-->
-                                            <!--<span class="label label-warning">未处理</span>-->
-                                        </td>
-                                        <td style="text-align: center">520</td>
-                                        <td style="text-align: center">2018-08-13T16:00:00.000+0000</td>
-                                        <td>
-                                            <div value =""></div>
-                                            <div class='text-right'>
-                                                <a class='btn btn-success btn-mini' href='#' onclick='PointsMgr.showInfo(this)'>
-                                                    <i class='icon-pencil'></i>
-                                                </a>
-                                                <a class='btn btn-danger btn-mini' href='#'>
-                                                    <i class='icon-remove'></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
+                                    <!--</thead>-->
+                                    <!--<tbody id="tbody">-->
+                                    <!--<tr>-->
+                                        <!--<td style="text-align: center" >11231232</td>-->
+                                        <!--<td style="text-align: center" >2131232</td>-->
+                                        <!--<td style="text-align: center">1231241</td>-->
+                                        <!--<td style="text-align: center" id="state">-->
+                                            <!--<span class="label label-success">已完成</span>-->
+                                            <!--&lt;!&ndash;<span class="label label-important">已驳回</span>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<span class="label label-warning">未处理</span>&ndash;&gt;-->
+                                        <!--</td>-->
+                                        <!--<td style="text-align: center">520</td>-->
+                                        <!--<td style="text-align: center">2018-08-13T16:00:00.000+0000</td>-->
+                                        <!--<td>-->
+                                            <!--<div value =""></div>-->
+                                            <!--<div class='text-right'>-->
+                                                <!--<a class='btn btn-success btn-mini' href='#' onclick='PointsMgr.showInfo(this)'>-->
+                                                    <!--<i class='icon-pencil'></i>-->
+                                                <!--</a>-->
+                                                <!--<a class='btn btn-danger btn-mini' href='#'>-->
+                                                    <!--<i class='icon-remove'></i>-->
+                                                <!--</a>-->
+                                            <!--</div>-->
+                                        <!--</td>-->
+                                    <!--</tr>-->
+                                    <!--</tbody>-->
 
-                                    <tfoot id="tfoot">
+                                    <!--<tfoot id="tfoot">-->
 
 
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
+                                    <!--</tfoot>-->
+                                <!--</table>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <div>
+                        <h1>拥有积分：</h1>
+                        <h1 id="score"></h1>
+                    </div>
+                    <br>
+                    <div>
+                        <h1>上缴积分：</h1>
+                        <input type="text" id="shangjiao">
+                        <br>
+                        <h1>兑换金额：</h1>
+                        <input type="text" id="nadaomoney">
+                        <br>
+                        <button class="btn" id="sendshangjiao">提交审核</button>
                     </div>
                 </div>
             </div>

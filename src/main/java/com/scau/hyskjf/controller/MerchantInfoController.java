@@ -7,6 +7,7 @@ import com.scau.hyskjf.service.MerchantInfoService;
 import com.scau.hyskjf.service.ProductInfoService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -323,16 +324,18 @@ public class MerchantInfoController {
 
 
     //查询商家详细信息
-    @RequestMapping("/submitdetail")
-    public ResponseJSON browseSubmitDetail(Integer merid) {
+    @RequestMapping(value = "/submitdetail")
+    public ResponseJSON browseSubmitDetail() {
+        Integer merid = ((Merchantaccount)SecurityUtils.getSubject().getSession().getAttribute("user")).getMerid();
         MerchantdetailWithBLOBs merchantdetail = merchantInfoService.findMerchantDetail(merid);
         return new ResponseJSON(ResponseCode.SUCCESS, merchantdetail);
     }
 
     //积分上缴
-    @RequestMapping("/creditsubmit")
-    public ResponseJSON creaditSubmit(Integer merid, Float credit, Float money) {
+    @RequestMapping(value = "/creditsubmit")
+    public ResponseJSON creaditSubmit(Float credit, Float money) {
         try {
+            Integer merid = ((Merchantaccount)SecurityUtils.getSubject().getSession().getAttribute("user")).getMerid();
             merchantInfoService.insertCreditSubmit(merid, credit, money);
             return new ResponseJSON(ResponseCode.SUCCESS);
         } catch (Exception e) {

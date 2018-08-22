@@ -35,6 +35,11 @@ var InitPage = {
             });
         } else if (window.location.href.indexOf("customerManagerRechargeHistory") > 0) {
             alert("此功能尚未开放");
+        } else if (window.location.href.indexOf("customerManagerUnsettledPoint") > 0) {
+            alert("上缴功能开发中");
+            $("#sendshangjiao").on('click', function () {
+                pointsMgr.send();
+            })
         }
     },
     action:function () {
@@ -432,4 +437,7 @@ var rechargeMgr = {
 var pointsMgr = {
     //积分管理
     //缺页面：与<Business-Admin>一样，基本照搬即可
+    send:function () {
+        
+    }
 }
