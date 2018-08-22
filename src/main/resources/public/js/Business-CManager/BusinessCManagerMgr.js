@@ -36,7 +36,8 @@ var InitPage = {
         } else if (window.location.href.indexOf("customerManagerRechargeHistory") > 0) {
             alert("此功能尚未开放");
         } else if (window.location.href.indexOf("customerManagerUnsettledPoint") > 0) {
-            alert("上缴功能开发中");
+            // alert("上缴功能开发中");
+            pointsMgr.initScore();
             $("#sendshangjiao").on('click', function () {
                 pointsMgr.send();
             })
@@ -432,12 +433,49 @@ var rechargeMgr = {
         })
     }
     //充值记录查询：缺页面，列表有啥内容？
-}
+};
 
 var pointsMgr = {
     //积分管理
     //缺页面：与<Business-Admin>一样，基本照搬即可
+    initScore:function(){
+        $.ajax({
+            type : "GET",
+            url : "/merchantInfo/submitdetail",
+            datatype: "json",
+            success: function (res) {
+                if (res.code === 0) {
+                    $("#score").text(res.data.owecredit);
+                } else {
+                    alert("我们遇到未知的错误！请联系系统设计人员！")
+                }
+            },
+            error: function () {
+                alert("服务器繁忙");
+            }
+        })
+    },
+
     send:function () {
-        
+        $.ajax({
+            type : "POST",
+            url : "/merchantInfo/creditsubmit",
+            data : {
+                credit : $("#shangjiao").val(),
+                money : $("#nadaomoney").val()
+            },
+            datatype: "json",
+            success: function (res) {
+                if (res.code === 0) {
+                    alert("提交成功");
+                    window.location.reload();
+                } else {
+                    alert("提交失败");
+                }
+            },
+            error: function () {
+                alert("服务器繁忙");
+            }
+        });
     }
-}
+};
