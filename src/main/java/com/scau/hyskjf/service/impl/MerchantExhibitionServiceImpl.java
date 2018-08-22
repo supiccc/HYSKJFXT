@@ -1,12 +1,10 @@
 package com.scau.hyskjf.service.impl;
 
 import com.scau.hyskjf.dao.EvaluationMapper;
+import com.scau.hyskjf.dao.MemberaccountMapper;
 import com.scau.hyskjf.dao.MerchantdetailMapper;
 import com.scau.hyskjf.dao.ProductinfoMapper;
-import com.scau.hyskjf.pojo.EvaluationWithBLOBs;
-import com.scau.hyskjf.pojo.MerchantInfoInExhibition;
-import com.scau.hyskjf.pojo.MerchantdetailWithBLOBs;
-import com.scau.hyskjf.pojo.Productinfo;
+import com.scau.hyskjf.pojo.*;
 import com.scau.hyskjf.service.MerchantExhibitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +28,9 @@ public class MerchantExhibitionServiceImpl implements MerchantExhibitionService 
 
     @Autowired
     EvaluationMapper evaluationMapper;
+
+    @Autowired
+    MemberaccountMapper memberaccountMapper;
 
     @Override
     public List<MerchantInfoInExhibition> getAll() {
@@ -72,11 +73,29 @@ public class MerchantExhibitionServiceImpl implements MerchantExhibitionService 
         m.setMerprovince(tmp.getMerprovince());
         m.setMerAddress(tmp.getMeradress());
         m.setMerAddress(tmp.getMeradress());
+        m.setMerintroduce(tmp.getMerintroduce());
         result.put("info", m);
         List<Productinfo> p = productinfoMapper.selectProductByMerID(merId);
         result.put("product", p);
         List<EvaluationWithBLOBs> e = evaluationMapper.selectByMerid(merId);
-        result.put("evaluation", e);
+        List<EvaluationDetails> evaluationDetails = new ArrayList<>();
+        for (EvaluationWithBLOBs z : e) {
+            EvaluationDetails evatmp = new EvaluationDetails();
+            evatmp.setEvaid(z.getEvaid());
+            String name;
+            if (null == memberaccountMapper.selectByPrimaryKey(z.getMemid())) {
+                name = "已注销用户";
+            } else {
+                name = memberaccountMapper.selectByPrimaryKey(z.getMemid()).getManame();
+            }
+            evatmp.setEvabyN(name);
+            evatmp.setEvatime(z.getEvatime());
+            evatmp.setEvaenable(z.getEvaenable());
+            evatmp.setEvarepinfo(z.getEvarepinfo());
+            evatmp.setEvainfo(z.getEvainfo());
+            evaluationDetails.add(evatmp);
+        }
+        result.put("evaluation", evaluationDetails);
         return result;
     }
 }

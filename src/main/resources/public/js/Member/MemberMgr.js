@@ -11,14 +11,16 @@ var result;
 var row;
 var InitPage = {
     init:function () {
+        // alert("进来了");
         if (window.location.href.indexOf("memberShoppingList") > 0) {
             shoppingRecordMgr.add();
         } else if (window.location.href.indexOf("memberCardHistoryList") > 0) {
             alert("此功能尚未开放");
+        } else if(window.location.href.indexOf("memberShopInfoDetail") > 0){
+            alert("进入商家详细信息");
+            shopMgr.initInfoListBymacid();
         } else if(window.location.href.indexOf("memberShopInfo") > 0){
             shopMgr.initList();
-        } else if(window.location.href.indexOf("memberShopInfoDetail")>0){
-            shopMgr.initInfoListBymacid();
         } else if (window.location.href.indexOf("memberCardList") > 0) {
             cardMgr.initList();
         } 
@@ -691,7 +693,7 @@ var shopMgr = {
 
     //根据商家macid获取商家详细信息
     initInfoListBymacid:function(){
-        var urlText = "http://localhost:8080/getmerchant/"+Basic.getPassingStr("macid");
+        var urlText = "http://localhost:8080/getmerchant/"+Basic.getPassingStr("merid");
         $.ajax({
             type : "GET",
             url : urlText,
