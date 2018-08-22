@@ -206,10 +206,14 @@ public class MemberCenterServiceImpl implements MemberCenterService {
         Memberaccount m = (Memberaccount) SecurityUtils.getSubject().getSession().getAttribute("user");
         if (m == null) return "nologin";
         List<Consumecomment> consumes = consumecommentMapper.selectByMerAndMem(merID, m.getMemid());
-        if (consumes.equals(null)) return "noconsume";
+        if (consumes.size() == 0) return "noconsume";
         int i = 0;
         for (i = 0; i < consumes.size(); i++) {
-            if (consumes.get(i).getHascomment().equals(true)) break;
+            if (consumes.get(i).getHascomment() == null) {
+                continue;
+            } else {
+                break;
+            }
         }
         if (i != consumes.size()) {
             return "hascomment";

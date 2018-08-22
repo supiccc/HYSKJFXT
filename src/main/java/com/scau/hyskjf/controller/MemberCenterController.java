@@ -134,11 +134,11 @@ public class MemberCenterController {
         if (result.equals("success")) {
             return new ResponseJSON(ResponseCode.SUCCESS);
         } else if (result.equals("nologin")) {
-            return new ResponseJSON(ResponseCode.NOTLOGIN, "未登录");
+            return new ResponseJSON(ResponseCode.NOTLOGIN, "请先登录");
         } else if (result.equals("noconsume")) {
-            return new ResponseJSON(ResponseCode.WARN, "未消费");
+            return new ResponseJSON(ResponseCode.WARN, "您还未在本店消费");
         } else if (result.equals("hascomment")){
-            return new ResponseJSON(ResponseCode.WARN, "已点评");
+            return new ResponseJSON(ResponseCode.WARN, "您已点评过本店啦");
         } else {
             return new ResponseJSON(ResponseCode.WARN);
         }

@@ -1,6 +1,5 @@
 package com.scau.hyskjf.dao;
 
-import com.scau.hyskjf.pojo.Consume;
 import com.scau.hyskjf.pojo.Consumecomment;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +11,7 @@ public interface ConsumecommentMapper {
 
     int insertSelective(Consumecomment record);
 
-    List<Consumecomment> selectByMemID(Integer memID);
-
     List<Consumecomment> selectByMerAndMem(Integer merID, Integer memId);
+
+    List<Consumecomment> selectByMemID(Integer memId);
 }

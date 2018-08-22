@@ -17,8 +17,17 @@ var InitPage = {
         } else if (window.location.href.indexOf("memberCardHistoryList") > 0) {
             alert("此功能尚未开放");
         } else if(window.location.href.indexOf("memberShopInfoDetail") > 0){
-            alert("进入商家详细信息");
+            // alert("进入商家详细信息");
             shopMgr.initInfoListBymacid();
+            $("#return").on('click', function () {
+                window.location.href = "./memberShopInfo.html?username="+username+"&role="+role+"";
+            });
+            $("#shoplist").on('click', function () {
+                window.location.href = "./memberShopInfo.html?username="+username+"&role="+role+"";
+            });
+            $("#sendeva").on('click', function () {
+                shopMgr.send();
+            })
         } else if(window.location.href.indexOf("memberShopInfo") > 0){
             shopMgr.initList();
         } else if (window.location.href.indexOf("memberCardList") > 0) {
@@ -736,6 +745,29 @@ var shopMgr = {
     },
     //2018.8.18 Hwalv
     //产品详情遮罩在我发给你的微信文件里 memberSearch.html中
+    send:function () {
+        // alert("发送评论功能开发中");
+        var merid = Basic.getPassingStr("merid");
+        $.ajax({
+            type: "POST",
+            url: "/memberCenter/comment/" + merid,
+            dataType: "json",
+            data: {
+                info: $("#inputTextArea").val()
+            },
+            success: function (res) {
+                 if (res.code === 0) {
+                     alert("评论成功");
+                     window.location.reload();
+                 } else {
+                     alert(res.data);
+                 }
+            },
+            error: function () {
+                alert("服务器繁忙！");
+            }
+        })
+    }
 };
 
 //消费记录页
@@ -914,5 +946,5 @@ $('#savenewinfo').on('click',function () {
 
 //获取商家详细信息
 var getmerchant =function (me) {
-    window.location.href = "./memberShopInfoDetail.html?merid="+ me;
+    window.location.href = "./memberShopInfoDetail.html?merid="+ me + "&username=" + username + "&role=" +role+"";
 };

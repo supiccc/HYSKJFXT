@@ -29,14 +29,6 @@ public class Consumecomment {
 
     private String mername;
 
-    private String pduname;
-
-    private Float pduprice;
-
-    private String pduintro;
-
-    private String pduimage;
-
     public Integer getCumid() {
         return cumid;
     }
@@ -139,37 +131,5 @@ public class Consumecomment {
 
     public void setMername(String mername) {
         this.mername = mername;
-    }
-
-    public String getPduname() {
-        return pduname;
-    }
-
-    public void setPduname(String pduname) {
-        this.pduname = pduname;
-    }
-
-    public Float getPduprice() {
-        return pduprice;
-    }
-
-    public void setPduprice(Float pduprice) {
-        this.pduprice = pduprice;
-    }
-
-    public String getPduintro() {
-        return pduintro;
-    }
-
-    public void setPduintro(String pduintro) {
-        this.pduintro = pduintro;
-    }
-
-    public String getPduimage() {
-        return pduimage;
-    }
-
-    public void setPduimage(String pduimage) {
-        this.pduimage = pduimage;
     }
 }
