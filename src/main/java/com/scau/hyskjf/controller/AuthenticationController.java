@@ -1,6 +1,7 @@
 package com.scau.hyskjf.controller;
 
 import com.scau.hyskjf.service.AuthenticationService;
+import com.scau.hyskjf.service.RedisService;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
 import com.scau.hyskjf.util.sms.IndustrySMS;
@@ -20,7 +21,10 @@ import java.util.Map;
 public class AuthenticationController {
 
     @Autowired
-    AuthenticationService authenticationService;
+    private AuthenticationService authenticationService;
+
+    @Autowired
+    private RedisService redisService;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseJSON login(String username, String pwd, String role, int rememberMe) {
@@ -46,6 +50,7 @@ public class AuthenticationController {
         String msg = (String) result.get("result");
 //        String verficationCode = VerficationCode.getCode();  // 获取验证码
         SecurityUtils.getSubject().getSession().setAttribute("verficationCode", verficationCode);
+        redisService.set(username + "verficationCode", verficationCode, 2);
         return new ResponseJSON(ResponseCode.SUCCESS, msg);
     }
 

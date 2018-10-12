@@ -5,6 +5,7 @@ import com.scau.hyskjf.dao.MemberaccountMapper;
 import com.scau.hyskjf.dao.MerchantaccountMapper;
 import com.scau.hyskjf.pojo.*;
 import com.scau.hyskjf.service.AuthenticationService;
+import com.scau.hyskjf.service.RedisService;
 import com.scau.hyskjf.util.shiro.UsernamePasswordRoleToken;
 import com.scau.hyskjf.util.json.ResponseCode;
 import com.scau.hyskjf.util.json.ResponseJSON;
@@ -29,6 +30,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Autowired
     MerchantaccountMapper merchantaccountMapper;
+
+    @Autowired
+    RedisService redisService;
 
     @Override
     public Memberaccount findBymaiid(String acc) {
@@ -76,7 +80,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public String forgetpwd(String username, String pwd, String vc, String role) {
         try {
-            String vcode = (String) SecurityUtils.getSubject().getSession().getAttribute("verficationCode");
+//            String vcode = (String) SecurityUtils.getSubject().getSession().getAttribute("verficationCode");
+            String vcode =  (String) redisService.get(username + "verficationCode");
             if (vc.equals(vcode)) {
                 pwd = new Md5Hash(pwd, username, 3).toString();
                 if (role.equals("member")) {
