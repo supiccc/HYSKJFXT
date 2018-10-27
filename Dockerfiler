@@ -1,0 +1,21 @@
+FROM openjdk:8-jdk
+
+ARG MAVEN_VERSION=3.5.4
+ARG USER_HOME_DIR="/root"
+ARG SHA=ce50b1c91364cb77efe3776f756a6d92b76d9038b0a0782f7d53acf1e997a14d
+ARG BASE_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries
+
+ADD pom.xml /tmp/build/
+RUN cd /tmp/build && mvn -q dependency:resolve
+
+ADD src /tmp/build/src
+        #构建应用
+RUN cd /tmp/build && mvn -q -DskipTests=true package \
+        #拷贝编译结果到指定目录
+        && mv target/*.jar /app.jar \
+        #清理编译痕迹
+        && cd / && rm -rf /tmp/build
+
+VOLUME /tmp
+EXPOSE 8080
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
